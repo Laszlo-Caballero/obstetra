@@ -49,19 +49,15 @@ export default function Perfilpage() {
             </div>
           </div>
           <div className="flex gap-x-1.5">
-            <Button
-              text="Deshacer"
-              icon={<LiaUndoAltSolid className="text-ob-white" size={18} />}
-              className={{
-                button: "bg-transparent border border-ob-gray",
-                text: "text-ob-white",
-              }}
-            />
+            <Button className="bg-transparent border border-ob-gray text-ob-white">
+              <LiaUndoAltSolid className="text-ob-white" size={18} />
+              Deshacer
+            </Button>
 
-            <Button
-              text="Guardar Cambios"
-              icon={<LuSave size={18} className="text-ob-black-6" />}
-            />
+            <Button>
+              <LuSave size={18} className="text-ob-black-6" />
+              Guardar Cambios
+            </Button>
           </div>
         </div>
 
