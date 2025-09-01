@@ -1,4 +1,6 @@
 import React from "react";
+import Select from "@/components/ui/select/Select";
+import Input from "@/components/ui/input/input";
 import { LuHeartPulse } from "react-icons/lu";
 import { LuShield } from "react-icons/lu";
 import { PiSignInBold } from "react-icons/pi";
@@ -30,26 +32,25 @@ export default function LoginPage() {
                 Ingresa tu usuario, contraseña y la posta donde trabaja
                 </p>
             </div>
-            <div className="flex flex-col gap-y-1">
-                <label className="text-ob-gray-2 font-medium" htmlFor="username">Usuario</label>
-                <input
-                className="bg-ob-black-4 rounded-xl font-medium text-sm placeholder-ob-white py-2 px-3 border border-ob-gray"
-                type="text"
-                placeholder="tu.ususario@hospital.com"
+
+            <Input 
+                label="Usuario" 
+                placeholder="tu.ususario@hospital.com" 
                 id="username"
-                />
-            </div>
-            <div className="flex flex-col gap-y-1">
-                <label className="text-ob-gray-2 font-medium" htmlFor="password">Contraseña</label>
-                <input
-                className="bg-ob-black-4 rounded-xl font-medium text-sm placeholder-ob-white py-2 px-3 border border-ob-gray"
-                type="password"
+            />
+
+            <Input 
+                label="Contraseña" 
                 placeholder="••••••••"
                 id="password"
-                />
-            </div>
+            />
+
             <div>
-                <label className="text-ob-gray-2 font-medium">Posta</label>
+                <Select
+                label="Posta"
+                placeholder="Selecciona la posta donde trabajas"
+                busqueda="Buscar Postas..."
+                />
             </div>
             <div className="flex gap-x-3 text-sm">
                 <button className="flex items-center justify-center w-[372px] bg-ob-blue p-2.5 rounded-md gap-x-2">
