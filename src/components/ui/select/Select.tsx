@@ -3,7 +3,7 @@ import cx from "@/libs/cx";
 import { ReactNode, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
-import { LuHospital } from "react-icons/lu";
+import { useClose } from "@/hooks/useClose";
 
 type Options = {
   label: ReactNode;
@@ -16,6 +16,7 @@ interface SelectProps {
   search?: string;
   options?: Options[];
   className?: string;
+  icon?: ReactNode;
 }
 
 export default function Select({
@@ -24,10 +25,12 @@ export default function Select({
   placeholder,
   search,
   className,
+  icon,
 }: SelectProps) {
   const [isOpen,setOpen] = useState(false);
+  const ref = useClose({closeFunction:setOpen});
 
-  return <div className="flex flex-col gap-y-1 relative">
+  return <div className="flex flex-col gap-y-1 relative" ref={ref}>
     <label className="text-ob-gray-2 font-medium">
       {label}
     </label>
@@ -48,54 +51,19 @@ export default function Select({
             <input type="text" className="placeholder-ob-white text-sm w-full focus:outline-none" placeholder={search}/>
           </div>
           <div className="max-h-[100px] overflow-y-scroll">
+          {options?.map((option)=>{
+            return (
+              
             <div className="flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer" onClick={()=>setOpen(false)}>
               <span>
-                <LuHospital className="text-ob-white" size={18} />
+                {icon}
               </span>
               <p className="text-ob-white text-sm">
-                Posta Central - Turno Mañana
+                {option.label}
               </p>
             </div>
-          <div className="flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer" onClick={()=>setOpen(false)}>
-            <span>
-              <LuHospital className="text-ob-white" size={18} />
-            </span>
-            <p className="text-ob-white text-sm">
-              Posta Central - Turno Mañana
-            </p>
-          </div>
-          <div className="flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer" onClick={()=>setOpen(false)}>
-            <span>
-              <LuHospital className="text-ob-white" size={18} />
-            </span>
-            <p className="text-ob-white text-sm">
-              Posta Central - Turno Mañana
-            </p>
-          </div>
-          <div className="flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer" onClick={()=>setOpen(false)}>
-            <span>
-              <LuHospital className="text-ob-white" size={18} />
-            </span>
-            <p className="text-ob-white text-sm">
-              Posta Central - Turno Mañana
-            </p>
-          </div>
-          <div className="flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer" onClick={()=>setOpen(false)}>
-            <span>
-              <LuHospital className="text-ob-white" size={18} />
-            </span>
-            <p className="text-ob-white text-sm">
-              Posta Central - Turno Mañana
-            </p>
-          </div>
-          <div className="flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer" onClick={()=>setOpen(false)}>
-            <span>
-              <LuHospital className="text-ob-white" size={18} />
-            </span>
-            <p className="text-ob-white text-sm">
-              Posta Central - Turno Mañana
-            </p>
-          </div>
+            )
+          })}
           </div>
         </div>
       }

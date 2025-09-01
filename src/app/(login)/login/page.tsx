@@ -6,6 +6,8 @@ import { LuShield } from "react-icons/lu";
 import { PiSignInBold } from "react-icons/pi";
 import { FiHelpCircle } from "react-icons/fi";
 import { RiInformationLine } from "react-icons/ri";
+import { LuHospital } from "react-icons/lu";
+
 
 export default function LoginPage() {
     return (
@@ -50,6 +52,11 @@ export default function LoginPage() {
                 label="Posta"
                 placeholder="Selecciona la posta donde trabajas"
                 search="Buscar Postas..."
+                icon={<LuHospital className="text-ob-white" size={18} />}
+                options={[
+                            { label: "Posta Central - Turno Mañana", value: "1" },
+                            { label: "Posta Central - Turno Noche", value: "2" },
+                        ]}
                 />
             </div>
             <div className="flex gap-x-3 text-sm">
