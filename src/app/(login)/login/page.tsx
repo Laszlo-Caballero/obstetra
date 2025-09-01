@@ -49,7 +49,7 @@ export default function LoginPage() {
                 <Select
                 label="Posta"
                 placeholder="Selecciona la posta donde trabajas"
-                busqueda="Buscar Postas..."
+                search="Buscar Postas..."
                 />
             </div>
             <div className="flex gap-x-3 text-sm">
