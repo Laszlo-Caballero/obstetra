@@ -4,7 +4,7 @@ import { LuHeartPulse } from "react-icons/lu";
 
 export default function Aside() {
   return (
-    <aside className="flex h-screen w-[88px] py-3 px-[9px] items-center flex-col bg-ob-black border-r border-ob-gray">
+    <aside className="flex h-screen w-[88px] py-3 px-[9px] items-center flex-col bg-ob-black border-r border-ob-gray sticky top-0">
       <div className="py-1.5 w-full flex justify-center">
         <span className="p-2.5 border-2 size-[40px] border-ob-blue flex justify-center rounded-xl">
           <LuHeartPulse className="size-5 text-ob-white" />

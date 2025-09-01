@@ -1,13 +1,13 @@
 import React from 'react'
 import Button from '@/components/ui/button/Button';
-import { LuUser } from "react-icons/lu";
+import Input from '@/components/ui/input/input';
+import Select from '@/components/ui/select/Select';
+
+import { LuUser, LuUserCog, LuSave } from "react-icons/lu";
+import { GoHome, GoGear } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { GoHome } from "react-icons/go";
-import { GoGear } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
-import { LuUserCog } from "react-icons/lu";
 import { LiaUndoAltSolid } from "react-icons/lia";
-import { LuSave } from "react-icons/lu";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -74,19 +74,9 @@ export default function Perfilpage() {
                         </div>
                     </div>
                     <div className='flex gap-x-1.5'>
-                        <button className='flex items-center gap-x-2 px-3 py-2.5 border border-ob-gray rounded-md'>
-                            <LiaUndoAltSolid className='text-ob-white' size={18} />
-                            <span className='text-ob-white text-sm font-medium'>
-                                Deshacer
-                            </span>
-                        </button>
+                        <Button text='Deshacer' icon={<LiaUndoAltSolid className='text-ob-white' size={18} />} className={{button:"bg-transparent border border-ob-gray",text: "text-ob-white"}} />
 
-                        <button className='flex items-center bg-ob-blue gap-x-2 px-3 py-2.5 rounded-md'>
-                            <LuSave size={18} className='text-ob-black-6' />
-                            <span className='text-ob-black-6 text-sm font-medium'>
-                                Guardar Cambios
-                            </span>
-                        </button>
+                        <Button text='Guardar Cambios' icon={<LuSave size={18} className='text-ob-black-6' />} />
                     </div>
                 </div>
 
@@ -103,13 +93,8 @@ export default function Perfilpage() {
                                 admin@salud.gov
                             </span>
                             <div className='flex items-center gap-x-2 mt-2'>
-                                <Button text='Cambiar Foto' icon={<MdOutlineFileUpload size={18} className='text-ob-lightblue'/>} className={{button:"bg-ob-blue-2",text: "text-ob-lightblue font-medium"}} />
-                                <button className='flex items-center gap-x-2 px-3 py-2.5 border border-ob-gray rounded-md '>
-                                    <FaRegTrashAlt size={18} className='text-ob-white'/>
-                                    <span className='text-ob-white text-sm font-medium'>
-                                        Quitar
-                                    </span>
-                                </button>
+                                <Button text='Cambiar Foto' icon={<MdOutlineFileUpload size={18} className='text-ob-lightblue'/>} className={{button:"bg-ob-blue-2",text: "text-ob-lightblue"}} />
+                                <Button text='Quitar' icon={<FaRegTrashAlt  size={18} className='text-ob-white'/>} className={{button:"bg-transparent border border-ob-gray",text: "text-ob-white"}} />
                             </div>
                         </div>
                     </div>
@@ -148,6 +133,31 @@ export default function Perfilpage() {
                         </div>
                     </div>
                 </div>
+
+                    {/* Formulario  */}
+
+                <form>
+                    <div >
+                        <span className='text-ob-white font-medium text-sm'>
+                            Información Personal
+                        </span>
+                        <div className='grid grid-cols-2 gap-3'>
+                            <Input label='Nombres' placeholder='Ñepito' id='name' className={{label:'text-sm'}} />
+                            <Input label='Apellidos' placeholder='Ñispe' id='lastname' className={{label:'text-sm'}} />
+                            <Input label='Correo Institucional' placeholder='admin@salud.gob' id='email'className={{label:'text-sm'}} />
+                            <Select label='Establecimiento (Posta)' placeholder='Seleccionar Posta' search='Buscar Postas...' options={[
+                                { label: "Posta Central - Turno Mañana", value: "1" },
+                                { label: "Posta Central - Turno Noche", value: "2" },
+                            ]}/>
+                            <Select label='Especialidad' placeholder='Seleccionar Especialidad' search='Buscar Especialidades...' options={[
+                                { label: "Medicina Reproductiva", value: "1" },
+                                { label: "Oncología", value: "2" },
+                            ]}/>
+                            <Input label='Telefono' placeholder='+51 987 654 321' id='phone' className={{label:'text-sm'}} />
+                        </div>
+                    </div>
+                    <div></div>
+                </form>
             </main>
         </div>
     )
