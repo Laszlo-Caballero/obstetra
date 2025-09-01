@@ -1,4 +1,5 @@
 "use client";
+import cx from "@/libs/cx";
 import { ReactNode, useState } from "react";
 
 type Options = {
@@ -10,10 +11,16 @@ interface SelectProps {
   label: string;
   placeholder?: string;
   options: Options[];
+  className?: string;
 }
 
-export default function Select({ label, options, placeholder }: SelectProps) {
-  const [] = useState("");
+export default function Select({
+  label,
+  options,
+  placeholder,
+  className,
+}: SelectProps) {
+  const [isOpen] = useState(true);
 
-  return <div>{label}</div>;
+  return <div className={cx(`bg-amber-200`, className)}>{label}</div>;
 }
