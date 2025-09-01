@@ -19,13 +19,16 @@ export default function Perfilpage() {
                 {
                 title: "Inicio",
                 icon: <GoHome />,
+                href: "/",
                 },
                 {
                 title: "Admin",
                 icon: <GoGear />,
+                href: "/",
                 },
                 {
                 title: "Perfil",
+                href: "/",
                 },
             ]}
             />
