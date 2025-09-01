@@ -16,6 +16,6 @@ export const asideData: AsideProps[] = [
   {
     icon: <LuBuilding2 />,
     title: "Postas",
-    href: "/postas",
+    href: "/posta",
   },
 ];

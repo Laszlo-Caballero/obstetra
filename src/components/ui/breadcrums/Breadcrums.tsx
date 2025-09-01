@@ -1,17 +1,16 @@
+import { IconProps } from "@/interface/props";
 import cx from "@/libs/cx";
+import Link from "next/link";
 import React, { cloneElement, Fragment, ReactElement, SVGProps } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 interface BreadcrumsProps {
   items: {
     title: string;
+    href: string;
     icon?: React.ReactNode;
   }[];
 }
-
-type IconProps = SVGProps<SVGElement> & {
-  size?: number;
-};
 
 export default function Breadcrums({ items }: BreadcrumsProps) {
   return (
@@ -19,10 +18,13 @@ export default function Breadcrums({ items }: BreadcrumsProps) {
       {items.map((item, i) => {
         return (
           <Fragment key={i}>
-            <span className="flex items-center gap-x-2">
+            <Link href={item.href} className="flex items-center gap-x-2">
               {item.icon &&
                 cloneElement(item.icon as ReactElement<IconProps>, {
-                  className: "text-ob-gray-2",
+                  className: cx(
+                    "text-ob-gray-2",
+                    i == items.length - 1 && "text-ob-white"
+                  ),
                   size: 16,
                 })}
 
@@ -34,7 +36,7 @@ export default function Breadcrums({ items }: BreadcrumsProps) {
               >
                 {item.title}
               </p>
-            </span>
+            </Link>
 
             {i < items.length - 1 && (
               <IoIosArrowForward className="text-ob-gray-2" size={16} />
