@@ -72,7 +72,7 @@ export default function Select({
             />
           </div>
           <div className="max-h-[100px] overflow-y-scroll">
-            {options?.map((option) => {
+            {options?.map((option, i) => {
               return (
                 <div
                   className={cx(
@@ -80,6 +80,7 @@ export default function Select({
                     className?.optionsItem
                   )}
                   onClick={() => setOpen(false)}
+                  key={i}
                 >
                   <span>{icon}</span>
                   <p className="text-ob-white text-sm">{option.label}</p>

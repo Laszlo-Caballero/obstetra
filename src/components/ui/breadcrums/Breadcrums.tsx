@@ -1,7 +1,7 @@
 import { IconProps } from "@/interface/props";
 import cx from "@/libs/cx";
 import Link from "next/link";
-import React, { cloneElement, Fragment, ReactElement, SVGProps } from "react";
+import React, { cloneElement, Fragment, ReactElement } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 interface BreadcrumsProps {
