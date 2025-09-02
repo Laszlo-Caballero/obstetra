@@ -10,8 +10,14 @@ import { PiWarningBold } from "react-icons/pi";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import Button from "@/components/ui/button/Button";
 import Image from "next/image";
+import { headers } from "next/headers";
+import Link from "@/components/ui/link/Link";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const headersList = await headers();
+
+  const pathname = headersList.get("x-pathname");
+
   return (
     <div className="flex items-center justify-center h-screen font-inter">
       <div className="flex items-center bg-ob-black-6 rounded-3xl border border-ob-gray overflow-hidden">
@@ -38,18 +44,21 @@ export default function NotFound() {
             </p>
           </div>
           <div className="flex items-center justify-between gap-x-3 border-b pb-5 border-ob-gray">
-            <Button className="font-medium">
+            <Link className="font-medium" href="/">
               <LuHouse size={18} className="text-ob-black" />
               Volver al Inicio
-            </Button>
-            <Button className="bg-transparent border border-ob-gray text-ob-white">
+            </Link>
+            <Link
+              href="/"
+              className="bg-transparent border border-ob-gray text-ob-white"
+            >
               <LuSearch size={18} className="text-ob-white" />
               Buscar
-            </Button>
-            <Button className="text-ob-lightblue bg-ob-blue-2">
+            </Link>
+            <Link href="/programas" className="text-ob-lightblue bg-ob-blue-2">
               <HiOutlineSquares2X2 size={18} className="text-ob-lightblue" />
               Ver Modulos
-            </Button>
+            </Link>
           </div>
           <div className="flex items-center gap-x-3">
             <span className="flex items-center gap-x-1.5 font-semibold text-ob-gray-2">
@@ -68,7 +77,7 @@ export default function NotFound() {
             intenta más tarde
           </p>
           <span className="rounded-md border border-ob-gray text-ob-white p-3">
-            GET /ruta-desconocida - 404
+            GET {pathname} - 404
           </span>
         </div>
         <div className="bg-ob-blue-3 p-8 w-[399px] h-[673px]">
