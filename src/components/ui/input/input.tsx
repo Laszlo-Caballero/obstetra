@@ -12,9 +12,8 @@ interface InputProps
     label?: string;
     container?: string;
   };
-  children?: ReactNode;
 }
-export default function Input({ label, className, id,icon, children, ...props }: InputProps) {
+export default function Input({ label, className, id,icon, ...props }: InputProps) {
   return (
     <div className="flex flex-col gap-y-1">
       <label
@@ -24,7 +23,7 @@ export default function Input({ label, className, id,icon, children, ...props }:
         {label}
       </label>
       <div className={cx("flex items-center bg-ob-black-4 rounded-xl border border-ob-gray",className?.container)}>
-        {children}
+        {icon && <span className="pl-3">{icon}</span>}
         <input
           className={cx(
             " font-medium text-sm placeholder-ob-white py-2 px-3 w-full focus:outline-none ",

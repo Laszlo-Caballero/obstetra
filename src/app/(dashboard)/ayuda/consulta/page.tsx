@@ -3,10 +3,14 @@ import Breadcrums from '@/components/ui/breadcrums/Breadcrums'
 import Button from '@/components/ui/button/Button';
 import Input from '@/components/ui/input/input';
 import Select from '@/components/ui/select/Select';
-import { LuHouse, LuBookOpen, LuLayers, LuFlag, LuPhone } from "react-icons/lu";
+import TextArea from '@/components/ui/textarea/Textarea';
+import SmallCard from '@/components/ui/small-card/SmallCard';
+import { LuHouse, LuBookOpen, LuLayers, LuFlag, LuPhone, LuPaperclip, LuX, LuSend } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
 import { RxText } from "react-icons/rx";
 import { IoMdHelpCircleOutline } from "react-icons/io";
+import { GoGoal } from "react-icons/go";
+import { AiOutlineMedicineBox } from "react-icons/ai";
 
 export default function page() {
     return (
@@ -49,34 +53,42 @@ export default function page() {
 
             {/* Formulario */}
 
-            {/* <form className='bg-ob-black-6 border border-ob-gray rounded-3xl p-4'>
+            <form className='bg-ob-black-6 border border-ob-gray rounded-3xl p-4'>
                 <div className='grid grid-cols-2 gap-3'>
-                    <Input
-                    placeholder='Breve descripción del Problema'
-                    label='Asunto'
-                    id='issue'
-                    className={{label: "text-sm"}}
-                    icon= {<LuLayers className="text-ob-white" size={18}/>}
-                    >
-                        <RxText size={28} className='pl-3' />
-                    </Input>
-                    <Select
-                        label="Módulo Relacionado"
-                        placeholder="Seleccionar Modulo"
-                        search="Buscar Módulos..."
+                    <div className='flex flex-col gap-y-1.5'>
+                        <Input
+                        placeholder='Breve descripción del Problema'
+                        label='Asunto'
+                        id='issue'
                         className={{label: "text-sm"}}
-                        icon={<LuLayers className="text-ob-white" size={18} />}
-                        options={[
-                                    { label: "Perfil", value: "1" },
-                                    { label: "Postas", value: "2" },
-                                ]}
-                    />
+                        icon= {<RxText className="text-ob-white" size={18}/>}
+                        />
+                        <span className='text-xs text-ob-gray-2' >
+                            Se especifico. Ej. No puedo crear una cita
+                        </span>
+                    </div>
+                    <div className='flex flex-col gap-y-1.5'>
+                        <Select
+                            label="Módulo Relacionado"
+                            placeholder="Seleccionar Modulo"
+                            search="Buscar Módulos..."
+                            className={{label: "text-sm"}}
+                            iconInput={<LuLayers className="text-ob-white" size={18} />}
+                            options={[
+                                        { label: "Perfil", value: "1" },
+                                        { label: "Postas", value: "2" },
+                                    ]}
+                        />
+                        <span className='text-xs text-ob-gray-2' >
+                            Obstetras, Admin, Citas, Laboratorio, Metas.
+                        </span>
+                    </div>
                     <Select
                         label="Prioridad"
                         placeholder="Seleccionar Prioridad"
                         search="Buscar Prioridad..."
                         className={{label: "text-sm"}}
-                        icon={<LuFlag className="text-ob-white" size={18} />}
+                        iconInput={<LuFlag className="text-ob-white" size={18} />}
                         options={[
                                     { label: "Alta", value: "1" },
                                     { label: "Baja", value: "2" },
@@ -87,32 +99,87 @@ export default function page() {
                         placeholder="Seleccionar Consulta"
                         search="Buscar Consulta..."
                         className={{label: "text-sm"}}
-                        icon={<IoMdHelpCircleOutline className="text-ob-white" size={18} />}
+                        iconInput={<IoMdHelpCircleOutline  size={18} />}
                         options={[
                                     { label: "Soporte Técnico", value: "1" },
                                     { label: "asdad", value: "2" },
                                 ]}
                     />
+                    <div className='flex flex-col gap-y-1.5 col-start-1 col-end-3'>
+                        <TextArea
+                        placeholder='Describe lo ocurrido'
+                        label='Descripción'
+                        id='description'
+                        className={{label: "text-sm"}}
+                        rows={5}
+                        />
+                        <span className='text-xs text-ob-gray-2' >
+                            Incluye capturas de pantalla o mensajes de error si los tienes
+                        </span>
+                    </div>
+
                     <Input
                     placeholder='nombre@ejemplo.com'
                     label='Correo de contacto'
                     id='email'
                     className={{label: "text-sm"}}
-                    icon= {<LuLayers className="text-ob-white" size={18}/>}
-                    >
-                        <MdOutlineEmail size={28} className='pl-3' />
-                    </Input>
+                    icon= {<MdOutlineEmail size={18}/>}
+                    />
+                        
                     <Input
                     placeholder='+51 999 999 999'
                     label='Teléfono (opcional)'
                     id='phone'
                     className={{label: "text-sm"}}
-                    >
-                        <LuPhone size={28} className='pl-3' />
-                    </Input>
+                    icon={<LuPhone size={18} />}
+                    />
                 </div>
-            </form> */}
-
+                <div className='flex flex-col gap-y-1.5 py-4'>
+                        <span className='text-sm text-ob-gray-2'>
+                            Adjuntos
+                        </span>
+                        <div className='flex items-center gap-x-2'>
+                            <Button className='bg-ob-blue-2 text-ob-lightblue text-sm'>
+                                <LuPaperclip size={18}/>
+                                Subir Archivos
+                            </Button>
+                            <span className='text-sm text-ob-gray-2'>
+                                PNG, JPG o PDF, máx. 10MB
+                            </span>
+                        </div>
+                    </div>
+                    <div className='flex items-center justify-between pt-4 border-t border-ob-gray'>
+                        <Button className='bg-transparent border border-ob-gray text-ob-white'>
+                            <LuX size={18}/>
+                            Cancelar
+                        </Button>
+                        <Button>
+                            <LuSend />
+                            Enviar Consulta
+                        </Button>
+                    </div>
+            </form> 
+            <div className='flex flex-col gap-y-3 bg-ob-black-6 border border-ob-gray rounded-3xl p-4'>
+                <span>Preguntas Frecuentes</span>
+                <SmallCard
+                    title='¿Cómo reinicio mi contraseña?'
+                    description='Ve a Admin > Usuarios > Restablecer Contraseña'
+                    button='Guia Rapida'
+                    icon={<IoMdHelpCircleOutline  size={18} />}
+                />
+                <SmallCard
+                    title='No veo mis metas del Mes'
+                    description='Revisa los filtros de año/mes en la vista Metas'
+                    button='Solución'
+                    icon={<GoGoal  size={18} />}
+                />
+                <SmallCard
+                    title='Error al Completar Datos del Cliente'
+                    description='Usa el botón "Completar datos" en Laboratorio y valida campos obligatorios.'
+                    button='Paso a Paso'
+                    icon={<AiOutlineMedicineBox  size={18} />}
+                />
+            </div>
         </div>
     )
 }
