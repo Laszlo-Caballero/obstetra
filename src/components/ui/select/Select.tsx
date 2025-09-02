@@ -19,6 +19,7 @@ interface SelectProps {
     optionsItem?: string;
   };
   icon?: ReactNode;
+  iconInput?: ReactNode;
 }
 
 export default function Select({
@@ -28,6 +29,7 @@ export default function Select({
   search,
   className,
   icon,
+  iconInput,
 }: SelectProps) {
   const [isOpen, setOpen] = useState(false);
   const ref = useClose({ closeFunction: setOpen });
@@ -44,7 +46,10 @@ export default function Select({
         )}
         onClick={() => setOpen(!isOpen)}
       >
-        <span>{placeholder}</span>
+        <div className="flex items-cente gap-x-2">
+          {iconInput}
+          {placeholder}
+        </div>
         <span>
           <RiArrowDropDownLine className="text-ob-white" size={18} />
         </span>
@@ -52,7 +57,7 @@ export default function Select({
       {isOpen && (
         <div
           className={cx(
-            "absolute traslate-y-2 mt-1 top-full bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full ",
+            "absolute traslate-y-2 mt-1 top-full z-10 bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full ",
             className?.optionsContainer
           )}
         >
