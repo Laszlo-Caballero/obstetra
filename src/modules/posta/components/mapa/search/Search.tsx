@@ -21,7 +21,7 @@ export default function Search({
 
   return (
     <div className="w-full bg-ob-black-4 border py-[11px] rounded-xl flex justify-between relative px-[13px] border-ob-gray">
-      <div className="flex gap-x-2 items-center">
+      <div className="flex gap-x-2 items-center w-full">
         <GrLocation className="text-ob-white size-[18px]" />
         <input
           value={value}
@@ -33,7 +33,7 @@ export default function Search({
       </div>
 
       <button
-        className="flex gap-x-[6px] py-[6px] px-2 items-center"
+        className="flex gap-x-[6px] py-[6px] text-nowrap px-2 items-center"
         onClick={onClickButton}
       >
         <FiTarget className="text-ob-white size-[18px]" />
