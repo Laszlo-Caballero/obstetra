@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/image"; 
 import React from "react";
 import { LuUser } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
