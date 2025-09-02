@@ -217,27 +217,27 @@ export default function Perfilpage() {
           <div className="font-medium text-sm border border-ob-gray rounded-3xl overflow-hidden">
             <table className="w-full">
               <thead className="bg-ob-blue-2 border-collapse ">
-                <tr className="text-ob-lightblue text-xs rounded-t-3xl text-left">
+                <tr className="text-ob-lightblue text-sm rounded-t-3xl text-left">
                   <th className="p-2.5">Fecha</th>
-                  <th className="p-2.5">Accion</th>
-                  <th className="p-2.5">IP</th>
+                  <th>Accion</th>
+                  <th>IP</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-ob-gray hover:bg-ob-black-4">
                   <td className="p-2.5">2025-08-12 09:20</td>
-                  <td className="p-2.5">Inicio de Sesión</td>
-                  <td className="p-2.5">201.160.23.10</td>
+                  <td >Inicio de Sesión</td>
+                  <td >201.160.23.10</td>
                 </tr>
                 <tr className="border-b border-ob-gray hover:bg-ob-black-4">
                   <td className="p-2.5">2025-08-11 13:55</td>
-                  <td className="p-2.5">Actualizó perfil</td>
-                  <td className="p-2.5">201.160.23.10</td>
+                  <td >Actualizó perfil</td>
+                  <td >201.160.23.10</td>
                 </tr>
                 <tr className="hover:bg-ob-black-4">
                   <td className="p-2.5">2025-08-10 08:55</td>
-                  <td className="p-2.5">Restablecio Contraseña</td>
-                  <td className="p-2.5">201.160.23.10</td>
+                  <td >Restablecio Contraseña</td>
+                  <td >201.160.23.10</td>
                 </tr>
               </tbody>
             </table>
