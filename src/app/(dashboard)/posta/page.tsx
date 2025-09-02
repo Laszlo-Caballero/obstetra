@@ -8,8 +8,14 @@ import Filter from "@/components/ui/filter/Filter";
 import { TbMapPin } from "react-icons/tb";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { GoHome } from "react-icons/go";
+import { fetcher } from "@/libs/fetch";
+import { ResponsePosta } from "@/interface/response.interface";
+import Table from "@/components/ui/table/Table";
+import PostaTable from "@/modules/posta/table/PostaTable";
 
-export default function PostaPage() {
+export default async function PostaPage() {
+  const data = await fetcher<ResponsePosta[]>("posta", "get");
+  console.log(data);
   return (
     <div className="flex flex-col w-full p-5 gap-y-4">
       <Breadcrums
@@ -85,6 +91,13 @@ export default function PostaPage() {
           ]}
         />
       </div>
+
+      <PostaTable
+        data={data?.data || []}
+        total={data?.metadata?.totalItems}
+        totalPage={data?.metadata?.totalPages}
+        limit={10}
+      />
     </div>
   );
 }

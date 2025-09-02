@@ -32,7 +32,7 @@ export default function Filter({
   return (
     <div
       className={cx(
-        "py-[11px] relative flex items-center px-[13px] border gap-x-2 border-ob-gray rounded-xl",
+        "py-[11px] relative cursor-pointer flex items-center px-[13px] border gap-x-2 border-ob-gray rounded-xl",
         className?.container
       )}
       ref={ref}
