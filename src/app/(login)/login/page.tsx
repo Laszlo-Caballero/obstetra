@@ -7,6 +7,7 @@ import { PiSignInBold } from "react-icons/pi";
 import { FiHelpCircle } from "react-icons/fi";
 import { RiInformationLine } from "react-icons/ri";
 import { LuHospital } from "react-icons/lu";
+import { TbLockPassword } from "react-icons/tb";
 
 
 export default function LoginPage() {
@@ -40,7 +41,6 @@ export default function LoginPage() {
                 placeholder="tu.ususario@hospital.com" 
                 id="username"
             />
-
             <Input 
                 label="Contraseña" 
                 placeholder="••••••••"

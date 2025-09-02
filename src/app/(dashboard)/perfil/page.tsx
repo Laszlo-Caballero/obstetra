@@ -31,18 +31,18 @@ export default function Perfilpage() {
 
         {/* Titulo */}
 
-        <div className="flex items-center justify-between">
+        <section className="flex items-center justify-between">
           <div className="flex items-start gap-x-2.5">
-            <span className="bg-ob-blue-2 rounded-xl border-2 border-ob-blue p-1">
+            <span className="bg-ob-blue-3 rounded-xl border-3 border-ob-blue p-1">
               <LuUserCog className=" text-ob-white" size={16} />
             </span>
             <div className="flex flex-col gap-y-0.5">
-              <p className="text-ob-white font-medium text-xl">
+              <h2 className="text-ob-white font-medium text-xl">
                 Ver y Editar Perfil
-              </p>
-              <span className="text-ob-gray-2 text-sm font-medium">
+              </h2>
+              <p className="text-ob-gray-2 text-sm font-medium">
                 Actualiza tu informacion personal, credenciales y preferencias.
-              </span>
+              </p>
             </div>
           </div>
           <div className="flex gap-x-1.5">
@@ -56,19 +56,19 @@ export default function Perfilpage() {
               Guardar Cambios
             </Button>
           </div>
-        </div>
+        </section>
 
         {/* Perfil */}
 
         <div className="bg-ob-black-3 p-4 rounded-3xl border border-ob-gray">
           <div className="flex items-center gap-x-3 border-b border-ob-gray pb-3 bg-">
-            <Image
+            {/* <Image
               src="https://i.pinimg.com/736x/69/d4/f5/69d4f553a801270cc080e78402855353.jpg"
               className="w-16 rounded-full"
               alt="foto de perfil"
               width={64}
               height={64}
-            />
+            /> */}
             <div className="flex flex-col ">
               <span className="text-ob-white font-medium">Admin</span>
               <span className="text-ob-gray-2 text-sm font-medium">
