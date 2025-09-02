@@ -71,12 +71,13 @@ export default function page() {
             GET /ruta-desconocida - 404
           </span>
         </div>
-        <div className="bg-ob-blue-3 p-8 w-[621px] ">
+        <div className="bg-ob-blue-3 p-8 w-[621px] h-[621px] ">
           <Image
             src="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779047/oetmwfy0gtch546jkysg.webp"
             alt="Corredor de Hospital"
+            className="rounded-xl h-[555px]"
             width={335}
-            height={557}
+            height={555}
           />
         </div>
       </div>
