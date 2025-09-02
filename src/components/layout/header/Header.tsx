@@ -1,4 +1,4 @@
-import Image from "next/image"; 
+import Image from "next/image";
 import React from "react";
 import { LuUser } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -14,7 +14,7 @@ export default function Header() {
       </div>
       <div className="flex items-center bg-ob-blue-2 gap-x-2.5 px-2.5 py-1.5 cursor-pointer rounded-xl">
         <Image
-          src="https://i.pinimg.com/736x/69/d4/f5/69d4f553a801270cc080e78402855353.jpg"
+          src="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779110/nviouobzjm4eiaw301zf.webp"
           className="w-6 rounded-full"
           alt="foto de perfil"
           width={24}
