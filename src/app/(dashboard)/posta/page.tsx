@@ -8,14 +8,18 @@ import Filter from "@/components/ui/filter/Filter";
 import { TbMapPin } from "react-icons/tb";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { GoHome } from "react-icons/go";
-import { fetcher } from "@/libs/fetch";
-import { ResponsePosta } from "@/interface/response.interface";
-import Table from "@/components/ui/table/Table";
+import { Response, ResponsePosta } from "@/interface/response.interface";
 import PostaTable from "@/modules/posta/table/PostaTable";
+import Mapa from "@/modules/posta/components/mapa/Mapa";
+import { Position } from "@/interface/types";
+import axios from "@/libs/axios";
 
 export default async function PostaPage() {
-  const data = await fetcher<ResponsePosta[]>("posta", "get");
-  console.log(data);
+  const data: Response<ResponsePosta[]> = (await axios.get("posta")).data;
+
+  const rawPostas: Response<Position[]> = (await axios.get("posta/raw-postas"))
+    .data;
+
   return (
     <div className="flex flex-col w-full p-5 gap-y-4">
       <Breadcrums
@@ -98,6 +102,12 @@ export default async function PostaPage() {
         totalPage={data?.metadata?.totalPages}
         limit={10}
       />
+
+      <div className="p-[6px] flex flex-col gap-y-3 mb-[41px]">
+        <h2 className="text-xl font-medium">Mapa de Postas</h2>
+
+        <Mapa markers={rawPostas?.data || []} />
+      </div>
     </div>
   );
 }

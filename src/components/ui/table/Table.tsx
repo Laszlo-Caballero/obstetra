@@ -33,7 +33,7 @@ export default function Table<T>({
   return (
     <div
       className={cx(
-        "rounded-3xl border border-ob-gray overflow-x-auto",
+        "rounded-3xl border border-ob-gray overflow-x-hidden",
         className
       )}
     >

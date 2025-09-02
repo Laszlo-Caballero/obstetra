@@ -5,7 +5,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between bg-ob-black-3 px-5 py-2.5 border-b border-ob-gray">
+    <header className="flex sticky top-0 h-[57px] items-center justify-between bg-ob-black-3 px-5 py-2.5 border-b border-ob-gray">
       <div className="flex items-center gap-x-3">
         <span className="bg-ob-blue-2 rounded-xl border-2 border-ob-blue p-1">
           <LuUser size={16} className="text-ob-white" />
