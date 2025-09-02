@@ -75,9 +75,9 @@ export default function page() {
                             className={{label: "text-sm"}}
                             iconInput={<LuLayers className="text-ob-white" size={18} />}
                             options={[
-                                        { label: "Perfil", value: "1" },
-                                        { label: "Postas", value: "2" },
-                                    ]}
+                                { label: "Perfil", value: "1" },
+                                { label: "Postas", value: "2" },
+                            ]}
                         />
                         <span className='text-xs text-ob-gray-2' >
                             Obstetras, Admin, Citas, Laboratorio, Metas.
