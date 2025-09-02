@@ -11,11 +11,11 @@ import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import Button from "@/components/ui/button/Button";
 import Image from "next/image";
 
-export default function page() {
+export default function NotFound() {
   return (
     <div className="flex items-center justify-center h-screen font-inter">
-      <div className="flex items-center bg-ob-black-6 rounded-3xl border border-ob-gray w-[880px] overflow-hidden">
-        <div className="flex flex-col gap-y-5 p-12">
+      <div className="flex items-center bg-ob-black-6 rounded-3xl border border-ob-gray overflow-hidden">
+        <div className="flex flex-col gap-y-5 p-12 max-w-lg">
           <span className="flex items-center gap-x-2.5">
             <LuStethoscope size={20} className="text-ob-white" />
             <p className="text-lg font-semibold text-ob-white">
@@ -71,11 +71,11 @@ export default function page() {
             GET /ruta-desconocida - 404
           </span>
         </div>
-        <div className="bg-ob-blue-3 p-8 w-[621px] h-[621px] ">
+        <div className="bg-ob-blue-3 p-8 w-[399px] h-[673px]">
           <Image
             src="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779047/oetmwfy0gtch546jkysg.webp"
             alt="Corredor de Hospital"
-            className="rounded-xl h-[555px]"
+            className="rounded-xl h-full w-full object-cover"
             width={335}
             height={555}
           />
