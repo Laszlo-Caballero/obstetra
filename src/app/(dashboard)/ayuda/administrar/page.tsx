@@ -1,7 +1,11 @@
 import React from "react";
+import Button from "@/components/ui/button/Button";
+import Search from "@/components/ui/search/Search";
+import Select from "@/components/ui/select/Select";
 import SmallCard from "@/components/ui/small-card/SmallCard";
 import CrearModulo from "@/modules/ayuda/crear-modulo/CrearModulo";
 import CrearTipo from "@/modules/ayuda/crear-tipo/CrearTipo";
+import Documentacion from "@/modules/ayuda/documentacion/Documentacion";
 
 import { LuHouse, LuBookOpen, LuFolderPlus, LuPlus } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
@@ -116,19 +120,16 @@ export default async function AdministrarPage() {
         <SmallCard
           title="¿Cómo reinicio mi contraseña?"
           description="Ve a Admin > Usuarios > Restablecer Contraseña"
-          button="Guia Rapida"
           icon={<IoMdHelpCircleOutline size={18} />}
         />
         <SmallCard
           title="No veo mis metas del Mes"
           description="Revisa los filtros de año/mes en la vista Metas"
-          button="Solución"
           icon={<GoGoal size={18} />}
         />
         <SmallCard
           title="Error al Completar Datos del Cliente"
           description='Usa el botón "Completar datos" en Laboratorio y valida campos obligatorios.'
-          button="Paso a Paso"
           icon={<AiOutlineMedicineBox size={18} />}
         />
       </div>

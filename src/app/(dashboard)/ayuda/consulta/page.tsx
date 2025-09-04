@@ -11,6 +11,7 @@ import { RxText } from "react-icons/rx";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { GoGoal } from "react-icons/go";
 import { AiOutlineMedicineBox } from "react-icons/ai";
+import Badge from '@/components/ui/badge/Badge';
 
 export default function page() {
     return (
@@ -164,21 +165,32 @@ export default function page() {
                 <SmallCard
                     title='¿Cómo reinicio mi contraseña?'
                     description='Ve a Admin > Usuarios > Restablecer Contraseña'
-                    button='Guia Rapida'
                     icon={<IoMdHelpCircleOutline  size={18} />}
-                />
+                >
+                    <Badge className='bg-ob-blue-3 text-xs'>
+                        Guia Rapida
+                    </Badge>
+                </SmallCard>
                 <SmallCard
                     title='No veo mis metas del Mes'
                     description='Revisa los filtros de año/mes en la vista Metas'
-                    button='Solución'
                     icon={<GoGoal  size={18} />}
-                />
+                >
+                    <Badge className='bg-ob-blue-3 text-xs'>
+                        Solucion
+                    </Badge>
+                </SmallCard>
+
                 <SmallCard
                     title='Error al Completar Datos del Cliente'
                     description='Usa el botón "Completar datos" en Laboratorio y valida campos obligatorios.'
-                    button='Paso a Paso'
                     icon={<AiOutlineMedicineBox  size={18} />}
-                />
+                >
+                    <Badge className='bg-ob-blue-3 text-xs  '>
+                        Paso a paso
+                    </Badge>
+                </SmallCard>
+
             </div>
         </div>
     )

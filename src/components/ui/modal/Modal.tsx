@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import Badge from "../badge/Badge";
 import { LuX } from "react-icons/lu";
 import Button from "../button/Button";
@@ -50,7 +50,7 @@ export default function Modal({
             <LuX size={18} className="text-ob-white" />
           </span>
         </header>
-        <div className="p-4">{children}</div>
+        {children}
         <footer className="flex items-center justify-between p-4 font-medium border-t border-ob-gray">
           <span className="text-ob-gray-2 text-sm">{nota}</span>
           <div className="flex items-center justify-between gap-x-3">
