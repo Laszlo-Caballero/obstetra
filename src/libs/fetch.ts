@@ -5,7 +5,7 @@ export async function fetcher<T>(path: string): Promise<Response<T> | null> {
   try {
     const res = await axios.get(`${path}`);
     return res.data;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

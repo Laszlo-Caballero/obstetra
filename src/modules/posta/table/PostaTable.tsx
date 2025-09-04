@@ -5,7 +5,7 @@ import Table from "@/components/ui/table/Table";
 import { Response, ResponsePosta } from "@/interface/response.interface";
 import cx from "@/libs/cx";
 import Link from "next/link";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import ButtonLink from "@/components/ui/link/Link";
 import { TbEdit, TbTrash } from "react-icons/tb";

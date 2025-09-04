@@ -9,7 +9,6 @@ import { LiaUndoAltSolid } from "react-icons/lia";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import Image from "next/image";
 
 export default function Perfilpage() {
   return (
@@ -226,18 +225,18 @@ export default function Perfilpage() {
               <tbody>
                 <tr className="border-b border-ob-gray hover:bg-ob-black-4">
                   <td className="p-2.5">2025-08-12 09:20</td>
-                  <td >Inicio de Sesión</td>
-                  <td >201.160.23.10</td>
+                  <td>Inicio de Sesión</td>
+                  <td>201.160.23.10</td>
                 </tr>
                 <tr className="border-b border-ob-gray hover:bg-ob-black-4">
                   <td className="p-2.5">2025-08-11 13:55</td>
-                  <td >Actualizó perfil</td>
-                  <td >201.160.23.10</td>
+                  <td>Actualizó perfil</td>
+                  <td>201.160.23.10</td>
                 </tr>
                 <tr className="hover:bg-ob-black-4">
                   <td className="p-2.5">2025-08-10 08:55</td>
-                  <td >Restablecio Contraseña</td>
-                  <td >201.160.23.10</td>
+                  <td>Restablecio Contraseña</td>
+                  <td>201.160.23.10</td>
                 </tr>
               </tbody>
             </table>
