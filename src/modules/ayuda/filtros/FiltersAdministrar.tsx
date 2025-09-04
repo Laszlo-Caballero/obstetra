@@ -6,8 +6,19 @@ import React from "react";
 import { FaRegDotCircle } from "react-icons/fa";
 import { LuFlag, LuLayers } from "react-icons/lu";
 import { FilterAdministrar } from "../types";
+import { Modulo, Prioridad, Tipo } from "@/interface/response.interface";
 
-export default function FiltersAdministrar() {
+interface FiltersAdministrarProps {
+  modulos: Modulo[];
+  prioridades: Prioridad[];
+  tipos: Tipo[];
+}
+
+export default function FiltersAdministrar({
+  modulos,
+  prioridades,
+  tipos,
+}: FiltersAdministrarProps) {
   const { filters, setFilter } = useFilter<FilterAdministrar>();
 
   return (
@@ -24,8 +35,10 @@ export default function FiltersAdministrar() {
         iconInput={<LuLayers size={18} />}
         options={[
           { label: "Todos", value: "" },
-          { label: "Obstetras", value: "1" },
-          { label: "Postas", value: "2" },
+          ...modulos.map((modulo) => ({
+            label: modulo.nombre,
+            value: modulo.moduloId.toString(),
+          })),
         ]}
         onChange={(value) => setFilter("moduloId", value)}
         value={filters.moduloId}
@@ -36,20 +49,24 @@ export default function FiltersAdministrar() {
         iconInput={<LuFlag size={18} />}
         options={[
           { label: "Todos", value: "" },
-          { label: "Alto", value: "1" },
-          { label: "Medio", value: "2" },
+          ...prioridades.map((prioridad) => ({
+            label: prioridad.nombre,
+            value: prioridad.prioridadId.toString(),
+          })),
         ]}
         onChange={(value) => setFilter("prioridadId", value)}
         value={filters.prioridadId}
       />
       <Select
-        placeholder="Estado"
-        search="Buscar Estado..."
+        placeholder="Tipo de Consulta"
+        search="Buscar Tipo de Consulta..."
         iconInput={<FaRegDotCircle size={18} />}
         options={[
           { label: "Todos", value: "" },
-          { label: "Alto", value: "1" },
-          { label: "Medio", value: "2" },
+          ...tipos.map((tipo) => ({
+            label: tipo.nombre,
+            value: tipo.tipoId.toString(),
+          })),
         ]}
         onChange={(value) => setFilter("estadoId", value)}
         value={filters.estadoId}

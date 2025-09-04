@@ -24,11 +24,24 @@ import ButtonModal from "@/components/ui/button-modal/ButtonModal";
 
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { fetcher } from "@/libs/fetch";
-import { Response, ResponseConsulta } from "@/interface/response.interface";
+import {
+  Modulo,
+  Prioridad,
+  ResponseConsulta,
+  Tipo,
+} from "@/interface/response.interface";
 import TablaAdmistrar from "@/modules/ayuda/tabla/TablaAdmistrar";
 import FiltersAdministrar from "@/modules/ayuda/filtros/FiltersAdministrar";
 export default async function AdministrarPage() {
   const data = await fetcher<ResponseConsulta[]>("ayuda/consulta");
+
+  const modulos = await fetcher<Modulo[]>("ayuda/modulo/raw-modulos");
+
+  const prioridades = await fetcher<Prioridad[]>(
+    "ayuda/prioridad/raw-prioridad"
+  );
+
+  const tipos = await fetcher<Tipo[]>("ayuda/tipo-consulta/raw-tipos");
 
   return (
     <div className="w-full flex flex-col gap-y-4 p-5">
@@ -91,7 +104,11 @@ export default async function AdministrarPage() {
 
       <div className="flex flex-col gap-y-3 bg-ob-black-6 rounded-3xl border border-ob-gray p-4.5">
         <div className="flex items-center justify-between">
-          <FiltersAdministrar />
+          <FiltersAdministrar
+            modulos={modulos?.data || []}
+            prioridades={prioridades?.data || []}
+            tipos={tipos?.data || []}
+          />
           <span className="bg-ob-black-4 border border-ob-gray rounded-xl py-2 px-3 text-sm">
             Total: 10
           </span>
