@@ -1,6 +1,7 @@
 import AsideIcon from "@/components/ui/aside-icon/AsideIcon";
 import { asideData } from "@/const/asideData";
 import { LuHeartPulse } from "react-icons/lu";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 export default function Aside() {
   return (
@@ -17,6 +18,14 @@ export default function Aside() {
         {asideData.map((item, i) => {
           return <AsideIcon key={i} {...item} />;
         })}
+      </div>
+
+      <div className="w-full mt-auto">
+        <AsideIcon
+          icon={<AiOutlineQuestionCircle />}
+          title="Ayuda"
+          href="/ayuda/administrar"
+        />
       </div>
     </aside>
   );
