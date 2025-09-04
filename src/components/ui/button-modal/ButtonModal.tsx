@@ -1,0 +1,28 @@
+"use client";
+
+import React, { ReactElement, ReactNode, useState } from 'react'
+import Button from '../button/Button'
+import Modal, { ModalProps } from '../modal/Modal';
+import cx from "@/libs/cx";
+
+
+interface ButtonModalProps{
+    modal: ReactElement<ModalProps>;
+    children?: ReactNode;
+    className?: string;
+}
+
+export default function ButtonModal({modal, children, className}: ButtonModalProps) {
+    const[showModal, setShowModal] = useState(false);
+
+    return (
+    <>
+        <Button className={cx('text-ob-white', className)} onClick={() => setShowModal(true)}>
+            {children}
+        </Button>   
+        {showModal && (
+            React.cloneElement(modal, { onClose: () => setShowModal(false) })
+        )}
+    </>
+    )
+}

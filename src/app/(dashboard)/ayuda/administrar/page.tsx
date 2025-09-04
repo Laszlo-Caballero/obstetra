@@ -3,6 +3,7 @@ import Button from '@/components/ui/button/Button';
 import Search from '@/components/ui/search/Search';
 import Select from '@/components/ui/select/Select';
 import SmallCard from '@/components/ui/small-card/SmallCard';
+import CrearModulo from '@/modules/ayuda/crear-modulo/CrearModulo';
 
 import { LuHouse, LuBookOpen, LuLayers, LuFlag } from "react-icons/lu";
 import { MdOutlineEmail} from "react-icons/md";
@@ -10,6 +11,8 @@ import { FaRegDotCircle } from "react-icons/fa";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { GoGoal } from "react-icons/go";
 import { AiOutlineMedicineBox } from "react-icons/ai";
+import Modal from '@/components/ui/modal/Modal';
+import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 
 
 import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
@@ -46,10 +49,12 @@ export default function AdministrarPage() {
                         </p>
                     </div>
                 </div>
-                <Button className='bg-transparent text-ob-white border border-ob-gray'>
+                <ButtonModal className='bg-transparent text-ob-white border border-ob-gray'
+                modal={<CrearModulo/>}
+                >
                     <LuBookOpen size={18}/>
                     Documentación
-                </Button>
+                </ButtonModal>
             </section>
 
             {/* Tabla */}
@@ -93,7 +98,7 @@ export default function AdministrarPage() {
                         Total: 10
                     </span>
                 </div>
-                {/* <div className=" text-sm border border-ob-gray rounded-3xl overflow-hidden  font-medium text-left">
+                <div className=" text-sm border border-ob-gray rounded-3xl overflow-hidden  font-medium text-left">
                     <table className='w-full border-collapse'>
                         <thead className='bg-ob-blue-3  '>
                             <tr className='text-ob-lightblue '>
@@ -170,7 +175,7 @@ export default function AdministrarPage() {
                             </tr>
                         </tbody>
                     </table>
-                </div> */}
+                </div>
                 <div className='flex items-center justify-between'>
                     <span className='text-sm text-ob-gray-2'>
                         Mostrando 1-10 de 48
