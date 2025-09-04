@@ -88,7 +88,7 @@ export default function Table<T>({
 
             <td className="p-3 text-ob-gray-2 font-medium w-full text-right">
               <Pagination
-                length={limit}
+                length={totalPage || 1}
                 onClick={(page) => console.log("Page:", page)}
                 value={1}
               />

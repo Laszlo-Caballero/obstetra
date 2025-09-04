@@ -55,7 +55,7 @@ export default function Filter({
       />
 
       {isOpen && (
-        <div className="absolute w-full bg-ob-black-7 left-0 top-full translate-y-2 rounded-lg border border-ob-gray">
+        <div className="absolute w-full max-h-[300px] overflow-y-auto bg-ob-black-7 left-0 top-full translate-y-2 rounded-lg border border-ob-gray">
           {values?.map((item) => (
             <div
               key={item.value}

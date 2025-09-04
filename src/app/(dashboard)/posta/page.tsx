@@ -8,14 +8,19 @@ import Filter from "@/components/ui/filter/Filter";
 import { TbMapPin } from "react-icons/tb";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { GoHome } from "react-icons/go";
-import { fetcher } from "@/libs/fetch";
-import { ResponsePosta } from "@/interface/response.interface";
-import Table from "@/components/ui/table/Table";
+import { Region, ResponsePosta } from "@/interface/response.interface";
 import PostaTable from "@/modules/posta/table/PostaTable";
+import Mapa from "@/modules/posta/components/mapa/Mapa";
+import { Position } from "@/interface/types";
+import { fetcher } from "@/libs/fetch";
 
 export default async function PostaPage() {
-  const data = await fetcher<ResponsePosta[]>("posta", "get");
-  console.log(data);
+  const data = await fetcher<ResponsePosta[]>("posta");
+
+  const rawPostas = await fetcher<Position[]>("posta/raw-postas");
+
+  const regiones = await fetcher<Region[]>("utils/regiones");
+
   return (
     <div className="flex flex-col w-full p-5 gap-y-4">
       <Breadcrums
@@ -72,22 +77,26 @@ export default async function PostaPage() {
           className={{
             container: "min-w-[260px]",
           }}
-          value="0"
+          value=""
           values={[
-            { label: "Todas", value: "0" },
-            { label: "Region 2", value: "region-2" },
-            { label: "Region 3", value: "region-3" },
+            { label: "Todas", value: "" },
+            ...(regiones?.data.map((region) => {
+              return {
+                label: region.nombre,
+                value: region.regionId.toString(),
+              };
+            }) || []),
           ]}
         />
         <Filter
-          placeholder="Region:"
+          placeholder="Estado:"
           className={{
             container: "min-w-[153px]",
           }}
-          value="0"
+          value="true"
           values={[
-            { label: "Activas", value: "0" },
-            { label: "Desactivas", value: "region-2" },
+            { label: "Activas", value: "true" },
+            { label: "Desactivas", value: "false" },
           ]}
         />
       </div>
@@ -98,6 +107,12 @@ export default async function PostaPage() {
         totalPage={data?.metadata?.totalPages}
         limit={10}
       />
+
+      <div className="p-[6px] flex flex-col gap-y-3 mb-[41px]">
+        <h2 className="text-xl font-medium">Mapa de Postas</h2>
+
+        <Mapa markers={rawPostas?.data || []} />
+      </div>
     </div>
   );
 }

@@ -4,9 +4,9 @@ import React, { PropsWithChildren } from "react";
 
 export default function LayoutDashboard({ children }: PropsWithChildren) {
   return (
-    <main className="flex">
+    <main className="flex h-screen w-full">
       <Aside />
-      <div className="flex flex-col min-h-screen w-full">
+      <div className="flex flex-col w-full overflow-y-scroll">
         <Header />
         {children}
       </div>

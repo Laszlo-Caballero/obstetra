@@ -34,21 +34,17 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
           },
         },
         {
+          header: "Ruc",
+          cell: ({ row }) => {
+            return <span className="text-nowrap">{row.ruc}</span>;
+          },
+        },
+        {
           header: "Ipress",
           cell: ({ row }) => {
             return (
               <span className="text-nowrap">
                 {row.ipress.toString().padStart(4, "0")}
-              </span>
-            );
-          },
-        },
-        {
-          header: "Codigo",
-          cell: ({ row }) => {
-            return (
-              <span className="text-nowrap">
-                PC-{row.postaId.toString().padStart(4, "0")}
               </span>
             );
           },
@@ -66,15 +62,35 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
           },
         },
         {
-          header: "Dirección",
+          header: "Provincia",
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.direccion}</span>;
+            return <span className="text-nowrap">{row.provincia?.nombre}</span>;
+          },
+        },
+        {
+          header: "Distrito",
+          cell: ({ row }) => {
+            return <span className="text-nowrap">{row.distrito?.nombre}</span>;
           },
         },
         {
           header: "Capacidad",
           cell: ({ row }) => {
             return <span className="text-nowrap">{row.capacidad}</span>;
+          },
+        },
+        {
+          header: "Fecha de creación",
+          cell: ({ row }) => {
+            return <span className="text-nowrap">{row.fechaCreacion}</span>;
+          },
+        },
+        {
+          header: "Fecha de inicio de actividad",
+          cell: ({ row }) => {
+            return (
+              <span className="text-nowrap">{row.fechaInicioActividad}</span>
+            );
           },
         },
         {
