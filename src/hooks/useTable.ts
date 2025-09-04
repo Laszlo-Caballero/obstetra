@@ -16,8 +16,6 @@ export function useTable<T>({ columns, data, initialData }: TableProps<T>) {
     }
   }, [data]);
 
-  console.log("tableData", tableData);
-
   const getHeaders = useCallback(() => {
     return columns.map((column) => column.header || column.headerComponent?.());
   }, [columns, data]);

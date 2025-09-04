@@ -1,21 +1,10 @@
 import React from "react";
-import Button from "@/components/ui/button/Button";
-import Search from "@/components/ui/search/Search";
-import Select from "@/components/ui/select/Select";
 import SmallCard from "@/components/ui/small-card/SmallCard";
 import CrearModulo from "@/modules/ayuda/crear-modulo/CrearModulo";
 import CrearTipo from "@/modules/ayuda/crear-tipo/CrearTipo";
 
-import {
-  LuHouse,
-  LuBookOpen,
-  LuLayers,
-  LuFlag,
-  LuFolderPlus,
-  LuPlus,
-} from "react-icons/lu";
+import { LuHouse, LuBookOpen, LuFolderPlus, LuPlus } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
-import { FaRegDotCircle } from "react-icons/fa";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { GoGoal } from "react-icons/go";
 import { AiOutlineMedicineBox } from "react-icons/ai";

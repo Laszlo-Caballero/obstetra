@@ -29,11 +29,7 @@ export default function Table<T>({
   initialData,
 }: TableProps<T>) {
   const table = useTable({ columns, data, initialData });
-  console.log("data in table", {
-    limit,
-    total,
-    totalPage,
-  });
+
   return (
     <div
       className={cx(

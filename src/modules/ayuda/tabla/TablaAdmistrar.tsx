@@ -96,7 +96,7 @@ export default function TablaAdmistrar({
         },
         {
           header: "Acciones",
-          cell: ({ row }) => {
+          cell: () => {
             return (
               <Button className="bg-ob-blue-3 text-ob-lightblue py-1.5">
                 <FaRegDotCircle size={18} />

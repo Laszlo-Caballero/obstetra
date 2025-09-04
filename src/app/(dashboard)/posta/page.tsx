@@ -1,11 +1,8 @@
 import Button from "@/components/ui/button/Button";
-import Search from "@/components/ui/search/Search";
 import React from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import { LuDownload } from "react-icons/lu";
 import { HiOutlinePlus } from "react-icons/hi2";
-import Filter from "@/components/ui/filter/Filter";
-import { TbMapPin } from "react-icons/tb";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { GoHome } from "react-icons/go";
 import { Region, ResponsePosta } from "@/interface/response.interface";

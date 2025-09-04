@@ -8,7 +8,6 @@ import {
 } from "react-icons/lu";
 import { PiWarningBold } from "react-icons/pi";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
-import Button from "@/components/ui/button/Button";
 import Image from "next/image";
 import { headers } from "next/headers";
 import Link from "@/components/ui/link/Link";
