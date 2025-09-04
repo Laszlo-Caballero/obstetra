@@ -21,14 +21,12 @@ export interface ModalProps{
 export default function Modal({children, title, icon, badge, nota, button, iconButton, onClose} : ModalProps) {
     return (
         <div className=' fixed inset-0 z-10 bg-black/50 flex items-center justify-center ' onClick={onClose}>
-            <div className='flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[450px]' onClick={(e) => e.stopPropagation()}>
+            <div className='flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[560px]' onClick={(e) => e.stopPropagation()}>
                 <header className='flex items-center justify-between p-4 font-medium border-b border-ob-gray'>
-                    <div className='flex items-center gap-x-2.5'>
-                        <span className="bg-ob-blue-3 p-1 rounded-xl border-3 border-ob-blue">
-                            {icon}
-                        </span>
-                        <span className='text-ob-white'> {title} </span>
-                        <Badge className='bg-ob-blue-2 text-ob-lightblue text-sm'>
+                    <div className='flex items-center gap-x-2'>
+                        {icon}
+                        <span className='text-ob-white text-lg'> {title} </span>
+                        <Badge className='bg-ob-blue-3 text-ob-lightblue text-xs'>
                             {badge}
                         </Badge>
                     </div>
@@ -47,7 +45,7 @@ export default function Modal({children, title, icon, badge, nota, button, iconB
                         <Button className='bg-transparent border border-ob-gray text-ob-white' onClick={onClose}>
                             Cancelar
                         </Button>
-                        <Button className='font-semibold'>
+                        <Button className='font-semibold bg-ob-teal'>
                             {iconButton}
                             {button}
                         </Button>

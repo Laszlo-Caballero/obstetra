@@ -1,34 +1,34 @@
 import React from 'react'
 import Modal from '@/components/ui/modal/Modal'
-import { HiOutlineSquares2X2 } from "react-icons/hi2";
+import Input from '@/components/ui/input/input'
+import TextArea from '@/components/ui/textarea/Textarea'
 import { LuSave, LuTag} from "react-icons/lu";
-import Input from '@/components/ui/input/input';
-import TextArea from '@/components/ui/textarea/Textarea';
+import { PiStethoscopeFill } from "react-icons/pi";
 
-export default function CrearModulo() {
+export default function CrearTipo() {
     return (
         <Modal
-        title='Crear Modulo'
+        title='Crear Tipo de Consulta'
         badge='Basico'
         button='Guardar'
         nota='Se le notificara a todos los administradores'
         iconButton ={<LuSave size={18} />}
-        icon={<HiOutlineSquares2X2 size={20}/>}>
+        icon={<PiStethoscopeFill size={20}/>}>
             
             <div className='flex flex-col gap-y-3'>
                 <span className='text-ob-gray-2 text-sm'>
-                    Agrega un Módulo Basico. Solo necesitas dos datos
+                    Agrega un Tipo de Consulta Basico. Solo necesitas dos datos
                 </span>
                 <div className='flex flex-col gap-y-1'>
                     <Input
-                    label='Nombre del Modulo'
+                    label='Nombre del Tipo de Consulta'
                     placeholder='Ingresar Nombre'
                     id='name'
                     className={{label: "text-ob-white text-sm"}}
                     icon={<LuTag size={18}/>}
                     />
                     <span className='text-ob-gray-2 text-xs'>
-                        Ejemplos: Citas, Laboratorio, Metas
+                        Ejemplos: Soporte Tecnico, Seguridad, Error en Página
                     </span>
                 </div>
                 <div className='flex flex-col gap-y-1'>
@@ -40,7 +40,7 @@ export default function CrearModulo() {
                     className={{label: "text-ob-white text-sm"}}
                     />
                     <span className='text-ob-gray-2 text-xs'>
-                        Describe el funcionamiento del modulo
+                        Describe de que se trata el tipo de consulta
                     </span>
                 </div>
             </div>

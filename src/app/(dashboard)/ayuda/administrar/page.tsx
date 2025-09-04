@@ -4,8 +4,9 @@ import Search from '@/components/ui/search/Search';
 import Select from '@/components/ui/select/Select';
 import SmallCard from '@/components/ui/small-card/SmallCard';
 import CrearModulo from '@/modules/ayuda/crear-modulo/CrearModulo';
+import CrearTipo from '@/modules/ayuda/crear-tipo/CrearTipo';
 
-import { LuHouse, LuBookOpen, LuLayers, LuFlag } from "react-icons/lu";
+import { LuHouse, LuBookOpen, LuLayers, LuFlag, LuFolderPlus, LuPlus} from "react-icons/lu";
 import { MdOutlineEmail} from "react-icons/md";
 import { FaRegDotCircle } from "react-icons/fa";
 import { IoMdHelpCircleOutline } from "react-icons/io";
@@ -37,7 +38,7 @@ export default function AdministrarPage() {
 
             <section className='flex items-center justify-between'>
                 <div className='flex items-start gap-x-2.5 text-ob-white font-medium'>
-                    <span className='bg-ob-blue-3 p-1 rounded-xl border-3 border-ob-blue'>
+                    <span className='bg-ob-blue-3 p-1 rounded-xl border-3 border-ob-teal'>
                         <MdOutlineEmail  size={16} />
                     </span>
                     <div className='flex flex-col gap-y-0.5'>
@@ -49,12 +50,27 @@ export default function AdministrarPage() {
                         </p>
                     </div>
                 </div>
-                <ButtonModal className='bg-transparent text-ob-white border border-ob-gray'
-                modal={<CrearModulo/>}
-                >
-                    <LuBookOpen size={18}/>
-                    Documentación
-                </ButtonModal>
+                <div className='flex items-center gap-x-2'>
+                    <ButtonModal className='bg-transparent text-ob-white border border-ob-gray'
+                    modal={<Modal/>}
+                    >
+                        <LuBookOpen size={18}/>
+                        Documentación
+                    </ButtonModal>
+                    <ButtonModal className='text-ob-black-4 bg-ob-teal'
+                    modal={<CrearModulo/>}
+                    >
+                        <LuPlus size={18}/>
+                        Agregar Modulos
+                    </ButtonModal>
+                    <ButtonModal className='text-ob-black-4 bg-ob-teal'
+                    modal={<CrearTipo/>}
+                    >
+                        <LuFolderPlus size={18}/>
+                        Agregar Tipos de Consulta
+                    </ButtonModal>
+                </div>
+                
             </section>
 
             {/* Tabla */}

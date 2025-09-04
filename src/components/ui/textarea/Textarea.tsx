@@ -6,7 +6,6 @@ interface TextAreaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className"> {
   label: string;
   id: string;
-  icon?: ReactNode;
   className?: {
     textarea?: string;
     label?: string;
@@ -14,7 +13,7 @@ interface TextAreaProps
     main?:string
   };
 }
-export default function TextArea({ label, className, id,icon, ...props }: TextAreaProps) {
+export default function TextArea({ label, className, id, ...props }: TextAreaProps) {
     return (
         <div className={cx("flex flex-col gap-y-1", className?.main)}>
         <label
@@ -24,7 +23,6 @@ export default function TextArea({ label, className, id,icon, ...props }: TextAr
             {label}
         </label>
         <div className={cx("flex items-center bg-ob-black-4 rounded-xl border border-ob-gray",className?.container)}>
-            {icon && <span className="pl-3">{icon}</span>}
             <textarea
             className={cx(
                 " font-medium text-sm placeholder-ob-white py-2 px-3 w-full focus:outline-none",
