@@ -8,17 +8,18 @@ import Filter from "@/components/ui/filter/Filter";
 import { TbMapPin } from "react-icons/tb";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { GoHome } from "react-icons/go";
-import { Response, ResponsePosta } from "@/interface/response.interface";
+import { Region, ResponsePosta } from "@/interface/response.interface";
 import PostaTable from "@/modules/posta/table/PostaTable";
 import Mapa from "@/modules/posta/components/mapa/Mapa";
 import { Position } from "@/interface/types";
-import axios from "@/libs/axios";
+import { fetcher } from "@/libs/fetch";
 
 export default async function PostaPage() {
-  const data: Response<ResponsePosta[]> = (await axios.get("posta")).data;
+  const data = await fetcher<ResponsePosta[]>("posta");
 
-  const rawPostas: Response<Position[]> = (await axios.get("posta/raw-postas"))
-    .data;
+  const rawPostas = await fetcher<Position[]>("posta/raw-postas");
+
+  const regiones = await fetcher<Region[]>("utils/regiones");
 
   return (
     <div className="flex flex-col w-full p-5 gap-y-4">
@@ -76,22 +77,26 @@ export default async function PostaPage() {
           className={{
             container: "min-w-[260px]",
           }}
-          value="0"
+          value=""
           values={[
-            { label: "Todas", value: "0" },
-            { label: "Region 2", value: "region-2" },
-            { label: "Region 3", value: "region-3" },
+            { label: "Todas", value: "" },
+            ...(regiones?.data.map((region) => {
+              return {
+                label: region.nombre,
+                value: region.regionId.toString(),
+              };
+            }) || []),
           ]}
         />
         <Filter
-          placeholder="Region:"
+          placeholder="Estado:"
           className={{
             container: "min-w-[153px]",
           }}
-          value="0"
+          value="true"
           values={[
-            { label: "Activas", value: "0" },
-            { label: "Desactivas", value: "region-2" },
+            { label: "Activas", value: "true" },
+            { label: "Desactivas", value: "false" },
           ]}
         />
       </div>

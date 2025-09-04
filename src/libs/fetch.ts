@@ -1,15 +1,9 @@
-import { env } from "@/config/env";
 import { Response } from "@/interface/response.interface";
-import axios from "axios";
+import axios from "@/libs/axios";
 
-type ApiMethod = "get" | "post" | "put" | "delete";
-
-export async function fetcher<T>(
-  path: string,
-  options: ApiMethod
-): Promise<Response<T> | null> {
+export async function fetcher<T>(path: string): Promise<Response<T> | null> {
   try {
-    const res = await axios[options](`${env.url_api}/${path}`);
+    const res = await axios.get(`${path}`);
     return res.data;
   } catch (error) {
     return null;
