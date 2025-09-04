@@ -20,6 +20,8 @@ interface SelectProps {
   };
   icon?: ReactNode;
   iconInput?: ReactNode;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 export default function Select({
@@ -30,6 +32,8 @@ export default function Select({
   className,
   icon,
   iconInput,
+  onChange,
+  value,
 }: SelectProps) {
   const [isOpen, setOpen] = useState(false);
   const ref = useClose({ closeFunction: setOpen });
@@ -48,7 +52,7 @@ export default function Select({
       >
         <div className="flex items-cente gap-x-2">
           {iconInput}
-          {placeholder}
+          {placeholder} {options?.find((item) => item.value === value)?.label}
         </div>
         <span>
           <RiArrowDropDownLine className="text-ob-white" size={18} />
@@ -84,7 +88,10 @@ export default function Select({
                     "flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer",
                     className?.optionsItem
                   )}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    onChange?.(option.value);
+                  }}
                   key={i}
                 >
                   <span>{icon}</span>

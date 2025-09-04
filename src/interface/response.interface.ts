@@ -41,3 +41,42 @@ export interface Distrito {
   distritoId: number;
   nombre: string;
 }
+
+export interface ResponseConsulta {
+  consultaId: number;
+  asunto: string;
+  descripcion: string;
+  correo: string;
+  telefono: string;
+  estado: boolean;
+  modulo: Modulo;
+  prioridad: Prioridad;
+  tipo: Tipo;
+  user: User;
+}
+
+export interface Modulo {
+  moduloId: number;
+  nombre: string;
+  descripcion: string;
+  estado: boolean;
+}
+
+export interface Prioridad {
+  prioridadId: number;
+  nombre: string;
+  estado: boolean;
+}
+
+export interface Tipo {
+  tipoId: number;
+  nombre: string;
+  descripcion: string;
+  estado: boolean;
+}
+
+export interface User {
+  userId: number;
+  user: string;
+  password: string;
+}
