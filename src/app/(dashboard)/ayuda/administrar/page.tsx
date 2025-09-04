@@ -14,7 +14,6 @@ import { GoGoal } from "react-icons/go";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import Modal from "@/components/ui/modal/Modal";
 import ButtonModal from "@/components/ui/button-modal/ButtonModal";
-
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { fetcher } from "@/libs/fetch";
 import {
@@ -69,7 +68,7 @@ export default async function AdministrarPage() {
         <div className="flex items-center gap-x-2">
           <ButtonModal
             className="bg-transparent text-ob-white border border-ob-gray"
-            modal={<Modal />}
+            modal={<Documentacion />}
           >
             <LuBookOpen size={18} />
             Documentación

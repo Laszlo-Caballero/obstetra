@@ -3,9 +3,10 @@ import Button from "@/components/ui/button/Button";
 import Input from "@/components/ui/input/input";
 import Select from "@/components/ui/select/Select";
 import TextArea from "@/components/ui/textarea/Textarea";
+import CheckBox from "@/components/ui/checkbox/CheckBox";
 import React from "react";
 import { GoHome } from "react-icons/go";
-import { LuArrowLeft, LuPill, LuPlus, LuSave } from "react-icons/lu";
+import { LuArrowLeft, LuCheck, LuPill, LuPlus, LuSave } from "react-icons/lu";
 
 export default function page() {
   return (
@@ -145,8 +146,11 @@ export default function page() {
               placeholder="30"
               className={{ label: "text-sm text-ob-white" }}
             />
+            <CheckBox className="flex items-center gap-y-2">
+              <LuCheck size={16} />
+              Sí
+            </CheckBox>
           </div>
-          <div>RECETA</div>
         </div>
       </form>
     </div>
