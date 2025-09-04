@@ -36,7 +36,7 @@ export default function Search({
         type="text"
         placeholder={placeholder}
         onChange={(e) => onSearch?.(e.target.value)}
-        className="h-full outline-0"
+        className="h-full w-full outline-0"
         value={value}
       />
     </div>
