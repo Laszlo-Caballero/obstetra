@@ -2,13 +2,17 @@
 import GoogleMapsIcon from "@/assets/svg/GoogleMapsIcon";
 import Badge from "@/components/ui/badge/Badge";
 import Table from "@/components/ui/table/Table";
-import { ResponsePosta } from "@/interface/response.interface";
+import { Response, ResponsePosta } from "@/interface/response.interface";
 import cx from "@/libs/cx";
 import Link from "next/link";
-import React from "react";
+import React, { use, useState } from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import ButtonLink from "@/components/ui/link/Link";
 import { TbEdit, TbTrash } from "react-icons/tb";
+import { FilterPosta } from "../types";
+import { useFilter } from "@/components/context/FilterContext";
+import { useQuery } from "@/hooks/useQuery";
+import axios from "axios";
 
 interface PostaTableProps {
   data: ResponsePosta[];
@@ -18,10 +22,51 @@ interface PostaTableProps {
 }
 
 export default function PostaTable({ data, ...props }: PostaTableProps) {
+  const { filters, setFilter } = useFilter<FilterPosta>();
+
+  const [metadata, setMetadata] = useState(props);
+
+  const { data: queryData } = useQuery<Response<ResponsePosta[]>>({
+    firstRender: false,
+    queryFn: async (url) => {
+      const parseUrl = new URL(`${url}/posta`);
+
+      parseUrl.searchParams.append("limit", props.limit?.toString() || "10");
+      parseUrl.searchParams.append("page", filters.page);
+
+      if (filters.status != "") {
+        parseUrl.searchParams.append("status", filters.status);
+      }
+
+      if (filters.regionId != "") {
+        parseUrl.searchParams.append("regionId", filters.regionId);
+      }
+
+      if (filters.search != "") {
+        parseUrl.searchParams.append("search", filters.search);
+      }
+
+      const res = await axios.get(parseUrl.toString());
+      const data: Response<ResponsePosta[]> = res.data;
+      setMetadata({
+        total: data?.metadata?.totalItems || 0,
+        totalPage: data?.metadata?.totalPages || 0,
+        limit: 10,
+      });
+      return data;
+    },
+    dependencies: [filters],
+  });
+
   return (
     <Table
-      {...props}
-      data={data}
+      {...metadata}
+      value={Number(filters.page) || 1}
+      onChangePage={(page) => {
+        setFilter("page", page.toString());
+      }}
+      initialData={data}
+      data={queryData?.data}
       columns={[
         {
           header: "",

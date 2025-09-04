@@ -1,25 +1,36 @@
 import { ColumnDef } from "@/interface/table.interface";
-import { ReactNode, useCallback } from "react";
+import { ReactNode, useCallback, useState, useEffect } from "react";
 
 interface TableProps<T> {
-  data: T[];
+  data?: T[];
   columns: ColumnDef<T>[];
+  initialData: T[];
 }
 
-export function useTable<T>({ columns, data }: TableProps<T>) {
+export function useTable<T>({ columns, data, initialData }: TableProps<T>) {
+  const [tableData, setTableData] = useState<T[]>(initialData ?? data);
+
+  useEffect(() => {
+    if (data) {
+      setTableData(data);
+    }
+  }, [data]);
+
+  console.log("tableData", tableData);
+
   const getHeaders = useCallback(() => {
     return columns.map((column) => column.header || column.headerComponent?.());
   }, [columns, data]);
 
   const getCells = useCallback(() => {
-    return data.map((row) => {
+    return tableData.map((row) => {
       return columns.map((column) => {
         return column.accessorKey
           ? (row[column.accessorKey] as ReactNode)
           : column.cell?.({ row });
       });
     });
-  }, [columns, data]);
+  }, [columns, tableData, data]);
 
   const getFooter = useCallback(() => {
     return columns.map((column) => column.footer || column.footerComponent?.());

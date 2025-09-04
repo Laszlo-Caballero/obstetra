@@ -1,5 +1,5 @@
 import { env } from "@/config/env";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface QueryProps<T> {
   dependencies?: unknown[];
@@ -19,6 +19,7 @@ export function useQuery<T>({
     error: string;
   }>({ isError: false, isLoading: true, error: "" });
   // const { user } = useAuth();
+  const didMount = useRef(false);
 
   const refreshData = (data: T) => {
     setFetch((prev) => ({ ...prev, data }));
@@ -39,7 +40,12 @@ export function useQuery<T>({
         setFetch({ isLoading: false, isError: true, error: String(error) });
       }
     };
-    if (firstRender) {
+    if (!didMount.current) {
+      didMount.current = true;
+      if (firstRender) {
+        fetchData();
+      }
+    } else {
       fetchData();
     }
   }, [...(dependencies || [])]);

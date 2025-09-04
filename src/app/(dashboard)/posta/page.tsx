@@ -13,6 +13,8 @@ import PostaTable from "@/modules/posta/table/PostaTable";
 import Mapa from "@/modules/posta/components/mapa/Mapa";
 import { Position } from "@/interface/types";
 import { fetcher } from "@/libs/fetch";
+import FilterSelect from "@/modules/posta/filters/FilterSelect";
+import SearchPosta from "@/modules/posta/filters/SearchPosta";
 
 export default async function PostaPage() {
   const data = await fetcher<ResponsePosta[]>("posta");
@@ -51,12 +53,7 @@ export default async function PostaPage() {
           </div>
         </div>
 
-        <Search
-          placeholder="Buscar postas..."
-          className={{
-            container: "max-w-[389px] ml-8",
-          }}
-        />
+        <SearchPosta />
 
         <div className="flex gap-x-2 ml-auto ">
           <Button className="bg-transparent max-h-10 text-white border border-ob-gray rounded-[6px]">
@@ -70,36 +67,7 @@ export default async function PostaPage() {
         </div>
       </section>
 
-      <div className="flex items-center gap-x-3">
-        <Filter
-          placeholder="Region:"
-          icon={<TbMapPin />}
-          className={{
-            container: "min-w-[260px]",
-          }}
-          value=""
-          values={[
-            { label: "Todas", value: "" },
-            ...(regiones?.data.map((region) => {
-              return {
-                label: region.nombre,
-                value: region.regionId.toString(),
-              };
-            }) || []),
-          ]}
-        />
-        <Filter
-          placeholder="Estado:"
-          className={{
-            container: "min-w-[153px]",
-          }}
-          value="true"
-          values={[
-            { label: "Activas", value: "true" },
-            { label: "Desactivas", value: "false" },
-          ]}
-        />
-      </div>
+      <FilterSelect regiones={regiones?.data} />
 
       <PostaTable
         data={data?.data || []}

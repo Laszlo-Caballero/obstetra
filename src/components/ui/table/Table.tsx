@@ -6,12 +6,15 @@ import cx from "@/libs/cx";
 import Pagination from "../pagination/Pagination";
 
 interface TableProps<T> {
-  data: T[];
+  initialData: T[];
+  data?: T[];
   columns: ColumnDef<T>[];
   className?: string;
   total?: number;
   totalPage?: number;
   limit?: number;
+  onChangePage?: (page: number) => void;
+  value?: number;
 }
 
 export default function Table<T>({
@@ -21,15 +24,16 @@ export default function Table<T>({
   limit = 10,
   total,
   totalPage,
+  onChangePage,
+  value,
+  initialData,
 }: TableProps<T>) {
-  // const { data: contextData, refresh } = useTableContext<T>();
-
-  const table = useTable({ columns, data: data });
-
-  // useEffect(() => {
-  //   refresh(data);
-  // }, [data]);
-
+  const table = useTable({ columns, data, initialData });
+  console.log("data in table", {
+    limit,
+    total,
+    totalPage,
+  });
   return (
     <div
       className={cx(
@@ -89,8 +93,8 @@ export default function Table<T>({
             <td className="p-3 text-ob-gray-2 font-medium w-full text-right">
               <Pagination
                 length={totalPage || 1}
-                onClick={(page) => console.log("Page:", page)}
-                value={1}
+                onClick={(page) => onChangePage?.(page)}
+                value={value}
               />
             </td>
           </tr>

@@ -6,6 +6,7 @@ import { LuSearch } from "react-icons/lu";
 interface SearchProps {
   placeholder?: string;
   onSearch?: (query: string) => void;
+  value?: string;
   className?: {
     container?: string;
   };
@@ -15,6 +16,7 @@ export default function Search({
   placeholder,
   onSearch,
   className,
+  value,
 }: SearchProps) {
   const id = useId();
 
@@ -35,6 +37,7 @@ export default function Search({
         placeholder={placeholder}
         onChange={(e) => onSearch?.(e.target.value)}
         className="h-full outline-0"
+        value={value}
       />
     </div>
   );
