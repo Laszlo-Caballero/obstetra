@@ -97,7 +97,9 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
         {
           header: "Nombre",
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.nombre}</span>;
+            return (
+              <span className="max-w-[200px] text-wrap">{row.nombre}</span>
+            );
           },
         },
         {

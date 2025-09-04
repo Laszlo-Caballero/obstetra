@@ -12,6 +12,8 @@ import { Position } from "@/interface/types";
 import { fetcher } from "@/libs/fetch";
 import FilterSelect from "@/modules/posta/filters/FilterSelect";
 import SearchPosta from "@/modules/posta/filters/SearchPosta";
+import ExportButton from "@/modules/posta/components/export-button/ExportButton";
+import Link from "@/components/ui/link/Link";
 
 export default async function PostaPage() {
   const data = await fetcher<ResponsePosta[]>("posta");
@@ -53,14 +55,12 @@ export default async function PostaPage() {
         <SearchPosta />
 
         <div className="flex gap-x-2 ml-auto ">
-          <Button className="bg-transparent max-h-10 text-white border border-ob-gray rounded-[6px]">
-            <LuDownload /> Exportar
-          </Button>
+          <ExportButton />
 
-          <Button className="max-h-10 text-white">
+          <Link href="/posta/crear" className="max-h-10 text-white">
             <HiOutlinePlus />
             Nueva posta
-          </Button>
+          </Link>
         </div>
       </section>
 
