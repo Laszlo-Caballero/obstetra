@@ -8,10 +8,10 @@ import Button from '../button/Button';
 export interface ModalProps{
     children?: ReactNode;
     title?: string;
-    icon?: ReactNode;
     badge?: string;
     nota?: string;
     button?: string;
+    icon?: ReactNode;
     iconButton?: ReactNode;
     onClose?: () => void;
 }
