@@ -5,6 +5,7 @@ import Select from '@/components/ui/select/Select';
 import SmallCard from '@/components/ui/small-card/SmallCard';
 import CrearModulo from '@/modules/ayuda/crear-modulo/CrearModulo';
 import CrearTipo from '@/modules/ayuda/crear-tipo/CrearTipo';
+import Documentacion from '@/modules/ayuda/documentacion/Documentacion';
 
 import { LuHouse, LuBookOpen, LuLayers, LuFlag, LuFolderPlus, LuPlus} from "react-icons/lu";
 import { MdOutlineEmail} from "react-icons/md";
@@ -17,6 +18,7 @@ import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 
 
 import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
+import Badge from '@/components/ui/badge/Badge';
 export default function AdministrarPage() {
     return (
         <div className='w-full flex flex-col gap-y-4 p-5'>
@@ -53,7 +55,7 @@ export default function AdministrarPage() {
                 <div className='flex items-center gap-x-2'>
                     
                     <ButtonModal className='bg-transparent text-ob-white border border-ob-gray'
-                    modal={<Modal/>}
+                    modal={<Documentacion/>}
                     >
                         <LuBookOpen size={18}/>
                         Documentación
@@ -224,21 +226,31 @@ export default function AdministrarPage() {
                 <SmallCard
                     title='¿Cómo reinicio mi contraseña?'
                     description='Ve a Admin > Usuarios > Restablecer Contraseña'
-                    button='Guia Rapida'
                     icon={<IoMdHelpCircleOutline  size={18} />}
-                />
+                >
+                    <Badge className='bg-ob-blue-3 text-xs text-ob-lightblue'>
+                        Guia Rapida
+                    </Badge>
+                </SmallCard>
                 <SmallCard
                     title='No veo mis metas del Mes'
                     description='Revisa los filtros de año/mes en la vista Metas'
-                    button='Solución'
                     icon={<GoGoal  size={18} />}
-                />
+                >
+                    <Badge className='bg-ob-blue-3 text-xs text-ob-lightblue'>
+                        Solucion
+                    </Badge>
+                </SmallCard>
+
                 <SmallCard
                     title='Error al Completar Datos del Cliente'
                     description='Usa el botón "Completar datos" en Laboratorio y valida campos obligatorios.'
-                    button='Paso a Paso'
                     icon={<AiOutlineMedicineBox  size={18} />}
-                />
+                >
+                    <Badge className='bg-ob-blue-3 text-xs text-ob-lightblue'>
+                        Paso a paso
+                    </Badge>
+                </SmallCard>
             </div>
         </div>
     )

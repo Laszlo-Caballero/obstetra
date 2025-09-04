@@ -61,21 +61,6 @@ export default function Select({
             className?.optionsContainer
           )}
         >
-          <div
-            className={cx(
-              "flex items-center gap-x-2 bg-ob-black-4 border border-ob-gray rounded-xl p-2 mb-2",
-              className?.search
-            )}
-          >
-            <span>
-              <CiSearch className="text-ob-white" size={18} />
-            </span>
-            <input
-              type="text"
-              className="placeholder-ob-white text-sm w-full focus:outline-none"
-              placeholder={search}
-            />
-          </div>
           <div className="max-h-[100px] overflow-y-scroll">
             {options?.map((option, i) => {
               return (
