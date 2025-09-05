@@ -24,14 +24,16 @@ export default function ModalTitle({
       <span className={cx("text-ob-white text-lg", className?.title)}>
         {title}
       </span>
-      <Badge
-        className={cx(
-          "bg-ob-blue-3 text-ob-lightblue text-xs",
-          className?.badge
-        )}
-      >
-        {badge}
-      </Badge>
+      {badge && (
+        <Badge
+          className={cx(
+            "bg-ob-blue-3 text-ob-lightblue text-xs",
+            className?.badge
+          )}
+        >
+          {badge}
+        </Badge>
+      )}
     </div>
   );
 }

@@ -19,12 +19,12 @@ import { TfiReload } from "react-icons/tfi";
 import { LiaGripLinesSolid } from "react-icons/lia";
 import Search from "@/components/ui/search/Search";
 import SmallCard from "@/components/ui/small-card/SmallCard";
-import Modal from "@/components/ui/modal-v2/Modal";
-import ModalHeader from "@/components/ui/modal-v2/modal-header/ModalHeader";
-import ModalTitle from "@/components/ui/modal-v2/modal-title/ModalTitle";
-import ModalFooter from "@/components/ui/modal-v2/modal-footer/ModalFooter";
-import ContainerButton from "@/components/ui/modal-v2/container-button/ContainerButton";
-import CloseButton from "@/components/ui/modal-v2/close-button/CloseButton";
+import Modal from "@/components/ui/modal/Modal";
+import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
+import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
+import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
+import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
+import CloseButton from "@/components/ui/modal/close-button/CloseButton";
 
 export default function Documentacion() {
   return (

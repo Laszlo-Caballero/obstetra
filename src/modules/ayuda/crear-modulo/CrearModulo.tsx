@@ -1,14 +1,14 @@
 import React from "react";
-import Modal from "@/components/ui/modal-v2/Modal";
+import Modal from "@/components/ui/modal/Modal";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import { LuSave, LuTag, LuX } from "react-icons/lu";
 import Input from "@/components/ui/input/input";
 import TextArea from "@/components/ui/textarea/Textarea";
-import ModalHeader from "@/components/ui/modal-v2/modal-header/ModalHeader";
-import ModalTitle from "@/components/ui/modal-v2/modal-title/ModalTitle";
-import CloseButton from "@/components/ui/modal-v2/close-button/CloseButton";
-import ModalFooter from "@/components/ui/modal-v2/modal-footer/ModalFooter";
-import ContainerButton from "@/components/ui/modal-v2/container-button/ContainerButton";
+import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
+import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
+import CloseButton from "@/components/ui/modal/close-button/CloseButton";
+import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
+import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
 import Button from "@/components/ui/button/Button";
 
 export default function CrearModulo() {
