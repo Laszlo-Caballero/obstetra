@@ -4,6 +4,7 @@ import { IconProps, Options } from "@/interface/props";
 import cx from "@/libs/cx";
 import { cloneElement, ReactElement, ReactNode, useState } from "react";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
+import { AnimatePresence, motion } from "motion/react";
 
 interface FilterProps {
   placeholder?: string;
@@ -54,22 +55,30 @@ export default function Filter({
         )}
       />
 
-      {isOpen && (
-        <div className="absolute w-full z-10 max-h-[300px] overflow-y-auto bg-ob-black-7 left-0 top-full translate-y-2 rounded-lg border border-ob-gray">
-          {values?.map((item) => (
-            <div
-              key={item.value}
-              className="py-2.5 px-3 hover:bg-ob-gray-2 border-b border-ob-gray cursor-pointer text-sm bg-ob-black-7 first:rounded-t-lg last:border-0 last:rounded-b-lg text-ob-white font-medium"
-              onClick={() => {
-                onChange?.(item.value);
-                setOpen(false);
-              }}
-            >
-              {item.label}
-            </div>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="absolute w-full z-10 max-h-[300px] overflow-y-auto bg-ob-black-7 left-0 top-full translate-y-2 rounded-lg border border-ob-gray"
+            initial={{ height: 0, overflow: "hidden" }}
+            animate={{ height: "auto", overflow: "auto" }}
+            exit={{ height: 0, overflow: "hidden" }}
+            transition={{ duration: 0.3 }}
+          >
+            {values?.map((item) => (
+              <div
+                key={item.value}
+                className="py-2.5 px-3 hover:bg-ob-gray-2 border-b border-ob-gray cursor-pointer text-sm bg-ob-black-7 first:rounded-t-lg last:border-0 last:rounded-b-lg text-ob-white font-medium"
+                onClick={() => {
+                  onChange?.(item.value);
+                  setOpen(false);
+                }}
+              >
+                {item.label}
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

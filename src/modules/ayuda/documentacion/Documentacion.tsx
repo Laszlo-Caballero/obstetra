@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "@/components/ui/modal/Modal";
 import Button from "@/components/ui/button/Button";
 import Badge from "@/components/ui/badge/Badge";
 
@@ -12,6 +11,7 @@ import {
   LuInfo,
   LuStar,
   LuDownload,
+  LuX,
 } from "react-icons/lu";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { BiUpvote } from "react-icons/bi";
@@ -19,17 +19,25 @@ import { TfiReload } from "react-icons/tfi";
 import { LiaGripLinesSolid } from "react-icons/lia";
 import Search from "@/components/ui/search/Search";
 import SmallCard from "@/components/ui/small-card/SmallCard";
+import Modal from "@/components/ui/modal-v2/Modal";
+import ModalHeader from "@/components/ui/modal-v2/modal-header/ModalHeader";
+import ModalTitle from "@/components/ui/modal-v2/modal-title/ModalTitle";
+import ModalFooter from "@/components/ui/modal-v2/modal-footer/ModalFooter";
+import ContainerButton from "@/components/ui/modal-v2/container-button/ContainerButton";
+import CloseButton from "@/components/ui/modal-v2/close-button/CloseButton";
 
 export default function Documentacion() {
   return (
-    <Modal
-      title="Exporta Manuales en Pdf"
-      badge="Documentacion"
-      button="Subir Nueva Version"
-      nota="Puedes cargar una nueva version sin perder el historial"
-      icon={<IoDocumentTextOutline size={20} />}
-      iconButton={<FiUpload size={18} />}
-    >
+    <Modal>
+      <ModalHeader>
+        <ModalTitle title="Exporta Manuales en Pdf" badge="Documentacion">
+          <IoDocumentTextOutline size={20} />
+        </ModalTitle>
+        <CloseButton>
+          <LuX size={18} className="text-ob-white" />
+        </CloseButton>
+      </ModalHeader>
+
       <div className="flex">
         <div className="flex flex-col gap-y-3 border-r border-ob-gray">
           <section className="flex items-center gap-x-3 border-b border-ob-gray pb-3 p-4">
@@ -130,6 +138,16 @@ export default function Documentacion() {
           </div>
         </aside>
       </div>
+
+      <ModalFooter nota="Puedes cargar una nueva version sin perder el historial">
+        <ContainerButton>
+          <CloseButton>Cancelar</CloseButton>
+          <Button className="font-semibold bg-ob-teal">
+            <FiUpload size={18} />
+            Subir Nueva Version
+          </Button>
+        </ContainerButton>
+      </ModalFooter>
     </Modal>
   );
 }

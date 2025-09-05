@@ -14,6 +14,9 @@ import FilterSelect from "@/modules/posta/filters/FilterSelect";
 import SearchPosta from "@/modules/posta/filters/SearchPosta";
 import ExportButton from "@/modules/posta/components/export-button/ExportButton";
 import Link from "@/components/ui/link/Link";
+import ButtonModal from "@/components/ui/button-modal/ButtonModal";
+import { LuUpload } from "react-icons/lu";
+import ModalImport from "@/modules/posta/import/ModalImport";
 
 export default async function PostaPage() {
   const data = await fetcher<ResponsePosta[]>("posta");
@@ -56,6 +59,14 @@ export default async function PostaPage() {
 
         <div className="flex gap-x-2 ml-auto ">
           <ExportButton />
+
+          <ButtonModal
+            className="bg-transparent max-h-10 text-white border border-ob-gray rounded-[6px]"
+            modal={<ModalImport />}
+          >
+            <LuUpload />
+            Importar
+          </ButtonModal>
 
           <Link href="/posta/crear" className="max-h-10 text-white">
             <HiOutlinePlus />
