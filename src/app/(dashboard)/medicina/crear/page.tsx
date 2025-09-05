@@ -153,6 +153,12 @@ export default function page() {
               </span>
             </CheckBox>
           </div>
+          <div>
+            <div className="flex items-centes justify-between text-sm">
+              <span className="text-ob-white">Imagen</span>
+              <span className="text-ob-gray-2">Opcional</span>
+            </div>
+          </div>
         </div>
       </form>
     </div>
