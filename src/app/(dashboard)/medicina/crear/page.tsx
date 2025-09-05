@@ -146,9 +146,11 @@ export default function page() {
               placeholder="30"
               className={{ label: "text-sm text-ob-white" }}
             />
-            <CheckBox className="flex items-center gap-y-2">
-              <LuCheck size={16} />
-              Sí
+            <CheckBox label="Necesita Receta">
+              <span className="flex items-center gap-x-2">
+                <LuCheck size={16} />
+                Sí
+              </span>
             </CheckBox>
           </div>
         </div>
