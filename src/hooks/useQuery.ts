@@ -1,3 +1,4 @@
+import { useLoader } from "@/components/context/LoaderContext";
 import { env } from "@/config/env";
 import { useEffect, useRef, useState } from "react";
 
@@ -20,6 +21,7 @@ export function useQuery<T>({
   }>({ isError: false, isLoading: true, error: "" });
   // const { user } = useAuth();
   const didMount = useRef(false);
+  const { setLoading, setOver } = useLoader();
 
   const refreshData = (data: T) => {
     setFetch((prev) => ({ ...prev, data }));
@@ -34,10 +36,13 @@ export function useQuery<T>({
           error: "",
           data: undefined,
         });
+        setLoading();
         const data = await queryFn(env.url_api || "");
         setFetch({ isLoading: false, data, isError: false, error: "" });
       } catch (error: unknown) {
         setFetch({ isLoading: false, isError: true, error: String(error) });
+      } finally {
+        setOver();
       }
     };
     if (!didMount.current) {

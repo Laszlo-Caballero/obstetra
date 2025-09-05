@@ -1,9 +1,17 @@
 "use client";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
+interface MetadataProps {
+  total: number;
+  totalPage: number;
+  limit: number;
+}
+
 interface FilterContextType<T> {
   filters: T;
   setFilter: (key: keyof T, value: T[keyof T]) => void;
+  metadata?: MetadataProps;
+  setMetadata: (metadata: MetadataProps) => void;
 }
 
 const FilterContext = createContext<FilterContextType<unknown> | undefined>(
@@ -19,13 +27,16 @@ export function FilterProvider<T>({
   children,
 }: PropsWithChildren<FilterProviderProps<T>>) {
   const [filters, setFilters] = useState<T>(initialFilters);
+  const [metadata, setMetadata] = useState<MetadataProps>();
 
   const setFilter = (key: keyof T, value: T[keyof T]) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
-    <FilterContext value={{ filters, setFilter }}>{children}</FilterContext>
+    <FilterContext value={{ filters, setFilter, metadata, setMetadata }}>
+      {children}
+    </FilterContext>
   );
 }
 

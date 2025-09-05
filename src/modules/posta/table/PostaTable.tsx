@@ -22,9 +22,8 @@ interface PostaTableProps {
 }
 
 export default function PostaTable({ data, ...props }: PostaTableProps) {
-  const { filters, setFilter } = useFilter<FilterPosta>();
-
-  const [metadata, setMetadata] = useState(props);
+  const { filters, setFilter, setMetadata, metadata } =
+    useFilter<FilterPosta>();
 
   const { data: queryData } = useQuery<Response<ResponsePosta[]>>({
     firstRender: false,

@@ -4,6 +4,7 @@ import { useMutation } from "@/hooks/useMutation";
 import axios from "axios";
 import React from "react";
 import { LuDownload } from "react-icons/lu";
+import { toast } from "sonner";
 
 export default function ExportButton() {
   const { mutate } = useMutation<unknown, Blob>({
@@ -15,6 +16,7 @@ export default function ExportButton() {
       return res.data;
     },
     onSuccess: (data) => {
+      toast.success("Exportando postas");
       const url = window.URL.createObjectURL(new Blob([data]));
       const link = document.createElement("a");
       link.href = url;

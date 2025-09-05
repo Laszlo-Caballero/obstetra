@@ -4,6 +4,8 @@ import { useTable } from "@/hooks/useTable";
 import { ColumnDef } from "@/interface/table.interface";
 import cx from "@/libs/cx";
 import Pagination from "../pagination/Pagination";
+import { useTableContext } from "@/components/context/TableContext";
+import { useEffect } from "react";
 
 interface TableProps<T> {
   initialData: T[];
@@ -28,7 +30,13 @@ export default function Table<T>({
   value,
   initialData,
 }: TableProps<T>) {
-  const table = useTable({ columns, data, initialData });
+  const { data: contextData, refresh } = useTableContext<T>();
+
+  const table = useTable({ columns, data: contextData, initialData });
+
+  useEffect(() => {
+    refresh(data);
+  }, [data]);
 
   return (
     <div
