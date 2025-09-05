@@ -2,9 +2,9 @@
 import cx from "@/libs/cx";
 import { ReactNode, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { CiSearch } from "react-icons/ci";
 import { useClose } from "@/hooks/useClose";
 import { Options } from "@/interface/props";
+import { AnimatePresence, motion } from "motion/react";
 
 interface SelectProps {
   label?: string;
@@ -58,35 +58,41 @@ export default function Select({
           <RiArrowDropDownLine className="text-ob-white" size={18} />
         </span>
       </div>
-      {isOpen && (
-        <div
-          className={cx(
-            "absolute traslate-y-2 mt-1 top-full z-10 bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full ",
-            className?.optionsContainer
-          )}
-        >
-          <div className="max-h-[100px] overflow-y-scroll">
-            {options?.map((option, i) => {
-              return (
-                <div
-                  className={cx(
-                    "flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer",
-                    className?.optionsItem
-                  )}
-                  onClick={() => {
-                    setOpen(false);
-                    onChange?.(option.value);
-                  }}
-                  key={i}
-                >
-                  <span>{icon}</span>
-                  <p className="text-ob-white text-sm">{option.label}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className={cx(
+              "absolute traslate-y-2 mt-1 top-full z-10 bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full min-w-[200px]",
+              className?.optionsContainer
+            )}
+            initial={{ height: 0, overflow: "hidden" }}
+            animate={{ height: "auto", overflow: "auto" }}
+            exit={{ height: 0, overflow: "hidden" }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="max-h-[200px]">
+              {options?.map((option, i) => {
+                return (
+                  <div
+                    className={cx(
+                      "flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer",
+                      className?.optionsItem
+                    )}
+                    onClick={() => {
+                      setOpen(false);
+                      onChange?.(option.value);
+                    }}
+                    key={i}
+                  >
+                    <span>{icon}</span>
+                    <p className="text-ob-white text-sm">{option.label}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

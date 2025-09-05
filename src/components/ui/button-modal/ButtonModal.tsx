@@ -4,6 +4,7 @@ import React, { ReactElement, ReactNode, useState } from "react";
 import Button from "../button/Button";
 import { ModalProps } from "../modal/Modal";
 import cx from "@/libs/cx";
+import { AnimatePresence } from "motion/react";
 
 interface ButtonModalProps {
   modal: ReactElement<ModalProps>;
@@ -26,8 +27,10 @@ export default function ButtonModal({
       >
         {children}
       </Button>
-      {showModal &&
-        React.cloneElement(modal, { onClose: () => setShowModal(false) })}
+      <AnimatePresence>
+        {showModal &&
+          React.cloneElement(modal, { onClose: () => setShowModal(false) })}
+      </AnimatePresence>
     </>
   );
 }

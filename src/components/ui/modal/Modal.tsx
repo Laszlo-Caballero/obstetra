@@ -1,9 +1,9 @@
 "use client";
-
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import Badge from "../badge/Badge";
 import { LuX } from "react-icons/lu";
 import Button from "../button/Button";
+import { motion } from "motion/react";
 
 export interface ModalProps {
   children?: ReactNode;
@@ -27,9 +27,13 @@ export default function Modal({
   onClose,
 }: ModalProps) {
   return (
-    <div
+    <motion.div
       className=" fixed inset-0 z-[100] bg-black/50 flex items-center justify-center "
       onClick={onClose}
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.2 }}
     >
       <div
         className="flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[560px]"
@@ -67,6 +71,6 @@ export default function Modal({
           </div>
         </footer>
       </div>
-    </div>
+    </motion.div>
   );
 }
