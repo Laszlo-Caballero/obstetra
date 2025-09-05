@@ -1,6 +1,6 @@
-import Modal from "@/components/ui/modal-v2/Modal";
-import ModalHeader from "@/components/ui/modal-v2/modal-header/ModalHeader";
-import ModalTitle from "@/components/ui/modal-v2/modal-title/ModalTitle";
+import Modal from "@/components/ui/modal/Modal";
+import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
+import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
 import React from "react";
 import { LuUpload } from "react-icons/lu";
 

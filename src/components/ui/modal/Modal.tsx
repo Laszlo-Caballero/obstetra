@@ -1,76 +1,54 @@
 "use client";
-import { ReactNode } from "react";
-import Badge from "../badge/Badge";
-import { LuX } from "react-icons/lu";
-import Button from "../button/Button";
+import cx from "@/libs/cx";
 import { motion } from "motion/react";
+import { createContext, PropsWithChildren, useContext } from "react";
 
-export interface ModalProps {
-  children?: ReactNode;
-  title?: string;
-  badge?: string;
-  nota?: string;
-  button?: string;
-  icon?: ReactNode;
-  iconButton?: ReactNode;
+interface ModalProviderProps {
   onClose?: () => void;
 }
 
-export default function Modal({
-  children,
-  title,
-  icon,
-  badge,
-  nota,
-  button,
-  iconButton,
-  onClose,
-}: ModalProps) {
+const ModalContext = createContext<ModalProviderProps | undefined>(undefined);
+
+interface ModalProps extends PropsWithChildren {
+  onClose?: () => void;
+  className?: {
+    background?: string;
+    container?: string;
+  };
+}
+
+export default function Modal({ onClose, className, children }: ModalProps) {
   return (
-    <motion.div
-      className=" fixed inset-0 z-[100] bg-black/50 flex items-center justify-center "
-      onClick={onClose}
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 0.2 }}
-    >
-      <div
-        className="flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[560px]"
-        onClick={(e) => e.stopPropagation()}
+    <ModalContext value={{ onClose }}>
+      <motion.div
+        className={cx(
+          "fixed inset-0 z-[100] bg-black/50 flex items-center justify-center",
+          className?.background
+        )}
+        onClick={onClose}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: 0.2 }}
       >
-        <header className="flex items-center justify-between p-4 font-medium border-b border-ob-gray">
-          <div className="flex items-center gap-x-2">
-            {icon}
-            <span className="text-ob-white text-lg"> {title} </span>
-            <Badge className="bg-ob-blue-3 text-ob-lightblue text-xs">
-              {badge}
-            </Badge>
-          </div>
-          <span
-            className="border border-ob-gray py-2.5 px-3 rounded-md cursor-pointer"
-            onClick={onClose}
-          >
-            <LuX size={18} className="text-ob-white" />
-          </span>
-        </header>
-        {children}
-        <footer className="flex items-center justify-between p-4 font-medium border-t border-ob-gray">
-          <span className="text-ob-gray-2 text-sm">{nota}</span>
-          <div className="flex items-center justify-between gap-x-3">
-            <Button
-              className="bg-transparent border border-ob-gray text-ob-white"
-              onClick={onClose}
-            >
-              Cancelar
-            </Button>
-            <Button className="font-semibold bg-ob-teal">
-              {iconButton}
-              {button}
-            </Button>
-          </div>
-        </footer>
-      </div>
-    </motion.div>
+        <div
+          className={cx(
+            "flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[560px]",
+            className?.container
+          )}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {children}
+        </div>
+      </motion.div>
+    </ModalContext>
   );
+}
+
+export function useModal() {
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error("useModal must be used within a ModalProvider");
+  }
+  return context;
 }
