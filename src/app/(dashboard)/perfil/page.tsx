@@ -1,7 +1,10 @@
 import React from "react";
+import Image from "next/image";
+
 import Button from "@/components/ui/button/Button";
 import Input from "@/components/ui/input/input";
 import Select from "@/components/ui/select/Select";
+import InfoContainer from "@/components/ui/info-container/InfoContainer";
 
 import { LuUserCog, LuSave, LuShieldCheck, LuX, LuCheck } from "react-icons/lu";
 import { GoHome } from "react-icons/go";
@@ -59,15 +62,15 @@ export default function Perfilpage() {
 
         {/* Perfil */}
 
-        <div className="bg-ob-black-3 p-4 rounded-3xl border border-ob-gray">
+        <InfoContainer>
           <div className="flex items-center gap-x-3 border-b border-ob-gray pb-3 bg-">
-            {/* <Image
-              src="https://i.pinimg.com/736x/69/d4/f5/69d4f553a801270cc080e78402855353.jpg"
+            <Image
+              src="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779110/nviouobzjm4eiaw301zf.webp"
               className="w-16 rounded-full"
               alt="foto de perfil"
               width={64}
               height={64}
-            /> */}
+            />
             <div className="flex flex-col ">
               <span className="text-ob-white font-medium">Admin</span>
               <span className="text-ob-gray-2 text-sm font-medium">
@@ -114,12 +117,12 @@ export default function Perfilpage() {
               </span>
             </div>
           </div>
-        </div>
+        </InfoContainer>
 
         {/* Formulario  */}
 
         <form className="flex flex-col gap-y-4">
-          <div className=" flex flex-col gap-y-3 bg-ob-black-3 p-4 rounded-3xl border border-ob-gray">
+          <InfoContainer>
             <span className="text-ob-white font-medium text-sm">
               Información Personal
             </span>
@@ -169,8 +172,8 @@ export default function Perfilpage() {
                 className={{ label: "text-sm" }}
               />
             </div>
-          </div>
-          <div className=" flex flex-col gap-y-3 bg-ob-black-3 p-4 rounded-3xl border border-ob-gray">
+          </InfoContainer>
+          <InfoContainer>
             <span className="text-ob-white font-medium text-sm">Seguridad</span>
             <div className="grid grid-cols-2 gap-3">
               <Input
@@ -203,12 +206,12 @@ export default function Perfilpage() {
                 Actualizar Contraseña
               </Button>
             </div>
-          </div>
+          </InfoContainer>
         </form>
 
         {/* Tabla */}
 
-        <div className=" flex flex-col gap-y-3 bg-ob-black-3 p-4 rounded-3xl border border-ob-gray">
+        <InfoContainer>
           <span className="text-ob-white font-medium text-sm">
             Actividad Reciente
           </span>
@@ -241,7 +244,7 @@ export default function Perfilpage() {
               </tbody>
             </table>
           </div>
-        </div>
+        </InfoContainer>
 
         {/* Botones */}
 

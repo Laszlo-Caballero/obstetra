@@ -4,9 +4,16 @@ import Input from "@/components/ui/input/input";
 import Select from "@/components/ui/select/Select";
 import TextArea from "@/components/ui/textarea/Textarea";
 import CheckBox from "@/components/ui/checkbox/CheckBox";
+import InfoContainer from "@/components/ui/info-container/InfoContainer";
 import React from "react";
 import { GoHome } from "react-icons/go";
-import { LuArrowLeft, LuCheck, LuPill, LuPlus, LuSave } from "react-icons/lu";
+import {
+  LuArrowLeft,
+  LuCheck,
+  LuPill,
+  LuSave,
+  LuImageUp,
+} from "react-icons/lu";
 
 export default function page() {
   return (
@@ -57,7 +64,7 @@ export default function page() {
       <form className="flex flex-col gap-y-4 ">
         {/* Formulario 1 */}
 
-        <div className=" flex flex-col gap-y-3 border border-ob-gray rounded-3xl p-4">
+        <InfoContainer>
           <div className="flex justify-between items-center text-sm">
             <span className="text-ob-white ">Información Básica</span>
             <span className="text-ob-gray-2">
@@ -112,11 +119,11 @@ export default function page() {
               />
             </div>
           </div>
-        </div>
+        </InfoContainer>
 
         {/* Formulario 2 */}
 
-        <div className=" flex flex-col gap-y-3 border border-ob-gray rounded-3xl p-4">
+        <InfoContainer>
           <div className="flex items-center justify-between text-sm">
             <span className="text-ob-white ">Detalles y control</span>
             <span className="text-ob-gray-2">Configura unidades y alertas</span>
@@ -153,12 +160,27 @@ export default function page() {
               </span>
             </CheckBox>
           </div>
-          <div>
-            <div className="flex items-centes justify-between text-sm">
-              <span className="text-ob-white">Imagen</span>
-              <span className="text-ob-gray-2">Opcional</span>
-            </div>
+        </InfoContainer>
+        <InfoContainer>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-ob-white">Imagen</span>
+            <span className="text-ob-gray-2">Opcional</span>
           </div>
+          <div className="flex items-center justify-center bg-ob-black-4 rounded-xl h-[132px] border border-dashed border-ob-gray">
+            <span className="flex items-center gap-x-2 text-ob-gray-2">
+              <LuImageUp size={22} />
+              Subir o Arrastrar imagen del producto
+            </span>
+          </div>
+        </InfoContainer>
+        <div className="flex items-center justify-end gap-x-2">
+          <Button className="bg-transparent border border-ob-gray text-ob-white">
+            Cancelar
+          </Button>
+          <Button>
+            <LuSave size={18} />
+            Guardar Medicina
+          </Button>
         </div>
       </form>
     </div>
