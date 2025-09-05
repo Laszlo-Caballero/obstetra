@@ -5,6 +5,7 @@ import Select from "@/components/ui/select/Select";
 import TextArea from "@/components/ui/textarea/Textarea";
 import CheckBox from "@/components/ui/checkbox/CheckBox";
 import InfoContainer from "@/components/ui/info-container/InfoContainer";
+import Title from "@/components/ui/title/Title";
 import React from "react";
 import { GoHome } from "react-icons/go";
 import {
@@ -35,21 +36,13 @@ export default function page() {
           },
         ]}
       />
+
       <section className="flex items-center justify-between">
-        <div className="flex items-center text-ob-white font-medium">
-          <div className="flex items-start gap-x-2.5">
-            <span className=" p-1 border-3 border-ob-teal rounded-xl bg-ob-black-4">
-              <LuPill size={18} />
-            </span>
-            <div className="flex flex-col gap-y-0.5">
-              <h2 className="text-xl">Crear Medicina</h2>
-              <span className="text-sm text-ob-gray-2">
-                Registra un nuevo medicamento con sus datos, presentación y
-                stock inicial.
-              </span>
-            </div>
-          </div>
-        </div>
+        <Title
+          title="Crear Medicina"
+          description="Registra un Nuevo Medicamento con sus datos, presentación y stock original"
+          icon={<LuPill size={18} />}
+        ></Title>
         <div className="flex items-center gap-x-2">
           <Button className="bg-transparent border border-ob-gray text-ob-white">
             <LuArrowLeft size={18} />
