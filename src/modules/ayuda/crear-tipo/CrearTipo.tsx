@@ -1,20 +1,28 @@
 import React from "react";
-import Modal from "@/components/ui/modal/Modal";
+import Modal from "@/components/ui/modal-v2/Modal";
 import Input from "@/components/ui/input/input";
 import TextArea from "@/components/ui/textarea/Textarea";
-import { LuSave, LuTag } from "react-icons/lu";
+import ModalHeader from "@/components/ui/modal-v2/modal-header/ModalHeader";
+import ModalTitle from "@/components/ui/modal-v2/modal-title/ModalTitle";
+import CloseButton from "@/components/ui/modal-v2/close-button/CloseButton";
+import ModalFooter from "@/components/ui/modal-v2/modal-footer/ModalFooter";
+import ContainerButton from "@/components/ui/modal-v2/container-button/ContainerButton";
+import Button from "@/components/ui/button/Button";
+
+import { LuSave, LuTag, LuX } from "react-icons/lu";
 import { PiStethoscopeFill } from "react-icons/pi";
 
 export default function CrearTipo() {
   return (
-    <Modal
-      title="Crear Tipo de Consulta"
-      badge="Basico"
-      button="Guardar"
-      nota="Se le notificara a todos los administradores"
-      iconButton={<LuSave size={18} />}
-      icon={<PiStethoscopeFill size={20} />}
-    >
+    <Modal>
+      <ModalHeader>
+        <ModalTitle title="Crear Tipo de Consulta" badge="Basico">
+          <PiStethoscopeFill size={20} />
+        </ModalTitle>
+        <CloseButton>
+          <LuX size={18} className="text-ob-white" />
+        </CloseButton>
+      </ModalHeader>
       <div className="flex flex-col gap-y-3 p-4">
         <span className="text-ob-gray-2 text-sm">
           Agrega un Tipo de Consulta Basico. Solo necesitas dos datos
@@ -44,6 +52,15 @@ export default function CrearTipo() {
           </span>
         </div>
       </div>
+      <ModalFooter nota="Se le notificara a todos los administradores">
+        <ContainerButton>
+          <CloseButton>Cancelar</CloseButton>
+          <Button className="font-semibold bg-ob-teal">
+            <LuSave size={18} />
+            Guardar
+          </Button>
+        </ContainerButton>
+      </ModalFooter>
     </Modal>
   );
 }
