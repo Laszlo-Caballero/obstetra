@@ -3,7 +3,7 @@ import cx from "@/libs/cx";
 
 interface SmallCardProps {
   title: string;
-  description: string;
+  description?: string;
   icon?: ReactNode;
   className?: {
     container?: string;
