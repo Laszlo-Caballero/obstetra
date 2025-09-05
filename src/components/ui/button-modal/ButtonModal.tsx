@@ -2,12 +2,13 @@
 
 import React, { ReactElement, ReactNode, useState } from "react";
 import Button from "../button/Button";
-import { ModalProps } from "../modal/Modal";
 import cx from "@/libs/cx";
 import { AnimatePresence } from "motion/react";
 
 interface ButtonModalProps {
-  modal: ReactElement<ModalProps>;
+  modal: ReactElement<{
+    onClose: () => void;
+  }>;
   children?: ReactNode;
   className?: string;
 }

@@ -5,7 +5,6 @@ import Table from "@/components/ui/table/Table";
 import { Response, ResponsePosta } from "@/interface/response.interface";
 import cx from "@/libs/cx";
 import Link from "next/link";
-import React, { useState } from "react";
 import { LuBuilding2 } from "react-icons/lu";
 import ButtonLink from "@/components/ui/link/Link";
 import { TbEdit, TbTrash } from "react-icons/tb";
@@ -22,9 +21,8 @@ interface PostaTableProps {
 }
 
 export default function PostaTable({ data, ...props }: PostaTableProps) {
-  const { filters, setFilter } = useFilter<FilterPosta>();
-
-  const [metadata, setMetadata] = useState(props);
+  const { filters, setFilter, setMetadata, metadata } =
+    useFilter<FilterPosta>();
 
   const { data: queryData } = useQuery<Response<ResponsePosta[]>>({
     firstRender: false,

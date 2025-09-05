@@ -2,7 +2,6 @@
 import cx from "@/libs/cx";
 import { ReactNode, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { CiSearch } from "react-icons/ci";
 import { useClose } from "@/hooks/useClose";
 import { Options } from "@/interface/props";
 
@@ -28,7 +27,6 @@ export default function Select({
   label,
   options,
   placeholder,
-  search,
   className,
   icon,
   iconInput,

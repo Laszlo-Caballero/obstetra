@@ -2,11 +2,13 @@ export interface Response<T> {
   status: number;
   message: string;
   data: T;
-  metadata?: {
-    totalItems: number;
-    totalPages: number;
-    currentPage: number;
-  };
+  metadata?: MetadataResponse;
+}
+
+export interface MetadataResponse {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
 }
 
 export interface ResponsePosta {
