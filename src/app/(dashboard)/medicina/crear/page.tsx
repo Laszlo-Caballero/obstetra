@@ -42,7 +42,7 @@ export default function page() {
           title="Crear Medicina"
           description="Registra un Nuevo Medicamento con sus datos, presentación y stock original"
           icon={<LuPill size={18} />}
-        ></Title>
+        />
         <div className="flex items-center gap-x-2">
           <Button className="bg-transparent border border-ob-gray text-ob-white">
             <LuArrowLeft size={18} />
