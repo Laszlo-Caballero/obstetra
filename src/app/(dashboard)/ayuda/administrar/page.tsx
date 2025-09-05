@@ -1,7 +1,4 @@
 import React from "react";
-import Button from "@/components/ui/button/Button";
-import Search from "@/components/ui/search/Search";
-import Select from "@/components/ui/select/Select";
 import SmallCard from "@/components/ui/small-card/SmallCard";
 import CrearModulo from "@/modules/ayuda/crear-modulo/CrearModulo";
 import CrearTipo from "@/modules/ayuda/crear-tipo/CrearTipo";
@@ -12,7 +9,6 @@ import { MdOutlineEmail } from "react-icons/md";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { GoGoal } from "react-icons/go";
 import { AiOutlineMedicineBox } from "react-icons/ai";
-import Modal from "@/components/ui/modal/Modal";
 import ButtonModal from "@/components/ui/button-modal/ButtonModal";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { fetcher } from "@/libs/fetch";

@@ -1,6 +1,5 @@
 "use client";
 import { useFilter } from "@/components/context/FilterContext";
-import { useLoader } from "@/components/context/LoaderContext";
 import { useTableContext } from "@/components/context/TableContext";
 import Badge from "@/components/ui/badge/Badge";
 import Button from "@/components/ui/button/Button";
