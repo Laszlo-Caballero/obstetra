@@ -1,9 +1,14 @@
+"use client";
 import AsideIcon from "@/components/ui/aside-icon/AsideIcon";
 import { asideData } from "@/const/asideData";
 import { LuHeartPulse } from "react-icons/lu";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { useAuth } from "@/components/context/AuthContext";
+import { RolesEnum } from "@/enum/roles";
 
 export default function Aside() {
+  const { user } = useAuth();
+
   return (
     <aside className="flex h-screen w-[88px] py-3 px-[9px] items-center flex-col bg-ob-black border-r border-ob-gray sticky top-0">
       <div className="py-1.5 w-full flex justify-center">
@@ -24,7 +29,11 @@ export default function Aside() {
         <AsideIcon
           icon={<AiOutlineQuestionCircle />}
           title="Ayuda"
-          href="/ayuda/administrar"
+          href={
+            user?.role.roleName === RolesEnum.Administrador
+              ? "/ayuda/administrar"
+              : "/ayuda/consulta"
+          }
         />
       </div>
     </aside>

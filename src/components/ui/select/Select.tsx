@@ -4,6 +4,8 @@ import { ReactNode, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useClose } from "@/hooks/useClose";
 import { Options } from "@/interface/props";
+import { LuSearch } from "react-icons/lu";
+import { AnimatePresence, motion } from "motion/react";
 
 interface SelectProps {
   label?: string;
@@ -19,8 +21,10 @@ interface SelectProps {
   };
   icon?: ReactNode;
   iconInput?: ReactNode;
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: Options;
+  onChange?: (value: Options) => void;
+  onSearch?: (value: string) => void;
+  error?: string;
 }
 
 export default function Select({
@@ -31,7 +35,10 @@ export default function Select({
   icon,
   iconInput,
   onChange,
+  search,
   value,
+  onSearch,
+  error,
 }: SelectProps) {
   const [isOpen, setOpen] = useState(false);
   const ref = useClose({ closeFunction: setOpen });
@@ -51,42 +58,60 @@ export default function Select({
         <div className="flex items-cente gap-x-2">
           {iconInput}
           <div className="text-nowrap">
-            {placeholder} {options?.find((item) => item.value === value)?.label}
+            {value ? value?.label : placeholder}
           </div>
         </div>
         <span>
           <RiArrowDropDownLine className="text-ob-white" size={18} />
         </span>
       </div>
-      {isOpen && (
-        <div
-          className={cx(
-            "absolute traslate-y-2 mt-1 top-full z-10 bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full ",
-            className?.optionsContainer
-          )}
-        >
-          <div className="max-h-[100px] overflow-y-scroll">
-            {options?.map((option, i) => {
-              return (
-                <div
-                  className={cx(
-                    "flex items-center gap-x-2 p-3 hover:bg-ob-black-4 rounded-xl cursor-pointer",
-                    className?.optionsItem
-                  )}
-                  onClick={() => {
-                    setOpen(false);
-                    onChange?.(option.value);
-                  }}
-                  key={i}
-                >
-                  <span>{icon}</span>
-                  <p className="text-ob-white text-sm">{option.label}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {error && <span className="text-sm text-red-500">{error}</span>}
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className={cx(
+              "absolute translate-y-2 mt-1 top-full z-10 bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full ",
+              className?.optionsContainer
+            )}
+            initial={{ height: 0, overflow: "hidden" }}
+            animate={{ height: "auto", overflow: "visible" }}
+            exit={{ height: 0, overflow: "hidden" }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="flex gap-x-2 py-2 px-[11px] rounded-xl bg-ob-black-8 items-center w-full">
+              <LuSearch className="text-ob-white size-[18px]" />
+              <input
+                value={search}
+                onChange={(e) => onSearch?.(e.target.value)}
+                className="bg-none outline-none w-full text-sm text-ob-white placeholder:text-white"
+                placeholder={"Buscar..."}
+              />
+            </div>
+
+            <div className="max-h-[100px] overflow-y-auto">
+              {options?.map((option, i) => {
+                return (
+                  <div
+                    className={cx(
+                      "flex items-center gap-x-2 py-2.5 hover:bg-ob-black-4 rounded-xl cursor-pointer",
+                      className?.optionsItem
+                    )}
+                    onClick={() => {
+                      setOpen(false);
+                      onChange?.(option);
+                    }}
+                    key={i}
+                  >
+                    <span>{icon}</span>
+                    <p className="text-ob-white text-sm">{option.label}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

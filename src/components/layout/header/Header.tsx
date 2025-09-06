@@ -1,9 +1,14 @@
+"use client";
+import { useAuth } from "@/components/context/AuthContext";
+import { env } from "@/config/env";
 import Image from "next/image";
 import React from "react";
 import { LuUser } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function Header() {
+  const { user, token } = useAuth();
+
   return (
     <header className="flex sticky top-0 z-50 h-[57px] items-center justify-between bg-ob-black-3 px-5 py-2.5 border-b border-ob-gray">
       <div className="flex items-center gap-x-3">
@@ -14,13 +19,19 @@ export default function Header() {
       </div>
       <div className="flex items-center bg-ob-blue-2 gap-x-2.5 px-2.5 py-1.5 cursor-pointer rounded-xl">
         <Image
-          src="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779110/nviouobzjm4eiaw301zf.webp"
+          src={
+            user
+              ? `${env.api_images}${user?.recurso?.url}`
+              : "/assets/images/user.png"
+          }
           className="w-6 rounded-full"
           alt="foto de perfil"
           width={24}
           height={24}
         />
-        <span className="text-ob-lightblue font-medium text-sm">Admin</span>
+        <span className="text-ob-lightblue font-medium text-sm">
+          {user?.personal.nombre}
+        </span>
         <RiArrowDropDownLine size={18} />
       </div>
     </header>

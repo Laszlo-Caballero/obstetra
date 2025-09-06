@@ -1,19 +1,28 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, Ref } from "react";
 import cx from "@/libs/cx";
-import { ReactNode} from "react";
+import { ReactNode } from "react";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "className"> {
   label: string;
   id: string;
   icon?: ReactNode;
+  error?: string;
   className?: {
     input?: string;
     label?: string;
     container?: string;
   };
+  ref?: Ref<HTMLInputElement>;
 }
-export default function Input({ label, className, id,icon, ...props }: InputProps) {
+export default function Input({
+  label,
+  className,
+  id,
+  icon,
+  error,
+  ...props
+}: InputProps) {
   return (
     <div className="flex flex-col gap-y-1">
       <label
@@ -22,7 +31,12 @@ export default function Input({ label, className, id,icon, ...props }: InputProp
       >
         {label}
       </label>
-      <div className={cx("flex items-center bg-ob-black-4 rounded-xl border border-ob-gray",className?.container)}>
+      <div
+        className={cx(
+          "flex items-center bg-ob-black-4 rounded-xl border border-ob-gray",
+          className?.container
+        )}
+      >
         {icon && <span className="pl-3">{icon}</span>}
         <input
           className={cx(
@@ -33,6 +47,7 @@ export default function Input({ label, className, id,icon, ...props }: InputProp
           {...props}
         />
       </div>
+      {error && <span className="text-sm text-red-500">{error}</span>}
     </div>
   );
 }
