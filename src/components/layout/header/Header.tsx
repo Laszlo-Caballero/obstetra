@@ -22,7 +22,7 @@ export default function Header() {
         <UserDropDown
           user={user?.personal.nombre}
           icon={`${env.api_images}${user?.recurso?.url}`}
-          email="todo"
+          email={user?.personal.correo}
         />
       ) : (
         <UserSkeleton />
