@@ -14,7 +14,6 @@ export function TableProvider<T>({ children }: { children: React.ReactNode }) {
   const [data, setData] = useState<T[] | undefined>(undefined);
 
   const refresh = (newData?: T[]) => {
-    console.log("Refreshing data in TableContext", newData);
     setData(newData);
   };
 

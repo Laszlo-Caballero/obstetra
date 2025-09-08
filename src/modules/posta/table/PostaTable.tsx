@@ -12,7 +12,6 @@ import { FilterPosta } from "../types";
 import { useFilter } from "@/components/context/FilterContext";
 import { useQuery } from "@/hooks/useQuery";
 import axios from "axios";
-import { useEffect } from "react";
 
 interface PostaTableProps {
   data: ResponsePosta[];
@@ -24,14 +23,6 @@ interface PostaTableProps {
 export default function PostaTable({ data, ...props }: PostaTableProps) {
   const { filters, setFilter, setMetadata, metadata } =
     useFilter<FilterPosta>();
-
-  useEffect(() => {
-    setMetadata({
-      total: props.total || 0,
-      totalPage: props.totalPage || 0,
-      limit: props.limit || 10,
-    });
-  }, []);
 
   const { data: queryData } = useQuery<Response<ResponsePosta[]>>({
     firstRender: false,
@@ -67,7 +58,12 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
 
   return (
     <Table
-      {...metadata}
+      metadata={metadata}
+      initialMetadata={{
+        total: props.total || 0,
+        totalPage: props.totalPage || 0,
+        limit: props.limit || 10,
+      }}
       value={Number(filters.page) || 1}
       onChangePage={(page) => {
         setFilter("page", page.toString());

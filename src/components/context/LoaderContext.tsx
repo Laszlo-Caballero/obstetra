@@ -1,11 +1,5 @@
 "use client";
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 import Load from "../ui/load/Load";
 
 interface LoaderContextProps {
@@ -17,10 +11,6 @@ const LoaderContext = createContext<LoaderContextProps | undefined>(undefined);
 
 export default function LoaderProvider({ children }: PropsWithChildren) {
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    console.log("LoaderProvider mounted");
-  }, []);
 
   const setLoading = () => {
     setIsLoading(true);

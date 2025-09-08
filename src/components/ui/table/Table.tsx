@@ -5,16 +5,16 @@ import { ColumnDef } from "@/interface/table.interface";
 import cx from "@/libs/cx";
 import Pagination from "../pagination/Pagination";
 import { useTableContext } from "@/components/context/TableContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { MetadataProps } from "@/components/context/FilterContext";
 
 interface TableProps<T> {
   initialData: T[];
   data?: T[];
   columns: ColumnDef<T>[];
   className?: string;
-  total?: number;
-  totalPage?: number;
-  limit?: number;
+  metadata?: MetadataProps;
+  initialMetadata?: MetadataProps;
   onChangePage?: (page: number) => void;
   value?: number;
 }
@@ -23,9 +23,8 @@ export default function Table<T>({
   columns,
   className,
   data,
-  limit = 10,
-  total,
-  totalPage,
+  metadata,
+  initialMetadata,
   onChangePage,
   value,
   initialData,
@@ -33,10 +32,17 @@ export default function Table<T>({
   const { data: contextData, refresh } = useTableContext<T>();
 
   const table = useTable({ columns, data: contextData, initialData });
+  const [metadataState, setMetadataState] = useState(initialMetadata);
 
   useEffect(() => {
     refresh(data);
   }, [data]);
+
+  useEffect(() => {
+    if (metadata) {
+      setMetadataState(metadata);
+    }
+  }, [metadata, initialMetadata]);
 
   return (
     <div
@@ -90,13 +96,14 @@ export default function Table<T>({
               colSpan={columns.length - 1}
             >
               Mostrando <span className="font-bold">1</span> -{" "}
-              <span className="font-bold">{limit}</span> de{" "}
-              <span className="font-bold">{total}</span> resultados
+              <span className="font-bold">{metadataState?.limit}</span> de{" "}
+              <span className="font-bold">{metadataState?.total}</span>{" "}
+              resultados
             </td>
 
             <td className="p-3 text-ob-gray-2 font-medium w-full text-right">
               <Pagination
-                length={totalPage || 1}
+                length={metadataState?.totalPage || 1}
                 onClick={(page) => onChangePage?.(page)}
                 value={value}
               />

@@ -23,11 +23,6 @@ export default async function PostaPage() {
 
   const regiones = await fetcher<Region[]>("utils/regiones");
 
-
-  console.log({data})
-
-
-
   return (
     <div className="flex flex-col w-full p-5 gap-y-4">
       <Breadcrums

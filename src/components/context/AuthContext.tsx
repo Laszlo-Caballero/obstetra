@@ -34,16 +34,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const localStorageKey = useConst("obstetra_user");
 
   useEffect(() => {
-    console.log("AuthProvider mounted");
     const token = cookie.get(cookieKey);
     const user = localStorage.getItem("obstetra_user");
 
     if (token && user) {
       setToken(token);
       setUser(JSON.parse(user));
-    } // } else {
-    //   router.push("/login");
-    // }
+    }
   }, []);
 
   const { mutate } = useMutation<AuthSchemaType, Response<UserContextData>>({
@@ -54,13 +51,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
         postaId: Number(data.posta.value),
       });
 
-      console.log(res.data);
-
       return res.data;
     },
     onSuccess: ({ data }) => {
-      console.log(data);
-
       setUser(data);
       setToken(data.token);
       toast.success("Inicio de sesión exitoso");

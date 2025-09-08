@@ -1,7 +1,7 @@
 "use client";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
-interface MetadataProps {
+export interface MetadataProps {
   total: number;
   totalPage: number;
   limit: number;
@@ -27,7 +27,9 @@ export function FilterProvider<T>({
   children,
 }: PropsWithChildren<FilterProviderProps<T>>) {
   const [filters, setFilters] = useState<T>(initialFilters);
-  const [metadata, setMetadata] = useState<MetadataProps>();
+  const [metadata, setMetadata] = useState<MetadataProps | undefined>(
+    undefined
+  );
 
   const setFilter = (key: keyof T, value: T[keyof T]) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
