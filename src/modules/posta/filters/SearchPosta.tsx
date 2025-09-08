@@ -3,9 +3,15 @@ import { useFilter } from "@/components/context/FilterContext";
 import Search from "@/components/ui/search/Search";
 import React from "react";
 import { FilterPosta } from "../types";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function SearchPosta() {
-  const { filters, setFilter } = useFilter<FilterPosta>();
+  const { setFilter } = useFilter<FilterPosta>();
+  const { search, handleSearch } = useSearch({
+    onSearch: (value) => {
+      setFilter("search", value);
+    },
+  });
 
   return (
     <Search
@@ -13,10 +19,8 @@ export default function SearchPosta() {
       className={{
         container: "max-w-[389px] ml-8",
       }}
-      onSearch={(value) => {
-        setFilter("search", value);
-      }}
-      value={filters.search}
+      onSearch={handleSearch}
+      value={search}
     />
   );
 }
