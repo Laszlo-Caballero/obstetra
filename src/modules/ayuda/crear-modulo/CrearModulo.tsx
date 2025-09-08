@@ -10,11 +10,7 @@ import CloseButton from "@/components/ui/modal/close-button/CloseButton";
 import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
 import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
 import Button from "@/components/ui/button/Button";
-import { fetcher } from "@/libs/fetch";
-import { Response, Modulo } from "@/interface/response.interface";
 import TablaModulo from "../tabla-modulo/TablaModulo";
-import { useQuery } from "@/hooks/useQuery";
-import axios from "axios";
 
 export default function CrearModulo() {
   return (
@@ -58,7 +54,7 @@ export default function CrearModulo() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-y-1.5">
+      <div className="flex flex-col gap-y-1.5 p-4">
         <span>Modulos Existentes</span>
         <TablaModulo />
       </div>

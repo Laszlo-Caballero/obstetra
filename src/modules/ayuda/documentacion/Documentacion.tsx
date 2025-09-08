@@ -61,12 +61,12 @@ export default function Documentacion() {
           <div className="flex flex-col gap-y-3">
             <div className="flex items-center gap-x-3 px-4">
               <span className="text-sm text-ob-white">Tipo de Version</span>
-              <div className="flex items-center text-ob-white rounded-xl border border-ob-gray text-sm bg-ob-black-4">
-                <span className="flex items-center gap-x-1.5 border-r border-ob-gray py-2 px-2.5">
+              <div className="flex items-center text-ob-white rounded-xl border border-ob-gray text-sm bg-ob-black-4 overflow-hidden">
+                <span className="flex items-center gap-x-1.5 hover:bg-ob-blue-3 border-r border-ob-gray py-2 px-2.5 cursor-pointer">
                   <BiUpvote size={18} />
                   Major
                 </span>
-                <span className="flex items-center gap-x-1.5 py-2 px-2.5">
+                <span className="flex items-center hover:bg-ob-blue-3 gap-x-1.5 py-2 px-2.5 cursor-pointer">
                   <LuArrowUpRight size={18} />
                   Minor
                 </span>

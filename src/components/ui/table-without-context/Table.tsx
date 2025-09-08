@@ -81,28 +81,6 @@ export default function Table<T>({
             );
           })}
         </tbody>
-
-        <tfoot>
-          <tr>
-            <td
-              className="p-3 text-ob-gray-2 font-medium w-full"
-              colSpan={columns.length - 1}
-            >
-              Mostrando <span className="font-bold">1</span> -{" "}
-              <span className="font-bold">{metadataState?.limit}</span> de{" "}
-              <span className="font-bold">{metadataState?.total}</span>{" "}
-              resultados
-            </td>
-
-            <td className="p-3 text-ob-gray-2 font-medium w-full text-right">
-              <Pagination
-                length={metadataState?.totalPage || 1}
-                onClick={(page) => onChangePage?.(page)}
-                value={value}
-              />
-            </td>
-          </tr>
-        </tfoot>
       </table>
     </div>
   );

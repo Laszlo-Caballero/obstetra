@@ -10,14 +10,15 @@ import ContainerButton from "@/components/ui/modal/container-button/ContainerBut
 import Button from "@/components/ui/button/Button";
 
 import { LuSave, LuTag, LuX } from "react-icons/lu";
-import { PiStethoscopeFill } from "react-icons/pi";
+import { FaLaptopMedical } from "react-icons/fa";
+import TablaTipo from "../tabla-tipo/TablaTipo";
 
 export default function CrearTipo() {
   return (
     <Modal>
       <ModalHeader>
         <ModalTitle title="Crear Tipo de Consulta" badge="Basico">
-          <PiStethoscopeFill size={20} />
+          <FaLaptopMedical size={20} />
         </ModalTitle>
         <CloseButton>
           <LuX size={18} className="text-ob-white" />
@@ -51,6 +52,10 @@ export default function CrearTipo() {
             Describe de que se trata el tipo de consulta
           </span>
         </div>
+      </div>
+      <div className="flex flex-col gap-y-1.5 p-4">
+        <span>Tipo de Consulta Existentes</span>
+        <TablaTipo />
       </div>
       <ModalFooter nota="Se le notificara a todos los administradores">
         <ContainerButton>

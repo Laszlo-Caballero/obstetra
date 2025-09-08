@@ -1,28 +1,25 @@
 "use client";
 import React from "react";
-import axios from "axios";
-
-import Table from "@/components/ui/table-without-context/Table";
-import Button from "@/components/ui/button/Button";
-
-import { Response, Modulo } from "@/interface/response.interface";
 import { useQuery } from "@/hooks/useQuery";
-import { LuLayers } from "react-icons/lu";
-import { MdModeEdit } from "react-icons/md";
+import { Response, Tipo } from "@/interface/response.interface";
+import axios from "axios";
+import Table from "@/components/ui/table-without-context/Table";
+import { FaLaptopMedical } from "react-icons/fa";
 import Badge from "@/components/ui/badge/Badge";
+import Button from "@/components/ui/button/Button";
+import { MdModeEdit } from "react-icons/md";
 
-export default function TablaModulo() {
-  const { data: queryData } = useQuery<Modulo[]>({
+export default function TablaTipo() {
+  const { data: queryData } = useQuery<Tipo[]>({
     queryFn: async (url) => {
-      const parseUrl = new URL(`${url}/ayuda/modulo`);
+      const parseUrl = new URL(`${url}/ayuda/tipo-consulta`);
 
       const res = await axios.get(parseUrl.toString());
 
-      const data: Response<Modulo[]> = res.data;
+      const data: Response<Tipo[]> = res.data;
       return data.data;
     },
   });
-
   return (
     <Table
       initialData={queryData || []}
@@ -33,7 +30,7 @@ export default function TablaModulo() {
           cell: ({ row }) => {
             return (
               <span className=" flex items-center text-ob-white gap-x-2">
-                <LuLayers size={18} />
+                <FaLaptopMedical size={18} />
                 {row.nombre}
               </span>
             );
