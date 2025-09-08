@@ -58,7 +58,7 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
               />
               <span className="flex flex-col">
                 <span className="text-sm text-ob-white">{user}</span>
-                <span className="TEXT-XS text-ob-gray-2">{email}</span>
+                <span className="text-sm text-ob-gray-2">{email}</span>
               </span>
             </div>
             <span className="p-2 text-ob-gray-2 text-xs">Cuenta</span>

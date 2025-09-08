@@ -12,6 +12,9 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import { env } from "@/config/env";
+import { fetcher } from "@/libs/fetch";
+import { ResponseUser } from "@/interface/user.interface";
 
 export default async function Perfilpage() {
   const cookieStore = await cookies();
@@ -20,6 +23,12 @@ export default async function Perfilpage() {
   if (!token) {
     return notFound();
   }
+
+  const res = await fetcher<ResponseUser>(`${env.url_api}/auth/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return (
     <div className="w-full h-full">
@@ -72,16 +81,20 @@ export default async function Perfilpage() {
         <InfoContainer>
           <div className="flex items-center gap-x-3 border-b border-ob-gray pb-3 bg-">
             <Image
-              src="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779110/nviouobzjm4eiaw301zf.webp"
+              src={`${env.api_images}${res?.data?.recurso?.url}`}
               className="w-16 rounded-full"
               alt="foto de perfil"
               width={64}
               height={64}
             />
             <div className="flex flex-col ">
-              <span className="text-ob-white font-medium">Admin</span>
+              <span className="text-ob-white font-medium">
+                {res?.data?.personal.nombre}{" "}
+                {res?.data?.personal.apellidoPaterno}{" "}
+                {res?.data?.personal.apellidoMaterno}
+              </span>
               <span className="text-ob-gray-2 text-sm font-medium">
-                admin@salud.gov
+                {res?.data?.personal.correo}
               </span>
               <div className="flex items-center gap-x-2 mt-2">
                 <Button className="bg-ob-blue-2 text-ob-lightblue">
@@ -102,25 +115,29 @@ export default async function Perfilpage() {
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Rol</span>
               <span className="text-ob-white text-sm font-medium">
-                Administrador
+                {res?.data?.role.roleName}
               </span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Dni</span>
               <span className="text-ob-white text-sm font-medium">
-                12345678
+                {res?.data?.personal.dni}
               </span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Estado</span>
-              <span className="text-ob-white text-sm font-medium">Activo</span>
+              <span className="text-ob-white text-sm font-medium">
+                {res?.data?.personal.estado ? "Activo" : "Inactivo"}
+              </span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">
                 Telefono
               </span>
               <span className="text-ob-white text-sm font-medium">
-                +51 987 654 321
+                +51 {res?.data?.personal.telefono.slice(0, 3)}{" "}
+                {res?.data?.personal.telefono.slice(3, 6)}{" "}
+                {res?.data?.personal.telefono.slice(6)}
               </span>
             </div>
           </div>

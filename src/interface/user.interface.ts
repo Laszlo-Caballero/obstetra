@@ -1,16 +1,9 @@
-export interface ResponseAuth {
-  message: string;
-  status: boolean;
-  role: string;
-}
-
-export interface UserContextData {
+export interface ResponseUser {
   userId: number;
   user: string;
   password: string;
   personal: Personal;
   role: Role;
-  token: string;
   recurso: Recurso;
 }
 
@@ -19,14 +12,14 @@ export interface Personal {
   nombre: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
-  correo: string;
   fechaNacimiento: string;
+  correo: string;
   sexo: string;
   telefono: string;
   dni: string;
   codigoColegio: string;
   estado: boolean;
-  posta: Posta;
+  posta: Posta[];
 }
 
 export interface Posta {
