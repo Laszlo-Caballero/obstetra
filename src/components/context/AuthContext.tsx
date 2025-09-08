@@ -21,6 +21,7 @@ interface UserContext {
   user?: UserContextData;
   token: string;
   login: (data: AuthSchemaType) => void;
+  setUser: (user: UserContextData) => void;
   logout: () => void;
 }
 
@@ -75,7 +76,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: user, token, login: mutate, logout }}>
+    <AuthContext.Provider
+      value={{ user: user, token, login: mutate, logout, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

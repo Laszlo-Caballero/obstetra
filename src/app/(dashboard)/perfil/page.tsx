@@ -15,6 +15,7 @@ import { notFound } from "next/navigation";
 import { env } from "@/config/env";
 import { fetcher } from "@/libs/fetch";
 import { ResponseUser } from "@/interface/user.interface";
+import Photo from "@/modules/perfil/components/photo/Photo";
 
 export default async function Perfilpage() {
   const cookieStore = await cookies();
@@ -79,38 +80,13 @@ export default async function Perfilpage() {
         {/* Perfil */}
 
         <InfoContainer>
-          <div className="flex items-center gap-x-3 border-b border-ob-gray pb-3 bg-">
-            <Image
-              src={`${env.api_images}${res?.data?.recurso?.url}`}
-              className="w-16 rounded-full"
-              alt="foto de perfil"
-              width={64}
-              height={64}
-            />
-            <div className="flex flex-col ">
-              <span className="text-ob-white font-medium">
-                {res?.data?.personal.nombre}{" "}
-                {res?.data?.personal.apellidoPaterno}{" "}
-                {res?.data?.personal.apellidoMaterno}
-              </span>
-              <span className="text-ob-gray-2 text-sm font-medium">
-                {res?.data?.personal.correo}
-              </span>
-              <div className="flex items-center gap-x-2 mt-2">
-                <Button className="bg-ob-blue-2 text-ob-lightblue">
-                  <MdOutlineFileUpload
-                    size={18}
-                    className="text-ob-lightblue"
-                  />
-                  Cambiar Foto
-                </Button>
-                <Button className="bg-transparent border border-ob-gray text-ob-white">
-                  <FaRegTrashAlt size={18} className="text-ob-white" />
-                  Quitar
-                </Button>
-              </div>
-            </div>
-          </div>
+          <Photo
+            apellidoMaterno={res?.data?.personal.apellidoMaterno}
+            apellidoPaterno={res?.data?.personal.apellidoPaterno}
+            correo={res?.data?.personal.correo}
+            nombre={res?.data?.personal.nombre}
+            src={res?.data?.recurso?.url}
+          />
           <div className="grid grid-cols-2 gap-x-3 gap-y-2 mt-3">
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Rol</span>
