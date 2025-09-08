@@ -1,4 +1,3 @@
-
 "use client";
 import { useAuth } from "@/components/context/AuthContext";
 import { env } from "@/config/env";
@@ -6,6 +5,7 @@ import Image from "next/image";
 import UserDropDown from "@/components/ui/user-dropdown/UserDropDown";
 import React from "react";
 import { LuUser } from "react-icons/lu";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function Header() {
   const { user, token } = useAuth();
@@ -18,28 +18,15 @@ export default function Header() {
         </span>
         <p className="text-ob-white font-medium text-lg">Perfil de Usuario</p>
       </div>
-      <div className="flex items-center bg-ob-blue-2 gap-x-2.5 px-2.5 py-1.5 cursor-pointer rounded-xl">
-        <Image
-          src={
-            user
-              ? `${env.api_images}${user?.recurso?.url}`
-              : "/assets/images/user.png"
-          }
-          className="w-6 rounded-full"
-          alt="foto de perfil"
-          width={24}
-          height={24}
-        />
-        <span className="text-ob-lightblue font-medium text-sm">
-          {user?.personal.nombre}
-        </span>
-        <RiArrowDropDownLine size={18} />
-      </div>
 
       <UserDropDown
-        user="Admin"
-        icon="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779110/nviouobzjm4eiaw301zf.webp"
-        email="admin@salud.gov"
+        user={user?.personal.nombre}
+        icon={
+          user
+            ? `${env.api_images}${user?.recurso?.url}`
+            : "/assets/images/user.png"
+        }
+        email="todo"
       />
     </header>
   );
