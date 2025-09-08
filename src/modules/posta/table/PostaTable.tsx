@@ -58,7 +58,12 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
 
   return (
     <Table
-      {...metadata}
+      metadata={metadata}
+      initialMetadata={{
+        total: props.total || 0,
+        totalPage: props.totalPage || 0,
+        limit: props.limit || 10,
+      }}
       value={Number(filters.page) || 1}
       onChangePage={(page) => {
         setFilter("page", page.toString());
