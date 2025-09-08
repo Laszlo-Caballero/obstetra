@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>woquin progres</div>;
+  return <p>woquin progres</p>;
 }

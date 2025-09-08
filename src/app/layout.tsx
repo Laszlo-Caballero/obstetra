@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import LoaderProvider from "@/components/context/LoaderContext";
 import { TableProvider } from "@/components/context/TableContext";
+import { AuthProvider } from "@/components/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased font-inter`}
       >
         <TableProvider>
-          <LoaderProvider>{children}</LoaderProvider>
+          <LoaderProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </LoaderProvider>
         </TableProvider>
 
         <Toaster position="top-right" />

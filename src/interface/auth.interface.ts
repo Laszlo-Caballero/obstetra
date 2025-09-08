@@ -1,14 +1,17 @@
-export interface UserContextData {
-  user: ResponseUser;
-  token: string;
+export interface ResponseAuth {
+  message: string;
+  status: boolean;
+  role: string;
 }
 
-export interface ResponseUser {
+export interface UserContextData {
   userId: number;
   user: string;
   password: string;
   personal: Personal;
   role: Role;
+  token: string;
+  recurso: Recurso;
 }
 
 export interface Personal {
@@ -22,9 +25,33 @@ export interface Personal {
   dni: string;
   codigoColegio: string;
   estado: boolean;
+  posta: Posta;
+}
+
+export interface Posta {
+  postaId: number;
+  ruc: string;
+  nombre: string;
+  direccion: string;
+  ipress: string;
+  lat: string;
+  lng: string;
+  altitud: string;
+  capacidad: number;
+  fechaInicioActividad: string;
+  fechaCreacion: string;
+  estado: boolean;
 }
 
 export interface Role {
   roleId: number;
   roleName: string;
+}
+
+export interface Recurso {
+  recursoId: number;
+  nombre: string;
+  extension: string;
+  url: string;
+  fechaSubida: string;
 }
