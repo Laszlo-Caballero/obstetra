@@ -20,6 +20,7 @@ import {
 } from "@/interface/response.interface";
 import TablaAdmistrar from "@/modules/ayuda/tabla/TablaAdmistrar";
 import FiltersAdministrar from "@/modules/ayuda/filtros/FiltersAdministrar";
+
 export default async function AdministrarPage() {
   const data = await fetcher<ResponseConsulta[]>("ayuda/consulta");
 

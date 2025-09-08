@@ -1,5 +1,6 @@
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import Button from "@/components/ui/button/Button";
+import ButtonLink from "@/components/ui/button-link/ButtonLink";
 import React from "react";
 import { GoHome } from "react-icons/go";
 import { LuPill, LuPlus } from "react-icons/lu";
@@ -20,7 +21,7 @@ export default function page() {
           },
           {
             title: "Medicina",
-            href: "/",
+            href: "/medicina/crear",
           },
         ]}
       />
@@ -38,10 +39,13 @@ export default function page() {
             </div>
           </div>
         </div>
-        <Button className="text-ob-black bg-ob-teal">
+        <ButtonLink
+          className=" text-ob-black bg-ob-teal"
+          href="/medicina/crear"
+        >
           <LuPlus size={18} />
-          Nueva Medicina
-        </Button>
+          Registrar Medicina
+        </ButtonLink>
       </section>
 
       <div className="border border-ob-gray rounded-xl">tabla owo</div>

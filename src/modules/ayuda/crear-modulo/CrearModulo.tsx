@@ -10,8 +10,12 @@ import CloseButton from "@/components/ui/modal/close-button/CloseButton";
 import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
 import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
 import Button from "@/components/ui/button/Button";
+import { fetcher } from "@/libs/fetch";
+import { Modulo } from "@/interface/response.interface";
 
-export default function CrearModulo() {
+export default async function CrearModulo() {
+  const data = await fetcher<Modulo[]>("ayuda/modulo");
+
   return (
     <Modal>
       <ModalHeader>

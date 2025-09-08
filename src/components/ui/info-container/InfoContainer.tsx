@@ -13,7 +13,7 @@ export default function InfoContainer({
   return (
     <div
       className={cx(
-        " flex flex-col gap-y-3 border border-ob-gray bg-ob-black-3 rounded-3xl p-4",
+        " flex flex-col gap-y-3 border border-ob-gray  rounded-3xl p-4",
         className
       )}
     >
