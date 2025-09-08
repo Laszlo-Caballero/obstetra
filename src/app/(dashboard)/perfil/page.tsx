@@ -1,20 +1,26 @@
 import React from "react";
 import Image from "next/image";
-
 import Button from "@/components/ui/button/Button";
 import Input from "@/components/ui/input/input";
 import Select from "@/components/ui/select/Select";
 import InfoContainer from "@/components/ui/info-container/InfoContainer";
-
 import { LuUserCog, LuSave, LuShieldCheck, LuX, LuCheck } from "react-icons/lu";
 import { GoHome } from "react-icons/go";
 import { LiaUndoAltSolid } from "react-icons/lia";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import UserDropDown from "@/components/ui/user-dropdown/UserDropDown";
+import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 
-export default function Perfilpage() {
+export default async function Perfilpage() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("obstetra_token")?.value;
+
+  if (!token) {
+    return notFound();
+  }
+
   return (
     <div className="w-full h-full">
       <main className="p-5 flex flex-col gap-y-4">
