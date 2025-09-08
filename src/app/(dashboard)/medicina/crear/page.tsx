@@ -15,6 +15,7 @@ import {
   LuSave,
   LuImageUp,
 } from "react-icons/lu";
+import ButtonLink from "@/components/ui/button-link/ButtonLink";
 
 export default function page() {
   return (
@@ -44,10 +45,13 @@ export default function page() {
           icon={<LuPill size={18} />}
         />
         <div className="flex items-center gap-x-2">
-          <Button className="bg-transparent border border-ob-gray text-ob-white">
+          <ButtonLink
+            className=" border border-ob-gray text-ob-white"
+            href="/medicina/administrar"
+          >
             <LuArrowLeft size={18} />
             Volver
-          </Button>
+          </ButtonLink>
           <Button className="text-ob-black bg-ob-teal">
             <LuSave size={18} />
             Guardar
@@ -170,7 +174,7 @@ export default function page() {
           <Button className="bg-transparent border border-ob-gray text-ob-white">
             Cancelar
           </Button>
-          <Button>
+          <Button className="bg-ob-teal">
             <LuSave size={18} />
             Guardar Medicina
           </Button>

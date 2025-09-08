@@ -1,10 +1,11 @@
+
 "use client";
 import { useAuth } from "@/components/context/AuthContext";
 import { env } from "@/config/env";
 import Image from "next/image";
+import UserDropDown from "@/components/ui/user-dropdown/UserDropDown";
 import React from "react";
 import { LuUser } from "react-icons/lu";
-import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function Header() {
   const { user, token } = useAuth();
@@ -34,6 +35,12 @@ export default function Header() {
         </span>
         <RiArrowDropDownLine size={18} />
       </div>
+
+      <UserDropDown
+        user="Admin"
+        icon="https://res.cloudinary.com/dl0wif5vm/image/upload/v1756779110/nviouobzjm4eiaw301zf.webp"
+        email="admin@salud.gov"
+      />
     </header>
   );
 }
