@@ -2,13 +2,13 @@
 import React from "react";
 import axios from "axios";
 
-import Table from "@/components/ui/table/Table";
 import Button from "@/components/ui/button/Button";
 
 import { Response, Modulo } from "@/interface/response.interface";
 import { useQuery } from "@/hooks/useQuery";
 import { LuLayers } from "react-icons/lu";
 import { MdModeEdit } from "react-icons/md";
+import Table from "@/components/ui/table-without-context/Table";
 
 export default function TablaModulo() {
   const { data: queryData } = useQuery<Modulo[]>({
