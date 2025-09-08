@@ -210,43 +210,6 @@ export default function Perfilpage() {
           </InfoContainer>
         </form>
 
-        {/* Tabla */}
-
-        <InfoContainer>
-          <span className="text-ob-white font-medium text-sm">
-            Actividad Reciente
-          </span>
-
-          <div className="font-medium text-sm border border-ob-gray rounded-3xl overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-ob-blue-2 border-collapse ">
-                <tr className="text-ob-lightblue text-sm rounded-t-3xl text-left">
-                  <th className="p-2.5">Fecha</th>
-                  <th>Accion</th>
-                  <th>IP</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-ob-gray hover:bg-ob-black-4">
-                  <td className="p-2.5">2025-08-12 09:20</td>
-                  <td>Inicio de Sesión</td>
-                  <td>201.160.23.10</td>
-                </tr>
-                <tr className="border-b border-ob-gray hover:bg-ob-black-4">
-                  <td className="p-2.5">2025-08-11 13:55</td>
-                  <td>Actualizó perfil</td>
-                  <td>201.160.23.10</td>
-                </tr>
-                <tr className="hover:bg-ob-black-4">
-                  <td className="p-2.5">2025-08-10 08:55</td>
-                  <td>Restablecio Contraseña</td>
-                  <td>201.160.23.10</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </InfoContainer>
-
         {/* Botones */}
 
         <div className="flex justify-end gap-x-3">
