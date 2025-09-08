@@ -11,11 +11,12 @@ import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
 import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
 import Button from "@/components/ui/button/Button";
 import { fetcher } from "@/libs/fetch";
-import { Modulo } from "@/interface/response.interface";
+import { Response, Modulo } from "@/interface/response.interface";
+import TablaModulo from "../tabla-modulo/TablaModulo";
+import { useQuery } from "@/hooks/useQuery";
+import axios from "axios";
 
-export default async function CrearModulo() {
-  const data = await fetcher<Modulo[]>("ayuda/modulo");
-
+export default function CrearModulo() {
   return (
     <Modal>
       <ModalHeader>
@@ -55,6 +56,11 @@ export default async function CrearModulo() {
             Describe el funcionamiento del modulo
           </span>
         </div>
+      </div>
+
+      <div className="flex flex-col gap-y-1.5">
+        <span>Modulos Existentes</span>
+        <TablaModulo />
       </div>
 
       <ModalFooter nota="Se le notificara a todos los administradores">
