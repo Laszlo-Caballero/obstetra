@@ -1,0 +1,95 @@
+import Button from "@/components/ui/button/Button";
+import CheckBox from "@/components/ui/checkbox/CheckBox";
+import CloseButton from "@/components/ui/modal/close-button/CloseButton";
+import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
+import Modal from "@/components/ui/modal/Modal";
+import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
+import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
+import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
+import TextArea from "@/components/ui/textarea/Textarea";
+import React from "react";
+import { FaLaptopMedical } from "react-icons/fa";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import {
+  LuCircleCheckBig,
+  LuClock,
+  LuPaperclip,
+  LuSave,
+  LuX,
+} from "react-icons/lu";
+import { RiProhibitedLine } from "react-icons/ri";
+
+export default function EditarEstado() {
+  return (
+    <Modal>
+      <ModalHeader>
+        <ModalTitle title="Consulta #4152" badge="Editar Estado">
+          <FaLaptopMedical size={20} />
+        </ModalTitle>
+        <CloseButton>
+          <LuX size={18} className="text-ob-white" />
+        </CloseButton>
+      </ModalHeader>
+
+      <form className="flex flex-col gap-y-3 p-4 text-sm">
+        <span className="text-ob-gray-2">
+          Actualiza el estado de la consulta y agrega una nota opcional para el
+          historial
+        </span>
+        <div className="flex flex-col gap-y-1.5">
+          <span className="text-ob-white">Estado</span>
+          <div className="flex items-center gap-x-2">
+            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
+              <IoIosAddCircleOutline size={16} />
+              Nuevo
+            </CheckBox>
+            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
+              <LuClock size={16} />
+              En Progreso
+            </CheckBox>
+            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
+              <LuCircleCheckBig size={16} />
+              Resuelto
+            </CheckBox>
+            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
+              <RiProhibitedLine size={16} />
+              Cerrado
+            </CheckBox>
+          </div>
+
+          {/* <div>
+            <Select
+            label="prioridad"
+            placeholder="Selecciona..."
+
+            />
+          </div> */}
+
+          <TextArea
+            label="Nota"
+            placeholder="Describe el Motivo del Cambio"
+            rows={4}
+            className={{ label: "text-ob-white" }}
+          />
+
+          <div className="flex flex-col gap-y-1.5">
+            <span>Adjuntos</span>
+            <div className="flex items-center gap-x-2 text-ob-white rounded-xl border border-ob-gray bg-ob-black-4 py-2.5 px-3">
+              <LuPaperclip size={18} />
+              Agregar Archivo
+            </div>
+          </div>
+        </div>
+      </form>
+      <ModalFooter nota="Se le notificara al usuario sobre el cambio">
+        <ContainerButton>
+          <CloseButton>Cancelar</CloseButton>
+          <Button className="font-semibold bg-ob-teal">
+            <LuSave size={18} />
+            Guardar Cambios
+          </Button>
+        </ContainerButton>
+      </ModalFooter>
+    </Modal>
+  );
+}

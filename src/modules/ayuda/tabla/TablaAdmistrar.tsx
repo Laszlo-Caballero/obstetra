@@ -8,6 +8,8 @@ import { FilterAdministrar } from "../types";
 import { useState } from "react";
 import { useQuery } from "@/hooks/useQuery";
 import axios from "axios";
+import EditarEstado from "../editar-estado/EditarEstado";
+import ButtonModal from "@/components/ui/button-modal/ButtonModal";
 interface TablaAdmistrarProps {
   data: ResponseConsulta[];
   total?: number;
@@ -37,8 +39,8 @@ export default function TablaAdmistrar({
       if (filters.prioridadId != "") {
         parseUrl.searchParams.append("prioridadId", filters.prioridadId);
       }
-      if (filters.estadoId != "") {
-        parseUrl.searchParams.append("estadoId", filters.estadoId);
+      if (filters.tipoId != "") {
+        parseUrl.searchParams.append("tipoId", filters.tipoId);
       }
 
       if (filters.search != "") {
@@ -89,6 +91,12 @@ export default function TablaAdmistrar({
           },
         },
         {
+          header: "TipoConsulta",
+          cell: ({ row }) => {
+            return <span>{row.tipo.nombre}</span>;
+          },
+        },
+        {
           header: "Prioridad",
           cell: ({ row }) => {
             return <span>{row.prioridad.nombre}</span>;
@@ -98,10 +106,13 @@ export default function TablaAdmistrar({
           header: "Acciones",
           cell: () => {
             return (
-              <Button className="bg-ob-blue-3 text-ob-lightblue py-1.5">
+              <ButtonModal
+                className="bg-ob-blue-3 text-ob-lightblue py-1.5"
+                modal={<EditarEstado />}
+              >
                 <FaRegDotCircle size={18} />
                 Editar Estado
-              </Button>
+              </ButtonModal>
             );
           },
         },

@@ -4,7 +4,7 @@ import cx from "@/libs/cx";
 interface TextAreaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className"> {
   label: string;
-  id: string;
+  id?: string;
   className?: {
     textarea?: string;
     label?: string;

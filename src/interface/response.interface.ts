@@ -82,3 +82,27 @@ export interface User {
   user: string;
   password: string;
 }
+
+export interface ResponseMedicina {
+  medicinaId: number;
+  nombre: string;
+  descripcion: string;
+  codigo: string;
+  stock: number;
+  fechaCreacion: string;
+  estado: boolean;
+  categoria: Categoria;
+  presentacion: Presentacion;
+}
+
+export interface Categoria {
+  categoriaId: number;
+  nombre: string;
+  estado: boolean;
+}
+
+export interface Presentacion {
+  presentacionId: number;
+  nombre: string;
+  estado: boolean;
+}
