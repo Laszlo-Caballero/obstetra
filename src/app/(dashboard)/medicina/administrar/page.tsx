@@ -68,7 +68,7 @@ export default async function page() {
         </ButtonLink>
       </section>
 
-      <InfoContainer>
+      <InfoContainer className="bg-ob-black-6">
         <div className="flex items-center gap-x-2">
           <SearchMedicina />
           <FiltrosAdministrar

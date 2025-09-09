@@ -11,6 +11,8 @@ import { FaRegDotCircle } from "react-icons/fa";
 import { LuTrash2 } from "react-icons/lu";
 import { FiltersMedicina } from "../types";
 import { useFilter } from "@/components/context/FilterContext";
+import ButtonModal from "@/components/ui/button-modal/ButtonModal";
+import EliminarMedicina from "../Eliminar/EliminarMedicina";
 
 interface TablaMedicinaProps {
   data: ResponseMedicina[];
@@ -106,10 +108,13 @@ export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
                   <BiSolidEditAlt size={18} />
                   Editar
                 </Button>
-                <Button className="bg-transparent border border-ob-gray text-ob-white">
+                <ButtonModal
+                  className="bg-transparent border border-ob-gray text-ob-white"
+                  modal={<EliminarMedicina />}
+                >
                   <LuTrash2 size={18} />
                   Eliminar
-                </Button>
+                </ButtonModal>
               </div>
             );
           },

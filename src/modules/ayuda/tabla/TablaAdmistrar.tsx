@@ -10,6 +10,8 @@ import { useQuery } from "@/hooks/useQuery";
 import axios from "axios";
 import EditarEstado from "../editar-estado/EditarEstado";
 import ButtonModal from "@/components/ui/button-modal/ButtonModal";
+import { LuLayers } from "react-icons/lu";
+import Badge from "@/components/ui/badge/Badge";
 interface TablaAdmistrarProps {
   data: ResponseConsulta[];
   total?: number;
@@ -87,7 +89,12 @@ export default function TablaAdmistrar({
         {
           header: "Módulo",
           cell: ({ row }) => {
-            return <span>{row.modulo.nombre}</span>;
+            return (
+              <span className="flex items-center gap-x-2 text-ob-white">
+                <LuLayers size={18} />
+                {row.modulo.nombre}
+              </span>
+            );
           },
         },
         {
@@ -99,7 +106,11 @@ export default function TablaAdmistrar({
         {
           header: "Prioridad",
           cell: ({ row }) => {
-            return <span>{row.prioridad.nombre}</span>;
+            return (
+              <Badge className="bg-ob-blue-3 text-ob-lightblue">
+                {row.prioridad.nombre}
+              </Badge>
+            );
           },
         },
         {
