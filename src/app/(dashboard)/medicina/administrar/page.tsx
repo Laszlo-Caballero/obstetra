@@ -14,6 +14,7 @@ import {
   ResponseMedicina,
 } from "@/interface/response.interface";
 import InfoContainer from "@/components/ui/info-container/InfoContainer";
+import Title from "@/components/ui/title/Title";
 
 export default async function page() {
   const data = await fetcher<ResponseMedicina[]>("farmacia/medicina");
@@ -46,19 +47,11 @@ export default async function page() {
         ]}
       />
       <section className="flex items-center justify-between">
-        <div className="flex items-center text-ob-white font-medium">
-          <div className="flex items-start gap-x-2.5">
-            <span className=" p-1 border-3 border-ob-teal rounded-xl bg-ob-black-4">
-              <LuPill size={18} />
-            </span>
-            <div className="flex flex-col gap-y-0.5">
-              <h2 className="text-xl">Catálogo y Stock de Medicinas</h2>
-              <span className="text-sm text-ob-gray-2">
-                Crea, importa y administra el inventario de medicamentos.
-              </span>
-            </div>
-          </div>
-        </div>
+        <Title
+          title="Catálogo y Stock de Medicinas"
+          description="Crea, importa y administra el inventario de medicamentos."
+          icon={<LuPill size={18} />}
+        />
         <ButtonLink
           className=" text-ob-black bg-ob-teal"
           href="/medicina/crear"

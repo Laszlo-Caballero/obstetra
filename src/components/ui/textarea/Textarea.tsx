@@ -34,7 +34,7 @@ export default function TextArea({
       >
         <textarea
           className={cx(
-            " font-medium text-sm placeholder-ob-white py-2 px-3 w-full focus:outline-none",
+            " font-medium text-sm placeholder-ob-white py-2 px-3 w-full focus:outline-none resize-none",
             className?.textarea
           )}
           id={id}

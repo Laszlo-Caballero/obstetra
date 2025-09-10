@@ -22,6 +22,8 @@ interface TablaMedicinaProps {
 }
 
 export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
+  const [showModal, setShowModal] = useState(false);
+
   const { filters, setFilter, setMetadata, metadata } =
     useFilter<FiltersMedicina>();
 
@@ -120,6 +122,6 @@ export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
           },
         },
       ]}
-    ></Table>
+    />
   );
 }
