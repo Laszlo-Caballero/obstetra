@@ -7,6 +7,7 @@ import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
 import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
 import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
 import TextArea from "@/components/ui/textarea/Textarea";
+import Toggle from "@/components/ui/toggle/Toggle";
 import React from "react";
 import { FaLaptopMedical } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
@@ -38,32 +39,14 @@ export default function EditarEstado() {
         </span>
         <div className="flex flex-col gap-y-1.5">
           <span className="text-ob-white">Estado</span>
-          <div className="flex items-center gap-x-2">
-            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
-              <IoIosAddCircleOutline size={16} />
-              Nuevo
-            </CheckBox>
-            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
-              <LuClock size={16} />
-              En Progreso
-            </CheckBox>
-            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
-              <LuCircleCheckBig size={16} />
-              Resuelto
-            </CheckBox>
-            <CheckBox className={{ checkbox: "flex items-center gap-x-1.5" }}>
-              <RiProhibitedLine size={16} />
-              Cerrado
-            </CheckBox>
-          </div>
 
-          {/* <div>
-            <Select
-            label="prioridad"
-            placeholder="Selecciona..."
-
-            />
-          </div> */}
+          <Toggle
+            items={["Nuevo", "En Progreso", "Resuelto", "Cerrado"]}
+            className={{
+              item: "border border-ob-gray rounded-full",
+              background: "bg-ob-blue-3 rounded-full",
+            }}
+          />
 
           <TextArea
             label="Nota"

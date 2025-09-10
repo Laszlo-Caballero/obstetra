@@ -6,15 +6,9 @@ interface TitleProps {
   title?: string;
   description?: string;
   icon?: ReactNode;
-  children?: ReactNode;
 }
 
-export default function Title({
-  title,
-  description,
-  icon,
-  children,
-}: TitleProps) {
+export default function Title({ title, description, icon }: TitleProps) {
   return (
     <div className="flex items-center text-ob-white font-medium">
       <div className="flex items-start gap-x-2.5">
