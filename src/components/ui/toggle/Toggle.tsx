@@ -19,7 +19,7 @@ export default function Toggle({ items, className }: ToggleProps) {
   return (
     <div
       className={cx(
-        " flex items-center gap-x-2 p-1.5 rounded-xl w-fit",
+        " flex items-center gap-x-2 p-1.5 rounded-xl w-fit font-medium",
         className?.main
       )}
     >
