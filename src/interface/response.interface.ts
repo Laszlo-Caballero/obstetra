@@ -106,3 +106,25 @@ export interface Presentacion {
   nombre: string;
   estado: boolean;
 }
+
+export interface ResponsePersona {
+  dni: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  nombres: string;
+  fechaNacimiento: string;
+  fechaInscripcion: string;
+  fechaEmision: string;
+  fechaCaducidad: string;
+  ubigeoNacimiento: string;
+  ubigeoDomicilio: string;
+  direccion: string;
+  sexo: string;
+  estadoCivil: string;
+  codigoFicha: string;
+  madre: string;
+  padre: string;
+  departamento: string;
+  provincia: string;
+  distrito: string;
+}
