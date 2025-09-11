@@ -134,7 +134,14 @@ export default async function Perfilpage() {
                 className={{ label: "text-sm" }}
               />
               <Input
-                label="Apellidos"
+                label="Apellido Paterno"
+                placeholder="Ñispe"
+                id="lastname"
+                className={{ label: "text-sm" }}
+              />
+
+              <Input
+                label="Apellido Materno"
                 placeholder="Ñispe"
                 id="lastname"
                 className={{ label: "text-sm" }}
