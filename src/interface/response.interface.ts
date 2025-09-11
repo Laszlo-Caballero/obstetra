@@ -128,3 +128,9 @@ export interface ResponsePersona {
   provincia: string;
   distrito: string;
 }
+
+export interface ResponseReniec {
+  status: number;
+  message: string;
+  data: ResponsePersona;
+}
