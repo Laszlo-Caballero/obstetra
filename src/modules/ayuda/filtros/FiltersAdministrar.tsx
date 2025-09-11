@@ -1,12 +1,12 @@
 "use client";
 import { useFilter } from "@/components/context/FilterContext";
 import Search from "@/components/ui/search/Search";
-import Select from "@/components/ui/select/Select";
 import React from "react";
 import { FaRegDotCircle } from "react-icons/fa";
 import { LuFlag, LuLayers } from "react-icons/lu";
 import { FilterAdministrar } from "../types";
 import { Modulo, Prioridad, Tipo } from "@/interface/response.interface";
+import Filter from "@/components/ui/filter/Filter";
 
 interface FiltersAdministrarProps {
   modulos: Modulo[];
@@ -29,47 +29,67 @@ export default function FiltersAdministrar({
         onSearch={(value) => setFilter("search", value)}
         value={filters.search}
       />
-      <Select
-        placeholder="Modulo"
-        search="Buscar Modulos..."
-        iconInput={<LuLayers size={18} />}
-        options={[
-          { label: "Todos", value: "" },
-          ...modulos.map((modulo) => ({
-            label: modulo.nombre,
-            value: modulo.moduloId.toString(),
-          })),
-        ]}
-        onChange={(value) => setFilter("moduloId", value)}
+      <Filter
+        placeholder="Modulo:"
+        icon={<LuLayers />}
+        className={{
+          container: "min-w-[260px]",
+        }}
         value={filters.moduloId}
-      />
-      <Select
-        placeholder="Prioridad"
-        search="Buscar Prioridad..."
-        iconInput={<LuFlag size={18} />}
-        options={[
-          { label: "Todos", value: "" },
-          ...prioridades.map((prioridad) => ({
-            label: prioridad.nombre,
-            value: prioridad.prioridadId.toString(),
-          })),
+        values={[
+          { label: "Todas", value: "" },
+          ...(modulos?.map((modulo) => {
+            return {
+              label: modulo.nombre,
+              value: modulo.moduloId.toString(),
+            };
+          }) || []),
         ]}
-        onChange={(value) => setFilter("prioridadId", value)}
+        onChange={(value) => {
+          setFilter("moduloId", value);
+        }}
+      />
+
+      <Filter
+        placeholder="Prioridad:"
+        icon={<LuFlag />}
+        className={{
+          container: "min-w-[260px]",
+        }}
         value={filters.prioridadId}
-      />
-      <Select
-        placeholder="Tipo de Consulta"
-        search="Buscar Tipo de Consulta..."
-        iconInput={<FaRegDotCircle size={18} />}
-        options={[
-          { label: "Todos", value: "" },
-          ...tipos.map((tipo) => ({
-            label: tipo.nombre,
-            value: tipo.tipoId.toString(),
-          })),
+        values={[
+          { label: "Todas", value: "" },
+          ...(prioridades?.map((prioridad) => {
+            return {
+              label: prioridad.nombre,
+              value: prioridad.prioridadId.toString(),
+            };
+          }) || []),
         ]}
-        onChange={(value) => setFilter("estadoId", value)}
-        value={filters.estadoId}
+        onChange={(value) => {
+          setFilter("prioridadId", value);
+        }}
+      />
+
+      <Filter
+        placeholder="Tipo de Consulta:"
+        icon={<FaRegDotCircle />}
+        className={{
+          container: "min-w-[260px]",
+        }}
+        value={filters.tipoId}
+        values={[
+          { label: "Todas", value: "" },
+          ...(tipos?.map((tipo) => {
+            return {
+              label: tipo.nombre,
+              value: tipo.tipoId.toString(),
+            };
+          }) || []),
+        ]}
+        onChange={(value) => {
+          setFilter("tipoId", value);
+        }}
       />
     </div>
   );

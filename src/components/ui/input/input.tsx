@@ -12,6 +12,7 @@ interface InputProps
     input?: string;
     label?: string;
     container?: string;
+    main?: string;
   };
   ref?: Ref<HTMLInputElement>;
 }
@@ -24,7 +25,7 @@ export default function Input({
   ...props
 }: InputProps) {
   return (
-    <div className="flex flex-col gap-y-1">
+    <div className={cx("flex flex-col gap-y-1", className?.main)}>
       <label
         className={cx("text-ob-gray-2 font-medium", className?.label)}
         htmlFor={id}

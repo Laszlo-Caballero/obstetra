@@ -7,8 +7,6 @@ import InfoContainer from "@/components/ui/info-container/InfoContainer";
 import { LuUserCog, LuSave, LuShieldCheck, LuX, LuCheck } from "react-icons/lu";
 import { GoHome } from "react-icons/go";
 import { LiaUndoAltSolid } from "react-icons/lia";
-import { MdOutlineFileUpload } from "react-icons/md";
-import { FaRegTrashAlt } from "react-icons/fa";
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
@@ -16,6 +14,7 @@ import { env } from "@/config/env";
 import { fetcher } from "@/libs/fetch";
 import { ResponseUser } from "@/interface/user.interface";
 import Photo from "@/modules/perfil/components/photo/Photo";
+import Title from "@/components/ui/title/Title";
 
 export default async function Perfilpage() {
   const cookieStore = await cookies();
@@ -51,19 +50,11 @@ export default async function Perfilpage() {
         {/* Titulo */}
 
         <section className="flex items-center justify-between">
-          <div className="flex items-start gap-x-2.5">
-            <span className="bg-ob-blue-3 rounded-xl border-3 border-ob-blue p-1">
-              <LuUserCog className=" text-ob-white" size={16} />
-            </span>
-            <div className="flex flex-col gap-y-0.5">
-              <h2 className="text-ob-white font-medium text-xl">
-                Ver y Editar Perfil
-              </h2>
-              <p className="text-ob-gray-2 text-sm font-medium">
-                Actualiza tu informacion personal, credenciales y preferencias.
-              </p>
-            </div>
-          </div>
+          <Title
+            title="Ver y Editar Perfil"
+            description="Actualiza tu informacion personal, credenciales y preferencias."
+            icon={<LuUserCog size={18} />}
+          />
           <div className="flex gap-x-1.5">
             <Button className="bg-transparent border border-ob-gray text-ob-white">
               <LiaUndoAltSolid className="text-ob-white" size={18} />

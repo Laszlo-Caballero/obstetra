@@ -20,27 +20,27 @@ interface ModalProps extends PropsWithChildren {
 export default function Modal({ onClose, className, children }: ModalProps) {
   return (
     <ModalContext value={{ onClose }}>
-      <motion.div
+      <div
         className={cx(
           "fixed inset-0 z-[100] bg-black/50 flex items-center justify-center",
           className?.background
         )}
         onClick={onClose}
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.2 }}
       >
-        <div
+        <motion.div
           className={cx(
             "flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[560px]",
             className?.container
           )}
           onClick={(e) => e.stopPropagation()}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.2 }}
         >
           {children}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </ModalContext>
   );
 }

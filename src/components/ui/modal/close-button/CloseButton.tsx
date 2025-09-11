@@ -1,15 +1,21 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { useModal } from "../Modal";
 import cx from "@/libs/cx";
 import Button from "../../button/Button";
 
-interface CloseButtonProps extends PropsWithChildren {
+interface CloseButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> {
+  children?: ReactNode;
   className?: string;
 }
 
-export default function CloseButton({ className, children }: CloseButtonProps) {
+export default function CloseButton({
+  className,
+  children,
+  ...props
+}: CloseButtonProps) {
   const { onClose } = useModal();
 
   return (
@@ -19,6 +25,7 @@ export default function CloseButton({ className, children }: CloseButtonProps) {
         className
       )}
       onClick={onClose}
+      {...props}
     >
       {children}
     </Button>

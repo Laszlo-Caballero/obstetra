@@ -26,10 +26,10 @@ export default function CheckBox({
       </span>
       <div
         className={cx(
-          "rounded-full  p-2 cursor-pointer w-full border select-none ",
+          "rounded-full  p-2 cursor-pointer w-full  select-none ",
           isSelected
-            ? "border-ob-teal text-ob-lightblue"
-            : " border-ob-gray text-ob-gray-2",
+            ? "bg-ob-teal text-ob-black"
+            : " bg-ob-blue-3 text-ob-lightblue",
           className?.checkbox
         )}
         onClick={() => setSelected(!isSelected)}

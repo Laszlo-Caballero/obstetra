@@ -27,12 +27,16 @@
   --color-ob-teal: #0bb5a8;
   --color-ob-teal-2: #cff6f1;
   --color-ob-lightblue: #b8dcef;
+  --color-ob-lightblue-2: #2b968b;
   --color-ob-gray: #233043;
   --color-ob-gray-2: #6b7e8e;
   --color-ob-gray-3: #163146;
   --color-ob-gray-4: #20303c;
+  --color-ob-gray-5: #15202b;
   --color-ob-green: #10b981;
   --color-ob-red: #5a0f12;
+  --color-ob-red-2: #ef4444;
+  --color-ob-orange: #f97316;
 }
 
 body {
