@@ -19,7 +19,7 @@ import ModalImport from "@/modules/posta/import/ModalImport";
 export default async function PostaPage() {
   const data = await fetcher<ResponsePosta[]>("posta");
 
-  const rawPostas = await fetcher<Position[]>("posta/raw-postas");
+  // const rawPostas = await fetcher<Position[]>("posta/raw-postas");
 
   const regiones = await fetcher<Region[]>("utils/regiones");
 
@@ -85,7 +85,7 @@ export default async function PostaPage() {
       <div className="p-[6px] flex flex-col gap-y-3 mb-[41px]">
         <h2 className="text-xl font-medium">Mapa de Postas</h2>
 
-        <Mapa markers={rawPostas?.data || []} />
+        <Mapa markers={[]} />
       </div>
     </div>
   );
