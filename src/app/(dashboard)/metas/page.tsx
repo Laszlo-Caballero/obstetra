@@ -30,7 +30,7 @@ export default function ResumenPage() {
           },
           {
             title: "Metas",
-            href: "/metas/resumen",
+            href: "/metas",
           },
         ]}
       />

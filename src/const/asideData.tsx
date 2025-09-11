@@ -1,6 +1,6 @@
 import { AsideProps } from "@/interface/aside";
 import { SiDatabricks } from "react-icons/si";
-import { LuStethoscope } from "react-icons/lu";
+import { LuCalendar, LuStethoscope } from "react-icons/lu";
 import { LuBuilding2 } from "react-icons/lu";
 export const asideData: AsideProps[] = [
   {
@@ -17,5 +17,10 @@ export const asideData: AsideProps[] = [
     icon: <LuBuilding2 />,
     title: "Postas",
     href: "/posta",
+  },
+  {
+    icon: <LuCalendar />,
+    title: "Citas",
+    href: "/citas",
   },
 ];

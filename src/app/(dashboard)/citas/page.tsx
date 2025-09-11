@@ -1,26 +1,14 @@
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
 import ButtonLink from "@/components/ui/button-link/ButtonLink";
-import ButtonModal from "@/components/ui/button-modal/ButtonModal";
 import Button from "@/components/ui/button/Button";
 import InfoContainer from "@/components/ui/info-container/InfoContainer";
-import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
 import Title from "@/components/ui/title/Title";
 import DetalleCita from "@/modules/citas/Detalle/DetalleCita";
-import DetallePersonal from "@/modules/citas/Detalle/DetallePersonal";
-import EditarEstado from "@/modules/citas/EditarEstado/EditarEstado";
 import FiltradoCita from "@/modules/citas/Filtros/FiltradoCita";
 import SearchCita from "@/modules/citas/Filtros/SearchCita";
 import React from "react";
 import { GoHome } from "react-icons/go";
-import {
-  LuCalendar,
-  LuDownload,
-  LuInfo,
-  LuPencilLine,
-  LuPlus,
-  LuPrinter,
-  LuX,
-} from "react-icons/lu";
+import { LuCalendar, LuDownload, LuPlus } from "react-icons/lu";
 
 export default function AdministrarPage() {
   return (
@@ -34,7 +22,7 @@ export default function AdministrarPage() {
           },
           {
             title: "Citas",
-            href: "/citas/administrar",
+            href: "/citas",
           },
         ]}
       />
