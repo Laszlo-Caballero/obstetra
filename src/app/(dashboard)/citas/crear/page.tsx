@@ -25,7 +25,7 @@ export default function CrearPage() {
           },
           {
             title: "Citas",
-            href: "/citas/administrar",
+            href: "/citas",
           },
           {
             title: "Crear",
@@ -96,17 +96,14 @@ export default function CrearPage() {
         </InfoContainer>
 
         <div className="flex items- justify-end gap-x-3">
-          <ButtonLink
-            className="border border-ob-gray"
-            href="/citas/administrar"
-          >
+          <ButtonLink className="border border-ob-gray" href="/citas">
             <LuArrowLeft size={18} />
             Cancelar
           </ButtonLink>
-          <ButtonLink className="text-ob-white bg-ob-blue" href="/citas/crear">
+          <Button className="text-ob-white bg-ob-blue">
             <LuPlus size={18} />
             Registrar Cita
-          </ButtonLink>
+          </Button>
         </div>
       </form>
     </div>
