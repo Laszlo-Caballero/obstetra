@@ -1,4 +1,5 @@
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
+import ButtonLink from "@/components/ui/button-link/ButtonLink";
 import ButtonModal from "@/components/ui/button-modal/ButtonModal";
 import Button from "@/components/ui/button/Button";
 import InfoContainer from "@/components/ui/info-container/InfoContainer";
@@ -49,10 +50,10 @@ export default function AdministrarPage() {
             <LuDownload size={18} />
             Exportar
           </Button>
-          <Button className="text-ob-white">
+          <ButtonLink className="text-ob-white bg-ob-blue" href="/citas/crear">
             <LuPlus size={18} />
             Registrar Cita
-          </Button>
+          </ButtonLink>
         </div>
       </section>
 
@@ -65,35 +66,7 @@ export default function AdministrarPage() {
 
       <div className="flex items-start gap-x-4">
         <div className="bg-ob-black-3 h-[189px] w-[75%] rounded-2xl">Tabla</div>
-        <aside className="flex flex-col gap-y-4 bg-ob-black-3 rounded-2xl border border-ob-gray p-4 w-[25%] text-sm">
-          <span className="flex items-center gap-x-2">
-            <LuInfo size={18} />
-            Detalle de la Cita
-          </span>
-          <span className="flex items-center justify-between text-ob-lightblue bg-ob-gray-5 py-2.5 px-3 rounded-xl ">
-            <p>Fecha</p>
-            <p>12 Jun 2025, 10:30</p>
-          </span>
-          <DetalleCita />
-          <DetallePersonal />
-          <ContainerButton>
-            <Button className="bg-ob-black-3 border border-ob-gray text-ob-white ">
-              <LuPrinter size={18} />
-              Imprimir
-            </Button>
-            <Button className="bg-ob-blue-3 text-ob-lightblue ">
-              <LuDownload size={18} />
-              Exportar
-            </Button>
-            <ButtonModal
-              className="bg-ob-blue text-ob-white"
-              modal={<EditarEstado />}
-            >
-              <LuPencilLine size={18} />
-              Editar Estado
-            </ButtonModal>
-          </ContainerButton>
-        </aside>
+        <DetalleCita />
       </div>
     </div>
   );
