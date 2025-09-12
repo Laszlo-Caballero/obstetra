@@ -16,6 +16,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthSchema } from "@/schemas/auth/auth.schema";
 import Link from "next/link";
 import { useAuth } from "@/components/context/AuthContext";
+import ReCAPTCHA from "react-google-recaptcha";
+import { env } from "@/config/env";
+import { useMutation } from "@/hooks/useMutation";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [searchPostaLabel, setSearchPostaLabel] = useState("");
@@ -31,6 +35,8 @@ export default function LoginPage() {
   } = useForm({
     resolver: zodResolver(AuthSchema),
   });
+  const [isVerified, setIsVerified] = useState(false);
+  const refCaptcha = useRef<ReCAPTCHA>(null);
 
   const { data } = useQuery<Response<ResponsePosta[]>>({
     queryFn: async (url) => {
@@ -40,6 +46,35 @@ export default function LoginPage() {
     firstRender: false,
     dependencies: [searchPosta],
   });
+
+  const { mutate } = useMutation({
+    disableLoader: true,
+    mutationFn: async (token: string | null, url) => {
+      if (!token) {
+        throw new Error("No token provided");
+      }
+
+      const res = await axios.post(`${url}/auth/verify-captcha`, { token });
+      return res.data;
+    },
+    onSuccess: () => {
+      setIsVerified(true);
+      toast.success("Captcha verificado");
+    },
+    onError: () => {
+      setIsVerified(false);
+      toast.error("Error al verificar el captcha, intenta nuevamente");
+    },
+  });
+  const handleChange = (token: string | null) => {
+    mutate(token);
+  };
+
+  function handleExpired() {
+    setIsVerified(false);
+  }
+
+  console.log(env.site_key);
 
   return (
     <div className="flex justify-center items-center h-screen font-inter">
@@ -113,6 +148,14 @@ export default function LoginPage() {
             }}
             error={errors.posta?.message}
           />
+
+          <ReCAPTCHA
+            sitekey={env.site_key || ""}
+            onChange={handleChange}
+            onExpired={handleExpired}
+            ref={refCaptcha}
+          />
+
           <div className="flex gap-x-3 text-sm">
             <button className="flex items-center justify-center w-[372px] bg-ob-blue p-2.5 rounded-md gap-x-2">
               <span>
