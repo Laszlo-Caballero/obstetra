@@ -74,8 +74,6 @@ export default function LoginPage() {
     setIsVerified(false);
   }
 
-  console.log(env.site_key);
-
   return (
     <div className="flex justify-center items-center h-screen font-inter">
       <main className="bg-ob-black-3 border-1 border-ob-gray rounded-3xl w-[520px]">
@@ -95,7 +93,14 @@ export default function LoginPage() {
         </div>
         <form
           className="flex flex-col gap-y-4 p-5"
-          onSubmit={handleSubmit(login)}
+          onSubmit={handleSubmit((data) => {
+            if (!isVerified) {
+              toast.error("Por favor verifica el captcha");
+              setIsVerified(false);
+              return;
+            }
+            login(data);
+          })}
         >
           <div className="flex flex-col">
             <span className="font-medium text-ob-white">Iniciar Sesion</span>
@@ -157,7 +162,10 @@ export default function LoginPage() {
           />
 
           <div className="flex gap-x-3 text-sm">
-            <button className="flex items-center justify-center w-[372px] bg-ob-blue p-2.5 rounded-md gap-x-2">
+            <button
+              type="submit"
+              className="flex items-center justify-center w-[372px] disabled:bg-ob-lightblue bg-ob-blue p-2.5 rounded-md gap-x-2"
+            >
               <span>
                 <PiSignInBold size={18} />
               </span>
