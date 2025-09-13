@@ -28,10 +28,14 @@ import {
 } from "react-icons/lu";
 import { parse } from "date-fns";
 import { useMutation } from "@/hooks/useMutation";
-import { ResponseReniec } from "@/interface/response.interface";
+import {
+  ResponsePersona,
+  ResponseReniec,
+} from "@/interface/response.interface";
 import axios from "axios";
 import { env } from "@/config/env";
 import { toast } from "sonner";
+import { url } from "inspector";
 
 interface CrearPacienteProps {
   onClose?: () => void;
@@ -57,6 +61,19 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
   const onSubmit = (data: PacienteType) => {
     console.log(data);
   };
+
+  const { mutate: mutateCreate } = useMutation<PacienteType, ResponsePersona>({
+    mutationFn: async (data, url_api) => {
+      const envio = await axios.post(`${url_api}/pacientes`, data);
+      return envio.data;
+    },
+    onSuccess: () => {
+      console.log("Envio exitoso");
+    },
+    onError: (error) => {
+      console.error("Error en el envio");
+    },
+  });
 
   const { mutate } = useMutation<BuscarDNIResponse, ResponseReniec>({
     mutationFn: async (data) => {
@@ -121,7 +138,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           </div>
           <Input
             label="Nombres"
-            id="name"
+            id="nombre"
             placeholder="Ñepito"
             icon={<LuIdCard size={18} />}
             className={{ input: "placeholder: font-light" }}
@@ -130,7 +147,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <Input
             label="Apellidos Paterno"
-            id="lastname"
+            id="paterno"
             max={8}
             placeholder="Ñispe"
             icon={<LuIdCard size={18} />}
@@ -140,7 +157,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <Input
             label="Apellidos Materno"
-            id="lastname"
+            id="materno"
             max={8}
             placeholder="Ñispe"
             icon={<LuIdCard size={18} />}
@@ -150,7 +167,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <InputDate
             id="fecha_nacimiento"
-            label="Fecha de nacimiento"
+            label="nacimiento"
             icon={<LuCalendar size={18} />}
             onChange={(date) => {
               setValue("fecha_nacimiento", date.toISOString().split("T")[0]);
@@ -164,7 +181,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <Input
             label="Sexo"
-            id="sex"
+            id="sexo"
             placeholder="Femenino, Masculino"
             icon={<LuUser size={18} />}
             className={{ input: "placeholder: font-light" }}
@@ -173,7 +190,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <Input
             label="Telefono"
-            id="phone"
+            id="telefono"
             placeholder="958 154 162"
             icon={<LuPhone size={18} />}
             className={{ input: "placeholder: font-light" }}
@@ -182,7 +199,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <Input
             label="Dirección"
-            id="address"
+            id="direcciion"
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
@@ -195,7 +212,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
 
           <Input
             label="Departamento"
-            id="address"
+            id="departamento"
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
@@ -207,7 +224,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <Input
             label="Provincia"
-            id="address"
+            id="provincia"
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
@@ -220,7 +237,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
 
           <Input
             label="Distrito"
-            id="address"
+            id="distrito"
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
@@ -234,7 +251,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           <TextArea
             label="Notas"
             placeholder="Alergias, antecedentes u otra informacion relevante"
-            id="notes"
+            id="notas"
             rows={3}
             className={{ main: "col-start-1 col-end-3" }}
             {...register("nota")}
@@ -244,7 +261,13 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
         <ModalFooter nota="Al guardar, el paciente se añadirá al padrón.">
           <ContainerButton>
             <CloseButton type="button">Cancelar</CloseButton>
-            <Button type="submit" className="font-semibold bg-ob-teal">
+            <Button
+              type="submit"
+              className="font-semibold bg-ob-teal"
+              onClick={() => {
+                mutateCreate;
+              }}
+            >
               <LuSave size={18} />
               Guardar
             </Button>

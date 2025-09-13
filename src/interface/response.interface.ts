@@ -127,6 +127,7 @@ export interface ResponsePersona {
   departamento: string;
   provincia: string;
   distrito: string;
+  estado: boolean;
 }
 
 export interface ResponseReniec {

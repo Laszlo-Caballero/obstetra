@@ -13,9 +13,13 @@ import { LuPill, LuTrash2, LuX } from "react-icons/lu";
 import { PiWarningBold } from "react-icons/pi";
 import { RiProhibitedLine } from "react-icons/ri";
 
-export default function EliminarMedicina() {
+interface EliminarMedicinaProps {
+  onClose?: () => void;
+}
+
+export default function EliminarMedicina({ onClose }: EliminarMedicinaProps) {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <ModalHeader>
         <ModalTitle title="Deshabilitar Medicina" badge="Acción Critica">
           <LuTrash2 size={20} />
