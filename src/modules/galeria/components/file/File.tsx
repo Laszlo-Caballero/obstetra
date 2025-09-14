@@ -15,6 +15,7 @@ export default function FileCard({ name, path }: FileCardProps) {
   const [_, fileExtension] = name.split(".");
 
   const fileType = getFileType(fileExtension);
+  const parseName = Buffer.from(name, "latin1").toString("utf-8");
 
   return (
     <div className="flex flex-col rounded-3xl border border-ob-gray-4">
@@ -33,7 +34,7 @@ export default function FileCard({ name, path }: FileCardProps) {
           <div className="w-full text-wrap h-full flex flex-col text-ob-gray-2 justify-center items-center gap-y-2">
             <LuFile className="size-7" />
             <p className="whitespace-normal break-words max-w-[200px]">
-              {name}
+              {parseName}
             </p>
           </div>
         )}
@@ -47,7 +48,7 @@ export default function FileCard({ name, path }: FileCardProps) {
         </span>
 
         <h3 className="text-sm break-words whitespace-normal font-medium text-ob-white leading-5">
-          {name}
+          {parseName}
         </h3>
 
         <div className="flex gap-x-2 mt-auto">

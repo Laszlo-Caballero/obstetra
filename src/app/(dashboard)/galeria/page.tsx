@@ -8,6 +8,7 @@ import { fetcher } from "@/libs/fetch";
 import FileCard from "@/modules/galeria/components/file/File";
 import Folder from "@/modules/galeria/components/folder/Folder";
 import CrearCarpeta from "@/modules/galeria/modal/CrearCarpeta";
+import SubirArchivos from "@/modules/galeria/modal/SubirArchivos";
 import FileSection from "@/modules/galeria/sections/FilesSecion";
 import FoldersSection from "@/modules/galeria/sections/FoldersSection";
 import { LuFolderPlus, LuHouse, LuImage, LuUpload } from "react-icons/lu";
@@ -38,10 +39,13 @@ export default async function GaleriaPage() {
           icon={<LuImage size={16} />}
         />
         <div className="flex items-center gap-x-2">
-          <Button className="bg-ob-black-2 text-ob-lightblue">
+          <ButtonModal
+            modal={<SubirArchivos />}
+            className="bg-ob-black-2 text-ob-lightblue"
+          >
             <LuUpload size={18} />
             Subir Archivo
-          </Button>
+          </ButtonModal>
           <ButtonModal
             modal={<CrearCarpeta />}
             className="text-ob-white bg-ob-blue"

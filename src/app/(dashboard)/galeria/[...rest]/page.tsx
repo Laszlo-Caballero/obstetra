@@ -1,13 +1,10 @@
 import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import ButtonLink from "@/components/ui/button-link/ButtonLink";
 import ButtonModal from "@/components/ui/button-modal/ButtonModal";
-import Button from "@/components/ui/button/Button";
 import Title from "@/components/ui/title/Title";
 import { ResponseGaleria } from "@/interface/response.interface";
 import { fetcher } from "@/libs/fetch";
-import FileCard from "@/modules/galeria/components/file/File";
-import Folder from "@/modules/galeria/components/folder/Folder";
 import CrearCarpeta from "@/modules/galeria/modal/CrearCarpeta";
+import SubirArchivos from "@/modules/galeria/modal/SubirArchivos";
 import FileSection from "@/modules/galeria/sections/FilesSecion";
 import FoldersSection from "@/modules/galeria/sections/FoldersSection";
 import { notFound } from "next/navigation";
@@ -37,9 +34,15 @@ export default async function GaleryPageRest({
             href: "/",
           },
           {
+            icon: <LuImage />,
             title: "Galeria",
             href: "/galeria/",
           },
+          ...rest.map((folder, index) => ({
+            icon: index !== rest.length - 1 ? <LuFolderPlus /> : undefined,
+            title: folder.replaceAll("%20", " "),
+            href: `/galeria/${rest.slice(0, index + 1).join("/")}`,
+          })),
         ]}
       />
 
@@ -50,10 +53,13 @@ export default async function GaleryPageRest({
           icon={<LuImage size={16} />}
         />
         <div className="flex items-center gap-x-2">
-          <Button className="bg-ob-black-2 text-ob-lightblue">
+          <ButtonModal
+            modal={<SubirArchivos />}
+            className="bg-ob-black-2 text-ob-lightblue"
+          >
             <LuUpload size={18} />
             Subir Archivo
-          </Button>
+          </ButtonModal>
           <ButtonModal
             modal={<CrearCarpeta />}
             className="text-ob-white bg-ob-blue"
