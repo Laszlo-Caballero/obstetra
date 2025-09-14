@@ -9,6 +9,9 @@ import Button from '@/components/ui/button/Button';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { AnimatePresence, motion } from 'motion/react';
 import { useClose } from '@/hooks/useClose';
+import { useMutation } from '@/hooks/useMutation';
+import axios from 'axios';
+import { toast } from 'sonner';
 
 interface FileCardProps {
   name: string;
@@ -24,6 +27,31 @@ export default function FileCard({ name, path }: FileCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useClose({
     closeFunction: () => setIsOpen(false),
+  });
+
+  const { mutate } = useMutation<unknown, Blob>({
+    mutationFn: async () => {
+      const res = await axios.get(
+        `${env.url_api}/files/download/${path == '/' ? '' : path}${name}`,
+        {
+          responseType: 'blob',
+        },
+      );
+
+      return res.data;
+    },
+    onSuccess: (data) => {
+      const url = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', name);
+      document.body.appendChild(link);
+      link.click();
+      toast.success('Descarga iniciada');
+    },
+    onError: () => {
+      toast.error('Error al descargar el archivo');
+    },
   });
 
   return (
@@ -78,16 +106,18 @@ export default function FileCard({ name, path }: FileCardProps) {
                 className="bg-ob-black-6 border-ob-gray-4 absolute top-full right-0 flex min-w-[220px] flex-col overflow-y-hidden rounded-xl border"
                 initial={{
                   height: 0,
-                  y: -20,
                 }}
                 animate={{
                   height: 'auto',
                   y: 20,
                 }}
-                exit={{ height: 0, y: -20 }}
+                exit={{ height: 0 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 40 }}
               >
-                <button className="hover:bg-ob-gray-4 flex cursor-pointer items-center gap-x-2 p-3">
+                <button
+                  onClick={mutate}
+                  className="hover:bg-ob-gray-4 flex cursor-pointer items-center gap-x-2 p-3"
+                >
                   <LuDownload /> Descargar
                 </button>
 
