@@ -1,28 +1,29 @@
-"use client";
-import { useFilter } from "@/components/context/FilterContext";
-import { useTableContext } from "@/components/context/TableContext";
-import Badge from "@/components/ui/badge/Badge";
-import Button from "@/components/ui/button/Button";
-import CloseButton from "@/components/ui/modal/close-button/CloseButton";
-import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
-import Modal from "@/components/ui/modal/Modal";
-import ModalContent from "@/components/ui/modal/modal-content/ModalContent";
-import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
-import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
-import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
-import { useDrop } from "@/hooks/useDrop";
-import { useMutation } from "@/hooks/useMutation";
-import { Response, ResponsePosta } from "@/interface/response.interface";
-import cx from "@/libs/cx";
-import axios from "axios";
-import React, { useState } from "react";
-import { LuDownload, LuUpload, LuX } from "react-icons/lu";
-import { LuFile } from "react-icons/lu";
-import { LuCheck } from "react-icons/lu";
-import { LuCircleX } from "react-icons/lu";
-import { LuFolderOpen } from "react-icons/lu";
-import { toast } from "sonner";
-import { FilterPosta } from "../types";
+'use client';
+import { useFilter } from '@/components/context/FilterContext';
+import { useTableContext } from '@/components/context/TableContext';
+import Badge from '@/components/ui/badge/Badge';
+import Button from '@/components/ui/button/Button';
+import CloseButton from '@/components/ui/modal/close-button/CloseButton';
+import ContainerButton from '@/components/ui/modal/container-button/ContainerButton';
+import Modal from '@/components/ui/modal/Modal';
+import ModalContent from '@/components/ui/modal/modal-content/ModalContent';
+import ModalFooter from '@/components/ui/modal/modal-footer/ModalFooter';
+import ModalHeader from '@/components/ui/modal/modal-header/ModalHeader';
+import ModalTitle from '@/components/ui/modal/modal-title/ModalTitle';
+import { useDrop } from '@/hooks/useDrop';
+import { useMutation } from '@/hooks/useMutation';
+import { Response, ResponsePosta } from '@/interface/response.interface';
+import cx from '@/libs/cx';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { LuDownload, LuUpload, LuX } from 'react-icons/lu';
+import { LuFile } from 'react-icons/lu';
+import { LuCheck } from 'react-icons/lu';
+import { LuCircleX } from 'react-icons/lu';
+import { LuFolderOpen } from 'react-icons/lu';
+import { toast } from 'sonner';
+import { FilterPosta } from '../types';
+import { notify } from '@/libs/toast';
 
 interface ModalImportProps {
   onClose?: () => void;
@@ -42,7 +43,7 @@ export default function ModalImport({ onClose }: ModalImportProps) {
   const { mutate } = useMutation<File, Response<ResponsePosta[]>>({
     mutationFn: async (data, urlApi) => {
       const formData = new FormData();
-      formData.append("file", data);
+      formData.append('file', data);
 
       const res = await axios.post(`${urlApi}/posta/import-excel`, formData);
 
@@ -50,7 +51,7 @@ export default function ModalImport({ onClose }: ModalImportProps) {
     },
     onSuccess: (data) => {
       setFile(null);
-      toast.success("Archivo subido correctamente");
+      notify.success({ message: 'Archivo subido correctamente' });
       onClose?.();
       refresh(data.data);
       setMetadata({
@@ -60,7 +61,7 @@ export default function ModalImport({ onClose }: ModalImportProps) {
       });
     },
     onError: () => {
-      toast.error("Error al subir el archivo");
+      notify.error({ message: 'Error al subir el archivo' });
     },
   });
 
@@ -68,7 +69,7 @@ export default function ModalImport({ onClose }: ModalImportProps) {
     <Modal onClose={onClose}>
       <ModalHeader>
         <ModalTitle title="Subir archivo (solo Excel)">
-          <span className=" size-7 flex items-center rounded-xl border-ob-teal justify-center border-2 bg-ob-blue-3">
+          <span className="border-ob-teal bg-ob-blue-3 flex size-7 items-center justify-center rounded-xl border-2">
             <LuUpload />
           </span>
         </ModalTitle>
@@ -79,38 +80,37 @@ export default function ModalImport({ onClose }: ModalImportProps) {
         </CloseButton>
       </ModalHeader>
       <ModalContent className="gap-4">
-        <p className="font-medium text-ob-gray-2 max-w-[504px]">
-          Arrastra y suelta tu archivo aquí o selecciónalo. Solo se permiten
-          formatos .xlsx y .xls.
+        <p className="text-ob-gray-2 max-w-[504px] font-medium">
+          Arrastra y suelta tu archivo aquí o selecciónalo. Solo se permiten formatos .xlsx y .xls.
         </p>
 
         <input {...inputProps} />
 
         <div
-          className="p-[26px] cursor-pointer min-h-[126px] gap-y-[10px] flex flex-col justify-center items-center border-[2px] bg-ob-black-8 border-ob-gray-4 border-dashed"
+          className="bg-ob-black-8 border-ob-gray-4 flex min-h-[126px] cursor-pointer flex-col items-center justify-center gap-y-[10px] border-[2px] border-dashed p-[26px]"
           {...divProps}
         >
           {!isOver ? (
             <>
-              <Badge className="flex bg-ob-blue-3 items-center gap-2">
+              <Badge className="bg-ob-blue-3 flex items-center gap-2">
                 <LuFile />
                 Suelta tu Excel aqui
               </Badge>
 
               <div className="flex items-center gap-x-2">
-                <Badge className="flex items-center bg-ob-black-7 text-ob-gray-2 gap-x-[6px]">
+                <Badge className="bg-ob-black-7 text-ob-gray-2 flex items-center gap-x-[6px]">
                   <LuCheck />
                   .xlsx
                 </Badge>
-                <Badge className="flex items-center bg-ob-black-7 text-ob-gray-2 gap-x-[6px]">
+                <Badge className="bg-ob-black-7 text-ob-gray-2 flex items-center gap-x-[6px]">
                   <LuCheck />
                   .xls
                 </Badge>
-                <Badge className="flex items-center bg-ob-black-7 text-ob-gray-2 gap-x-[6px]">
+                <Badge className="bg-ob-black-7 text-ob-gray-2 flex items-center gap-x-[6px]">
                   <LuCircleX />
                   No .csv
                 </Badge>
-                <Badge className="flex items-center bg-ob-black-7 text-ob-gray-2 gap-x-[6px]">
+                <Badge className="bg-ob-black-7 text-ob-gray-2 flex items-center gap-x-[6px]">
                   <LuCircleX />
                   No .pdf
                 </Badge>
@@ -121,23 +121,17 @@ export default function ModalImport({ onClose }: ModalImportProps) {
           )}
         </div>
 
-        <div className="flex justify-between items-center w-full">
-          <p className="max-w-[100px] font-medium text-ob-gray-2">
-            Archivo seleccionado:
-          </p>
-          <div className="flex justify-between gap-x-2 min-w-[346px] items-center py-[11px] px-[13px] rounded-xl bg-ob-black-8 border border-ob-gray-4">
+        <div className="flex w-full items-center justify-between">
+          <p className="text-ob-gray-2 max-w-[100px] font-medium">Archivo seleccionado:</p>
+          <div className="bg-ob-black-8 border-ob-gray-4 flex min-w-[346px] items-center justify-between gap-x-2 rounded-xl border px-[13px] py-[11px]">
             {file ? (
               <p className="text-ob-gray-2 font-medium">{file.name}</p>
             ) : (
               <p className="text-ob-gray-2 font-medium">Ningun archivo</p>
             )}
 
-            <Badge
-              className={cx(
-                !file ? "bg-ob-red text-ob-white" : "bg-ob-teal text-ob-black-6"
-              )}
-            >
-              {file ? "Cargado" : "Esperando excel"}
+            <Badge className={cx(!file ? 'bg-ob-red text-ob-white' : 'bg-ob-teal text-ob-black-6')}>
+              {file ? 'Cargado' : 'Esperando excel'}
             </Badge>
           </div>
         </div>
@@ -146,7 +140,7 @@ export default function ModalImport({ onClose }: ModalImportProps) {
       <ModalFooter>
         <ContainerButton>
           <Button
-            className="text-ob-white bg-transparent border border-ob-gray-2"
+            className="text-ob-white border-ob-gray-2 border bg-transparent"
             onClick={() => {
               onClickInput();
             }}

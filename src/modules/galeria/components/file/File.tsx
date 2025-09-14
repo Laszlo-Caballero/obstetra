@@ -12,6 +12,7 @@ import { useClose } from '@/hooks/useClose';
 import { useMutation } from '@/hooks/useMutation';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { notify } from '@/libs/toast';
 
 interface FileCardProps {
   name: string;
@@ -47,10 +48,10 @@ export default function FileCard({ name, path }: FileCardProps) {
       link.setAttribute('download', name);
       document.body.appendChild(link);
       link.click();
-      toast.success('Descarga iniciada');
+      notify.success({ message: 'Descarga iniciada' });
     },
     onError: () => {
-      toast.error('Error al descargar el archivo');
+      notify.error({ message: 'Error al descargar el archivo' });
     },
   });
 

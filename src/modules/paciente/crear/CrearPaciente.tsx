@@ -1,21 +1,18 @@
-"use client";
-import Button from "@/components/ui/button/Button";
-import InputDate from "@/components/ui/input-date/InputDate";
-import Input from "@/components/ui/input/input";
-import CloseButton from "@/components/ui/modal/close-button/CloseButton";
-import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
-import Modal from "@/components/ui/modal/Modal";
-import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
-import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
-import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
-import TextArea from "@/components/ui/textarea/Textarea";
-import {
-  PacienteSchema,
-  PacienteType,
-} from "@/schemas/paciente/paciente.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
-import { useForm } from "react-hook-form";
+'use client';
+import Button from '@/components/ui/button/Button';
+import InputDate from '@/components/ui/input-date/InputDate';
+import Input from '@/components/ui/input/input';
+import CloseButton from '@/components/ui/modal/close-button/CloseButton';
+import ContainerButton from '@/components/ui/modal/container-button/ContainerButton';
+import Modal from '@/components/ui/modal/Modal';
+import ModalFooter from '@/components/ui/modal/modal-footer/ModalFooter';
+import ModalHeader from '@/components/ui/modal/modal-header/ModalHeader';
+import ModalTitle from '@/components/ui/modal/modal-title/ModalTitle';
+import TextArea from '@/components/ui/textarea/Textarea';
+import { PacienteSchema, PacienteType } from '@/schemas/paciente/paciente.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import {
   LuCalendar,
   LuIdCard,
@@ -25,17 +22,15 @@ import {
   LuSearch,
   LuUser,
   LuX,
-} from "react-icons/lu";
-import { parse } from "date-fns";
-import { useMutation } from "@/hooks/useMutation";
-import {
-  ResponsePersona,
-  ResponseReniec,
-} from "@/interface/response.interface";
-import axios from "axios";
-import { env } from "@/config/env";
-import { toast } from "sonner";
-import { url } from "inspector";
+} from 'react-icons/lu';
+import { parse } from 'date-fns';
+import { useMutation } from '@/hooks/useMutation';
+import { ResponsePersona, ResponseReniec } from '@/interface/response.interface';
+import axios from 'axios';
+import { env } from '@/config/env';
+import { toast } from 'sonner';
+import { url } from 'inspector';
+import { notify } from '@/libs/toast';
 
 interface CrearPacienteProps {
   onClose?: () => void;
@@ -68,10 +63,10 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
       return envio.data;
     },
     onSuccess: () => {
-      console.log("Envio exitoso");
+      console.log('Envio exitoso');
     },
     onError: (error) => {
-      console.error("Error en el envio");
+      console.error('Error en el envio');
     },
   });
 
@@ -82,25 +77,23 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
     },
     onSuccess(data) {
       const { data: persona } = data;
-      setValue("dni", persona.dni);
-      setValue("nombres", persona.nombres);
-      setValue("apellido_paterno", persona.apellidoPaterno);
-      setValue("apellido_materno", persona.apellidoMaterno);
+      setValue('dni', persona.dni);
+      setValue('nombres', persona.nombres);
+      setValue('apellido_paterno', persona.apellidoPaterno);
+      setValue('apellido_materno', persona.apellidoMaterno);
       setValue(
-        "fecha_nacimiento",
-        parse(persona.fechaNacimiento, "dd/MM/yyyy", new Date())
-          .toISOString()
-          .split("T")[0]
+        'fecha_nacimiento',
+        parse(persona.fechaNacimiento, 'dd/MM/yyyy', new Date()).toISOString().split('T')[0],
       );
-      setValue("sexo", persona.sexo);
-      setValue("direccion", persona.direccion);
-      setValue("departamento", persona.departamento);
-      setValue("provincia", persona.provincia);
-      setValue("distrito", persona.distrito);
-      toast.success("Datos cargados correctamente");
+      setValue('sexo', persona.sexo);
+      setValue('direccion', persona.direccion);
+      setValue('departamento', persona.departamento);
+      setValue('provincia', persona.provincia);
+      setValue('distrito', persona.distrito);
+      notify.success({ message: 'Datos cargados correctamente' });
     },
     onError() {
-      toast.error("No se encontraron datos para el DNI ingresado");
+      notify.error({ message: 'No se encontraron datos para el DNI ingresado' });
     },
   });
 
@@ -122,15 +115,15 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
               id="dni"
               placeholder="123456789"
               icon={<LuIdCard size={18} />}
-              className={{ input: "placeholder: font-light" }}
-              {...register("dni")}
+              className={{ input: 'placeholder: font-light' }}
+              {...register('dni')}
               error={errors.dni?.message}
             />
             <Button
               type="button"
               className="bg-ob-teal self-end"
               onClick={() => {
-                mutate({ dni: watch("dni") });
+                mutate({ dni: watch('dni') });
               }}
             >
               <LuSearch size={18} className="text-white" />
@@ -141,8 +134,8 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             id="nombre"
             placeholder="Ñepito"
             icon={<LuIdCard size={18} />}
-            className={{ input: "placeholder: font-light" }}
-            {...register("nombres")}
+            className={{ input: 'placeholder: font-light' }}
+            {...register('nombres')}
             error={errors.nombres?.message}
           />
           <Input
@@ -151,8 +144,8 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             max={8}
             placeholder="Ñispe"
             icon={<LuIdCard size={18} />}
-            className={{ input: "placeholder: font-light" }}
-            {...register("apellido_paterno")}
+            className={{ input: 'placeholder: font-light' }}
+            {...register('apellido_paterno')}
             error={errors.apellido_paterno?.message}
           />
           <Input
@@ -161,8 +154,8 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             max={8}
             placeholder="Ñispe"
             icon={<LuIdCard size={18} />}
-            className={{ input: "placeholder: font-light" }}
-            {...register("apellido_materno")}
+            className={{ input: 'placeholder: font-light' }}
+            {...register('apellido_materno')}
             error={errors.apellido_materno?.message}
           />
           <InputDate
@@ -170,11 +163,11 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             label="nacimiento"
             icon={<LuCalendar size={18} />}
             onChange={(date) => {
-              setValue("fecha_nacimiento", date.toISOString().split("T")[0]);
+              setValue('fecha_nacimiento', date.toISOString().split('T')[0]);
             }}
             value={
-              watch("fecha_nacimiento")
-                ? parse(watch("fecha_nacimiento"), "yyyy-MM-dd", new Date())
+              watch('fecha_nacimiento')
+                ? parse(watch('fecha_nacimiento'), 'yyyy-MM-dd', new Date())
                 : undefined
             }
             error={errors.fecha_nacimiento?.message}
@@ -184,8 +177,8 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             id="sexo"
             placeholder="Femenino, Masculino"
             icon={<LuUser size={18} />}
-            className={{ input: "placeholder: font-light" }}
-            {...register("sexo")}
+            className={{ input: 'placeholder: font-light' }}
+            {...register('sexo')}
             error={errors.sexo?.message}
           />
           <Input
@@ -193,8 +186,8 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             id="telefono"
             placeholder="958 154 162"
             icon={<LuPhone size={18} />}
-            className={{ input: "placeholder: font-light" }}
-            {...register("telefono")}
+            className={{ input: 'placeholder: font-light' }}
+            {...register('telefono')}
             error={errors.telefono?.message}
           />
           <Input
@@ -203,10 +196,10 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
-              input: "placeholder: font-light",
-              main: "col-start-1 col-end-3",
+              input: 'placeholder: font-light',
+              main: 'col-start-1 col-end-3',
             }}
-            {...register("direccion")}
+            {...register('direccion')}
             error={errors.direccion?.message}
           />
 
@@ -216,10 +209,10 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
-              input: "placeholder: font-light",
-              main: "col-start-1 col-end-3",
+              input: 'placeholder: font-light',
+              main: 'col-start-1 col-end-3',
             }}
-            {...register("departamento")}
+            {...register('departamento')}
             error={errors.departamento?.message}
           />
           <Input
@@ -228,10 +221,10 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
-              input: "placeholder: font-light",
-              main: "col-start-1 col-end-3",
+              input: 'placeholder: font-light',
+              main: 'col-start-1 col-end-3',
             }}
-            {...register("provincia")}
+            {...register('provincia')}
             error={errors.provincia?.message}
           />
 
@@ -241,10 +234,10 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             placeholder="Calle Numero Distrito"
             icon={<LuMapPin size={18} />}
             className={{
-              input: "placeholder: font-light",
-              main: "col-start-1 col-end-3",
+              input: 'placeholder: font-light',
+              main: 'col-start-1 col-end-3',
             }}
-            {...register("distrito")}
+            {...register('distrito')}
             error={errors.distrito?.message}
           />
 
@@ -253,8 +246,8 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             placeholder="Alergias, antecedentes u otra informacion relevante"
             id="notas"
             rows={3}
-            className={{ main: "col-start-1 col-end-3" }}
-            {...register("nota")}
+            className={{ main: 'col-start-1 col-end-3' }}
+            {...register('nota')}
           />
         </div>
 
@@ -263,7 +256,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             <CloseButton type="button">Cancelar</CloseButton>
             <Button
               type="submit"
-              className="font-semibold bg-ob-teal"
+              className="bg-ob-teal font-semibold"
               onClick={() => {
                 mutateCreate;
               }}

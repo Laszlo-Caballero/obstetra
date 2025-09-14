@@ -1,18 +1,15 @@
-"use client";
-import { ResponseGaleria } from "@/interface/response.interface";
-import { useGalery } from "../context/GaleryContext";
-import { useEffect } from "react";
-import Folder from "../components/folder/Folder";
+'use client';
+import { ResponseGaleria } from '@/interface/response.interface';
+import { useGalery } from '../context/GaleryContext';
+import { useEffect } from 'react';
+import Folder from '../components/folder/Folder';
 
 interface FoldersSectionProps {
-  initialData?: ResponseGaleria["folders"];
+  initialData?: ResponseGaleria['folders'];
   path?: string;
 }
 
-export default function FoldersSection({
-  initialData,
-  path,
-}: FoldersSectionProps) {
+export default function FoldersSection({ initialData, path }: FoldersSectionProps) {
   const {
     data: { folders },
     setData,
@@ -23,21 +20,13 @@ export default function FoldersSection({
     }
   }, [initialData]);
   return (
-    <section className="grid grid-cols-8 gap-2.5">
+    <section className="flex flex-wrap gap-2.5">
       {folders.length > 0
         ? folders?.map((folder) => (
-            <Folder
-              key={folder}
-              name={folder}
-              url={`/galeria/${path}${folder}`}
-            />
+            <Folder key={folder} name={folder} url={`/galeria/${path}${folder}`} />
           ))
         : initialData?.map((folder) => (
-            <Folder
-              key={folder}
-              name={folder}
-              url={`/galeria/${path}${folder}`}
-            />
+            <Folder key={folder} name={folder} url={`/galeria/${path}${folder}`} />
           ))}
     </section>
   );

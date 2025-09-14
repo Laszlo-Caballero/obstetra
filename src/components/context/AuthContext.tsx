@@ -1,11 +1,11 @@
-"use client";
-import { useConst } from "@/hooks/useConst";
-import { useMutation } from "@/hooks/useMutation";
-import { UserContextData } from "@/interface/auth.interface";
-import { Response } from "@/interface/response.interface";
-import { AuthSchemaType } from "@/schemas/auth/auth.schema";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+'use client';
+import { useConst } from '@/hooks/useConst';
+import { useMutation } from '@/hooks/useMutation';
+import { UserContextData } from '@/interface/auth.interface';
+import { Response } from '@/interface/response.interface';
+import { AuthSchemaType } from '@/schemas/auth/auth.schema';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import {
   createContext,
   PropsWithChildren,
@@ -13,9 +13,10 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { toast } from "sonner";
-import cookie from "js-cookie";
+} from 'react';
+import { toast } from 'sonner';
+import cookie from 'js-cookie';
+import { notify } from '@/libs/toast';
 
 interface UserContext {
   user?: UserContextData;
@@ -30,13 +31,13 @@ const AuthContext = createContext<UserContext | undefined>(undefined);
 export function AuthProvider({ children }: PropsWithChildren) {
   const router = useRouter();
   const [user, setUser] = useState<UserContextData | undefined>(undefined);
-  const [token, setToken] = useState<string>("");
-  const cookieKey = useConst("obstetra_token");
-  const localStorageKey = useConst("obstetra_user");
+  const [token, setToken] = useState<string>('');
+  const cookieKey = useConst('obstetra_token');
+  const localStorageKey = useConst('obstetra_user');
 
   useEffect(() => {
     const token = cookie.get(cookieKey);
-    const user = localStorage.getItem("obstetra_user");
+    const user = localStorage.getItem('obstetra_user');
 
     if (token && user) {
       setToken(token);
@@ -57,28 +58,26 @@ export function AuthProvider({ children }: PropsWithChildren) {
     onSuccess: ({ data }) => {
       setUser(data);
       setToken(data.token);
-      toast.success("Inicio de sesión exitoso");
+      notify.success({ message: 'Inicio de sesión exitoso' });
       localStorage.setItem(localStorageKey, JSON.stringify(data));
       cookie.set(cookieKey, data.token);
-      router.push("/");
+      router.push('/');
     },
     onError: () => {
-      toast.error("Error al iniciar sesión");
+      notify.error({ message: 'Error al iniciar sesión' });
     },
   });
 
   const logout = useCallback(() => {
     setUser(undefined);
-    setToken("");
+    setToken('');
     localStorage.removeItem(localStorageKey);
     cookie.remove(cookieKey);
-    router.push("/login");
+    router.push('/login');
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ user: user, token, login: mutate, logout, setUser }}
-    >
+    <AuthContext.Provider value={{ user: user, token, login: mutate, logout, setUser }}>
       {children}
     </AuthContext.Provider>
   );
@@ -87,7 +86,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 }

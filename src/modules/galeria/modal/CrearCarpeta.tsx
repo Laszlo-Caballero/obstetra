@@ -1,28 +1,26 @@
-"use client";
-import Button from "@/components/ui/button/Button";
-import Input from "@/components/ui/input/input";
-import CloseButton from "@/components/ui/modal/close-button/CloseButton";
-import ContainerButton from "@/components/ui/modal/container-button/ContainerButton";
-import Modal from "@/components/ui/modal/Modal";
-import ModalContent from "@/components/ui/modal/modal-content/ModalContent";
-import ModalFooter from "@/components/ui/modal/modal-footer/ModalFooter";
-import ModalHeader from "@/components/ui/modal/modal-header/ModalHeader";
-import ModalTitle from "@/components/ui/modal/modal-title/ModalTitle";
-import { useMutation } from "@/hooks/useMutation";
-import {
-  FolderSchema,
-  FolderSchemaType,
-} from "@/schemas/galeria/folder.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { usePathname } from "next/navigation";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { IoWarningOutline } from "react-icons/io5";
-import { LuFolder, LuSave, LuX } from "react-icons/lu";
-import { toast } from "sonner";
-import { useGalery } from "../context/GaleryContext";
-import { Response, ResponseGaleria } from "@/interface/response.interface";
+'use client';
+import Button from '@/components/ui/button/Button';
+import Input from '@/components/ui/input/input';
+import CloseButton from '@/components/ui/modal/close-button/CloseButton';
+import ContainerButton from '@/components/ui/modal/container-button/ContainerButton';
+import Modal from '@/components/ui/modal/Modal';
+import ModalContent from '@/components/ui/modal/modal-content/ModalContent';
+import ModalFooter from '@/components/ui/modal/modal-footer/ModalFooter';
+import ModalHeader from '@/components/ui/modal/modal-header/ModalHeader';
+import ModalTitle from '@/components/ui/modal/modal-title/ModalTitle';
+import { useMutation } from '@/hooks/useMutation';
+import { FolderSchema, FolderSchemaType } from '@/schemas/galeria/folder.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { usePathname } from 'next/navigation';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { IoWarningOutline } from 'react-icons/io5';
+import { LuFolder, LuSave, LuX } from 'react-icons/lu';
+import { toast } from 'sonner';
+import { useGalery } from '../context/GaleryContext';
+import { Response, ResponseGaleria } from '@/interface/response.interface';
+import { notify } from '@/libs/toast';
 
 interface CrearCarpetaProps {
   onClose?: () => void;
@@ -39,7 +37,7 @@ export default function CrearCarpeta({ onClose }: CrearCarpetaProps) {
 
   const pathName = usePathname();
 
-  const parsePath = pathName?.replace("/galeria", "") || "";
+  const parsePath = pathName?.replace('/galeria', '') || '';
 
   const { setData } = useGalery();
 
@@ -50,12 +48,12 @@ export default function CrearCarpeta({ onClose }: CrearCarpetaProps) {
       return res.data;
     },
     onSuccess: (data) => {
-      toast.success("Carpeta creada correctamente");
+      notify.success({ message: 'Carpeta creada correctamente' });
       setData(data.data);
       onClose?.();
     },
     onError: () => {
-      toast.error("Error al crear la carpeta");
+      notify.error({ message: 'Error al crear la carpeta' });
     },
   });
 
@@ -76,10 +74,10 @@ export default function CrearCarpeta({ onClose }: CrearCarpetaProps) {
             label="Nombre de la Carpeta"
             id="folderName"
             placeholder="Carpeta"
-            {...register("name")}
+            {...register('name')}
             error={errors.name?.message}
           />
-          <span className="flex items-center gap-x-1 text-ob-gray-2 text-xs mt-0.5">
+          <span className="text-ob-gray-2 mt-0.5 flex items-center gap-x-1 text-xs">
             <IoWarningOutline />
             Usa guiones bajos o medios. Evita caracteres especiales.
           </span>
@@ -87,7 +85,7 @@ export default function CrearCarpeta({ onClose }: CrearCarpetaProps) {
           <Input
             label="Ubicacion"
             id="location"
-            value={parsePath.replaceAll("%20", " ") || "/"}
+            value={parsePath.replaceAll('%20', ' ') || '/'}
             disabled
           />
         </ModalContent>
@@ -95,7 +93,7 @@ export default function CrearCarpeta({ onClose }: CrearCarpetaProps) {
         <ModalFooter>
           <ContainerButton className="w-full">
             <CloseButton>Cancelar</CloseButton>
-            <Button className="font-semibold bg-ob-teal text-white">
+            <Button className="bg-ob-teal font-semibold text-white">
               <LuSave size={18} />
               Crear Carpeta
             </Button>

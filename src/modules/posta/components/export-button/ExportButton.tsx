@@ -1,32 +1,33 @@
-"use client";
-import Button from "@/components/ui/button/Button";
-import { useMutation } from "@/hooks/useMutation";
-import axios from "axios";
-import React from "react";
-import { LuDownload } from "react-icons/lu";
-import { toast } from "sonner";
+'use client';
+import Button from '@/components/ui/button/Button';
+import { useMutation } from '@/hooks/useMutation';
+import { notify } from '@/libs/toast';
+import axios from 'axios';
+import React from 'react';
+import { LuDownload } from 'react-icons/lu';
+import { toast } from 'sonner';
 
 export default function ExportButton() {
   const { mutate } = useMutation<unknown, Blob>({
     mutationFn: async (_, urlApi) => {
       const res = await axios.get(`${urlApi}/posta/export`, {
-        responseType: "blob",
+        responseType: 'blob',
       });
 
       return res.data;
     },
     onSuccess: (data) => {
-      toast.success("Exportando postas");
+      notify.success({ message: 'Exportando postas' });
       const url = window.URL.createObjectURL(new Blob([data]));
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = url;
       const now = new Date();
 
-      const day = String(now.getDate()).padStart(2, "0");
-      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
       const year = now.getFullYear();
 
-      link.setAttribute("download", `Posta-${year}-${month}-${day}.xlsx`);
+      link.setAttribute('download', `Posta-${year}-${month}-${day}.xlsx`);
       document.body.appendChild(link);
       link.click();
     },
@@ -35,7 +36,7 @@ export default function ExportButton() {
   return (
     <Button
       onClick={() => mutate()}
-      className="bg-transparent max-h-10 text-white border border-ob-gray rounded-[6px]"
+      className="border-ob-gray max-h-10 rounded-[6px] border bg-transparent text-white"
     >
       <LuDownload /> Exportar
     </Button>
