@@ -13,6 +13,7 @@ export default function Mapa({ position, setPosistion }: MapaProps) {
   const { camaraProps, dataSeach, handleSelect, setLocation, setValue, value, handleCameraChange } =
     useMaps({
       position,
+      disableInit: true,
     });
   return (
     <div className="h-[358px] w-full rounded-3xl">

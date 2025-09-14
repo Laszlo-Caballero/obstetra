@@ -10,6 +10,7 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocom
 
 interface UseMapsProps {
   position?: Position;
+  disableInit?: boolean;
 }
 
 export function useMaps(props?: UseMapsProps) {
@@ -82,6 +83,8 @@ export function useMaps(props?: UseMapsProps) {
   };
 
   useEffect(() => {
+    if (props?.disableInit) return;
+
     setLocation();
   }, []);
 
