@@ -1,6 +1,4 @@
 import React, { ReactNode } from "react";
-import { LuArrowLeft, LuPill, LuSave } from "react-icons/lu";
-import Button from "../button/Button";
 
 interface TitleProps {
   title?: string;

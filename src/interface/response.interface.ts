@@ -135,3 +135,7 @@ export interface ResponseReniec {
   message: string;
   data: ResponsePersona;
 }
+export interface ResponseGaleria {
+  folders: string[];
+  files: string[];
+}
