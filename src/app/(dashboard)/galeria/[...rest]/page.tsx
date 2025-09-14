@@ -10,10 +10,22 @@ import Folder from "@/modules/galeria/components/folder/Folder";
 import CrearCarpeta from "@/modules/galeria/modal/CrearCarpeta";
 import FileSection from "@/modules/galeria/sections/FilesSecion";
 import FoldersSection from "@/modules/galeria/sections/FoldersSection";
+import { notFound } from "next/navigation";
 import { LuFolderPlus, LuHouse, LuImage, LuUpload } from "react-icons/lu";
 
-export default async function GaleriaPage() {
-  const res = await fetcher<ResponseGaleria>("files/carpets");
+export default async function GaleryPageRest({
+  params,
+}: {
+  params: Promise<{ rest: string[] }>;
+}) {
+  const { rest } = await params;
+  const folderPath = rest.join("/");
+
+  const res = await fetcher<ResponseGaleria>(`files/carpets/${folderPath}`);
+
+  if (!res) {
+    return notFound();
+  }
 
   return (
     <main className="flex flex-col w-full h-full gap-4 p-5">
@@ -52,7 +64,7 @@ export default async function GaleriaPage() {
         </div>
       </section>
 
-      <FoldersSection initialData={res?.data.folders} path="" />
+      <FoldersSection initialData={res?.data.folders} path={`${folderPath}/`} />
       <FileSection initialData={res?.data.files} path={`/`} />
     </main>
   );

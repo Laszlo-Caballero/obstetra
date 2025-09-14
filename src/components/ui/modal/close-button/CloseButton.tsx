@@ -24,6 +24,7 @@ export default function CloseButton({
         "border bg-transparent border-ob-gray text-white py-2.5 px-3 rounded-md cursor-pointer",
         className
       )}
+      type="button"
       onClick={onClose}
       {...props}
     >
