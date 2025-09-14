@@ -139,3 +139,18 @@ export interface ResponseGaleria {
   folders: string[];
   files: string[];
 }
+
+export interface ResponseRegion {
+  regionId: number;
+  nombre: string;
+}
+
+export interface ResponseProvincia {
+  provinciaId: number;
+  nombre: string;
+}
+
+export interface ResponseDistrito {
+  distritoId: number;
+  nombre: string;
+}

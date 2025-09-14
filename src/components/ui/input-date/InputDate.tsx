@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import cx from "@/libs/cx";
-import { ReactNode, useState } from "react";
-import "react-day-picker/dist/style.css";
-import { DayPicker } from "react-day-picker";
+import cx from '@/libs/cx';
+import { ReactNode, useState } from 'react';
+import 'react-day-picker/dist/style.css';
+import { DayPicker } from 'react-day-picker';
+import { useClose } from '@/hooks/useClose';
 
 interface InputProps {
   label: string;
@@ -30,39 +31,38 @@ export default function InputDate({
   onChange,
 }: InputProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useClose({
+    closeFunction: () => setIsOpen(false),
+  });
 
   return (
-    <div
-      className={cx("flex flex-col gap-y-1 relative", className?.main)}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <label
-        className={cx("text-ob-gray-2 font-medium", className?.label)}
-        htmlFor={id}
-      >
-        {label}
-      </label>
+    <div className="relative" ref={ref}>
       <div
-        className={cx(
-          "flex items-center h-[36px] bg-ob-black-4 rounded-xl border border-ob-gray",
-          className?.container
-        )}
+        className={cx('flex cursor-pointer flex-col gap-y-1', className?.main)}
+        onClick={() => setIsOpen(!isOpen)}
       >
-        {icon && <span className="px-3">{icon}</span>}
-        <p>{value?.toLocaleDateString()}</p>
+        <label className={cx('text-ob-gray-2 font-medium', className?.label)}>{label}</label>
+        <div
+          className={cx(
+            'bg-ob-black-4 border-ob-gray flex h-[36px] items-center rounded-xl border',
+            className?.container,
+          )}
+        >
+          {icon && <span className="px-3">{icon}</span>}
+          <p className="px-4">{value?.toLocaleDateString()}</p>
+        </div>
+        {error && <span className="text-sm text-red-500">{error}</span>}
       </div>
-      {error && <span className="text-sm text-red-500">{error}</span>}
-
       {isOpen && (
-        <div className="absolute top-full translate-y-4 z-10">
+        <div className="absolute top-full z-10 translate-y-4">
           <DayPicker
             mode="single"
-            className=" bg-ob-black-4 p-2 rounded-lg shadow-lg"
+            className="bg-ob-black-4 rounded-lg p-2 shadow-lg"
             selected={value}
+            defaultMonth={value}
             onSelect={(date) => {
               if (date) {
                 onChange?.(date);
-                setIsOpen(false);
               }
             }}
           />

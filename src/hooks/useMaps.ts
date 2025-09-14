@@ -1,21 +1,24 @@
-import { Position } from "@/interface/types";
+import { Position } from '@/interface/types';
 import {
   MapCameraChangedEvent,
   MapCameraProps,
   useMap,
   useMapsLibrary,
-} from "@vis.gl/react-google-maps";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+} from '@vis.gl/react-google-maps';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
-export function useMaps() {
-  const [position, setPosistion] = useState<Position>({
-    lat: -12.051631251341286,
-    lng: -77.03434007801428,
-  });
+interface UseMapsProps {
+  position?: Position;
+}
+
+export function useMaps(props?: UseMapsProps) {
+  const [position, setPosistion] = useState<Position>(
+    props?.position || {
+      lat: -12.051631251341286,
+      lng: -77.03434007801428,
+    },
+  );
 
   const [camaraProps, setCameraProps] = useState<MapCameraProps>({
     center: position,
@@ -32,11 +35,11 @@ export function useMaps() {
     clearSuggestions,
     init,
   } = usePlacesAutocomplete({
-    requestOptions: { region: "PE" },
+    requestOptions: { region: 'PE' },
     initOnMount: false,
   });
   const map = useMap();
-  const placesLib = useMapsLibrary("places");
+  const placesLib = useMapsLibrary('places');
 
   useEffect(() => {
     if (!placesLib || !map) return;
@@ -54,11 +57,11 @@ export function useMaps() {
   };
 
   const dataSeach = useMemo(() => {
-    return status === "OK"
+    return status === 'OK'
       ? data.map(({ description }) => {
           return { label: description, value: description };
         })
-      : [{ label: "No hay resultados", value: "No hay resultados" }];
+      : [{ label: 'No hay resultados', value: 'No hay resultados' }];
   }, [data]);
 
   const setLocation = () => {

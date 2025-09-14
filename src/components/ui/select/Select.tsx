@@ -1,11 +1,11 @@
-"use client";
-import cx from "@/libs/cx";
-import { ReactNode, useState } from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { useClose } from "@/hooks/useClose";
-import { Options } from "@/interface/props";
-import { LuSearch } from "react-icons/lu";
-import { AnimatePresence, motion } from "motion/react";
+'use client';
+import cx from '@/libs/cx';
+import { ReactNode, useState } from 'react';
+import { RiArrowDropDownLine } from 'react-icons/ri';
+import { useClose } from '@/hooks/useClose';
+import { Options } from '@/interface/props';
+import { LuSearch } from 'react-icons/lu';
+import { AnimatePresence, motion } from 'motion/react';
 
 interface SelectProps {
   label?: string;
@@ -25,6 +25,8 @@ interface SelectProps {
   onChange?: (value: Options) => void;
   onSearch?: (value: string) => void;
   error?: string;
+  disableSearch?: boolean;
+  disable?: boolean;
 }
 
 export default function Select({
@@ -39,27 +41,27 @@ export default function Select({
   value,
   onSearch,
   error,
+  disableSearch,
+  disable,
 }: SelectProps) {
   const [isOpen, setOpen] = useState(false);
   const ref = useClose({ closeFunction: setOpen });
 
   return (
-    <div className="flex flex-col gap-y-1 relative" ref={ref}>
-      <label className={cx("text-ob-gray-2 font-medium", className?.label)}>
-        {label}
-      </label>
+    <div className="relative flex flex-col gap-y-1" ref={ref}>
+      <label className={cx('text-ob-gray-2 font-medium', className?.label)}>{label}</label>
       <div
         className={cx(
-          "flex items-center justify-between text-ob-white bg-ob-black-4 rounded-xl font-medium text-sm py-2 px-3 border border-ob-gray cursor-pointer",
-          className?.placeholder
+          'text-ob-white bg-ob-black-4 border-ob-gray flex cursor-pointer items-center justify-between rounded-xl border px-3 py-2 text-sm font-medium',
+          className?.placeholder,
         )}
-        onClick={() => setOpen(!isOpen)}
+        onClick={() => {
+          if (!disable) setOpen(!isOpen);
+        }}
       >
-        <div className="flex items-cente gap-x-2">
+        <div className="items-cente flex gap-x-2">
           {iconInput}
-          <div className="text-nowrap">
-            {value ? value?.label : placeholder}
-          </div>
+          <div className="text-nowrap">{value ? value?.label : placeholder}</div>
         </div>
         <span>
           <RiArrowDropDownLine className="text-ob-white" size={18} />
@@ -71,31 +73,33 @@ export default function Select({
         {isOpen && (
           <motion.div
             className={cx(
-              "absolute translate-y-2 mt-1 top-full z-10 bg-ob-black-6 border border-ob-gray rounded-3xl p-3 w-full ",
-              className?.optionsContainer
+              'bg-ob-black-6 border-ob-gray absolute top-full z-10 mt-1 w-full translate-y-2 rounded-3xl border p-3',
+              className?.optionsContainer,
             )}
-            initial={{ height: 0, overflow: "hidden" }}
-            animate={{ height: "auto", overflow: "visible" }}
-            exit={{ height: 0, overflow: "hidden" }}
+            initial={{ height: 0, overflow: 'hidden' }}
+            animate={{ height: 'auto', overflow: 'visible' }}
+            exit={{ height: 0, overflow: 'hidden' }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex gap-x-2 py-2 px-[11px] rounded-xl bg-ob-black-8 items-center w-full">
-              <LuSearch className="text-ob-white size-[18px]" />
-              <input
-                value={search}
-                onChange={(e) => onSearch?.(e.target.value)}
-                className="bg-none outline-none w-full text-sm text-ob-white placeholder:text-white"
-                placeholder={"Buscar..."}
-              />
-            </div>
+            {!disableSearch && (
+              <div className="bg-ob-black-8 flex w-full items-center gap-x-2 rounded-xl px-[11px] py-2">
+                <LuSearch className="text-ob-white size-[18px]" />
+                <input
+                  value={search}
+                  onChange={(e) => onSearch?.(e.target.value)}
+                  className="text-ob-white w-full bg-none text-sm outline-none placeholder:text-white"
+                  placeholder={'Buscar...'}
+                />
+              </div>
+            )}
 
             <div className="max-h-[100px] overflow-y-auto">
               {options?.map((option, i) => {
                 return (
                   <div
                     className={cx(
-                      "flex items-center gap-x-2 py-2.5 hover:bg-ob-black-4 rounded-xl cursor-pointer",
-                      className?.optionsItem
+                      'hover:bg-ob-black-4 flex cursor-pointer items-center gap-x-2 rounded-xl py-2.5',
+                      className?.optionsItem,
                     )}
                     onClick={() => {
                       setOpen(false);
