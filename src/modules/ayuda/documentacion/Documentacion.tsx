@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from '@/components/ui/button/Button';
 import Badge from '@/components/ui/badge/Badge';
 
@@ -28,8 +28,14 @@ import ContainerButton from '@/components/ui/modal/container-button/ContainerBut
 import CloseButton from '@/components/ui/modal/close-button/CloseButton';
 import { ResponseDocumentacion } from '@/interface/response.interface';
 import { parseDate } from '@/libs/parseDate';
-import { PDFViewer } from '@react-pdf/renderer';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { env } from '@/config/env';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+import { useMutation } from '@/hooks/useMutation';
+import { useAuth } from '@/components/context/AuthContext';
+import axios from 'axios';
+import { notify } from '@/libs/toast';
 
 interface DocumentacionProps {
   data?: ResponseDocumentacion[];
@@ -38,6 +44,51 @@ interface DocumentacionProps {
 
 export default function Documentacion({ data, onClose }: DocumentacionProps) {
   const lastVersion = data?.[0];
+  const [numPages, setNumPages] = useState<number | null>(null);
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+  };
+  const [zoom, setZoom] = useState(1);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+  }, []);
+
+  const { mutate: downloadDocument } = useMutation<unknown, Blob>({
+    mutationFn: async (_, url) => {
+      const res = await axios.get(`${url}/documentacion/download-last`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: 'blob',
+      });
+      const fileName =
+        res.headers['content-disposition']?.toString().split('filename=')[1] || 'documentacion.pdf';
+      console.log(fileName);
+
+      const pdfUrl = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      return res.data;
+    },
+
+    onSuccess: () => {
+      notify.success({
+        message: 'Descarga iniciada',
+      });
+    },
+    onError: (error) => {
+      console.error(error);
+      notify.error({
+        message: 'Error al descargar el documento',
+      });
+    },
+  });
 
   return (
     <Modal onClose={onClose}>
@@ -53,15 +104,24 @@ export default function Documentacion({ data, onClose }: DocumentacionProps) {
       <div className="flex">
         <div className="border-ob-gray flex flex-col gap-y-3 border-r">
           <section className="border-ob-gray flex items-center gap-x-3 border-b p-4 pb-3">
-            <Button className="border-ob-gray text-ob-white border bg-transparent">
+            <Button
+              className="border-ob-gray text-ob-white border bg-transparent"
+              onClick={() => setZoom(zoom + 0.1)}
+            >
               <LuZoomIn size={18} />
               Zoom In
             </Button>
-            <Button className="border-ob-gray text-ob-white border bg-transparent">
+            <Button
+              className="border-ob-gray text-ob-white border bg-transparent"
+              onClick={() => setZoom(zoom - 0.1)}
+            >
               <LuZoomOut size={18} />
               Zoom Out
             </Button>
-            <Button className="border-ob-gray text-ob-white border bg-transparent">
+            <Button
+              className="border-ob-gray text-ob-white border bg-transparent"
+              onClick={downloadDocument}
+            >
               <FiRotateCcw size={18} />
               Descargar
             </Button>
@@ -91,11 +151,19 @@ export default function Documentacion({ data, onClose }: DocumentacionProps) {
             <div className="bg-ob-blue-3 h-[452px] w-[637px] p-4">
               <div className="bg-ob-black-6 flex h-[420px] items-center justify-center">
                 {lastVersion ? (
-                  <iframe
-                    src={`${env.api_images}${lastVersion.resource.url}`}
-                    width="100%"
-                    height="100%"
-                  ></iframe>
+                  <Document
+                    file={`${env.api_images}${lastVersion.resource.url}`}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    loading={<span className="text-ob-gray-2 text-sm">Cargando documento...</span>}
+                    error={
+                      <span className="text-ob-gray-2 text-sm">Error al cargar el documento.</span>
+                    }
+                    className="flex h-full flex-col gap-y-2 overflow-y-auto"
+                  >
+                    {Array.from(new Array(numPages), (_, index) => (
+                      <Page key={`page_${index + 1}`} pageNumber={index + 1} scale={zoom} />
+                    ))}
+                  </Document>
                 ) : (
                   <span className="text-ob-gray-2 text-sm">No hay versiones disponibles</span>
                 )}
@@ -121,6 +189,7 @@ export default function Documentacion({ data, onClose }: DocumentacionProps) {
                 if (i === 0) {
                   return (
                     <SmallCard
+                      key={doc._id}
                       title={`v${doc.version} Actual`}
                       description={parseDate(doc.resource.fechaSubida)}
                       className={{ description: '' }}
@@ -133,6 +202,7 @@ export default function Documentacion({ data, onClose }: DocumentacionProps) {
 
                 return (
                   <SmallCard
+                    key={doc._id}
                     title={`v${doc.version}`}
                     description={parseDate(doc.resource.fechaSubida)}
                     icon={<LiaGripLinesSolid size={18} className="text-ob-white" />}
