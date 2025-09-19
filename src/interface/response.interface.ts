@@ -176,3 +176,20 @@ export interface User {
   apellidoPaterno: string;
   apellidoMaterno: string;
 }
+
+export interface ResponsePaciente {
+  pacienteId: number;
+  dni: string;
+  nombres: string;
+  apellido_paterno: string;
+  apellido_materno: string;
+  fecha_nacimiento: string;
+  telefono: string;
+  nota: string;
+  direccion: string;
+  departamento: string;
+  provincia: string;
+  distrito: string;
+  estado: boolean;
+  // citas: any[] //TODO:
+}

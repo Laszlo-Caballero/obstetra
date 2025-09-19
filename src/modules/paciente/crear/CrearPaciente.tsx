@@ -25,12 +25,13 @@ import {
 } from 'react-icons/lu';
 import { parse } from 'date-fns';
 import { useMutation } from '@/hooks/useMutation';
-import { ResponsePersona, ResponseReniec } from '@/interface/response.interface';
+import { Response, ResponsePersona, ResponseReniec } from '@/interface/response.interface';
 import axios from 'axios';
 import { env } from '@/config/env';
-import { toast } from 'sonner';
-import { url } from 'inspector';
 import { notify } from '@/libs/toast';
+import { useTableContext } from '@/components/context/TableContext';
+import { useFilter } from '@/components/context/FilterContext';
+import { FilterPaciente } from '../types';
 
 interface CrearPacienteProps {
   onClose?: () => void;
@@ -41,6 +42,9 @@ interface BuscarDNIResponse {
 }
 
 export default function CrearPaciente({ onClose }: CrearPacienteProps) {
+  const { refresh } = useTableContext<ResponsePersona>();
+  const { setMetadata } = useFilter<FilterPaciente>();
+
   const {
     register,
     formState: { errors },
@@ -51,10 +55,29 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
     resolver: zodResolver(PacienteSchema),
   });
 
-  console.log({ errors });
+  const { mutate: create } = useMutation<PacienteType, Response<ResponsePersona[]>>({
+    mutationFn: async (data, urlApi) => {
+      const res = await axios.post(`${urlApi}/pacientes`, data);
+
+      return res.data;
+    },
+    onSuccess: (data) => {
+      notify.success({ message: 'Paciente creado correctamente' });
+      refresh(data.data);
+      setMetadata({
+        total: data?.metadata?.totalItems || 10,
+        limit: 10,
+        totalPage: data?.metadata?.totalPages || 1,
+      });
+      onClose?.();
+    },
+    onError: () => {
+      notify.error({ message: 'Error al crear paciente' });
+    },
+  });
 
   const onSubmit = (data: PacienteType) => {
-    console.log(data);
+    create(data);
   };
 
   const { mutate: mutateCreate } = useMutation<PacienteType, ResponsePersona>({
@@ -197,7 +220,6 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             icon={<LuMapPin size={18} />}
             className={{
               input: 'placeholder: font-light',
-              main: 'col-start-1 col-end-3',
             }}
             {...register('direccion')}
             error={errors.direccion?.message}
@@ -210,7 +232,6 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             icon={<LuMapPin size={18} />}
             className={{
               input: 'placeholder: font-light',
-              main: 'col-start-1 col-end-3',
             }}
             {...register('departamento')}
             error={errors.departamento?.message}
@@ -222,7 +243,6 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             icon={<LuMapPin size={18} />}
             className={{
               input: 'placeholder: font-light',
-              main: 'col-start-1 col-end-3',
             }}
             {...register('provincia')}
             error={errors.provincia?.message}
@@ -235,7 +255,6 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             icon={<LuMapPin size={18} />}
             className={{
               input: 'placeholder: font-light',
-              main: 'col-start-1 col-end-3',
             }}
             {...register('distrito')}
             error={errors.distrito?.message}
