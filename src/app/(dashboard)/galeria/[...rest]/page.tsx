@@ -61,7 +61,7 @@ export default async function GaleryPageRest({ params }: { params: Promise<{ res
       </section>
 
       <FoldersSection initialData={res?.data.folders} path={`${folderPath}/`} />
-      <FileSection initialData={res?.data.files} path={`/`} />
+      <FileSection initialData={res?.data.files} path={`${folderPath}/`} />
     </main>
   );
 }
