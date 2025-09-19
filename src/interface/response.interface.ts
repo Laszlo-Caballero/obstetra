@@ -154,3 +154,25 @@ export interface ResponseDistrito {
   distritoId: number;
   nombre: string;
 }
+export interface ResponseDocumentacion {
+  _id: string;
+  version: number;
+  resource: Resource;
+  user: User;
+  __v: number;
+}
+
+export interface Resource {
+  nombre: string;
+  extension: string;
+  url: string;
+  recursoId: number;
+  fechaSubida: string;
+}
+
+export interface User {
+  userId: number;
+  nombre: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+}
