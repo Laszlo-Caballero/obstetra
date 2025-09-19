@@ -1,13 +1,13 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { LuShield, LuUser } from "react-icons/lu";
-import { PiSignOutBold } from "react-icons/pi";
-import ButtonLink from "../button-link/ButtonLink";
-import { motion, AnimatePresence } from "motion/react";
-import { useClose } from "@/hooks/useClose";
-import { useAuth } from "@/components/context/AuthContext";
+'use client';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { RiArrowDropDownLine } from 'react-icons/ri';
+import { LuShield, LuUser } from 'react-icons/lu';
+import { PiSignOutBold } from 'react-icons/pi';
+import ButtonLink from '../button-link/ButtonLink';
+import { motion, AnimatePresence } from 'motion/react';
+import { useClose } from '@/hooks/useClose';
+import { useAuth } from '@/components/context/AuthContext';
 
 interface UserDropDownProps {
   user?: string;
@@ -25,9 +25,9 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
   const { logout } = useAuth();
 
   return (
-    <div className="flex flex-col font-medium reltive" ref={ref}>
+    <div className="reltive flex flex-col font-medium" ref={ref}>
       <div
-        className="flex items-center bg-ob-blue-2 gap-x-2.5 px-2.5 py-1.5 cursor-pointer rounded-xl"
+        className="bg-ob-blue-2 flex cursor-pointer items-center gap-x-2.5 rounded-xl px-2.5 py-1.5"
         onClick={() => setOpen(!isOpen)}
       >
         <Image
@@ -37,15 +37,15 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
           width={24}
           height={24}
         />
-        <span className="text-ob-lightblue font-medium text-sm">{user}</span>
+        <span className="text-ob-lightblue text-sm font-medium">{user}</span>
         <RiArrowDropDownLine size={18} />
       </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className=" absolute overflow-hidden z-10 top-full right-5 flex flex-col bg-ob-black-3 rounded-xl border border-ob-gray w-[260px]"
+            className="bg-ob-black-3 border-ob-gray absolute top-full right-5 z-10 flex w-[260px] flex-col overflow-hidden rounded-xl border"
             initial={{ opacity: 0, y: -10, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: "auto" }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}
           >
             <div className="flex items-center gap-x-2.5 p-3">
@@ -57,28 +57,28 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
                 height={36}
               />
               <span className="flex flex-col">
-                <span className="text-sm text-ob-white">{user}</span>
-                <span className="text-sm text-ob-gray-2">{email}</span>
+                <span className="text-ob-white text-sm">{user}</span>
+                <span className="text-ob-gray-2 text-sm">{email}</span>
               </span>
             </div>
-            <span className="p-2 text-ob-gray-2 text-xs">Cuenta</span>
+            <span className="text-ob-gray-2 p-2 text-xs">Cuenta</span>
             <ButtonLink
               href="/perfil"
-              className="p-2.5 text-ob-white rounded-none hover:bg-ob-blue-2 border-b border-ob-gray "
+              className="text-ob-white hover:bg-ob-blue-2 border-ob-gray rounded-none border-b p-2.5"
             >
               <LuUser size={18} />
               Perfil
             </ButtonLink>
             <ButtonLink
               href="/"
-              className=" p-2.5 text-ob-white border-b border-ob-gray rounded-none hover:bg-ob-blue-2 "
+              className="text-ob-white border-ob-gray hover:bg-ob-blue-2 rounded-none border-b p-2.5"
             >
               <LuShield size={18} />
               Seguridad
             </ButtonLink>
-            <span className="p-2 text-ob-gray-2 text-xs">Sesion</span>
+            <span className="text-ob-gray-2 p-2 text-xs">Sesion</span>
             <button
-              className="flex items-center gap-x-2.5 p-2.5 text-ob-white cursor-pointer"
+              className="text-ob-white flex cursor-pointer items-center gap-x-2.5 p-2.5"
               onClick={logout}
             >
               <PiSignOutBold size={18} />
