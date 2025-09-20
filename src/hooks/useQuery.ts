@@ -19,12 +19,17 @@ export function useQuery<T>({ queryFn, dependencies, firstRender = true }: Query
   const didMount = useRef(false);
   const { setLoading, setOver } = useLoader();
 
+  useEffect(() => {
+    console.log('dependencies changed', dependencies);
+  }, [...(dependencies || [])]);
+
   const refreshData = (data: T) => {
     setFetch((prev) => ({ ...prev, data }));
   };
 
   const fetchData = useCallback(async () => {
     try {
+      console.log('Fetching data...');
       setFetch({
         isLoading: true,
         isError: false,

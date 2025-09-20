@@ -1,48 +1,36 @@
-import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import Button from "@/components/ui/button/Button";
-import ButtonLink from "@/components/ui/button-link/ButtonLink";
-import SearchMedicina from "@/modules/medicina/Filtros/SearchMedicina";
-import FiltrosAdministrar from "@/modules/medicina/Filtros/FiltrosAdministrar";
-import TablaMedicina from "@/modules/medicina/Tabla/TablaMedicina";
-import React from "react";
-import { GoHome } from "react-icons/go";
-import { LuPill, LuPlus } from "react-icons/lu";
-import { fetcher } from "@/libs/fetch";
-import {
-  Categoria,
-  Presentacion,
-  ResponseMedicina,
-} from "@/interface/response.interface";
-import InfoContainer from "@/components/ui/info-container/InfoContainer";
-import Title from "@/components/ui/title/Title";
+import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
+import Button from '@/components/ui/button/Button';
+import ButtonLink from '@/components/ui/button-link/ButtonLink';
+import SearchMedicina from '@/modules/medicina/Filtros/SearchMedicina';
+import FiltrosAdministrar from '@/modules/medicina/Filtros/FiltrosAdministrar';
+import TablaMedicina from '@/modules/medicina/Tabla/TablaMedicina';
+import React from 'react';
+import { GoHome } from 'react-icons/go';
+import { LuPill, LuPlus } from 'react-icons/lu';
+import { fetcher } from '@/libs/fetch';
+import { Categoria, Presentacion, ResponseMedicina } from '@/interface/response.interface';
+import InfoContainer from '@/components/ui/info-container/InfoContainer';
+import Title from '@/components/ui/title/Title';
 
 export default async function page() {
-  const data = await fetcher<ResponseMedicina[]>("farmacia/medicina");
+  const data = await fetcher<ResponseMedicina[]>('farmacia/medicina');
 
-  const categorias = await fetcher<Categoria[]>(
-    "farmacia/categoria/raw-categorias"
-  );
+  const categorias = await fetcher<Categoria[]>('farmacia/categoria/raw-categorias');
 
-  const presentaciones = await fetcher<Presentacion[]>(
-    "farmacia/presentacion/raw-presentaciones"
-  );
+  const presentaciones = await fetcher<Presentacion[]>('farmacia/presentacion/raw-presentaciones');
 
   return (
-    <div className="w-full flex flex-col gap-y-4 p-5">
+    <div className="flex w-full flex-col gap-y-4 p-5">
       <Breadcrums
         items={[
           {
-            title: "Inicio",
+            title: 'Inicio',
             icon: <GoHome />,
-            href: "/",
+            href: '/',
           },
           {
-            title: "Perfil",
-            href: "/perfil",
-          },
-          {
-            title: "Medicina",
-            href: "/medicina/crear",
+            title: 'Medicina',
+            href: '/medicina/crear',
           },
         ]}
       />
@@ -52,10 +40,7 @@ export default async function page() {
           description="Crea, importa y administra el inventario de medicamentos."
           icon={<LuPill size={18} />}
         />
-        <ButtonLink
-          className=" text-ob-black bg-ob-teal"
-          href="/medicina/crear"
-        >
+        <ButtonLink className="text-ob-black bg-ob-teal" href="/medicina/crear">
           <LuPlus size={18} />
           Registrar Medicina
         </ButtonLink>
@@ -64,10 +49,7 @@ export default async function page() {
       <InfoContainer className="bg-ob-black-6">
         <div className="flex items-center gap-x-2">
           <SearchMedicina />
-          <FiltrosAdministrar
-            categorias={categorias?.data}
-            presentaciones={presentaciones?.data}
-          />
+          <FiltrosAdministrar categorias={categorias?.data} presentaciones={presentaciones?.data} />
         </div>
         <TablaMedicina
           data={data?.data || []}

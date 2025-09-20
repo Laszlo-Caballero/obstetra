@@ -21,6 +21,7 @@ import { useMutation } from '@/hooks/useMutation';
 import axios from 'axios';
 import { Recurso } from '@/interface/auth.interface';
 import { notify } from '@/libs/toast';
+import { redirect } from 'next/navigation';
 
 interface CreateMedicinaProps {
   categorias: ResponseCategoria[];
@@ -74,6 +75,7 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
       notify.success({
         message: 'Medicina creada con éxito',
       });
+      redirect('/medicina');
     },
     onError: () => {
       notify.error({
@@ -92,12 +94,13 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
             href: '/',
           },
           {
-            title: 'Perfil',
-            href: '/perfil',
+            title: 'Medicina',
+            href: '/medicina',
+            icon: <LuPill />,
           },
           {
-            title: 'Medicina',
-            href: '/',
+            title: 'Crear Medicina',
+            href: '/medicina/crear',
           },
         ]}
       />

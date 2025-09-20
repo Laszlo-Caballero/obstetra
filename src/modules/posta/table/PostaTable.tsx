@@ -89,7 +89,7 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
         {
           header: 'Ipress',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.ipress.toString().padStart(4, '0')}</span>;
+            return <span className="text-nowrap">{row.ipress?.toString()?.padStart(4, '0')}</span>;
           },
         },
         {
