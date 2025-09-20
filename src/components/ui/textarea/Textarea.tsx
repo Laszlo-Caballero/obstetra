@@ -1,8 +1,7 @@
-import React, { TextareaHTMLAttributes } from "react";
-import cx from "@/libs/cx";
+import React, { TextareaHTMLAttributes } from 'react';
+import cx from '@/libs/cx';
 
-interface TextAreaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className"> {
+interface TextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'className'> {
   label: string;
   id?: string;
   className?: {
@@ -11,36 +10,30 @@ interface TextAreaProps
     container?: string;
     main?: string;
   };
+  error?: string;
 }
-export default function TextArea({
-  label,
-  className,
-  id,
-  ...props
-}: TextAreaProps) {
+export default function TextArea({ label, className, error, id, ...props }: TextAreaProps) {
   return (
-    <div className={cx("flex flex-col gap-y-1", className?.main)}>
-      <label
-        className={cx("text-ob-gray-2 font-medium", className?.label)}
-        htmlFor={id}
-      >
+    <div className={cx('flex flex-col gap-y-1', className?.main)}>
+      <label className={cx('text-ob-gray-2 font-medium', className?.label)} htmlFor={id}>
         {label}
       </label>
       <div
         className={cx(
-          "flex items-center bg-ob-black-4 rounded-xl border border-ob-gray",
-          className?.container
+          'bg-ob-black-4 border-ob-gray flex items-center rounded-xl border',
+          className?.container,
         )}
       >
         <textarea
           className={cx(
-            " font-medium text-sm placeholder-ob-white py-2 px-3 w-full focus:outline-none resize-none",
-            className?.textarea
+            'placeholder-ob-white w-full resize-none px-3 py-2 text-sm font-medium focus:outline-none',
+            className?.textarea,
           )}
           id={id}
           {...props}
         />
       </div>
+      {error && <span className="text-sm text-red-500">{error}</span>}
     </div>
   );
 }

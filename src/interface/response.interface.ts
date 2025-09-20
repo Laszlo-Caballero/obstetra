@@ -193,3 +193,15 @@ export interface ResponsePaciente {
   estado: boolean;
   // citas: any[] //TODO:
 }
+
+export interface ResponsePresentacion {
+  presentacionId: number;
+  nombre: string;
+  estado: boolean;
+}
+
+export interface ResponseCategoria {
+  categoriaId: number;
+  nombre: string;
+  estado: boolean;
+}

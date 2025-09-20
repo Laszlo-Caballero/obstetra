@@ -1,21 +1,16 @@
-import React, { ReactNode } from "react";
-import cx from "@/libs/cx";
+import React, { HTMLAttributes, ReactNode } from 'react';
+import cx from '@/libs/cx';
 
-interface InfoContainerProps {
+interface InfoContainerProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
 }
 
-export default function InfoContainer({
-  children,
-  className,
-}: InfoContainerProps) {
+export default function InfoContainer({ children, className, ...props }: InfoContainerProps) {
   return (
     <div
-      className={cx(
-        " flex flex-col gap-y-3 border border-ob-gray  rounded-3xl p-4",
-        className
-      )}
+      className={cx('border-ob-gray flex flex-col gap-y-3 rounded-3xl border p-4', className)}
+      {...props}
     >
       {children}
     </div>
