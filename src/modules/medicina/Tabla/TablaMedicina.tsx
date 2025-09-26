@@ -83,13 +83,13 @@ export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
         {
           header: 'Categoria',
           cell: ({ row }) => {
-            return <span>{row.categoria.nombre}</span>;
+            return <span>{row?.categoria?.nombre}</span>;
           },
         },
         {
           header: 'Presentacion',
           cell: ({ row }) => {
-            return <span>{row.presentacion.nombre}</span>;
+            return <span>{row?.presentacion?.nombre}</span>;
           },
         },
         {

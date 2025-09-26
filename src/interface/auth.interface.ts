@@ -10,8 +10,9 @@ export interface UserContextData {
   password: string;
   personal: Personal;
   role: Role;
-  token: string;
+  // token: string;
   recurso: Recurso;
+  code_otp: string;
 }
 
 export interface Personal {
