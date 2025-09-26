@@ -1,17 +1,19 @@
 'use client';
-
+import { useAuth } from '@/components/context/AuthContext';
 import InputOtp from '@/components/ui/input-otp/InputOtp';
-import { useMutation } from '@/hooks/useMutation';
 import { OtpSchema } from '@/schemas/auth/otp.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { LuClock4, LuShieldCheck, LuStethoscope } from 'react-icons/lu';
 
 export default function VerificarOtpPage() {
+  const { verifyOtp, user } = useAuth();
+
   const [timer, setTimer] = useState(120);
 
-  const { setValue } = useForm({
+  const { setValue, handleSubmit } = useForm({
     resolver: zodResolver(OtpSchema),
   });
 
@@ -25,15 +27,19 @@ export default function VerificarOtpPage() {
   const minutes = Math.floor(timer / 60);
   const seconds = timer % 60;
 
-  const { mutate } = useMutation({
-    mutationFn: async (data: string, url) => {
-      console.log(data);
-    },
+  if (!user) {
+    redirect('/login');
+  }
+  const onSubmit = handleSubmit((data) => {
+    const { code_otp } = user;
+    verifyOtp({ code: data.code, code_otp });
   });
-
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
-      <main className="bg-ob-black-6 border-ob-gray-4 flex min-w-[520px] flex-col gap-y-5 rounded-3xl border p-[33px]">
+      <form
+        onSubmit={onSubmit}
+        className="bg-ob-black-6 border-ob-gray-4 flex min-w-[520px] flex-col gap-y-5 rounded-3xl border p-[33px]"
+      >
         <div className="flex justify-between">
           <span className="flex items-center gap-x-2.5 text-lg">
             <LuStethoscope className="size-5" />
@@ -69,13 +75,12 @@ export default function VerificarOtpPage() {
         </div>
 
         <button
-          className="bg-ob-teal rounded py-3 text-white disabled:cursor-not-allowed disabled:opacity-50"
+          className="bg-ob-blue rounded py-3 text-white disabled:cursor-not-allowed disabled:opacity-50"
           disabled={timer === 0}
-          onClick={() => mutate('')}
         >
           Verificar
         </button>
-      </main>
+      </form>
     </div>
   );
 }

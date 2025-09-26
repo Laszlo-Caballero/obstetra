@@ -14,14 +14,19 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { toast } from 'sonner';
 import cookie from 'js-cookie';
 import { notify } from '@/libs/toast';
+
+interface OtpPayload {
+  code: string;
+  code_otp: string;
+}
 
 interface UserContext {
   user?: UserContextData;
   token: string;
   login: (data: AuthSchemaType) => void;
+  verifyOtp: (code: OtpPayload) => void;
   setUser: (user: UserContextData) => void;
   logout: () => void;
 }
@@ -57,14 +62,30 @@ export function AuthProvider({ children }: PropsWithChildren) {
     },
     onSuccess: ({ data }) => {
       setUser(data);
-      setToken(data.token);
-      notify.success({ message: 'Inicio de sesión exitoso' });
+      // setToken(data.token);
+      // notify.success({ message: 'Inicio de sesión exitoso' });
       localStorage.setItem(localStorageKey, JSON.stringify(data));
-      cookie.set(cookieKey, data.token);
-      router.push('/');
+      // cookie.set(cookieKey, data.token);
+      router.push('/verificar-otp');
     },
     onError: () => {
       notify.error({ message: 'Error al iniciar sesión' });
+    },
+  });
+
+  const { mutate: verifyOtp } = useMutation<OtpPayload, Response<{ token: string }>>({
+    mutationFn: async (payload, urlApi) => {
+      const res = await axios.post(`${urlApi}/auth/verify-otp`, payload);
+      return res.data;
+    },
+    onSuccess({ data }) {
+      setToken(data.token);
+      cookie.set(cookieKey, data.token);
+      notify.success({ message: 'OTP verificado correctamente' });
+      router.push('/');
+    },
+    onError() {
+      notify.error({ message: 'Código OTP incorrecto' });
     },
   });
 
@@ -77,7 +98,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: user, token, login: mutate, logout, setUser }}>
+    <AuthContext.Provider value={{ user: user, token, login: mutate, logout, setUser, verifyOtp }}>
       {children}
     </AuthContext.Provider>
   );
