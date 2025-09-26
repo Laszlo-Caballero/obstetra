@@ -62,6 +62,7 @@ export default function Aside() {
 
       <div className="border-ob-gray-4 mt-auto w-full border-t">
         <AsideIcon
+          subItems={[]}
           icon={<AiOutlineQuestionCircle />}
           title="Ayuda"
           description="Centro de ayuda y soporte"

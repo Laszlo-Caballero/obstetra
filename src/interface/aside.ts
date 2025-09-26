@@ -5,4 +5,5 @@ export interface AsideProps {
   title: string;
   href: string;
   description: string;
+  subItems: AsideProps[];
 }
