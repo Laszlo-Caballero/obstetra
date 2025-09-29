@@ -24,7 +24,7 @@ export default function AsideIcon({
   const isActive = pathName === href;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       <Link
         href={href}
         className={cx(

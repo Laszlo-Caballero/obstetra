@@ -49,7 +49,7 @@ export default function Aside() {
 
       <div
         className={cx(
-          'flex flex-col items-center gap-y-1.5 overflow-y-auto py-3',
+          'flex w-full flex-col items-center gap-y-1.5 overflow-y-auto py-3',
           isOpen && 'w-full items-start',
         )}
       >
