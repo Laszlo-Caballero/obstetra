@@ -1,17 +1,16 @@
-"use client";
-import { useFilter } from "@/components/context/FilterContext";
-import Button from "@/components/ui/button/Button";
-import Table from "@/components/ui/table/Table";
-import { Response, ResponseConsulta } from "@/interface/response.interface";
-import { FaRegDotCircle } from "react-icons/fa";
-import { FilterAdministrar } from "../types";
-import { useState } from "react";
-import { useQuery } from "@/hooks/useQuery";
-import axios from "axios";
-import EditarEstado from "../editar-estado/EditarEstado";
-import ButtonModal from "@/components/ui/button-modal/ButtonModal";
-import { LuLayers } from "react-icons/lu";
-import Badge from "@/components/ui/badge/Badge";
+'use client';
+import { useFilter } from '@/components/context/FilterContext';
+import Table from '@/components/ui/table/Table';
+import { Response, ResponseConsulta } from '@/interface/response.interface';
+import { FaRegDotCircle } from 'react-icons/fa';
+import { FilterAdministrar } from '../types';
+import { useState } from 'react';
+import { useQuery } from '@/hooks/useQuery';
+import axios from 'axios';
+import EditarEstado from '../editar-estado/EditarEstado';
+import ButtonModal from '@/components/ui/button-modal/ButtonModal';
+import { LuLayers } from 'react-icons/lu';
+import Badge from '@/components/ui/badge/Badge';
 interface TablaAdmistrarProps {
   data: ResponseConsulta[];
   total?: number;
@@ -19,10 +18,7 @@ interface TablaAdmistrarProps {
   limit?: number;
 }
 
-export default function TablaAdmistrar({
-  data,
-  ...props
-}: TablaAdmistrarProps) {
+export default function TablaAdmistrar({ data, ...props }: TablaAdmistrarProps) {
   const { filters, setFilter } = useFilter<FilterAdministrar>();
   const [metadata, setMetadata] = useState(props);
 
@@ -31,22 +27,22 @@ export default function TablaAdmistrar({
     queryFn: async (url) => {
       const parseUrl = new URL(`${url}/ayuda/consulta`);
 
-      parseUrl.searchParams.append("limit", props.limit?.toString() || "10");
-      parseUrl.searchParams.append("page", filters.page);
+      parseUrl.searchParams.append('limit', props.limit?.toString() || '10');
+      parseUrl.searchParams.append('page', filters.page);
 
-      if (filters.moduloId != "") {
-        parseUrl.searchParams.append("moduloId", filters.moduloId);
+      if (filters.moduloId != '') {
+        parseUrl.searchParams.append('moduloId', filters.moduloId);
       }
 
-      if (filters.prioridadId != "") {
-        parseUrl.searchParams.append("prioridadId", filters.prioridadId);
+      if (filters.prioridadId != '') {
+        parseUrl.searchParams.append('prioridadId', filters.prioridadId);
       }
-      if (filters.tipoId != "") {
-        parseUrl.searchParams.append("tipoId", filters.tipoId);
+      if (filters.tipoId != '') {
+        parseUrl.searchParams.append('tipoId', filters.tipoId);
       }
 
-      if (filters.search != "") {
-        parseUrl.searchParams.append("search", filters.search);
+      if (filters.search != '') {
+        parseUrl.searchParams.append('search', filters.search);
       }
 
       const res = await axios.get(parseUrl.toString());
@@ -70,27 +66,27 @@ export default function TablaAdmistrar({
       initialData={data}
       data={queryData}
       onChangePage={(page) => {
-        setFilter("page", page.toString());
+        setFilter('page', page.toString());
       }}
       value={Number(filters.page) || 1}
       columns={[
         {
-          header: "ID",
+          header: 'ID',
           cell: ({ row }) => {
             return <span>{row.consultaId}</span>;
           },
         },
         {
-          header: "Asunto",
+          header: 'Asunto',
           cell: ({ row }) => {
             return <span>{row.asunto}</span>;
           },
         },
         {
-          header: "Módulo",
+          header: 'Módulo',
           cell: ({ row }) => {
             return (
-              <span className="flex items-center gap-x-2 text-ob-white">
+              <span className="text-ob-white flex items-center gap-x-2">
                 <LuLayers size={18} />
                 {row.modulo.nombre}
               </span>
@@ -98,23 +94,19 @@ export default function TablaAdmistrar({
           },
         },
         {
-          header: "TipoConsulta",
+          header: 'TipoConsulta',
           cell: ({ row }) => {
             return <span>{row.tipo.nombre}</span>;
           },
         },
         {
-          header: "Prioridad",
+          header: 'Prioridad',
           cell: ({ row }) => {
-            return (
-              <Badge className="bg-ob-blue-3 text-ob-lightblue">
-                {row.prioridad.nombre}
-              </Badge>
-            );
+            return <Badge className="bg-ob-blue-3 text-ob-lightblue">{row.prioridad.nombre}</Badge>;
           },
         },
         {
-          header: "Acciones",
+          header: 'Acciones',
           cell: () => {
             return (
               <ButtonModal

@@ -1,15 +1,13 @@
-"use client";
-import { ResponseGaleria } from "@/interface/response.interface";
-import { usePathname } from "next/navigation";
+'use client';
+import { ResponseGaleria } from '@/interface/response.interface';
 import {
   createContext,
   Dispatch,
   PropsWithChildren,
   SetStateAction,
   useContext,
-  useEffect,
   useState,
-} from "react";
+} from 'react';
 
 interface GaleryContextProps {
   data: ResponseGaleria;
@@ -19,8 +17,6 @@ interface GaleryContextProps {
 const GaleryContext = createContext<GaleryContextProps | undefined>(undefined);
 
 export function GaleryProvider({ children }: PropsWithChildren) {
-  const pathName = usePathname();
-
   const [data, setData] = useState<ResponseGaleria>({
     files: [],
     folders: [],
@@ -32,7 +28,7 @@ export function GaleryProvider({ children }: PropsWithChildren) {
 export function useGalery() {
   const context = useContext(GaleryContext);
   if (!context) {
-    throw new Error("useGalery must be used within a GaleryProvider");
+    throw new Error('useGalery must be used within a GaleryProvider');
   }
   return context;
 }

@@ -22,7 +22,10 @@ export default function ToastFailed({ title, message, onClose, onRetry, retry }:
       </span>
       <div className="flex items-center gap-x-2">
         {retry && (
-          <Button className="bg-ob-red-2 border-ob-red-3 text-ob-white border px-2 py-1.5">
+          <Button
+            className="bg-ob-red-2 border-ob-red-3 text-ob-white border px-2 py-1.5"
+            onClick={onRetry}
+          >
             Reintentar
           </Button>
         )}

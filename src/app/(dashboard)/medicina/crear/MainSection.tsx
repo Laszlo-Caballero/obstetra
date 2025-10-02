@@ -21,7 +21,7 @@ import { useMutation } from '@/hooks/useMutation';
 import axios from 'axios';
 import { Recurso } from '@/interface/auth.interface';
 import { notify } from '@/libs/toast';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 interface CreateMedicinaProps {
   categorias: ResponseCategoria[];

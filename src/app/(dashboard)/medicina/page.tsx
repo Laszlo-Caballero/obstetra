@@ -1,5 +1,4 @@
 import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
-import Button from '@/components/ui/button/Button';
 import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import SearchMedicina from '@/modules/medicina/Filtros/SearchMedicina';
 import FiltrosAdministrar from '@/modules/medicina/Filtros/FiltrosAdministrar';

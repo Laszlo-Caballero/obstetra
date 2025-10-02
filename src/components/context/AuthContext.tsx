@@ -25,6 +25,7 @@ interface OtpPayload {
 interface UserContext {
   user?: UserContextData;
   token: string;
+  setToken: (token: string) => void;
   login: (data: AuthSchemaType) => void;
   verifyOtp: (code: OtpPayload) => void;
   setUser: (user: UserContextData) => void;
@@ -98,7 +99,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: user, token, login: mutate, logout, setUser, verifyOtp }}>
+    <AuthContext.Provider
+      value={{ user: user, token, setToken, login: mutate, logout, setUser, verifyOtp }}
+    >
       {children}
     </AuthContext.Provider>
   );

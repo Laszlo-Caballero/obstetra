@@ -21,15 +21,7 @@ interface InputProps {
   onChange?: (date: Date) => void;
 }
 
-export default function InputDate({
-  label,
-  id,
-  icon,
-  error,
-  className,
-  value,
-  onChange,
-}: InputProps) {
+export default function InputDate({ label, icon, error, className, value, onChange }: InputProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useClose({
     closeFunction: () => setIsOpen(false),

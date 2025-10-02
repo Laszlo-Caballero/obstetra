@@ -1,4 +1,4 @@
-import { ReactNode, SVGProps } from "react";
+import { SVGProps } from 'react';
 
 export type Options = {
   label: string;

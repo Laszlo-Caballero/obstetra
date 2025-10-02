@@ -1,24 +1,23 @@
-import React from "react";
-import Image from "next/image";
-import Button from "@/components/ui/button/Button";
-import Input from "@/components/ui/input/input";
-import Select from "@/components/ui/select/Select";
-import InfoContainer from "@/components/ui/info-container/InfoContainer";
-import { LuUserCog, LuSave, LuShieldCheck, LuX, LuCheck } from "react-icons/lu";
-import { GoHome } from "react-icons/go";
-import { LiaUndoAltSolid } from "react-icons/lia";
-import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
-import { env } from "@/config/env";
-import { fetcher } from "@/libs/fetch";
-import { ResponseUser } from "@/interface/user.interface";
-import Photo from "@/modules/perfil/components/photo/Photo";
-import Title from "@/components/ui/title/Title";
+import React from 'react';
+import Button from '@/components/ui/button/Button';
+import Input from '@/components/ui/input/input';
+import Select from '@/components/ui/select/Select';
+import InfoContainer from '@/components/ui/info-container/InfoContainer';
+import { LuUserCog, LuSave, LuShieldCheck, LuX, LuCheck } from 'react-icons/lu';
+import { GoHome } from 'react-icons/go';
+import { LiaUndoAltSolid } from 'react-icons/lia';
+import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
+import { env } from '@/config/env';
+import { fetcher } from '@/libs/fetch';
+import { ResponseUser } from '@/interface/user.interface';
+import Photo from '@/modules/perfil/components/photo/Photo';
+import Title from '@/components/ui/title/Title';
 
 export default async function Perfilpage() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("obstetra_token")?.value;
+  const token = cookieStore.get('obstetra_token')?.value;
 
   if (!token) {
     return notFound();
@@ -31,18 +30,18 @@ export default async function Perfilpage() {
   });
 
   return (
-    <div className="w-full h-full">
-      <main className="p-5 flex flex-col gap-y-4">
+    <div className="h-full w-full">
+      <main className="flex flex-col gap-y-4 p-5">
         <Breadcrums
           items={[
             {
-              title: "Inicio",
+              title: 'Inicio',
               icon: <GoHome />,
-              href: "/",
+              href: '/',
             },
             {
-              title: "Perfil",
-              href: "/perfil",
+              title: 'Perfil',
+              href: '/perfil',
             },
           ]}
         />
@@ -56,7 +55,7 @@ export default async function Perfilpage() {
             icon={<LuUserCog size={18} />}
           />
           <div className="flex gap-x-1.5">
-            <Button className="bg-transparent border border-ob-gray text-ob-white">
+            <Button className="border-ob-gray text-ob-white border bg-transparent">
               <LiaUndoAltSolid className="text-ob-white" size={18} />
               Deshacer
             </Button>
@@ -78,33 +77,26 @@ export default async function Perfilpage() {
             nombre={res?.data?.personal.nombre}
             src={res?.data?.recurso?.url}
           />
-          <div className="grid grid-cols-2 gap-x-3 gap-y-2 mt-3">
+          <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2">
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Rol</span>
-              <span className="text-ob-white text-sm font-medium">
-                {res?.data?.role.roleName}
-              </span>
+              <span className="text-ob-white text-sm font-medium">{res?.data?.role.roleName}</span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Dni</span>
-              <span className="text-ob-white text-sm font-medium">
-                {res?.data?.personal.dni}
-              </span>
+              <span className="text-ob-white text-sm font-medium">{res?.data?.personal.dni}</span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Estado</span>
               <span className="text-ob-white text-sm font-medium">
-                {res?.data?.personal.estado ? "Activo" : "Inactivo"}
+                {res?.data?.personal.estado ? 'Activo' : 'Inactivo'}
               </span>
             </div>
             <div className="flex flex-col gap-y-1">
-              <span className="text-ob-gray-2 text-xs font-medium">
-                Telefono
-              </span>
+              <span className="text-ob-gray-2 text-xs font-medium">Telefono</span>
               <span className="text-ob-white text-sm font-medium">
-                +51 {res?.data?.personal.telefono.slice(0, 3)}{" "}
-                {res?.data?.personal.telefono.slice(3, 6)}{" "}
-                {res?.data?.personal.telefono.slice(6)}
+                +51 {res?.data?.personal.telefono.slice(0, 3)}{' '}
+                {res?.data?.personal.telefono.slice(3, 6)} {res?.data?.personal.telefono.slice(6)}
               </span>
             </div>
           </div>
@@ -114,78 +106,76 @@ export default async function Perfilpage() {
 
         <form className="flex flex-col gap-y-4">
           <InfoContainer>
-            <span className="text-ob-white font-medium text-sm">
-              Información Personal
-            </span>
+            <span className="text-ob-white text-sm font-medium">Información Personal</span>
             <div className="grid grid-cols-2 gap-3">
               <Input
                 label="Nombres"
                 placeholder="Ñepito"
                 id="name"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
               <Input
                 label="Apellido Paterno"
                 placeholder="Ñispe"
                 id="lastname"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
 
               <Input
                 label="Apellido Materno"
                 placeholder="Ñispe"
                 id="lastname"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
               <Input
                 label="Correo Institucional"
                 placeholder="admin@salud.gob"
                 id="email"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
               <Select
                 label="Establecimiento (Posta)"
                 placeholder="Seleccionar Posta"
                 search="Buscar Postas..."
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
                 options={[
-                  { label: "Posta Central - Turno Mañana", value: "1" },
-                  { label: "Posta Central - Turno Noche", value: "2" },
+                  { label: 'Posta Central - Turno Mañana', value: '1' },
+                  { label: 'Posta Central - Turno Noche', value: '2' },
                 ]}
               />
               <Select
                 label="Especialidad"
                 placeholder="Seleccionar Especialidad"
                 search="Buscar Especialidades..."
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
                 options={[
-                  { label: "Medicina Reproductiva", value: "1" },
-                  { label: "Oncología", value: "2" },
+                  { label: 'Medicina Reproductiva', value: '1' },
+                  { label: 'Oncología', value: '2' },
                 ]}
               />
               <Input
                 label="Telefono"
                 placeholder="+51 987 654 321"
                 id="phone"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
             </div>
           </InfoContainer>
           <InfoContainer>
-            <span className="text-ob-white font-medium text-sm">Seguridad</span>
+            <span className="text-ob-white text-sm font-medium">Seguridad</span>
             <div className="grid grid-cols-2 gap-3">
               <Input
                 label="Contraseña Actual"
                 placeholder="********"
                 id="actual-password"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
               <div className="flex flex-col gap-y-2">
                 <Input
                   label="Nueva Contraseña"
                   placeholder="********"
                   id="new-password"
-                  className={{ label: "text-sm" }}
+                  className={{ label: 'text-sm' }}
                 />
                 <span className="text-ob-gray-2 text-xs font-medium">
                   Minimo 8 caracteres. Usa números y letras
@@ -195,7 +185,7 @@ export default async function Perfilpage() {
                 label="Confirmar Contraseña"
                 placeholder="********"
                 id="confirm-password"
-                className={{ label: "text-sm" }}
+                className={{ label: 'text-sm' }}
               />
             </div>
             <div className="flex justify-end">
@@ -210,7 +200,7 @@ export default async function Perfilpage() {
         {/* Botones */}
 
         <div className="flex justify-end gap-x-3">
-          <Button className="bg-transparent border border-ob-gray text-ob-white">
+          <Button className="border-ob-gray text-ob-white border bg-transparent">
             <LuX size={18} className="text-ob-white" />
             Cancelar
           </Button>

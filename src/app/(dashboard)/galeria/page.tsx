@@ -1,12 +1,8 @@
 import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
-import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import ButtonModal from '@/components/ui/button-modal/ButtonModal';
-import Button from '@/components/ui/button/Button';
 import Title from '@/components/ui/title/Title';
 import { ResponseGaleria } from '@/interface/response.interface';
 import { fetcher } from '@/libs/fetch';
-import FileCard from '@/modules/galeria/components/file/File';
-import Folder from '@/modules/galeria/components/folder/Folder';
 import CrearCarpeta from '@/modules/galeria/modal/CrearCarpeta';
 import SubirArchivos from '@/modules/galeria/modal/SubirArchivos';
 import FileSection from '@/modules/galeria/sections/FilesSecion';

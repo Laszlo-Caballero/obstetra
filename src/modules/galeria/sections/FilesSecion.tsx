@@ -19,7 +19,7 @@ export default function FileSection({ initialData, path }: FoldersSectionProps) 
     if (initialData) {
       setData((prev) => ({ ...prev, files: initialData }));
     }
-  }, [initialData]);
+  }, [initialData, setData]);
 
   return (
     <section className="grid w-full grid-cols-6 gap-2.5">

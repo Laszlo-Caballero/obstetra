@@ -11,7 +11,6 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useClose } from '@/hooks/useClose';
 import { useMutation } from '@/hooks/useMutation';
 import axios from 'axios';
-import { toast } from 'sonner';
 import { notify } from '@/libs/toast';
 
 interface FileCardProps {
@@ -20,7 +19,7 @@ interface FileCardProps {
 }
 
 export default function FileCard({ name, path }: FileCardProps) {
-  const [_, fileExtension] = name.split('.');
+  const [, fileExtension] = name.split('.');
 
   const fileType = getFileType(fileExtension);
   const parseName = Buffer.from(name, 'latin1').toString('utf-8');

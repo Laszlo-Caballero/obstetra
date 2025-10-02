@@ -17,7 +17,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { IoWarningOutline } from 'react-icons/io5';
 import { LuFolder, LuSave, LuX } from 'react-icons/lu';
-import { toast } from 'sonner';
 import { useGalery } from '../context/GaleryContext';
 import { Response, ResponseGaleria } from '@/interface/response.interface';
 import { notify } from '@/libs/toast';

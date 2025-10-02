@@ -5,12 +5,10 @@ import { env } from '@/config/env';
 import { useMutation } from '@/hooks/useMutation';
 import { UserContextData } from '@/interface/auth.interface';
 import { Response } from '@/interface/response.interface';
-import { ResponseUser } from '@/interface/user.interface';
 import { notify } from '@/libs/toast';
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
-import { toast } from 'sonner';
 
 interface PhotoProps {
   src?: string;
@@ -45,8 +43,8 @@ export default function Photo({
     onSuccess: ({ data }) => {
       setUser({
         ...data,
-        token: token,
       });
+      // setToken(data.token); //TODO:
       localStorage.setItem('obstetra_user', JSON.stringify(data));
       notify.success({ message: 'Foto de perfil actualizada' });
     },

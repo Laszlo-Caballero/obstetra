@@ -18,10 +18,9 @@ import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { LuCloudUpload, LuDelete, LuFile, LuUpload, LuX } from 'react-icons/lu';
+import { LuCloudUpload, LuFile, LuUpload, LuX } from 'react-icons/lu';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useGalery } from '../context/GaleryContext';
-import { toast } from 'sonner';
 import { notify } from '@/libs/toast';
 
 interface SubirArchivosProps {

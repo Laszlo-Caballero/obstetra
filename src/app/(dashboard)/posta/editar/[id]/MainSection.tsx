@@ -114,7 +114,7 @@ export default function MainSection({ regiones, defaultData }: MainSectionProps)
     if (defaultData.provincia) {
       getDistrito({ provinciaId: defaultData.provincia.provinciaId.toString() });
     }
-  }, []);
+  }, [defaultData.provincia, defaultData.region]);
 
   const watchLat = watch('lat');
   const watchLng = watch('lng');

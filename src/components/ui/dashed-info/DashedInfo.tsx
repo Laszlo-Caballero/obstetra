@@ -1,5 +1,5 @@
-import cx from "@/libs/cx";
-import React, { PropsWithChildren, ReactNode } from "react";
+import cx from '@/libs/cx';
+import React, { ReactNode } from 'react';
 
 interface DashedInfoProps {
   className?: string;
@@ -10,8 +10,8 @@ export default function DashedInfo({ children, className }: DashedInfoProps) {
   return (
     <div
       className={cx(
-        "flex items-center justify-between border-b border-dashed border-ob-gray py-2",
-        className
+        'border-ob-gray flex items-center justify-between border-b border-dashed py-2',
+        className,
       )}
     >
       {children}

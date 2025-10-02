@@ -1,23 +1,21 @@
-"use client";
-import { useFilter } from "@/components/context/FilterContext";
-import React from "react";
-import { FiltersCitas } from "../type";
-import Filter from "@/components/ui/filter/Filter";
-import { LuCalendarRange, LuCircleDot } from "react-icons/lu";
+'use client';
+import React from 'react';
+import Filter from '@/components/ui/filter/Filter';
+import { LuCalendarRange, LuCircleDot } from 'react-icons/lu';
 
 // interface FiltradoCitaProps{
 
 // }
 
 export default function FiltradoCita() {
-  const { filters, setFilter } = useFilter<FiltersCitas>();
+  // const { filters, setFilter } = useFilter<FiltersCitas>();
   return (
     <div className="flex items-center gap-x-3">
       <Filter
         placeholder="Fecha"
         icon={<LuCalendarRange />}
         className={{
-          container: "min-w-[200px] bg-ob-black-4",
+          container: 'bg-ob-black-4 min-w-[200px]',
         }}
         // value={filters.categoriaId}
         // values={[
@@ -37,7 +35,7 @@ export default function FiltradoCita() {
         placeholder="Estado"
         icon={<LuCircleDot />}
         className={{
-          container: "min-w-[200px] bg-ob-black-4",
+          container: 'bg-ob-black-4 min-w-[200px]',
         }}
       />
     </div>

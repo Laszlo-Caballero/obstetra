@@ -1,36 +1,29 @@
-import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import ButtonModal from "@/components/ui/button-modal/ButtonModal";
-import Button from "@/components/ui/button/Button";
-import CardInfo from "@/components/ui/cardInfo/CardInfo";
-import InfoContainer from "@/components/ui/info-container/InfoContainer";
-import Modal from "@/components/ui/modal/Modal";
-import Title from "@/components/ui/title/Title";
-import Toggle from "@/components/ui/toggle/Toggle";
-import React from "react";
-import { GoHome } from "react-icons/go";
-import { GrTest } from "react-icons/gr";
-import {
-  LuCalendar,
-  LuDownload,
-  LuPlus,
-  LuSmile,
-  LuTarget,
-} from "react-icons/lu";
-import { PiPulseBold } from "react-icons/pi";
+import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
+import ButtonModal from '@/components/ui/button-modal/ButtonModal';
+import Button from '@/components/ui/button/Button';
+import CardInfo from '@/components/ui/cardInfo/CardInfo';
+import InfoContainer from '@/components/ui/info-container/InfoContainer';
+import Modal from '@/components/ui/modal/Modal';
+import Title from '@/components/ui/title/Title';
+import Toggle from '@/components/ui/toggle/Toggle';
+import React from 'react';
+import { GoHome } from 'react-icons/go';
+import { GrTest } from 'react-icons/gr';
+import { LuCalendar, LuDownload, LuPlus, LuSmile, LuTarget } from 'react-icons/lu';
 
 export default function ResumenPage() {
   return (
-    <div className="flex flex-col gap-y-4 p-5 w-full">
+    <div className="flex w-full flex-col gap-y-4 p-5">
       <Breadcrums
         items={[
           {
-            title: "Inicio",
+            title: 'Inicio',
             icon: <GoHome />,
-            href: "/",
+            href: '/',
           },
           {
-            title: "Metas",
-            href: "/metas",
+            title: 'Metas',
+            href: '/metas',
           },
         ]}
       />
@@ -41,14 +34,11 @@ export default function ResumenPage() {
           icon={<LuTarget size={18} />}
         />
         <div className="flex items-center gap-x-2">
-          <Button className="bg-transparent border border-ob-gray text-ob-white hover:bg-ob-blue-2">
+          <Button className="border-ob-gray text-ob-white hover:bg-ob-blue-2 border bg-transparent">
             <LuDownload size={18} />
             Exportar
           </Button>
-          <ButtonModal
-            modal={<Modal />}
-            className="hover:bg-ob-lightblue-2 bg-ob-teal"
-          >
+          <ButtonModal modal={<Modal />} className="hover:bg-ob-lightblue-2 bg-ob-teal">
             <LuPlus size={18} />
             Nueva Meta
           </ButtonModal>
@@ -56,13 +46,10 @@ export default function ResumenPage() {
       </section>
       <InfoContainer className="flex-row items-center justify-between">
         <div>FILTROOOS</div>
-        <Toggle
-          items={["Anuales", "Mensuales"]}
-          className={{ main: "bg-ob-blue-2" }}
-        />
+        <Toggle items={['Anuales', 'Mensuales']} className={{ main: 'bg-ob-blue-2' }} />
       </InfoContainer>
       <div className="flex items-center gap-x-3">
-        <InfoContainer className="font-medium w-[50%]">
+        <InfoContainer className="w-[50%] font-medium">
           <span className="text-ob-white">Resumen Mensual</span>
           <div className="flex items-center gap-x-3">
             <CardInfo
@@ -75,14 +62,10 @@ export default function ResumenPage() {
               description="89 / 110"
               icon={<GrTest size={22} />}
             />
-            <CardInfo
-              title="Satisfaccion"
-              description="91% / 100%"
-              icon={<LuSmile size={22} />}
-            />
+            <CardInfo title="Satisfaccion" description="91% / 100%" icon={<LuSmile size={22} />} />
           </div>
         </InfoContainer>
-        <InfoContainer className="font-medium w-[50%]">
+        <InfoContainer className="w-[50%] font-medium">
           <span className="text-ob-white">Resumen Anual</span>
           <div className="flex items-center gap-x-3">
             <CardInfo
@@ -95,11 +78,7 @@ export default function ResumenPage() {
               description="890 / 1100"
               icon={<GrTest size={22} />}
             />
-            <CardInfo
-              title="Satisfaccion"
-              description="91% / 100%"
-              icon={<LuSmile size={22} />}
-            />
+            <CardInfo title="Satisfaccion" description="91% / 100%" icon={<LuSmile size={22} />} />
           </div>
         </InfoContainer>
       </div>

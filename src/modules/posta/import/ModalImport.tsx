@@ -21,7 +21,6 @@ import { LuFile } from 'react-icons/lu';
 import { LuCheck } from 'react-icons/lu';
 import { LuCircleX } from 'react-icons/lu';
 import { LuFolderOpen } from 'react-icons/lu';
-import { toast } from 'sonner';
 import { FilterPosta } from '../types';
 import { notify } from '@/libs/toast';
 

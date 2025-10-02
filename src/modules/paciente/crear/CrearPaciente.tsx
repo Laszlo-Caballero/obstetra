@@ -80,19 +80,6 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
     create(data);
   };
 
-  const { mutate: mutateCreate } = useMutation<PacienteType, ResponsePersona>({
-    mutationFn: async (data, url_api) => {
-      const envio = await axios.post(`${url_api}/pacientes`, data);
-      return envio.data;
-    },
-    onSuccess: () => {
-      console.log('Envio exitoso');
-    },
-    onError: (error) => {
-      console.error('Error en el envio');
-    },
-  });
-
   const { mutate } = useMutation<BuscarDNIResponse, ResponseReniec>({
     mutationFn: async (data) => {
       const response = await axios.get(`${env.api_reniec}/reniec/${data.dni}`);
@@ -273,13 +260,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
         <ModalFooter nota="Al guardar, el paciente se añadirá al padrón.">
           <ContainerButton>
             <CloseButton type="button">Cancelar</CloseButton>
-            <Button
-              type="submit"
-              className="bg-ob-teal font-semibold"
-              onClick={() => {
-                mutateCreate;
-              }}
-            >
+            <Button type="submit" className="bg-ob-teal font-semibold">
               <LuSave size={18} />
               Guardar
             </Button>

@@ -22,7 +22,7 @@ export function useTable<T>({ columns, data, initialData }: TableProps<T>) {
 
   const getHeaders = useCallback(() => {
     return columns.map((column) => column.header || column.headerComponent?.());
-  }, [columns, data]);
+  }, [columns]);
 
   const getCells = useCallback(() => {
     return tableData.map((row) => {
@@ -30,11 +30,11 @@ export function useTable<T>({ columns, data, initialData }: TableProps<T>) {
         return column.accessorKey ? (row[column.accessorKey] as ReactNode) : column.cell?.({ row });
       });
     });
-  }, [columns, tableData, data]);
+  }, [columns, tableData]);
 
   const getFooter = useCallback(() => {
     return columns.map((column) => column.footer || column.footerComponent?.());
-  }, [columns, data]);
+  }, [columns]);
 
   return {
     getHeaders,

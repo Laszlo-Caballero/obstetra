@@ -5,7 +5,6 @@ import { notify } from '@/libs/toast';
 import axios from 'axios';
 import React from 'react';
 import { LuDownload } from 'react-icons/lu';
-import { toast } from 'sonner';
 
 export default function ExportButton() {
   const { mutate } = useMutation<unknown, Blob>({

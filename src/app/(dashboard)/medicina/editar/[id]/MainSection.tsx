@@ -7,7 +7,6 @@ import TextArea from '@/components/ui/textarea/Textarea';
 import CheckBox from '@/components/ui/checkbox/CheckBox';
 import InfoContainer from '@/components/ui/info-container/InfoContainer';
 import Title from '@/components/ui/title/Title';
-import React, { useState } from 'react';
 import { GoHome } from 'react-icons/go';
 import { LuArrowLeft, LuCheck, LuPill, LuSave, LuImageUp } from 'react-icons/lu';
 import ButtonLink from '@/components/ui/button-link/ButtonLink';

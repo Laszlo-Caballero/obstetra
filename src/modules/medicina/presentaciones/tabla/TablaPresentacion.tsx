@@ -68,7 +68,7 @@ export default function TablaPresentacion({ data, ...props }: TabalaPresentacion
         },
         {
           header: 'Acciones',
-          cell({ row }) {
+          cell() {
             return (
               <div className="flex gap-2">
                 <Button

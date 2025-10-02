@@ -7,7 +7,7 @@ import { Response, ResponseMedicina } from '@/interface/response.interface';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { BiSolidEditAlt } from 'react-icons/bi';
-import { FaEye, FaRegDotCircle } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 import { LuTrash2 } from 'react-icons/lu';
 import { FiltersMedicina } from '../types';
 import { useFilter } from '@/components/context/FilterContext';

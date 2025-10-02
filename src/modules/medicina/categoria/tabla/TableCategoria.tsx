@@ -5,7 +5,6 @@ import { FilterCategoria } from '../types';
 import { useQuery } from '@/hooks/useQuery';
 import axios from 'axios';
 import Table from '@/components/ui/table/Table';
-import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import Button from '@/components/ui/button/Button';
 import { TbEdit, TbTrash } from 'react-icons/tb';
 import Badge from '@/components/ui/badge/Badge';
@@ -71,7 +70,7 @@ export default function TableCategoria({ data, ...props }: TablaCategoriaProps) 
         },
         {
           header: 'Acciones',
-          cell({ row }) {
+          cell() {
             return (
               <div className="flex gap-2">
                 <Button
