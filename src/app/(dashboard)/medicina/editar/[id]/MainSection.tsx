@@ -7,11 +7,16 @@ import TextArea from '@/components/ui/textarea/Textarea';
 import CheckBox from '@/components/ui/checkbox/CheckBox';
 import InfoContainer from '@/components/ui/info-container/InfoContainer';
 import Title from '@/components/ui/title/Title';
-import React from 'react';
+import React, { useState } from 'react';
 import { GoHome } from 'react-icons/go';
 import { LuArrowLeft, LuCheck, LuPill, LuSave, LuImageUp } from 'react-icons/lu';
 import ButtonLink from '@/components/ui/button-link/ButtonLink';
-import { Response, ResponseCategoria, ResponsePresentacion } from '@/interface/response.interface';
+import {
+  Response,
+  ResponseCategoria,
+  ResponseMedicina,
+  ResponsePresentacion,
+} from '@/interface/response.interface';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MedicinaSchema, MedicinaSchemaType } from '@/schemas/medicina/medicina.schema';
@@ -21,15 +26,22 @@ import { useMutation } from '@/hooks/useMutation';
 import axios from 'axios';
 import { Recurso } from '@/interface/auth.interface';
 import { notify } from '@/libs/toast';
-import { redirect, useRouter } from 'next/navigation';
+import { env } from '@/config/env';
+import { useRouter } from 'next/navigation';
 
-interface CreateMedicinaProps {
+interface EditMedicinaProps {
   categorias: ResponseCategoria[];
   presentaciones: ResponsePresentacion[];
+  preloadedData: ResponseMedicina;
 }
 
-export default function CreateMedicina({ categorias, presentaciones }: CreateMedicinaProps) {
+export default function EditMedicina({
+  categorias,
+  presentaciones,
+  preloadedData,
+}: EditMedicinaProps) {
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -38,7 +50,28 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
     formState: { errors },
   } = useForm({
     resolver: zodResolver(MedicinaSchema),
+    defaultValues: {
+      nombre: preloadedData.nombre,
+      categoria: {
+        label: preloadedData.categoria.nombre,
+        value: preloadedData.categoria.categoriaId.toString(),
+      },
+      codigo: preloadedData.codigo,
+      descripcion: preloadedData.descripcion,
+      unidades: preloadedData.unidades,
+      dosis: preloadedData.dosis,
+      stock: preloadedData.stock,
+      stockMinimo: preloadedData.stockMinimo,
+      necesitaReceta: preloadedData.necesitaReceta,
+      presentacion: {
+        label: preloadedData.presentacion.nombre,
+        value: preloadedData.presentacion.presentacionId.toString(),
+      },
+      foto: new File([], ''),
+    },
   });
+
+  const defaultImage = `${env.api_images}${preloadedData.recurso?.url}`;
   const { divProps, inputProps } = useDrop({
     onDrop(file) {
       const fistFile = file[0];
@@ -56,11 +89,20 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
     mutationFn: async (data, urlApi) => {
       const { foto, categoria, presentacion, ...medicamento } = data;
 
-      const formData = new FormData();
-      formData.append('file', foto);
-      formData.append('destination', 'medicamentos');
+      let res = {
+        data: {
+          data: preloadedData.recurso,
+          status: 200,
+          message: 'OK',
+        },
+      };
+      if (foto.size > 0) {
+        const formData = new FormData();
+        formData.append('file', foto);
+        formData.append('destination', 'medicamentos');
 
-      const res = await axios.post(`${urlApi}/recurso/one`, formData);
+        res = await axios.post(`${urlApi}/recurso/one`, formData);
+      }
 
       const recursoData: Response<Recurso> = res.data;
 
@@ -70,17 +112,20 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
         categoriaId: parseInt(categoria.value),
         presentacionId: parseInt(presentacion.value),
       };
-      return axios.post(`${urlApi}/farmacia/medicina`, parsedMedicamento);
+      return axios.patch(
+        `${urlApi}/farmacia/medicina/${preloadedData.medicinaId}`,
+        parsedMedicamento,
+      );
     },
     onSuccess: () => {
       notify.success({
-        message: 'Medicina creada con éxito',
+        message: 'Medicina actualizada con éxito',
       });
       router.push('/medicina');
     },
     onError: () => {
       notify.error({
-        message: 'Error al crear la medicina',
+        message: 'Error al actualizar la medicina',
       });
     },
   });
@@ -100,16 +145,16 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
             icon: <LuPill />,
           },
           {
-            title: 'Crear Medicina',
-            href: '/medicina/crear',
+            title: 'Editar Medicina',
+            href: '/medicina/editar',
           },
         ]}
       />
 
       <section className="flex items-center justify-between">
         <Title
-          title="Crear Medicina"
-          description="Registra un Nuevo Medicamento con sus datos, presentación y stock original"
+          title="Editar Medicina"
+          description="Edita la información de la medicina seleccionada"
           icon={<LuPill size={18} />}
         />
         <div className="flex items-center gap-x-2">
@@ -254,9 +299,13 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
             className="bg-ob-black-4 border-ob-gray flex h-[132px] cursor-pointer items-center justify-center rounded-xl border border-dashed"
           >
             <input {...inputProps} />
-            {watch('foto') ? (
+            {watch('foto') || defaultImage ? (
               <Image
-                src={URL.createObjectURL(watch('foto'))}
+                src={
+                  watch('foto') && watch('foto').size > 0
+                    ? URL.createObjectURL(watch('foto'))
+                    : defaultImage
+                }
                 alt="preview"
                 width={100}
                 height={100}
@@ -275,7 +324,7 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
           <Button className="border-ob-gray text-ob-white border bg-transparent">Cancelar</Button>
           <Button className="bg-ob-teal">
             <LuSave size={18} />
-            Guardar Medicina
+            Actualizar Medicina
           </Button>
         </div>
       </form>

@@ -12,7 +12,7 @@ export default async function MainSectionMedicina() {
   );
 
   if (!resCategoria || !resPresentacion) {
-    redirect('/matenimiento');
+    redirect('/mantenimiento');
   }
 
   return <CreateMedicina categorias={resCategoria.data} presentaciones={resPresentacion.data} />;
