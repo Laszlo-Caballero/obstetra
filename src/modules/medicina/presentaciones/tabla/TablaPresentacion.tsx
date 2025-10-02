@@ -1,39 +1,36 @@
 'use client';
 import { useFilter } from '@/components/context/FilterContext';
-import { Categoria, Response } from '@/interface/response.interface';
-import { FilterCategoria } from '../types';
+import { Response, ResponsePresentacion } from '@/interface/response.interface';
+import { FilterPresentacion } from '../types';
 import { useQuery } from '@/hooks/useQuery';
 import axios from 'axios';
 import Table from '@/components/ui/table/Table';
-import ButtonLink from '@/components/ui/button-link/ButtonLink';
+import Badge from '@/components/ui/badge/Badge';
 import Button from '@/components/ui/button/Button';
 import { TbEdit, TbTrash } from 'react-icons/tb';
-import Badge from '@/components/ui/badge/Badge';
 
-interface TablaCategoriaProps {
-  data: Categoria[];
+interface TabalaPresentacionProps {
+  data: ResponsePresentacion[];
   total?: number;
   totalPage?: number;
   limit?: number;
 }
 
-export default function TableCategoria({ data, ...props }: TablaCategoriaProps) {
-  const { filters, setFilter, setMetadata, metadata } = useFilter<FilterCategoria>();
-  const { data: queryData } = useQuery<Response<Categoria[]>>({
+export default function TablaPresentacion({ data, ...props }: TabalaPresentacionProps) {
+  const { filters, setFilter, setMetadata, metadata } = useFilter<FilterPresentacion>();
+  const { data: queryData } = useQuery<Response<ResponsePresentacion[]>>({
     firstRender: false,
     queryFn: async (url) => {
-      const parseUrl = new URL(`${url}/farmacia/categoria`);
+      const parseUrl = new URL(`${url}/farmacia/presentacion`);
 
       parseUrl.searchParams.append('limit', props.limit?.toString() || '10');
       parseUrl.searchParams.append('page', filters.page.toString() || '1');
-
       if (filters.search != '') {
         parseUrl.searchParams.append('search', filters.search);
       }
-
       const res = await axios.get(parseUrl.toString());
 
-      const data: Response<Categoria[]> = res.data;
+      const data: Response<ResponsePresentacion[]> = res.data;
       setMetadata({
         total: data?.metadata?.totalItems || 0,
         totalPage: data?.metadata?.totalPages || 0,

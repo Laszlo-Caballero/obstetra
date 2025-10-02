@@ -6,8 +6,17 @@ import { MdOutlineQueuePlayNext } from 'react-icons/md';
 import { GiMedicines } from 'react-icons/gi';
 import { IoMdPhotos } from 'react-icons/io';
 import { TbCategoryPlus } from 'react-icons/tb';
+import { IoGift } from 'react-icons/io5';
+import { BiHome } from 'react-icons/bi';
 
 export const asideData: AsideProps[] = [
+  {
+    icon: <BiHome />,
+    title: 'Inicio',
+    href: '/',
+    description: 'Página principal',
+    subItems: [],
+  },
   {
     icon: <SiDatabricks />,
     title: 'Programas',
@@ -60,7 +69,14 @@ export const asideData: AsideProps[] = [
         icon: <TbCategoryPlus />,
         title: 'Categorías',
         href: '/medicina/categorias',
-        description: 'Gestión de categorías de medicinas',
+        description: 'Gestión de categorías',
+        subItems: [],
+      },
+      {
+        icon: <IoGift />,
+        title: 'Presentaciones',
+        href: '/medicina/presentaciones',
+        description: 'Gestión de presentaciones',
         subItems: [],
       },
     ],

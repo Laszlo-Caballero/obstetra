@@ -1,18 +1,17 @@
 import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
-import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 import Title from '@/components/ui/title/Title';
-import { Categoria } from '@/interface/response.interface';
+import { ResponsePresentacion } from '@/interface/response.interface';
 import { fetcher } from '@/libs/fetch';
-import ModalCreateCategory from '@/modules/medicina/categoria/crear/ModalCreateCategory';
-import SearchCategoria from '@/modules/medicina/categoria/filters/SearchCategoria';
-import TableCategoria from '@/modules/medicina/categoria/tabla/TableCategoria';
+import CrearPresentacionModal from '@/modules/medicina/presentaciones/crear/CrearPresentacionModal';
+import SearchPresentacion from '@/modules/medicina/presentaciones/filters/SearchPresentacion';
+import TablaPresentacion from '@/modules/medicina/presentaciones/tabla/TablaPresentacion';
 import React from 'react';
 import { GoHome } from 'react-icons/go';
 import { LuPill, LuPlus } from 'react-icons/lu';
 
-export default async function CategoriasPage() {
-  const data = await fetcher<Categoria[]>('farmacia/categoria');
+export default async function PresentacionesPage() {
+  const data = await fetcher<ResponsePresentacion[]>('farmacia/presentacion');
   return (
     <div className="flex w-full flex-col gap-y-4 p-5">
       <Breadcrums
@@ -27,25 +26,25 @@ export default async function CategoriasPage() {
             href: '/medicina',
           },
           {
-            title: 'Categorías',
-            href: '/medicina/categorias',
+            title: 'Presentaciones',
+            href: '/medicina/presentaciones',
           },
         ]}
       />
       <section className="flex items-center justify-between">
         <Title
-          title="Categorias de Medicinas"
+          title="Presentaciones de Medicinas"
           description="Crea, importa y administra el inventario de medicamentos."
           icon={<LuPill size={18} />}
         />
-        <ButtonModal className="text-ob-black bg-ob-teal" modal={<ModalCreateCategory />}>
+        <ButtonModal className="text-ob-black bg-ob-teal" modal={<CrearPresentacionModal />}>
           <LuPlus size={18} />
-          Registrar Categoría
+          Registrar Presentación
         </ButtonModal>
       </section>
-      <SearchCategoria />
+      <SearchPresentacion />
 
-      <TableCategoria
+      <TablaPresentacion
         data={data?.data || []}
         limit={10}
         total={data?.metadata?.totalItems}

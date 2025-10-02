@@ -52,7 +52,7 @@ export default function AsideIcon({
         </div>
       </Link>
       {subItems.length > 0 && isOpen && (
-        <div className="border-ob-gray-4 mt-2 border-t pt-2 pl-3">
+        <div className="border-ob-gray-4 mt-2 flex flex-col gap-y-1 border-t pt-2 pl-3">
           {subItems.map((subItem, index) => (
             <AsideIcon key={index} {...subItem} isOpen={isOpen} type="subItem" />
           ))}
