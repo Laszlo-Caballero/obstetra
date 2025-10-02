@@ -89,10 +89,15 @@ export interface ResponseMedicina {
   descripcion: string;
   codigo: string;
   stock: number;
+  stockMinimo: number;
+  dosis: string;
+  unidades: number;
+  necesitaReceta: boolean;
   fechaCreacion: string;
   estado: boolean;
   categoria: Categoria;
   presentacion: Presentacion;
+  recurso: Resource;
 }
 
 export interface Categoria {

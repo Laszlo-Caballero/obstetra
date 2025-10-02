@@ -112,7 +112,7 @@ export default function CreateMedicina({ categorias, presentaciones }: CreateMed
           icon={<LuPill size={18} />}
         />
         <div className="flex items-center gap-x-2">
-          <ButtonLink className="border-ob-gray text-ob-white border" href="/medicina/administrar">
+          <ButtonLink className="border-ob-gray text-ob-white border" href="/medicina">
             <LuArrowLeft size={18} />
             Volver
           </ButtonLink>

@@ -7,12 +7,14 @@ import { Response, ResponseMedicina } from '@/interface/response.interface';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { BiSolidEditAlt } from 'react-icons/bi';
-import { FaRegDotCircle } from 'react-icons/fa';
+import { FaEye, FaRegDotCircle } from 'react-icons/fa';
 import { LuTrash2 } from 'react-icons/lu';
 import { FiltersMedicina } from '../types';
 import { useFilter } from '@/components/context/FilterContext';
 import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 import EliminarMedicina from '../Eliminar/EliminarMedicina';
+import Image from 'next/image';
+import { env } from '@/config/env';
 
 interface TablaMedicinaProps {
   data: ResponseMedicina[];
@@ -75,6 +77,25 @@ export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
       data={queryData?.data}
       columns={[
         {
+          header: 'SKU',
+          cell: ({ row }) => {
+            return <span>{row?.codigo.padStart(5, '0')}</span>;
+          },
+        },
+        {
+          header: 'Imagen',
+          cell: ({ row }) => {
+            return (
+              <Image
+                src={`${env.api_images}${row?.recurso?.url}`}
+                alt={row?.nombre}
+                width={50}
+                height={50}
+              />
+            );
+          },
+        },
+        {
           header: 'Nombre',
           cell: ({ row }) => {
             return <span>{row?.nombre}</span>;
@@ -97,6 +118,10 @@ export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
           cell: () => {
             return (
               <div className="flex items-center gap-x-2">
+                <Button className="bg-ob-blue-3 text-ob-lightblue">
+                  <FaEye size={18} />
+                  Ver detalles
+                </Button>
                 <Button className="bg-ob-blue-3 text-ob-lightblue">
                   <BiSolidEditAlt size={18} />
                   Editar
