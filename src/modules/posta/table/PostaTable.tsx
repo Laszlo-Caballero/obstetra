@@ -83,7 +83,7 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
         {
           header: 'Ruc',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.ruc}</span>;
+            return <span className="text-nowrap">{row?.ruc}</span>;
           },
         },
         {
@@ -95,19 +95,19 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
         {
           header: 'Nombre',
           cell: ({ row }) => {
-            return <span className="max-w-[200px] text-wrap">{row.nombre}</span>;
+            return <span className="max-w-[200px] text-wrap">{row?.nombre}</span>;
           },
         },
         {
           header: 'Region',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.region.nombre}</span>;
+            return <span className="text-nowrap">{row?.region?.nombre}</span>;
           },
         },
         {
           header: 'Provincia',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.provincia?.nombre}</span>;
+            return <span className="text-nowrap">{row?.provincia?.nombre}</span>;
           },
         },
         {
@@ -119,19 +119,19 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
         {
           header: 'Capacidad',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.capacidad}</span>;
+            return <span className="text-nowrap">{row?.capacidad}</span>;
           },
         },
         {
           header: 'Fecha de creación',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.fechaCreacion}</span>;
+            return <span className="text-nowrap">{row?.fechaCreacion}</span>;
           },
         },
         {
           header: 'Fecha de inicio de actividad',
           cell: ({ row }) => {
-            return <span className="text-nowrap">{row.fechaInicioActividad}</span>;
+            return <span className="text-nowrap">{row?.fechaInicioActividad}</span>;
           },
         },
         {
@@ -139,7 +139,7 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
           cell: ({ row }) => {
             return (
               <Badge className={cx(row.estado ? 'bg-ob-green' : 'bg-ob-red')}>
-                {row.estado ? 'Activo' : 'Inactivo'}
+                {row?.estado ? 'Activo' : 'Inactivo'}
               </Badge>
             );
           },
@@ -149,7 +149,7 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
           cell: ({ row }) => {
             return (
               <Link
-                href={`https://www.google.com/maps/search/?api=1&query=${row.lat},${row.lng}`}
+                href={`https://www.google.com/maps/search/?api=1&query=${row?.lat},${row?.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full items-center justify-center"
@@ -165,14 +165,14 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
             return (
               <div className="flex gap-2">
                 <ButtonLink
-                  href={`/posta/editar/${row.postaId}`}
+                  href={`/posta/editar/${row?.postaId}`}
                   className="text-ob-lightblue bg-ob-black-2 w-1/2"
                 >
                   <TbEdit className="size-[18px]" />
                   Editar
                 </ButtonLink>
                 <ButtonLink
-                  href={`/posta/${row.postaId}/delete`}
+                  href={`/posta/${row?.postaId}/delete`}
                   className="border-ob-gray w-1/2 border bg-transparent text-red-400"
                 >
                   <TbTrash className="size-[18px]" />

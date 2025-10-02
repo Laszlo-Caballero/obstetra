@@ -18,10 +18,7 @@ export function useQuery<T>({ queryFn, dependencies, firstRender = true }: Query
   // const { user } = useAuth();
   const didMount = useRef(false);
   const { setLoading, setOver } = useLoader();
-
-  useEffect(() => {
-    console.log('dependencies changed', dependencies);
-  }, [...(dependencies || [])]);
+  const prevDependencies = useRef<unknown[]>(undefined);
 
   const refreshData = (data: T) => {
     setFetch((prev) => ({ ...prev, data }));
@@ -29,7 +26,6 @@ export function useQuery<T>({ queryFn, dependencies, firstRender = true }: Query
 
   const fetchData = useCallback(async () => {
     try {
-      console.log('Fetching data...');
       setFetch({
         isLoading: true,
         isError: false,
@@ -47,14 +43,23 @@ export function useQuery<T>({ queryFn, dependencies, firstRender = true }: Query
   }, [queryFn, setLoading, setOver]);
 
   useEffect(() => {
+    const newDeps = dependencies || [];
+    const prevDeps = prevDependencies.current;
+
     if (!didMount.current) {
-      didMount.current = true;
       if (firstRender) {
         fetchData();
       }
     } else {
-      fetchData();
+      const depsChanged = !prevDeps || JSON.stringify(prevDeps) !== JSON.stringify(newDeps);
+
+      if (depsChanged) {
+        fetchData();
+      }
     }
+
+    prevDependencies.current = newDeps;
+    didMount.current = true;
   }, [...(dependencies || [])]);
 
   return {

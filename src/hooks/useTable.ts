@@ -1,5 +1,5 @@
-import { ColumnDef } from "@/interface/table.interface";
-import { ReactNode, useCallback, useState, useEffect } from "react";
+import { ColumnDef } from '@/interface/table.interface';
+import { ReactNode, useCallback, useState, useEffect } from 'react';
 
 interface TableProps<T> {
   data?: T[];
@@ -16,6 +16,10 @@ export function useTable<T>({ columns, data, initialData }: TableProps<T>) {
     }
   }, [data]);
 
+  useEffect(() => {
+    setTableData(initialData);
+  }, [initialData]);
+
   const getHeaders = useCallback(() => {
     return columns.map((column) => column.header || column.headerComponent?.());
   }, [columns, data]);
@@ -23,9 +27,7 @@ export function useTable<T>({ columns, data, initialData }: TableProps<T>) {
   const getCells = useCallback(() => {
     return tableData.map((row) => {
       return columns.map((column) => {
-        return column.accessorKey
-          ? (row[column.accessorKey] as ReactNode)
-          : column.cell?.({ row });
+        return column.accessorKey ? (row[column.accessorKey] as ReactNode) : column.cell?.({ row });
       });
     });
   }, [columns, tableData, data]);
