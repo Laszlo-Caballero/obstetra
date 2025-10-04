@@ -8,6 +8,7 @@ import { IoMdPhotos } from 'react-icons/io';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { IoGift } from 'react-icons/io5';
 import { BiHome } from 'react-icons/bi';
+import { LuSpellCheck2 } from 'react-icons/lu';
 
 export const asideData: AsideProps[] = [
   {
@@ -26,9 +27,9 @@ export const asideData: AsideProps[] = [
   },
   {
     icon: <LuStethoscope />,
-    title: 'Obstetras',
-    href: '/obstetras',
-    description: 'Lista de obstetras',
+    title: 'Personal Médico',
+    href: '/personal',
+    description: 'Lista de personal médico',
     subItems: [],
   },
   {
@@ -86,6 +87,13 @@ export const asideData: AsideProps[] = [
     title: 'Galeria',
     href: '/galeria',
     description: 'Visualizar galería de imágenes',
+    subItems: [],
+  },
+  {
+    icon: <LuSpellCheck2 />,
+    title: 'CMS',
+    href: '/cms',
+    description: 'Gestión de contenido del sitio',
     subItems: [],
   },
 ];
