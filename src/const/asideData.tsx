@@ -9,6 +9,7 @@ import { TbCategoryPlus } from 'react-icons/tb';
 import { IoGift } from 'react-icons/io5';
 import { BiHome } from 'react-icons/bi';
 import { LuSpellCheck2 } from 'react-icons/lu';
+import { TbClock24 } from 'react-icons/tb';
 
 export const asideData: AsideProps[] = [
   {
@@ -30,7 +31,22 @@ export const asideData: AsideProps[] = [
     title: 'Personal Médico',
     href: '/personal',
     description: 'Lista de personal médico',
-    subItems: [],
+    subItems: [
+      {
+        icon: <TbClock24 />,
+        title: 'Turnos',
+        href: '/personal/turnos',
+        description: 'Gestión de turnos médicos',
+        subItems: [],
+      },
+      {
+        icon: <LuPersonStanding />,
+        title: 'Tipo de Personal',
+        href: '/personal/tipo',
+        description: 'Gestión de tipos de personal médico',
+        subItems: [],
+      },
+    ],
   },
   {
     icon: <LuBuilding2 />,
