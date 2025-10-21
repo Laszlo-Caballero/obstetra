@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { LuInfo } from 'react-icons/lu';
 import Badge from '../badge/Badge';
 
 interface CardHelpProps {
