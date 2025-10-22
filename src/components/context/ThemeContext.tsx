@@ -1,5 +1,6 @@
 'use client';
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 export enum Theme {
   LIGHT = 'light',
@@ -37,6 +38,7 @@ export function ThemeProvider({ children }: PropsWithChildren) {
 
     setTheme(initialTheme);
     localStorage.setItem(themeKey, initialTheme);
+    Cookies.set(themeKey, initialTheme);
   }, []);
 
   const toggleTheme = (newTheme: Theme) => {
@@ -45,6 +47,7 @@ export function ThemeProvider({ children }: PropsWithChildren) {
     document.documentElement.classList.toggle('dark', newTheme === Theme.DARK);
 
     localStorage.setItem(themeKey, newTheme);
+    Cookies.set(themeKey, newTheme);
   };
 
   return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;

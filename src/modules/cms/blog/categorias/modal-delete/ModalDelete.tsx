@@ -1,5 +1,4 @@
 'use client';
-
 import { useAuth } from '@/components/context/AuthContext';
 import { useTableContext } from '@/components/context/TableContext';
 import Button from '@/components/ui/button/Button';
