@@ -27,19 +27,22 @@ export default function Input({
 }: InputProps) {
   return (
     <div className={cx('flex flex-col gap-y-1', className?.main)}>
-      <label className={cx('text-ob-gray-2 font-medium', className?.label)} htmlFor={id}>
+      <label
+        className={cx('dark:text-ob-gray-2 text-ob-red-5 font-medium', className?.label)}
+        htmlFor={id}
+      >
         {label}
       </label>
       <div
         className={cx(
-          'bg-ob-black-4 border-ob-gray flex items-center rounded-xl border',
+          'dark:bg-ob-black-4 dark:border-ob-gray border-ob-white-3 flex items-center rounded-xl border bg-white',
           className?.container,
         )}
       >
         {icon && <span className="pl-3">{icon}</span>}
         <input
           className={cx(
-            'placeholder-ob-white w-full px-3 py-2 text-sm font-medium focus:outline-none',
+            'dark:placeholder-ob-white placeholder-ob-black-4 w-full px-3 py-2 text-sm font-medium focus:outline-none',
             className?.input,
           )}
           id={id}

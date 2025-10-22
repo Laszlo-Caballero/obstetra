@@ -5,6 +5,8 @@
   --foreground: #e6eef3;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -21,7 +23,12 @@
   --color-ob-black-8: #0b1724;
   --color-ob-black-9: #08131a;
   --color-ob-black-10: #061018;
+  --color-ob-black-11: #0b1220;
   --color-ob-white: #e6eef3;
+  --color-ob-white-2: #fff8f9;
+  --color-ob-white-3: #f3d6da;
+  --color-ob-white-4: #ffecef;
+  --color-ob-white-5: #fff1f3;
   --color-ob-blue: #1e90ff;
   --color-ob-blue-2: #0f2740;
   --color-ob-blue-3: #0c3240;
@@ -41,14 +48,18 @@
   --color-ob-red: #5a0f12;
   --color-ob-red-2: #ef4444;
   --color-ob-red-3: #ad3a3a;
+  --color-ob-red-4: #4b1220;
+  --color-ob-red-5: #8b5962;
+  --color-ob-red-6: #d9536f;
   --color-ob-orange: #f97316;
   --color-ob-orange-2: #bb540f;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-inter), Helvetica, sans-serif;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
 }
 
 ::-webkit-scrollbar {

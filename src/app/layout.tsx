@@ -5,6 +5,7 @@ import { Toaster } from 'sonner';
 import LoaderProvider from '@/components/context/LoaderContext';
 import { TableProvider } from '@/components/context/TableContext';
 import { AuthProvider } from '@/components/context/AuthContext';
+import { ThemeProvider } from '@/components/context/ThemeContext';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,13 +36,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} font-inter antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} font-inter dark:bg-ob-black-11 dark:text-ob-white text-ob-black-4 bg-ob-white-2 antialiased`}
       >
-        <TableProvider>
-          <LoaderProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </LoaderProvider>
-        </TableProvider>
+        <ThemeProvider>
+          <TableProvider>
+            <LoaderProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </LoaderProvider>
+          </TableProvider>
+        </ThemeProvider>
 
         <Toaster position="top-right" />
       </body>
