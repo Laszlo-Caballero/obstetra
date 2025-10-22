@@ -17,7 +17,7 @@ export default function ToggleTheme() {
         }
       }}
     >
-      {theme === 'light' ? <LuMoon size={20} /> : <LuSun size={20} />}
+      {theme === 'light' ? <LuMoon size={20} className="text-white" /> : <LuSun size={20} />}
     </button>
   );
 }
