@@ -210,3 +210,12 @@ export interface ResponseCategoria {
   nombre: string;
   estado: boolean;
 }
+
+export interface ResponseBlogCategoria {
+  _id: string;
+  name: string;
+  slug: string;
+  iconName: string;
+  blogCategoryId: number;
+  __v: number;
+}

@@ -42,11 +42,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const localStorageKey = useConst('obstetra_user');
 
   useEffect(() => {
-    const token = cookie.get(cookieKey);
+    const token = cookie.get(cookieKey) || localStorage.getItem(cookieKey);
     const user = localStorage.getItem('obstetra_user');
 
-    if (token && user) {
+    if (token) {
       setToken(token);
+    }
+    if (user) {
       setUser(JSON.parse(user));
     }
   }, []);
@@ -82,6 +84,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     onSuccess({ data }) {
       setToken(data.token);
       cookie.set(cookieKey, data.token);
+      localStorage.setItem(cookieKey, JSON.stringify(user));
       notify.success({ message: 'OTP verificado correctamente' });
       router.push('/');
     },
