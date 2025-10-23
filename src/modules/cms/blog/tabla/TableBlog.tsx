@@ -15,6 +15,10 @@ import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import { TbEdit, TbTrash } from 'react-icons/tb';
 import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 import StatusBadge from '../StatusBadge';
+import Button from '@/components/ui/button/Button';
+import { useModal } from '@/hooks/useModal';
+import { AnimatePresence } from 'motion/react';
+import ModalPublished from '../modal/published/ModalPublished';
 
 interface TableBlogProps {
   data: ResponseBlog[];
@@ -61,137 +65,154 @@ export default function TableBlog({ data, ...props }: TableBlogProps) {
     firstRender: false,
   });
 
+  const openModalPublish = useModal(-1);
+
   return (
-    <Table
-      metadata={metadata}
-      initialMetadata={{
-        total: props.total || 0,
-        totalPage: props.totalPage || 0,
-        limit: props.limit || 10,
-      }}
-      value={filters.page}
-      onChangePage={(page) => {
-        setFilter('page', page);
-      }}
-      initialData={data}
-      data={queryData?.data}
-      columns={[
-        {
-          header: 'ID',
-          accessorKey: 'blogId',
-        },
-        {
-          header: 'Slug',
-          cell: ({ row }) => {
-            const slug = row.slug;
-            return (
-              <span className="block max-w-[150px] font-medium text-wrap break-words whitespace-break-spaces">
-                {slug}
-              </span>
-            );
+    <>
+      <Table
+        metadata={metadata}
+        initialMetadata={{
+          total: props.total || 0,
+          totalPage: props.totalPage || 0,
+          limit: props.limit || 10,
+        }}
+        value={filters.page}
+        onChangePage={(page) => {
+          setFilter('page', page);
+        }}
+        initialData={data}
+        data={queryData?.data}
+        columns={[
+          {
+            header: 'ID',
+            accessorKey: 'blogId',
           },
-        },
-        {
-          header: 'Título',
-          cell: ({ row }) => {
-            const title = row.title;
-            return (
-              <span className="block max-w-[150px] font-medium text-wrap break-words whitespace-break-spaces">
-                {title}
-              </span>
-            );
-          },
-        },
-        {
-          header: 'Descripción',
-          cell: ({ row }) => {
-            const description = row.description;
-            return (
-              <span className="block max-w-[150px] font-medium text-wrap break-words whitespace-break-spaces">
-                {description}
-              </span>
-            );
-          },
-        },
-        {
-          header: 'Categorias',
-          cell: ({ row }) => {
-            const categories = row.category;
-            console.log(categories);
-
-            return (
-              <div className="flex flex-col gap-2">
-                {categories.map((cat) => (
-                  <Badge key={cat.blogCategoryId} className="border-ob-gray-4 border">
-                    {cat.name}
-                  </Badge>
-                ))}
-              </div>
-            );
-          },
-        },
-        {
-          header: 'Autor',
-          cell: ({ row }) => {
-            const author = row.user.personal;
-            const recurso = row.user.recurso;
-
-            return (
-              <div className="flex items-center gap-2">
-                <Image
-                  src={env.api_images + recurso.url}
-                  alt={author.nombre}
-                  width={20}
-                  height={20}
-                  className="rounded-full"
-                />
-                <span>
-                  {author.nombre} {author.apellidoPaterno}
+          {
+            header: 'Slug',
+            cell: ({ row }) => {
+              const slug = row.slug;
+              return (
+                <span className="block max-w-[150px] font-medium text-wrap break-words whitespace-break-spaces">
+                  {slug}
                 </span>
-              </div>
-            );
+              );
+            },
           },
-        },
-        {
-          header: 'Estado',
-          cell: ({ row }) => {
-            return <StatusBadge status={row.status} />;
+          {
+            header: 'Título',
+            cell: ({ row }) => {
+              const title = row.title;
+              return (
+                <span className="block max-w-[150px] font-medium text-wrap break-words whitespace-break-spaces">
+                  {title}
+                </span>
+              );
+            },
           },
-        },
-        {
-          header: 'Fecha de Creación',
-          cell: ({ row }) => {
-            const date = parseDate(row.createdAt);
-            return <span>{date}</span>;
+          {
+            header: 'Descripción',
+            cell: ({ row }) => {
+              const description = row.description;
+              return (
+                <span className="block max-w-[150px] font-medium text-wrap break-words whitespace-break-spaces">
+                  {description}
+                </span>
+              );
+            },
           },
-        },
-        {
-          header: 'Acciones',
-          cell: ({ row }) => {
-            return (
-              <div className="flex gap-2">
-                <ButtonLink
-                  href={`/blog/editar/${row?.blogId}`}
-                  className="dark:text-ob-lightblue dark:bg-ob-black-2 w-1/2"
-                >
-                  <TbEdit className="size-[18px]" />
-                  Editar
-                </ButtonLink>
-                <ButtonModal
-                  modal={<></>}
-                  className="border-ob-gray w-1/2 border dark:bg-transparent dark:text-red-400"
-                >
-                  <TbTrash className="size-[18px]" />
-                  Eliminar
-                </ButtonModal>
-                {user?.role.roleName === 'Administrador' && row.status === StatusType.DRAFT && (
-                  <ButtonModal modal={<></>}>Publicar</ButtonModal>
-                )}
-              </div>
-            );
+          {
+            header: 'Categorias',
+            cell: ({ row }) => {
+              const categories = row.category;
+              console.log(categories);
+
+              return (
+                <div className="flex flex-col gap-2">
+                  {categories.map((cat) => (
+                    <Badge key={cat.blogCategoryId} className="border-ob-gray-4 border">
+                      {cat.name}
+                    </Badge>
+                  ))}
+                </div>
+              );
+            },
           },
-        },
-      ]}
-    />
+          {
+            header: 'Autor',
+            cell: ({ row }) => {
+              const author = row.user.personal;
+              const recurso = row.user.recurso;
+
+              return (
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={env.api_images + recurso.url}
+                    alt={author.nombre}
+                    width={20}
+                    height={20}
+                    className="rounded-full"
+                  />
+                  <span>
+                    {author.nombre} {author.apellidoPaterno}
+                  </span>
+                </div>
+              );
+            },
+          },
+          {
+            header: 'Estado',
+            cell: ({ row }) => {
+              return <StatusBadge status={row.status} />;
+            },
+          },
+          {
+            header: 'Fecha de Creación',
+            cell: ({ row }) => {
+              const date = parseDate(row.createdAt);
+              return <span>{date}</span>;
+            },
+          },
+          {
+            header: 'Acciones',
+            cell: ({ row }) => {
+              return (
+                <div className="flex gap-2">
+                  <ButtonLink
+                    href={`/blog/editar/${row?.blogId}`}
+                    className="dark:text-ob-lightblue dark:bg-ob-black-2 w-1/2"
+                  >
+                    <TbEdit className="size-[18px]" />
+                    Editar
+                  </ButtonLink>
+                  <Button className="border-ob-gray w-1/2 border dark:bg-transparent dark:text-red-400">
+                    <TbTrash className="size-[18px]" />
+                    Eliminar
+                  </Button>
+                  {user?.role.roleName === 'Administrador' && row.status === StatusType.DRAFT && (
+                    <Button
+                      onClick={() => {
+                        openModalPublish.openModal(row.blogId);
+                      }}
+                      className="text-ob-white"
+                    >
+                      Publicar
+                    </Button>
+                  )}
+                </div>
+              );
+            },
+          },
+        ]}
+      />
+
+      <AnimatePresence>
+        {openModalPublish.isOpen && (
+          <ModalPublished
+            onClose={openModalPublish.closeModal}
+            blogId={openModalPublish.id.toString()}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }
