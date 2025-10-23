@@ -1,4 +1,9 @@
 import z from 'zod';
+import { ArticlesComponentSchema } from './components/aritcles/articlesComponent.schema';
+import { ImageComponentSchema } from './components/image/imageComponent.schema';
+import { ListItemComponentSchema } from './components/list-item/listItemComponent.schema';
+import { NoteComponentSchema } from './components/note/noteComponent.schema';
+import { TextComponentSchema } from './components/text/textComponent.schema';
 
 export const CreateBlogSchema = z
   .object({
@@ -15,6 +20,17 @@ export const CreateBlogSchema = z
         .optional(),
     }),
     categories: z.array(z.number()).min(1, 'Debe seleccionar al menos una categoría'),
+    components: z
+      .array(
+        z.union([
+          ArticlesComponentSchema,
+          ImageComponentSchema,
+          ListItemComponentSchema,
+          NoteComponentSchema,
+          TextComponentSchema,
+        ]),
+      )
+      .min(1, 'El blog debe tener al menos un componente'),
   })
   .superRefine((data, ctx) => {
     if (!data.image.file && !data.image.selected) {
