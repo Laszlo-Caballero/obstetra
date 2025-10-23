@@ -1,18 +1,13 @@
-import cx from "@/libs/cx";
-import { PropsWithChildren } from "react";
+import cx from '@/libs/cx';
+import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
 
-interface BadgeProps {
+interface BadgeProps extends DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
   className?: string;
 }
 
-export default function Badge({
-  className,
-  children,
-}: PropsWithChildren<BadgeProps>) {
+export default function Badge({ className, children, ...props }: PropsWithChildren<BadgeProps>) {
   return (
-    <span
-      className={cx("font-medium text-white rounded-full px-2 py-1", className)}
-    >
+    <span className={cx('rounded-full px-2 py-1 font-medium text-white', className)} {...props}>
       {children}
     </span>
   );

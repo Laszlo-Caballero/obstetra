@@ -6,16 +6,15 @@ export const CreateBlogSchema = z
     description: z.string().min(10, 'La descripción debe tener al menos 10 caracteres'),
     legend: z.string().min(10, 'La leyenda debe tener al menos 10 caracteres'),
     image: z.object({
-      file: z.instanceof(File),
-      selected: z.object({
-        url: z.url(),
-        id: z.string().min(1, 'El public_id es obligatorio'),
-      }),
+      file: z.instanceof(File).optional(),
+      selected: z
+        .object({
+          url: z.url(),
+          id: z.number(),
+        })
+        .optional(),
     }),
-    categories: z.object({
-      value: z.string().min(1, 'La categoría es obligatoria'),
-      label: z.string(),
-    }),
+    categories: z.array(z.number()).min(1, 'Debe seleccionar al menos una categoría'),
   })
   .superRefine((data, ctx) => {
     if (!data.image.file && !data.image.selected) {
