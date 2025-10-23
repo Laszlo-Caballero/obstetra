@@ -47,6 +47,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     if (token) {
       setToken(token);
+      localStorage.setItem(cookieKey, token);
+      cookie.set(cookieKey, token);
     }
     if (user) {
       setUser(JSON.parse(user));
@@ -84,7 +86,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     onSuccess({ data }) {
       setToken(data.token);
       cookie.set(cookieKey, data.token);
-      localStorage.setItem(cookieKey, JSON.stringify(user));
+      localStorage.setItem(cookieKey, data.token);
       notify.success({ message: 'OTP verificado correctamente' });
       router.push('/');
     },
