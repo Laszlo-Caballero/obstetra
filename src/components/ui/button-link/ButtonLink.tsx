@@ -1,26 +1,23 @@
-import cx from "@/libs/cx";
-import React, { ReactNode } from "react";
+import cx from '@/libs/cx';
+import React, { ReactNode } from 'react';
+import Link from '../link/Link';
 
 interface ButtonLinkProps {
-  href?: string;
+  href: string;
   children?: ReactNode;
   className?: string;
 }
 
-export default function ButtonLink({
-  href,
-  children,
-  className,
-}: ButtonLinkProps) {
+export default function ButtonLink({ href, children, className }: ButtonLinkProps) {
   return (
-    <a
+    <Link
       className={cx(
-        "flex items-center cursor-pointer gap-x-2 px-3 py-2.5 rounded-md text-sm font-medium",
-        className
+        'flex cursor-pointer items-center gap-x-2 rounded-md px-3 py-2.5 text-sm font-medium',
+        className,
       )}
       href={href}
     >
       {children}
-    </a>
+    </Link>
   );
 }

@@ -1,4 +1,5 @@
 import HeaderCms from '@/components/layout/cms/header/HeaderCms';
+import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import Button from '@/components/ui/button/Button';
 import { ResponseBlog } from '@/interface/blog-response.interface';
 import { ResponseBlogCategoria } from '@/interface/response.interface';
@@ -30,10 +31,10 @@ export default async function BlogPage() {
     <main className="flex h-full flex-col">
       <HeaderCms title="Blogs - Administracion">
         <section className="flex items-center gap-x-2">
-          <Button>
+          <ButtonLink href="blog/crear" className="border-ob-gray-4 bg-ob-blue border text-white">
             <LuPlus className="size-4" />
             Nuevo Blog
-          </Button>
+          </ButtonLink>
         </section>
       </HeaderCms>
       <div className="flex flex-col gap-y-4 p-4">
