@@ -1,6 +1,6 @@
 import cx from '@/libs/cx';
+import Link from 'next/link';
 import React, { ReactNode } from 'react';
-import Link from '../link/Link';
 
 interface ButtonLinkProps {
   href: string;

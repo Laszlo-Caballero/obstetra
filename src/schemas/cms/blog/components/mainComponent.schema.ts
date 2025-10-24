@@ -11,6 +11,8 @@ export const TextSchema = z.object({
     .optional(),
 });
 
+export type TextSchemaType = z.infer<typeof TextSchema>;
+
 export const ListItemSchema = z.object({
   title: z.string().min(1, 'El título del ítem es obligatorio'),
   text: TextSchema.superRefine((data, ctx) => {

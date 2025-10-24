@@ -14,6 +14,8 @@ import { useDrop } from '@/hooks/useDrop';
 import { ResponseBlogCategoria } from '@/interface/response.interface';
 import cx from '@/libs/cx';
 import { parseDate } from '@/libs/parseDate';
+import ListForm from '@/modules/cms/blog/form/ListForm';
+import TextForm from '@/modules/cms/blog/form/TextForm';
 import { CreateBlogSchema } from '@/schemas/cms/blog/Blog.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
@@ -230,6 +232,16 @@ export default function MainSection({ categories }: CreateBlogForm) {
               {parseDate(new Date().toISOString())}
             </span>
           </div>
+        </InfoContainer>
+
+        <InfoContainer className="col-span-2">
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-ob-white">Componentes</span>
+            <span className="text-ob-gray-2">Selecciona por lo menos un componente</span>
+          </div>
+
+          <TextForm />
+          <ListForm />
         </InfoContainer>
       </section>
     </form>
