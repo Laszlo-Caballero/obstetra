@@ -99,6 +99,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setUser(undefined);
     setToken('');
     localStorage.removeItem(localStorageKey);
+    localStorage.removeItem(cookieKey);
     cookie.remove(cookieKey);
     router.push('/login');
   }, []);

@@ -7,7 +7,7 @@ import ModalTitle from '../modal/modal-title/ModalTitle';
 import { LuFile, LuX } from 'react-icons/lu';
 import CloseButton from '../modal/close-button/CloseButton';
 import { useQuery } from '@/hooks/useQuery';
-import { Response, ResponseGaleria } from '@/interface/response.interface';
+import { Response } from '@/interface/response.interface';
 import { Recurso } from '@/interface/auth.interface';
 import axios from 'axios';
 import { env } from '@/config/env';
@@ -54,7 +54,7 @@ export function ModalGalery({ onClose, onSelect, valueId }: ModalProps) {
   const { token } = useAuth();
 
   const { data: resGalery } = useQuery<Response<Recurso[]>>({
-    queryFn: async (url) => {
+    queryFn: async () => {
       const res = await axios.get(`${env.url_api}/recurso`, {
         headers: {
           Authorization: `Bearer ${token}`,

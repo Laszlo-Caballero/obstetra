@@ -30,7 +30,6 @@ interface CreateBlogForm {
 export default function MainSection({ categories }: CreateBlogForm) {
   const {
     register,
-    handleSubmit,
     formState: { errors },
     setValue,
     watch,
@@ -52,8 +51,6 @@ export default function MainSection({ categories }: CreateBlogForm) {
 
   const imageWatch = watch('image');
   const categoriesWatch = watch('categories', []);
-
-  console.log(user);
 
   const onClickCategory = (categoryId: number) => {
     const exists = categoriesWatch.findIndex((cat) => cat === categoryId);
