@@ -225,3 +225,10 @@ export interface ResponseTipoPersonal {
   nombre: string;
   estado: boolean;
 }
+
+export interface ResponseTurno {
+  turnoId: number;
+  horaInicio: string;
+  horaFin: string;
+  estado: boolean;
+}
