@@ -192,6 +192,7 @@ export interface ResponsePaciente {
   telefono: string;
   nota: string;
   direccion: string;
+  sexo: string;
   departamento: string;
   provincia: string;
   distrito: string;

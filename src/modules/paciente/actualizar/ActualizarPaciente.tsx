@@ -11,7 +11,7 @@ import ModalTitle from '@/components/ui/modal/modal-title/ModalTitle';
 import TextArea from '@/components/ui/textarea/Textarea';
 import { PacienteSchema, PacienteType } from '@/schemas/paciente/paciente.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   LuCalendar,
@@ -25,25 +25,34 @@ import {
 } from 'react-icons/lu';
 import { parse } from 'date-fns';
 import { useMutation } from '@/hooks/useMutation';
-import { Response, ResponsePersona, ResponseReniec } from '@/interface/response.interface';
+import {
+  Response,
+  ResponsePaciente,
+  ResponsePersona,
+  ResponseReniec,
+} from '@/interface/response.interface';
 import axios, { AxiosError } from 'axios';
 import { env } from '@/config/env';
 import { notify } from '@/libs/toast';
 import { useTableContext } from '@/components/context/TableContext';
 import { useFilter } from '@/components/context/FilterContext';
 import { FilterPaciente } from '../types';
+import { useAuth } from '@/components/context/AuthContext';
+import { useQuery } from '@/hooks/useQuery';
 
 interface CrearPacienteProps {
   onClose?: () => void;
+  dni: string;
 }
 
 interface BuscarDNIResponse {
   dni: string;
 }
 
-export default function CrearPaciente({ onClose }: CrearPacienteProps) {
-  const { refresh } = useTableContext<ResponsePersona>();
+export default function ActualizarPaciente({ onClose, dni }: CrearPacienteProps) {
+  const { refresh } = useTableContext<ResponsePaciente>();
   const { setMetadata } = useFilter<FilterPaciente>();
+  const { token } = useAuth();
 
   const {
     register,
@@ -55,9 +64,38 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
     resolver: zodResolver(PacienteSchema),
   });
 
-  const { mutate: create } = useMutation<PacienteType, Response<ResponsePersona[]>>({
+  const { data } = useQuery<Response<ResponsePaciente>>({
+    queryFn: async (url) => {
+      const res = await axios.get(`${url}/pacientes/${dni}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return res.data;
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const paciente = data.data;
+      setValue('dni', paciente.dni);
+      setValue('nombres', paciente.nombres);
+      setValue('apellido_paterno', paciente.apellido_paterno);
+      setValue('apellido_materno', paciente.apellido_materno);
+      setValue('fecha_nacimiento', paciente.fecha_nacimiento.split('T')[0]);
+      setValue('sexo', paciente.sexo);
+      setValue('direccion', paciente.direccion);
+      setValue('departamento', paciente.departamento);
+      setValue('provincia', paciente.provincia);
+      setValue('distrito', paciente.distrito);
+      setValue('telefono', paciente.telefono);
+      setValue('nota', paciente.nota);
+    }
+  }, [data]);
+
+  const { mutate: create } = useMutation<PacienteType, Response<ResponsePaciente[]>>({
     mutationFn: async (data, urlApi) => {
-      const res = await axios.post(`${urlApi}/pacientes`, data);
+      const res = await axios.patch(`${urlApi}/pacientes/${dni}`, data);
 
       return res.data;
     },
@@ -118,7 +156,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
     <Modal onClose={onClose}>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <ModalHeader>
-          <ModalTitle title="Crear paciente" badge="Editar Estado">
+          <ModalTitle title="Editar Paciente" badge="Editar Estado">
             <LuUser size={20} />
           </ModalTitle>
           <CloseButton>
@@ -269,7 +307,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
             <CloseButton type="button">Cancelar</CloseButton>
             <Button type="submit" className="bg-ob-teal font-semibold">
               <LuSave size={18} />
-              Guardar
+              Actualizar Paciente
             </Button>
           </ContainerButton>
         </ModalFooter>
