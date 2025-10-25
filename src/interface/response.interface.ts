@@ -219,3 +219,9 @@ export interface ResponseBlogCategoria {
   blogCategoryId: number;
   __v: number;
 }
+
+export interface ResponseTipoPersonal {
+  tipoPersonalId: number;
+  nombre: string;
+  estado: boolean;
+}

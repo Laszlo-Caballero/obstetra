@@ -42,7 +42,7 @@ export const asideData: AsideProps[] = [
       {
         icon: <LuPersonStanding />,
         title: 'Tipo de Personal',
-        href: '/personal/tipo',
+        href: '/personal/tipo-personal',
         description: 'Gestión de tipos de personal médico',
         subItems: [],
       },

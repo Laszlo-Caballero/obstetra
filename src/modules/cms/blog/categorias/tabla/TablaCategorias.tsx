@@ -13,6 +13,7 @@ import ModalDelete from '../modal-delete/ModalDelete';
 
 export default function TablaCategorias({ data }: { data: ResponseBlogCategoria[] }) {
   const { data: queryData } = useQuery<ResponseBlogCategoria[]>({
+    firstRender: false,
     queryFn: async (url) => {
       const res = await axios.get(`${url}/blog-category`);
 
