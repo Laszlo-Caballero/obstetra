@@ -9,6 +9,7 @@ export default function layout({ children }: PropsWithChildren) {
         estado: 'true',
         page: '1',
         search: '',
+        searchByName: '',
       }}
     >
       {children}

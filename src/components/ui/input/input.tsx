@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
   label: string;
-  id: string;
+  id?: string;
   icon?: ReactNode;
   error?: string;
   className?: {

@@ -41,7 +41,7 @@ export default async function ProgramaPage() {
             <LuUpload size={18} />
             Importar
           </Button>
-          <ButtonLink className="text-ob-white bg-ob-teal" href="/medicina/crear">
+          <ButtonLink className="text-ob-white bg-ob-teal" href="/programas/crear">
             <LuPlus size={18} />
             Registrar Programa
           </ButtonLink>
