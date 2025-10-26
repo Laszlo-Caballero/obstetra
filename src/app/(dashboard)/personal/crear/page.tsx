@@ -4,11 +4,26 @@ import { redirect } from 'next/navigation';
 
 import React from 'react';
 import CreatePersonal from './MainSection';
+import { getToken } from '@/utils/getToken';
 
 export default async function MainSectionPersonal() {
-  const resTurno = await fetcher<Turno[]>('/turnos');
-  const resTipo = await fetcher<TipoPersonal[]>('/tipo-personal');
-  const resPosta = await fetcher<ResponsePosta[]>('/posta');
+  const token = await getToken();
+
+  const resTurno = await fetcher<Turno[]>('/turnos', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const resTipo = await fetcher<TipoPersonal[]>('/tipo-personal', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const resPosta = await fetcher<ResponsePosta[]>('/posta', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!resTipo || !resTurno || !resPosta) {
     redirect('/mantenimiento');
