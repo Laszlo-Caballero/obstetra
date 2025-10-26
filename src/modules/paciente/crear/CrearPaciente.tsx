@@ -26,7 +26,7 @@ import {
 import { parse } from 'date-fns';
 import { useMutation } from '@/hooks/useMutation';
 import { Response, ResponsePersona, ResponseReniec } from '@/interface/response.interface';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { env } from '@/config/env';
 import { notify } from '@/libs/toast';
 import { useTableContext } from '@/components/context/TableContext';
@@ -71,8 +71,15 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
       });
       onClose?.();
     },
-    onError: () => {
-      notify.error({ message: 'Error al crear paciente' });
+    onError: (error) => {
+      const typedError = error as AxiosError;
+
+      const message = typedError.response?.data as { message: string };
+      if (message?.message) {
+        notify.error({ message: message.message });
+      } else {
+        notify.error({ message: 'Error al crear el paciente' });
+      }
     },
   });
 
@@ -170,7 +177,7 @@ export default function CrearPaciente({ onClose }: CrearPacienteProps) {
           />
           <InputDate
             id="fecha_nacimiento"
-            label="nacimiento"
+            label="Fecha de Nacimiento"
             icon={<LuCalendar size={18} />}
             onChange={(date) => {
               setValue('fecha_nacimiento', date.toISOString().split('T')[0]);

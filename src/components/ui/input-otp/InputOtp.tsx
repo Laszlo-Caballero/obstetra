@@ -47,7 +47,7 @@ export default function InputOtp({ length = 6, onChange, className, error }: Inp
       onChange={(e) => handleChange(e.target.value, idx)}
       onKeyDown={(e) => handleKeyDown(e, idx)}
       className={cx(
-        'border-ob-gray-4 bg-ob-black-8 max-w-[80px] rounded-xl border py-4 text-center outline-none',
+        'dark:border-ob-gray-4 border-ob-white-3 dark:bg-ob-black-8 max-w-[80px] rounded-xl border bg-white py-4 text-center outline-none',
         className,
         error ? 'border-ob-red' : 'focus:border-ob-blue',
       )}

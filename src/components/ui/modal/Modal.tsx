@@ -1,7 +1,7 @@
-"use client";
-import cx from "@/libs/cx";
-import { motion } from "motion/react";
-import { createContext, PropsWithChildren, useContext } from "react";
+'use client';
+import cx from '@/libs/cx';
+import { motion } from 'motion/react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 interface ModalProviderProps {
   onClose?: () => void;
@@ -22,15 +22,18 @@ export default function Modal({ onClose, className, children }: ModalProps) {
     <ModalContext value={{ onClose }}>
       <div
         className={cx(
-          "fixed inset-0 z-[100] bg-black/50 flex items-center justify-center",
-          className?.background
+          'fixed inset-0 z-[100] flex items-center justify-center bg-black/50',
+          className?.background,
         )}
-        onClick={onClose}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose?.();
+        }}
       >
         <motion.div
           className={cx(
-            "flex flex-col bg-ob-black-6 border border-ob-gray rounded-3xl min-w-[560px]",
-            className?.container
+            'bg-ob-black-6 border-ob-gray flex min-w-[560px] flex-col rounded-3xl border',
+            className?.container,
           )}
           onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, y: -50 }}
@@ -48,7 +51,7 @@ export default function Modal({ onClose, className, children }: ModalProps) {
 export function useModal() {
   const context = useContext(ModalContext);
   if (!context) {
-    throw new Error("useModal must be used within a ModalProvider");
+    throw new Error('useModal must be used within a ModalProvider');
   }
   return context;
 }

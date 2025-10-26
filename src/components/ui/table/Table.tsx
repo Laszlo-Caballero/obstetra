@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useTable } from "@/hooks/useTable";
-import { ColumnDef } from "@/interface/table.interface";
-import cx from "@/libs/cx";
-import Pagination from "../pagination/Pagination";
-import { useTableContext } from "@/components/context/TableContext";
-import { useEffect, useState } from "react";
-import { MetadataProps } from "@/components/context/FilterContext";
+import { useTable } from '@/hooks/useTable';
+import { ColumnDef } from '@/interface/table.interface';
+import cx from '@/libs/cx';
+import Pagination from '../pagination/Pagination';
+import { useTableContext } from '@/components/context/TableContext';
+import { useEffect, useState } from 'react';
+import { MetadataProps } from '@/components/context/FilterContext';
 
 interface TableProps<T> {
   initialData: T[];
@@ -17,6 +17,7 @@ interface TableProps<T> {
   initialMetadata?: MetadataProps;
   onChangePage?: (page: number) => void;
   value?: number;
+  disableFooter?: boolean;
 }
 
 export default function Table<T>({
@@ -28,6 +29,7 @@ export default function Table<T>({
   onChangePage,
   value,
   initialData,
+  disableFooter,
 }: TableProps<T>) {
   const { data: contextData, refresh } = useTableContext<T>();
 
@@ -45,20 +47,15 @@ export default function Table<T>({
   }, [metadata, initialMetadata]);
 
   return (
-    <div
-      className={cx(
-        "rounded-3xl border border-ob-gray overflow-x-auto",
-        className
-      )}
-    >
-      <table className={cx("w-full table-auto")}>
+    <div className={cx('border-ob-gray overflow-x-auto rounded-3xl border', className)}>
+      <table className={cx('w-full table-auto')}>
         <thead>
-          <tr className="transition-colors bg-ob-black-2">
+          <tr className="bg-ob-black-2 transition-colors">
             {table.getHeaders().map((header, i) => {
               return (
                 <th
                   key={i}
-                  className="font-medium text-ob-lightblue text-sm text-left p-3 border-b border-ob-gray whitespace-nowrap w-auto max-w-max"
+                  className="text-ob-lightblue border-ob-gray w-auto max-w-max border-b p-3 text-left text-sm font-medium whitespace-nowrap"
                 >
                   {header}
                 </th>
@@ -70,16 +67,10 @@ export default function Table<T>({
         <tbody>
           {table.getCells().map((row, index) => {
             return (
-              <tr
-                key={index}
-                className="transition-colors border-y border-ob-gray"
-              >
+              <tr key={index} className="border-ob-gray border-y transition-colors">
                 {row.map((cell, i) => {
                   return (
-                    <td
-                      key={i}
-                      className="p-4 whitespace-nowrap w-auto max-w-max"
-                    >
+                    <td key={i} className="w-auto max-w-max p-4 whitespace-nowrap">
                       {cell}
                     </td>
                   );
@@ -89,27 +80,25 @@ export default function Table<T>({
           })}
         </tbody>
 
-        <tfoot>
-          <tr>
-            <td
-              className="p-3 text-ob-gray-2 font-medium w-full"
-              colSpan={columns.length - 1}
-            >
-              Mostrando <span className="font-bold">1</span> -{" "}
-              <span className="font-bold">{metadataState?.limit}</span> de{" "}
-              <span className="font-bold">{metadataState?.total}</span>{" "}
-              resultados
-            </td>
+        {!disableFooter && (
+          <tfoot>
+            <tr>
+              <td className="text-ob-gray-2 w-full p-3 font-medium" colSpan={columns.length - 1}>
+                Mostrando <span className="font-bold">1</span> -{' '}
+                <span className="font-bold">{metadataState?.limit}</span> de{' '}
+                <span className="font-bold">{metadataState?.total}</span> resultados
+              </td>
 
-            <td className="p-3 text-ob-gray-2 font-medium w-full text-right">
-              <Pagination
-                length={metadataState?.totalPage || 1}
-                onClick={(page) => onChangePage?.(page)}
-                value={value}
-              />
-            </td>
-          </tr>
-        </tfoot>
+              <td className="text-ob-gray-2 w-full p-3 text-right font-medium">
+                <Pagination
+                  length={metadataState?.totalPage || 1}
+                  onClick={(page) => onChangePage?.(page)}
+                  value={value}
+                />
+              </td>
+            </tr>
+          </tfoot>
+        )}
       </table>
     </div>
   );

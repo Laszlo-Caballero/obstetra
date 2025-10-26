@@ -49,10 +49,12 @@ export default function Select<T = string>({
 
   return (
     <div className="relative flex flex-col gap-y-1" ref={ref}>
-      <label className={cx('text-ob-gray-2 font-medium', className?.label)}>{label}</label>
+      <label className={cx('text-ob-red-5 dark:text-ob-gray-2 font-medium', className?.label)}>
+        {label}
+      </label>
       <div
         className={cx(
-          'text-ob-white bg-ob-black-4 border-ob-gray flex cursor-pointer items-center justify-between rounded-xl border px-3 py-2 text-sm font-medium',
+          'dark:text-ob-white text-ob-black-4 dark:bg-ob-black-4 border-ob-white-3 dark:border-ob-gray flex cursor-pointer items-center justify-between rounded-xl border bg-white px-3 py-2 text-sm font-medium',
           className?.placeholder,
         )}
         onClick={() => {
@@ -64,7 +66,7 @@ export default function Select<T = string>({
           <div className="text-nowrap">{value?.label ? value.label : placeholder}</div>
         </div>
         <span>
-          <RiArrowDropDownLine className="text-ob-white" size={18} />
+          <RiArrowDropDownLine className="dark:text-ob-white text-ob-black-4" size={18} />
         </span>
       </div>
       {error && <span className="text-sm text-red-500">{error}</span>}
@@ -73,7 +75,7 @@ export default function Select<T = string>({
         {isOpen && (
           <motion.div
             className={cx(
-              'bg-ob-black-6 border-ob-gray absolute top-full z-10 mt-1 w-full translate-y-2 rounded-3xl border p-3',
+              'dark:bg-ob-black-6 border-ob-white-3 dark:border-ob-gray absolute top-full z-10 mt-1 w-full translate-y-2 rounded-3xl border bg-white p-3',
               className?.optionsContainer,
             )}
             initial={{ height: 0, overflow: 'hidden' }}
@@ -82,12 +84,12 @@ export default function Select<T = string>({
             transition={{ duration: 0.2 }}
           >
             {!disableSearch && (
-              <div className="bg-ob-black-8 flex w-full items-center gap-x-2 rounded-xl px-[11px] py-2">
-                <LuSearch className="text-ob-white size-[18px]" />
+              <div className="dark:bg-ob-black-8 border-ob-white-3 flex w-full items-center gap-x-2 rounded-xl border bg-white px-[11px] py-2 dark:border-none">
+                <LuSearch className="dark:text-ob-white size-[18px]" />
                 <input
                   value={search}
                   onChange={(e) => onSearch?.(e.target.value)}
-                  className="text-ob-white w-full bg-none text-sm outline-none placeholder:text-white"
+                  className="dark:text-ob-white text-ob-red-5 placeholder:text-ob-red-5 w-full bg-none text-sm outline-none dark:placeholder:text-white"
                   placeholder={'Buscar...'}
                 />
               </div>
@@ -98,7 +100,7 @@ export default function Select<T = string>({
                 return (
                   <div
                     className={cx(
-                      'hover:bg-ob-black-4 flex cursor-pointer items-center gap-x-2 rounded-xl py-2.5',
+                      'dark:hover:bg-ob-black-4 hover:bg-ob-white-3 dark:hover:text-ob-white hover:text-ob-red-5 dark:text-ob-white mt-1 flex cursor-pointer items-center gap-x-2 rounded-xl p-2.5',
                       className?.optionsItem,
                     )}
                     onClick={() => {
@@ -108,7 +110,7 @@ export default function Select<T = string>({
                     key={i}
                   >
                     <span>{icon}</span>
-                    <p className="text-ob-white text-sm">{option.label}</p>
+                    <p className="text-sm">{option.label}</p>
                   </div>
                 );
               })}

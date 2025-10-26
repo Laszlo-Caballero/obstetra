@@ -20,6 +20,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { env } from '@/config/env';
 import { useMutation } from '@/hooks/useMutation';
 import { notify } from '@/libs/toast';
+import ToggleTheme from '@/components/ui/toggle-theme/ToggleTheme';
 
 export default function LoginPage() {
   const [searchPostaLabel, setSearchPostaLabel] = useState('');
@@ -79,20 +80,24 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="font-inter flex h-screen items-center justify-center">
-      <main className="bg-ob-black-3 border-ob-gray w-[520px] rounded-3xl border-1">
-        <div className="border-ob-gray flex justify-between border-b p-5">
+    <div className="font-inter relative flex h-screen items-center justify-center">
+      <div className="absolute top-2 right-2">
+        <ToggleTheme />
+      </div>
+
+      <main className="dark:bg-ob-black-3 dark:border-ob-gray border-ob-white-3 w-[520px] rounded-3xl border-1 shadow-xl dark:shadow-none">
+        <div className="dark:border-ob-gray border-ob-white-3 flex justify-between border-b p-5">
           <div className="flex items-center gap-x-3">
-            <span className="bg-ob-black-2 rounded-lg p-2">
+            <span className="dark:bg-ob-black-2 bg-ob-white-4 dark:border-ob-white border-ob-red-4 rounded-lg border p-2">
               <LuHeartPulse size={18} />
             </span>
             <p className="text-lg font-medium"> Portal Obstetrico</p>
           </div>
-          <div className="bg-ob-black-5 flex items-center justify-center gap-x-2 rounded-full px-2">
+          <div className="dark:bg-ob-black-5 bg-ob-white-5 flex items-center justify-center gap-x-2 rounded-full px-2">
             <span>
-              <LuShield className="text-ob-gray-2" size={14} />
+              <LuShield className="dark:text-ob-gray-2 text-ob-red-5" size={14} />
             </span>
-            <p className="text-ob-gray-2 text-xs">Acceso Seguro</p>
+            <p className="dark:text-ob-gray-2 text-ob-red-5 text-xs">Acceso Seguro</p>
           </div>
         </div>
         <form
@@ -109,8 +114,8 @@ export default function LoginPage() {
           })}
         >
           <div className="flex flex-col">
-            <span className="text-ob-white font-medium">Iniciar Sesion</span>
-            <p className="text-ob-gray-2 text-sm">
+            <span className="dark:text-ob-white font-medium">Iniciar Sesion</span>
+            <p className="dark:text-ob-gray-2 text-ob-red-5 text-sm">
               Ingresa tu usuario, contraseña y la posta donde trabaja
             </p>
           </div>
@@ -135,7 +140,7 @@ export default function LoginPage() {
             label="Posta"
             placeholder="Selecciona la posta donde trabajas"
             search={searchPostaLabel}
-            icon={<LuHospital className="text-ob-white" size={18} />}
+            icon={<LuHospital className="dark:text-ob-white" size={18} />}
             options={
               data?.data
                 ? data?.data.map((item) => ({
@@ -170,7 +175,7 @@ export default function LoginPage() {
           <div className="flex gap-x-3 text-sm">
             <button
               type="submit"
-              className="disabled:bg-ob-lightblue bg-ob-blue flex w-[372px] items-center justify-center gap-x-2 rounded-md p-2.5"
+              className="disabled:bg-ob-lightblue bg-ob-red-6 dark:bg-ob-blue flex w-[372px] items-center justify-center gap-x-2 rounded-md p-2.5 text-white"
             >
               <span>
                 <PiSignInBold size={18} />
@@ -179,7 +184,7 @@ export default function LoginPage() {
             </button>
             <Link
               href="public/ayuda"
-              className="border-ob-gray flex w-[94px] items-center justify-center gap-x-2 rounded-md border"
+              className="border-ob-white-3 dark:border-ob-gray flex w-[94px] items-center justify-center gap-x-2 rounded-md border"
             >
               <span>
                 <FiHelpCircle size={18} />
@@ -188,12 +193,12 @@ export default function LoginPage() {
             </Link>
           </div>
         </form>
-        <div className="border-ob-gray border-t p-4">
+        <div className="dark:border-ob-gray border-ob-white-3 border-t p-4">
           <div className="flex items-center justify-center gap-x-2">
             <span>
-              <RiInformationLine className="text-ob-gray-2" size={16} />
+              <RiInformationLine className="dark:text-ob-gray-2 text-ob-red-5" size={16} />
             </span>
-            <p className="text-ob-gray-2 text-sm">
+            <p className="dark:text-ob-gray-2 text-ob-red-5 text-sm">
               ¿Olvidaste tu contraseña? Contacta al Administrador
             </p>
           </div>

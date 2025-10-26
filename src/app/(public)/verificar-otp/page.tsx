@@ -1,6 +1,7 @@
 'use client';
 import { useAuth } from '@/components/context/AuthContext';
 import InputOtp from '@/components/ui/input-otp/InputOtp';
+import ToggleTheme from '@/components/ui/toggle-theme/ToggleTheme';
 import { OtpSchema } from '@/schemas/auth/otp.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { redirect } from 'next/navigation';
@@ -34,11 +35,15 @@ export default function VerificarOtpPage() {
     const { code_otp } = user;
     verifyOtp({ code: data.code, code_otp });
   });
+
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center">
+      <div className="absolute top-2 right-2">
+        <ToggleTheme />
+      </div>
       <form
         onSubmit={onSubmit}
-        className="bg-ob-black-6 border-ob-gray-4 flex min-w-[520px] flex-col gap-y-5 rounded-3xl border p-[33px]"
+        className="dark:bg-ob-black-6 border-ob-white-3 dark:border-ob-gray-4 flex min-w-[520px] flex-col gap-y-5 rounded-3xl border bg-white p-[33px] shadow-xl dark:shadow-none"
       >
         <div className="flex justify-between">
           <span className="flex items-center gap-x-2.5 text-lg">
@@ -53,7 +58,7 @@ export default function VerificarOtpPage() {
         </div>
 
         <h1 className="text-2xl">Ingresa el código de verificación</h1>
-        <p className="text-ob-gray-2 text-wrap">
+        <p className="dark:text-ob-gray-2 text-ob-red-5 text-wrap">
           Hemos enviado un código de 6 dígitos a tu correo y número móvil registrados.
         </p>
 
@@ -66,7 +71,7 @@ export default function VerificarOtpPage() {
         </section>
 
         <div className="flex w-full justify-between">
-          <span className="text-ob-gray-2 flex items-center gap-x-2">
+          <span className="dark:text-ob-gray-2 text-ob-red-5 flex items-center gap-x-2">
             <LuShieldCheck />
             Tu codigo expira en 2 minutos
           </span>
@@ -75,7 +80,7 @@ export default function VerificarOtpPage() {
         </div>
 
         <button
-          className="bg-ob-blue rounded py-3 text-white disabled:cursor-not-allowed disabled:opacity-50"
+          className="dark:bg-ob-blue bg-ob-red-6 rounded py-3 text-white disabled:cursor-not-allowed disabled:opacity-50"
           disabled={timer === 0}
         >
           Verificar

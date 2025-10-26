@@ -1,5 +1,6 @@
 import { AsideProps } from '@/interface/aside';
 import { GoHome } from 'react-icons/go';
+import { LuGrid2X2Plus, LuLogs } from 'react-icons/lu';
 import { RiCapsuleFill } from 'react-icons/ri';
 interface CmsAsideProps {
   title: string;
@@ -22,6 +23,20 @@ export const asideData: CmsAsideProps[] = [
         icon: <RiCapsuleFill />,
         title: 'Citas',
         description: '',
+        subItems: [],
+      },
+      {
+        href: '/cms/blog',
+        icon: <LuLogs />,
+        title: 'Blog',
+        description: '',
+        subItems: [],
+      },
+      {
+        href: '/cms/blog/categorias',
+        title: 'Categorías de blog',
+        description: '',
+        icon: <LuGrid2X2Plus />,
         subItems: [],
       },
     ],

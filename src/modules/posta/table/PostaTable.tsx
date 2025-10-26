@@ -166,14 +166,14 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
               <div className="flex gap-2">
                 <ButtonLink
                   href={`/posta/editar/${row?.postaId}`}
-                  className="text-ob-lightblue bg-ob-black-2 w-1/2"
+                  className="dark:text-ob-lightblue dark:bg-ob-black-2 w-1/2"
                 >
                   <TbEdit className="size-[18px]" />
                   Editar
                 </ButtonLink>
                 <ButtonLink
                   href={`/posta/${row?.postaId}/delete`}
-                  className="border-ob-gray w-1/2 border bg-transparent text-red-400"
+                  className="border-ob-gray w-1/2 border dark:bg-transparent dark:text-red-400"
                 >
                   <TbTrash className="size-[18px]" />
                   Eliminar

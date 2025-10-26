@@ -192,6 +192,7 @@ export interface ResponsePaciente {
   telefono: string;
   nota: string;
   direccion: string;
+  sexo: string;
   departamento: string;
   provincia: string;
   distrito: string;
@@ -208,6 +209,28 @@ export interface ResponsePresentacion {
 export interface ResponseCategoria {
   categoriaId: number;
   nombre: string;
+  estado: boolean;
+}
+
+export interface ResponseBlogCategoria {
+  _id: string;
+  name: string;
+  slug: string;
+  iconName: string;
+  blogCategoryId: number;
+  __v: number;
+}
+
+export interface ResponseTipoPersonal {
+  tipoPersonalId: number;
+  nombre: string;
+  estado: boolean;
+}
+
+export interface ResponseTurno {
+  turnoId: number;
+  horaInicio: string;
+  horaFin: string;
   estado: boolean;
 }
 
