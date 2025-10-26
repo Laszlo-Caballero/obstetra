@@ -74,7 +74,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
           cell: ({ row }) => {
             return (
               <span className="flex items-center gap-x-2">
-                <LuHospital className="text-ob-white size-4" />
+                <LuHospital className="text-ob-white" size={22} />
                 <p>{row?.nombre}</p>
               </span>
             );
@@ -83,15 +83,15 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
         {
           header: 'Descripcion',
           cell: ({ row }) => {
-            return <span className="block w-4">{row?.descripcion}</span>;
+            return <span className="block w-40">{row?.descripcion}</span>;
           },
         },
         {
           header: 'Responsable',
           cell: ({ row }) => {
             return (
-              <span className="flex w-5 items-center gap-x-2">
-                <LuUser className="text-ob-white size-4" />
+              <span className="flex items-center gap-x-2">
+                <LuUser className="text-ob-white" size={22} />
                 <p>{`${row?.responsable?.nombre} ${row?.responsable?.apellidoPaterno} ${row?.responsable?.apellidoMaterno}`}</p>
               </span>
             );
@@ -113,8 +113,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
             return (
               <div className="flex items-center gap-x-2">
                 <ButtonLink
-                  href=""
-                  //   href={`/medicina/editar/${row.programaId}`}
+                  href={`/programas/editar/${row.programaId}`}
                   className="bg-ob-blue-3 text-ob-lightblue"
                 >
                   <BiSolidEditAlt size={18} />

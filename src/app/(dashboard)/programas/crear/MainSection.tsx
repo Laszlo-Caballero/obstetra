@@ -121,9 +121,9 @@ export default function CreatePrograma({ responsables }: CreateProgramaProps) {
           <Select
             label="Responsable"
             placeholder="Seleccionar Responsable"
-            options={responsables.map((responsableId) => ({
-              label: `${responsableId.nombre} ${responsableId.apellidoPaterno} ${responsableId.apellidoMaterno}`,
-              value: responsableId.personalId.toString(),
+            options={responsables.map((responsable) => ({
+              label: `${responsable.nombre} ${responsable.apellidoPaterno} ${responsable.apellidoMaterno}`,
+              value: responsable.personalId.toString(),
             }))}
             onChange={(value) => setValue('responsable', value)}
             value={watchResponsable}
@@ -133,7 +133,7 @@ export default function CreatePrograma({ responsables }: CreateProgramaProps) {
         <TextArea
           label="Descripcion"
           placeholder="Breve Descripcion del Procedimiento"
-          rows={3}
+          rows={4}
           id="description"
           {...register('descripcion')}
           error={errors.descripcion?.message}
