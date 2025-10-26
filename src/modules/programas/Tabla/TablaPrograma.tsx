@@ -101,9 +101,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
           header: 'Estado',
           cell: ({ row }) => {
             return (
-              <Badge
-                className={cx('text-ob-white text-xs', row.estado ? 'bg-ob-green' : 'bg-ob-red')}
-              >
+              <Badge className={cx('text-ob-white', row.estado ? 'bg-ob-green' : 'bg-ob-red')}>
                 {row.estado ? 'Activo' : 'Inactivo'}
               </Badge>
             );
@@ -124,7 +122,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
                 </ButtonLink>
                 <ButtonModal
                   className="border-ob-gray text-ob-white border bg-transparent"
-                  modal={<EliminarPrograma />}
+                  modal={<EliminarPrograma id={row.programaId} programa={row} />}
                 >
                   <LuTrash2 size={18} />
                   Eliminar
