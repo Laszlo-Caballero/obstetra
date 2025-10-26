@@ -210,3 +210,34 @@ export interface ResponseCategoria {
   nombre: string;
   estado: boolean;
 }
+
+export interface ResponsePersonal {
+  nombre: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  fechaNacimiento: string;
+  correo: string;
+  sexo: string;
+  telefono: string;
+  dni: string;
+  codigoColegio: string;
+  estado: boolean;
+  turno: Turno;
+  posta: ResponsePosta[];
+  tipoPersonal: TipoPersonal;
+  personalId: number;
+  nota: string;
+}
+
+export interface Turno {
+  turnoId: number;
+  horaInicio: string;
+  horaFin: string;
+  estado: boolean;
+}
+
+export interface TipoPersonal {
+  tipoPersonalId: number;
+  nombre: string;
+  estado: boolean;
+}

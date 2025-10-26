@@ -7,11 +7,11 @@ import { Options } from '@/interface/props';
 import { LuSearch } from 'react-icons/lu';
 import { AnimatePresence, motion } from 'motion/react';
 
-interface SelectProps {
+interface SelectProps<T = string> {
   label?: string;
   placeholder?: string;
   search?: string;
-  options?: Options[];
+  options?: Options<T>[];
   className?: {
     label?: string;
     placeholder?: string;
@@ -21,15 +21,15 @@ interface SelectProps {
   };
   icon?: ReactNode;
   iconInput?: ReactNode;
-  value?: Options;
-  onChange?: (value: Options) => void;
+  value?: Options<T>;
+  onChange?: (value: Options<T>) => void;
   onSearch?: (value: string) => void;
   error?: string;
   disableSearch?: boolean;
   disable?: boolean;
 }
 
-export default function Select({
+export default function Select<T = string>({
   label,
   options,
   placeholder,
@@ -43,7 +43,7 @@ export default function Select({
   error,
   disableSearch,
   disable,
-}: SelectProps) {
+}: SelectProps<T>) {
   const [isOpen, setOpen] = useState(false);
   const ref = useClose({ closeFunction: setOpen });
 
@@ -61,7 +61,7 @@ export default function Select({
       >
         <div className="items-cente flex gap-x-2">
           {iconInput}
-          <div className="text-nowrap">{value ? value?.label : placeholder}</div>
+          <div className="text-nowrap">{value?.label ? value.label : placeholder}</div>
         </div>
         <span>
           <RiArrowDropDownLine className="text-ob-white" size={18} />

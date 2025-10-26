@@ -1,8 +1,8 @@
 import { SVGProps } from 'react';
 
-export type Options = {
+export type Options<T = string> = {
   label: string;
-  value: string;
+  value: T;
 };
 export type IconProps = SVGProps<SVGElement> & {
   size?: number;

@@ -1,13 +1,13 @@
 import { FilterProvider } from '@/components/context/FilterContext';
-import { FiltersMedicina } from '@/modules/medicina/types';
+import { FiltersPersonal } from '@/modules/personal/type';
 import React, { PropsWithChildren } from 'react';
 
-export default function LayoutAdministrar({ children }: PropsWithChildren) {
+export default function layout({ children }: PropsWithChildren) {
   return (
-    <FilterProvider<FiltersMedicina>
+    <FilterProvider<FiltersPersonal>
       initialFilters={{
-        categoriaId: '',
-        presentacionId: '',
+        tipoPersonalId: '',
+        postaId: '',
         status: 'true',
         page: '1',
         search: '',
