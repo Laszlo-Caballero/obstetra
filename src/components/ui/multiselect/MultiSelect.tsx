@@ -1,7 +1,6 @@
 'use client';
 import { useClose } from '@/hooks/useClose';
 import { Options } from '@/interface/props';
-import cx from '@/libs/cx';
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';

@@ -25,12 +25,7 @@ import {
 } from 'react-icons/lu';
 import { parse } from 'date-fns';
 import { useMutation } from '@/hooks/useMutation';
-import {
-  Response,
-  ResponsePaciente,
-  ResponsePersona,
-  ResponseReniec,
-} from '@/interface/response.interface';
+import { Response, ResponsePaciente, ResponseReniec } from '@/interface/response.interface';
 import axios, { AxiosError } from 'axios';
 import { env } from '@/config/env';
 import { notify } from '@/libs/toast';

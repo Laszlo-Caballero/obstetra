@@ -1,4 +1,4 @@
-import { Personal } from './auth.interface';
+// import { Personal } from './auth.interface';
 
 export interface Response<T> {
   status: number;

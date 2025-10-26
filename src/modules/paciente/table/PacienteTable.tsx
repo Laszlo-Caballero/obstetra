@@ -2,7 +2,7 @@
 
 import { useFilter } from '@/components/context/FilterContext';
 import Table from '@/components/ui/table/Table';
-import React, { useState } from 'react';
+import React from 'react';
 import { FilterPaciente } from '../types';
 import { Response, ResponsePaciente } from '@/interface/response.interface';
 import { useQuery } from '@/hooks/useQuery';

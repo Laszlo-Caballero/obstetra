@@ -1,7 +1,7 @@
 'use client';
 import { useFilter } from '@/components/context/FilterContext';
 import { ResponsePrograma, Response } from '@/interface/response.interface';
-import React, { useState } from 'react';
+import React from 'react';
 import { FiltersPrograma } from '../type';
 import { useQuery } from '@/hooks/useQuery';
 import axios from 'axios';
