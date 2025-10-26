@@ -15,6 +15,7 @@ import { AnimatePresence } from 'motion/react';
 import ActualizarPaciente from '../actualizar/ActualizarPaciente';
 import Badge from '@/components/ui/badge/Badge';
 import EliminarPaciente from '../eliminar/EliminarPaciente';
+import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 
 interface PacienteTableProps {
   data: ResponsePaciente[];
@@ -26,8 +27,6 @@ interface PacienteTableProps {
 export default function PacienteTable({ data, ...props }: PacienteTableProps) {
   const { filters, setFilter, setMetadata, metadata } = useFilter<FilterPaciente>();
   const updateModal = useModal('');
-  const deleteModal = useModal('');
-  const [dataPaciente, setDataPaciente] = useState<ResponsePaciente | null>(null);
 
   const { data: queryData } = useQuery<Response<ResponsePaciente[]>>({
     firstRender: false,
@@ -142,17 +141,14 @@ export default function PacienteTable({ data, ...props }: PacienteTableProps) {
                     <TbEdit className="size-[18px]" />
                     Editar
                   </Button>
-                  <Button
+                  <ButtonModal
                     //   href={`/posta/${row.dni}/delete`}
                     className="border-ob-gray w-1/2 border bg-transparent text-red-400"
-                    onClick={() => {
-                      setDataPaciente(row);
-                      deleteModal.openModal(row.dni);
-                    }}
+                    modal={<EliminarPaciente dni={row.dni} paciente={row} />}
                   >
                     <TbTrash className="size-[18px]" />
                     Eliminar
-                  </Button>
+                  </ButtonModal>
                 </div>
               );
             },
@@ -162,16 +158,6 @@ export default function PacienteTable({ data, ...props }: PacienteTableProps) {
       <AnimatePresence>
         {updateModal.isOpen && (
           <ActualizarPaciente onClose={updateModal.closeModal} dni={updateModal.id} />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {deleteModal.isOpen && dataPaciente && (
-          <EliminarPaciente
-            onClose={deleteModal.closeModal}
-            dni={deleteModal.id}
-            paciente={dataPaciente}
-          />
         )}
       </AnimatePresence>
     </>
