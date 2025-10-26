@@ -1,3 +1,5 @@
+import { Personal } from './auth.interface';
+
 export interface Response<T> {
   status: number;
   message: string;
@@ -263,4 +265,14 @@ export interface TipoPersonal {
   tipoPersonalId: number;
   nombre: string;
   estado: boolean;
+}
+
+export interface ResponsePrograma {
+  nombre: string;
+  descripcion: string;
+  estado: boolean;
+  cupoMaximo: number;
+  deribacion: boolean;
+  responsable: ResponsePersonal;
+  programaId: number;
 }
