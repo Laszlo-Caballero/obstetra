@@ -5,7 +5,7 @@ import { ResponseAuth } from './interface/auth.interface';
 import { admin_paths, public_paths } from './const/routes';
 import { RolesEnum } from './enum/roles';
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // para debugging si quieres
