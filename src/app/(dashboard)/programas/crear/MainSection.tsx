@@ -66,7 +66,6 @@ export default function CreatePrograma({ responsables }: CreateProgramaProps) {
     },
   });
 
-  console.log(errors);
   return (
     <form
       className="flex w-full flex-col gap-y-4 p-5"

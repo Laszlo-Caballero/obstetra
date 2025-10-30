@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
-import { useQuery } from "@/hooks/useQuery";
-import { Response, Tipo } from "@/interface/response.interface";
-import axios from "axios";
-import Table from "@/components/ui/table-without-context/Table";
-import { FaLaptopMedical } from "react-icons/fa";
-import Badge from "@/components/ui/badge/Badge";
-import Button from "@/components/ui/button/Button";
-import { MdModeEdit } from "react-icons/md";
+'use client';
+import React from 'react';
+import { useQuery } from '@/hooks/useQuery';
+import { Response, Tipo } from '@/interface/response.interface';
+import axios from 'axios';
+import Table from '@/components/ui/table-without-context/Table';
+import { FaLaptopMedical } from 'react-icons/fa';
+import Badge from '@/components/ui/badge/Badge';
+import Button from '@/components/ui/button/Button';
+import { MdModeEdit } from 'react-icons/md';
 
 export default function TablaTipo() {
   const { data: queryData } = useQuery<Tipo[]>({
@@ -26,10 +26,10 @@ export default function TablaTipo() {
       data={queryData}
       columns={[
         {
-          header: "Nombre",
+          header: 'Nombre',
           cell: ({ row }) => {
             return (
-              <span className=" flex items-center text-ob-white gap-x-2">
+              <span className="text-ob-white flex items-center gap-x-2">
                 <FaLaptopMedical size={18} />
                 {row.nombre}
               </span>
@@ -37,33 +37,30 @@ export default function TablaTipo() {
           },
         },
         {
-          header: "Descripcion",
+          header: 'Descripcion',
           cell: ({ row }) => {
             return <span className="text-ob-white">{row.descripcion}</span>;
           },
         },
         {
-          header: "Estado",
+          header: 'Estado',
           cell: ({ row }) => {
             return (
               <Badge
-                className={`text-sm    
-                ${
-                  row.estado
-                    ? "bg-ob-blue-2 text-ob-lightblue"
-                    : "bg-ob-red text-ob-white"
+                className={`text-sm ${
+                  row.estado ? 'bg-ob-blue-2 text-ob-lightblue' : 'bg-ob-red text-ob-white'
                 }`}
               >
-                {row.estado ? "Activo" : "Inactivo"}
+                {row.estado ? 'Activo' : 'Inactivo'}
               </Badge>
             );
           },
         },
         {
-          header: "Acciones",
+          header: 'Acciones',
           cell: () => {
             return (
-              <Button className="bg-ob-blue-2 text-ob-lightblue py-1.5">
+              <Button className="bg-ob-blue-2 text-ob-lightblue py-1.5" type="button">
                 <MdModeEdit size={18} />
                 Renombrar
               </Button>
