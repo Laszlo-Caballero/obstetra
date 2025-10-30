@@ -110,26 +110,26 @@ export default async function Perfilpage() {
             <div className="grid grid-cols-2 gap-3">
               <Input
                 label="Nombres"
-                placeholder="Ñepito"
+                placeholder={res?.data?.personal.nombre}
                 id="name"
                 className={{ label: 'text-sm' }}
               />
               <Input
                 label="Apellido Paterno"
-                placeholder="Ñispe"
+                placeholder={res?.data?.personal.apellidoPaterno}
                 id="lastname"
                 className={{ label: 'text-sm' }}
               />
 
               <Input
                 label="Apellido Materno"
-                placeholder="Ñispe"
+                placeholder={res?.data?.personal.apellidoMaterno}
                 id="lastname"
                 className={{ label: 'text-sm' }}
               />
               <Input
                 label="Correo Institucional"
-                placeholder="admin@salud.gob"
+                placeholder={res?.data?.personal.correo}
                 id="email"
                 className={{ label: 'text-sm' }}
               />
@@ -138,24 +138,16 @@ export default async function Perfilpage() {
                 placeholder="Seleccionar Posta"
                 search="Buscar Postas..."
                 className={{ label: 'text-sm' }}
-                options={[
-                  { label: 'Posta Central - Turno Mañana', value: '1' },
-                  { label: 'Posta Central - Turno Noche', value: '2' },
-                ]}
-              />
-              <Select
-                label="Especialidad"
-                placeholder="Seleccionar Especialidad"
-                search="Buscar Especialidades..."
-                className={{ label: 'text-sm' }}
-                options={[
-                  { label: 'Medicina Reproductiva', value: '1' },
-                  { label: 'Oncología', value: '2' },
-                ]}
+                options={
+                  res?.data?.personal.posta.map((posta) => ({
+                    label: posta.nombre,
+                    value: String(posta.postaId),
+                  })) || []
+                }
               />
               <Input
                 label="Telefono"
-                placeholder="+51 987 654 321"
+                placeholder={res?.data?.personal.telefono}
                 id="phone"
                 className={{ label: 'text-sm' }}
               />

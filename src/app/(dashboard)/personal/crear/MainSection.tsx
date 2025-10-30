@@ -304,10 +304,16 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
           </section>
         </InfoContainer>
         <div className="flex items-center justify-end gap-x-2">
-          <ButtonLink href="/personal" className="border-ob-gray border">
+          <Button
+            onClick={() => {
+              router.back();
+            }}
+            type="button"
+            className="border-ob-gray-4 border bg-transparent font-semibold text-white"
+          >
             <LuArrowLeft size={18} />
             Volver
-          </ButtonLink>
+          </Button>
           <Button className="font-semibold" type="submit">
             <LuCircleCheck size={18} />
             Crear Personal
