@@ -1,6 +1,12 @@
 'use client';
-import { PropsWithChildren } from 'react';
+import { Children, cloneElement, PropsWithChildren, ReactElement } from 'react';
 
 export default function TabsHeader({ children }: PropsWithChildren) {
-  return <header className="flex items-center px-3 py-2.5">{children}</header>;
+  return (
+    <header className="flex items-center gap-x-2 px-3">
+      {Children.map(children, (child, i) => {
+        return cloneElement(child as ReactElement<{ tabIndex?: number }>, { tabIndex: i });
+      })}
+    </header>
+  );
 }

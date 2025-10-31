@@ -34,6 +34,9 @@ import Select from '@/components/ui/select/Select';
 import TextArea from '@/components/ui/textarea/Textarea';
 import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import MultiSelect from '@/components/ui/multiselect/MultiSelect';
+import { sexoOptions } from '@/modules/personal/sexo';
+import { findArray } from '@/utils/findArray';
+import { capitalize } from '@/utils/capitalize';
 interface BuscarDNIResponse {
   dni: string;
 }
@@ -60,11 +63,24 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
   const watchTurno = watch('turno', { value: '', label: '' });
   const { mutate: create } = useMutation<PersonalSchemaType>({
     mutationFn: async (data, urlApi) => {
-      const { turno, postas, tipoPersonal, ...personal } = data;
+      const {
+        turno,
+        postas,
+        tipoPersonal,
+        apellido_materno,
+        apellido_paterno,
+        fecha_nacimiento,
+        codigo,
+        ...personal
+      } = data;
       const parsedPersonal = {
         ...personal,
+        apellidoMaterno: apellido_materno,
+        apellidoPaterno: apellido_paterno,
+        fechaNacimiento: fecha_nacimiento,
+        codigoColegio: codigo,
         turnoId: parseInt(turno.value),
-        postaIds: postas.map((p) => parseInt(p.value)),
+        postaId: postas.map((p) => parseInt(p.value)),
         tipoPersonalId: parseInt(tipoPersonal.value),
       };
       return axios.post(`${urlApi}/personal`, parsedPersonal);
@@ -97,7 +113,10 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
         'fecha_nacimiento',
         parse(persona.fechaNacimiento, 'dd/MM/yyyy', new Date()).toISOString().split('T')[0],
       );
-      setValue('sexo', persona.sexo);
+
+      const parseSexo = capitalize(persona.sexo);
+
+      setValue('sexo', parseSexo);
       notify.success({ message: 'Datos cargados correctamente' });
     },
     onError() {
@@ -149,7 +168,7 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
                   id="dni"
                   placeholder="123456789"
                   icon={<LuIdCard size={18} />}
-                  className={{ input: 'placeholder: font-light' }}
+                  className={{ input: 'placeholder: font-light', main: 'w-full' }}
                   {...register('dni')}
                   error={errors.dni?.message}
                 />
@@ -191,19 +210,20 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
                 error={errors.apellido_materno?.message}
               />
               <div className="grid grid-cols-2 gap-3">
-                <Input
+                <Select
                   label="Sexo"
-                  id="sexo"
-                  max={8}
                   placeholder="Masculino"
                   icon={<LuIdCard size={18} />}
-                  className={{ input: 'placeholder: font-light' }}
-                  {...register('apellido_materno')}
-                  error={errors.apellido_materno?.message}
+                  disableSearch={true}
+                  options={sexoOptions}
+                  onChange={({ value }) => {
+                    setValue('sexo', value);
+                  }}
+                  value={findArray(sexoOptions, 'value', watch('sexo'))}
                 />
                 <InputDate
                   id="fecha_nacimiento"
-                  label="nacimiento"
+                  label="Fecha de Nacimiento"
                   icon={<LuCalendar size={18} />}
                   onChange={(date) => {
                     setValue('fecha_nacimiento', date.toISOString().split('T')[0]);
