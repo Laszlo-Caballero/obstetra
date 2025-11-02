@@ -42,8 +42,12 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
             href: '/personal',
           },
           {
-            title: 'Deta',
-            href: '/personal/deta',
+            title: 'Detalle',
+            href: '/personal/detalle',
+          },
+          {
+            title: `${data?.nombre} ${data?.apellidoPaterno}`,
+            href: `/personal/detalle/${data?.personalId}`,
           },
         ]}
       />
@@ -100,8 +104,8 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
           </section>
         </InfoContainer>
         <div className="flex gap-x-6">
-          <InfoContainer className="bg-ob-black-6 w-[50%]">
-            <span>Posta Asignada</span>
+          <InfoContainer className="bg-ob-black-6 w-[50%] px-0">
+            <span className="border-ob-gray-4 border-b p-4 pb-2">Posta Asignada</span>
 
             <Tabs>
               <TabsHeader>
@@ -140,6 +144,9 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
                       position={{
                         lat: Number(posta.lat),
                         lng: Number(posta.lng),
+                      }}
+                      style={{
+                        height: '358px',
                       }}
                       disableHeader
                     />

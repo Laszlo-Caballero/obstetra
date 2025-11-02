@@ -3,14 +3,16 @@ import { Position } from '@/interface/types';
 import { AdvancedMarker, Map } from '@vis.gl/react-google-maps';
 import { useMaps } from '@/hooks/useMaps';
 import Search from '@/modules/posta/components/mapa/search/Search';
+import { CSSProperties } from 'react';
 
 interface MapaProps {
   position: Position;
   setPosistion?: (position: Position) => void;
   disableHeader?: boolean;
+  style?: CSSProperties;
 }
 
-export default function Mapa({ position, setPosistion, disableHeader }: MapaProps) {
+export default function Mapa({ position, setPosistion, disableHeader, style }: MapaProps) {
   const { camaraProps, dataSeach, handleSelect, setLocation, setValue, value, handleCameraChange } =
     useMaps({
       position,
@@ -38,6 +40,7 @@ export default function Mapa({ position, setPosistion, disableHeader }: MapaProp
           borderBottomRightRadius: '24px',
           borderBottomLeftRadius: '24px',
           height: '280px',
+          ...style,
         }}
         {...camaraProps}
         onClick={(e) => {
