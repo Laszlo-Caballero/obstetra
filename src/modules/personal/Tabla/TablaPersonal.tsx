@@ -140,7 +140,10 @@ export default function TablaPersonal({ data, ...props }: TablaPersonalProps) {
             cell: ({ row }) => {
               return (
                 <div className="flex items-center gap-x-2">
-                  <ButtonLink href={`/personal/crear`} className="bg-ob-blue-3 text-ob-lightblue">
+                  <ButtonLink
+                    href={`/personal/editar/${row.personalId}`}
+                    className="bg-ob-blue-3 text-ob-lightblue"
+                  >
                     <BiSolidEditAlt size={18} />
                     Editar
                   </ButtonLink>

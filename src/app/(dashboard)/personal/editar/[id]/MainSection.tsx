@@ -1,12 +1,17 @@
 'use client';
 import { useMutation } from '@/hooks/useMutation';
-import { ResponsePosta, ResponseReniec, TipoPersonal, Turno } from '@/interface/response.interface';
+import {
+  ResponsePersonal,
+  ResponsePosta,
+  ResponseReniec,
+  TipoPersonal,
+  Turno,
+} from '@/interface/response.interface';
 import { notify } from '@/libs/toast';
 import { PersonalSchema, PersonalSchemaType } from '@/schemas/personal/personal.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { env } from '@/config/env';
 import { parse } from 'date-fns';
 
@@ -32,21 +37,23 @@ import Button from '@/components/ui/button/Button';
 import InputDate from '@/components/ui/input-date/InputDate';
 import Select from '@/components/ui/select/Select';
 import TextArea from '@/components/ui/textarea/Textarea';
-import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import MultiSelect from '@/components/ui/multiselect/MultiSelect';
 import { sexoOptions } from '@/modules/personal/sexo';
 import { findArray } from '@/utils/findArray';
 import { capitalize } from '@/utils/capitalize';
+import { useAuth } from '@/components/context/AuthContext';
 interface BuscarDNIResponse {
   dni: string;
 }
 
-interface CreatePersonalProps {
+interface EditarPersonalProps {
   tipos: TipoPersonal[];
   postas: ResponsePosta[];
   turnos: Turno[];
+  personal: ResponsePersonal;
 }
-export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonalProps) {
+export default function EditarPersonal({ tipos, turnos, postas, personal }: EditarPersonalProps) {
+  const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const {
     register,
@@ -56,9 +63,34 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
     formState: { errors },
   } = useForm({
     resolver: zodResolver(PersonalSchema),
+    defaultValues: {
+      dni: personal.dni,
+      nombre: personal.nombre,
+      apellido_paterno: personal.apellidoPaterno,
+      apellido_materno: personal.apellidoMaterno,
+      codigo: personal.codigoColegio,
+      correo: personal.correo,
+      fecha_nacimiento: personal.fechaNacimiento.split('T')[0],
+      telefono: personal.telefono,
+      nota: personal.nota,
+      sexo: personal.sexo,
+      turno: {
+        label: `${personal.turno?.horaInicio} - ${personal.turno?.horaFin}`,
+        value: personal.turno?.turnoId.toString() || '',
+      },
+      postas: personal.posta.map((posta) => ({
+        label: posta.nombre,
+        value: posta.postaId.toString(),
+      })),
+      tipoPersonal: {
+        label: personal.tipoPersonal?.nombre || '',
+        value: personal.tipoPersonal?.tipoPersonalId.toString() || '',
+      },
+    },
   });
 
   const watchTipo = watch('tipoPersonal', { value: '', label: '' });
+  const { token } = useAuth();
   // const watchPostas = watch('postas', []);
   const watchTurno = watch('turno', { value: '', label: '' });
   const { mutate: create } = useMutation<PersonalSchemaType>({
@@ -83,17 +115,21 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
         postaId: postas.map((p) => parseInt(p.value)),
         tipoPersonalId: parseInt(tipoPersonal.value),
       };
-      return axios.post(`${urlApi}/personal`, parsedPersonal);
+      return axios.patch(`${urlApi}/personal/${id}`, parsedPersonal, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     },
     onSuccess: () => {
       notify.success({
-        message: 'Personal creado con éxito',
+        message: 'Personal actualizado con éxito',
       });
       router.push('/personal');
     },
     onError: () => {
       notify.error({
-        message: 'Error al crear el Personal',
+        message: 'Error al actualizar el Personal',
       });
     },
   });
@@ -138,8 +174,8 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
             href: '/personal',
           },
           {
-            title: 'Crear',
-            href: '/personal/crear',
+            title: 'Editar',
+            href: '/personal/editar',
           },
         ]}
       />
@@ -147,7 +183,7 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
         <InfoContainer className="bg-ob-black-6">
           <section className="flex items-center justify-between">
             <Title
-              title="Nuevo Personal"
+              title="Editar Personal"
               description="Completa la información básica, asignación y seguridad"
               icon={<LuUserPlus size={18} />}
             />
@@ -309,7 +345,7 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
                   label: posta.nombre,
                   value: posta.postaId.toString(),
                 }))}
-                // value={watchPostas}
+                value={watch('postas')}
                 onChange={(selected) => setValue('postas', selected)}
                 error={errors.postas?.message}
               />
@@ -339,7 +375,7 @@ export default function CreatePersonal({ tipos, turnos, postas }: CreatePersonal
           </Button>
           <Button className="font-semibold" type="submit">
             <LuCircleCheck size={18} />
-            Crear Personal
+            Actulizar Personal
           </Button>
         </div>
       </form>

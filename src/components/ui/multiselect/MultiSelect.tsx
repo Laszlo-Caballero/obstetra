@@ -13,7 +13,7 @@ interface MultiSelectProps {
   placeholder?: string;
   className?: string;
   // onSearch?: (value: string) => void;
-
+  value?: Options[];
   onChange?: (selected: Options[]) => void;
   error?: string;
   disableSearch?: boolean;
@@ -29,10 +29,11 @@ export default function MultiSelect({
   error,
   disableSearch,
   disable,
+  value,
 }: MultiSelectProps) {
   const [isOpen, setOpen] = useState(false);
   const ref = useClose({ closeFunction: setOpen });
-  const [selectedOptions, setSelectedOptions] = useState<Options[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<Options[]>(value || []);
 
   const setOption = (option: Options) => {
     let updatedOptions: Options[];
