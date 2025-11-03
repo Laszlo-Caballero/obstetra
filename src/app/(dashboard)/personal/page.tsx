@@ -7,14 +7,20 @@ import { fetcher } from '@/libs/fetch';
 import FiltrosPersonal from '@/modules/personal/Filtros/FiltrosPersonal';
 import SearchPersonal from '@/modules/personal/Filtros/SearchPersonal';
 import TablaPersonal from '@/modules/personal/Tabla/TablaPersonal';
-import React from 'react';
+import { getToken } from '@/utils/getToken';
 import { GoHome } from 'react-icons/go';
 import { LuIdCard, LuPlus } from 'react-icons/lu';
 
 export default async function PersonalPage() {
+  const token = await getToken();
+
   const data = await fetcher<ResponsePersonal[]>('personal');
 
-  const tipos = await fetcher<TipoPersonal[]>('tipo-personal');
+  const tipos = await fetcher<TipoPersonal[]>('tipo-personal', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const postas = await fetcher<ResponsePosta[]>('posta');
 
