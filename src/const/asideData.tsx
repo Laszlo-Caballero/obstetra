@@ -1,6 +1,12 @@
 import { AsideProps } from '@/interface/aside';
 import { SiDatabricks } from 'react-icons/si';
-import { LuCalendar, LuPersonStanding, LuStethoscope } from 'react-icons/lu';
+import {
+  LuCalendar,
+  LuCalendarCheck2,
+  LuGoal,
+  LuPersonStanding,
+  LuStethoscope,
+} from 'react-icons/lu';
 import { LuBuilding2 } from 'react-icons/lu';
 import { MdOutlineQueuePlayNext } from 'react-icons/md';
 import { GiMedicines } from 'react-icons/gi';
@@ -24,6 +30,20 @@ export const asideData: AsideProps[] = [
     title: 'Programas',
     href: '/programas',
     description: 'Administrar programas',
+    subItems: [],
+  },
+  {
+    icon: <LuCalendarCheck2 />,
+    title: 'Calendario',
+    description: 'Vista de calendario',
+    href: '/calendario',
+    subItems: [],
+  },
+  {
+    icon: <LuGoal />,
+    title: 'Metas',
+    description: 'Gestión de metas',
+    href: '/metas',
     subItems: [],
   },
   {
