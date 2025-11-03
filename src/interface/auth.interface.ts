@@ -1,3 +1,5 @@
+import { RolesEnum } from '@/enum/roles';
+
 export interface ResponseAuth {
   message: string;
   status: boolean;
@@ -47,7 +49,7 @@ export interface Posta {
 
 export interface Role {
   roleId: number;
-  roleName: string;
+  roleName: RolesEnum;
 }
 
 export interface Recurso {

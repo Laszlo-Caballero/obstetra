@@ -1,5 +1,6 @@
 export enum RolesEnum {
-  Obstetra = "Obstetra",
-  Enfermera = "Enfermera",
-  Administrador = "Administrador",
+  Obstetra = 'Obstetra',
+  Enfermera = 'Enfermera',
+  Supervisor = 'Supervisor',
+  Administrador = 'Administrador',
 }

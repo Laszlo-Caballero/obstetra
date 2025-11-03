@@ -13,6 +13,8 @@ import ButtonLink from '@/components/ui/button-link/ButtonLink';
 import { BiSolidEditAlt } from 'react-icons/bi';
 import ButtonModal from '@/components/ui/button-modal/ButtonModal';
 import EliminarPrograma from '../Eliminar/EliminarPrograma';
+import { useAuth } from '@/components/context/AuthContext';
+import { RolesEnum } from '@/enum/roles';
 
 interface TablaProgramaProps {
   data: ResponsePrograma[];
@@ -22,6 +24,7 @@ interface TablaProgramaProps {
 }
 export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
   const { filters, setFilter, setMetadata, metadata } = useFilter<FiltersPrograma>();
+  const { token, user } = useAuth();
 
   const { data: queryData } = useQuery<Response<ResponsePrograma[]>>({
     firstRender: false,
@@ -43,7 +46,11 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
         parseUrl.searchParams.append('searchByName', filters.searchByName);
       }
 
-      const res = await axios.get(parseUrl.toString());
+      const res = await axios.get(parseUrl.toString(), {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data: Response<ResponsePrograma[]> = res.data;
       setMetadata({
         total: data?.metadata?.totalItems || 0,
@@ -107,6 +114,21 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
             );
           },
         },
+        ...(user?.role.roleName === RolesEnum.Administrador
+          ? [
+              {
+                header: 'Posta',
+                cell: ({ row }: { row: ResponsePrograma }) => {
+                  return (
+                    <span className="flex items-center gap-x-2">
+                      <LuHospital className="text-ob-white" size={22} />
+                      <p>{row?.posta?.nombre}</p>
+                    </span>
+                  );
+                },
+              },
+            ]
+          : []),
         {
           header: 'Acciones',
           cell: ({ row }) => {

@@ -275,4 +275,5 @@ export interface ResponsePrograma {
   deribacion: boolean;
   responsable: ResponsePersonal;
   programaId: number;
+  posta: ResponsePosta;
 }

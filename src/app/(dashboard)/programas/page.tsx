@@ -8,12 +8,18 @@ import { fetcher } from '@/libs/fetch';
 import FiltrosPrograma from '@/modules/programas/Filtros/FiltrosPrograma';
 import SearchPrograma from '@/modules/programas/Filtros/SearchPrograma';
 import TablaPrograma from '@/modules/programas/Tabla/TablaPrograma';
-import React from 'react';
+import { getToken } from '@/utils/getToken';
 import { GoHome } from 'react-icons/go';
 import { LuLayers, LuPlus, LuUpload } from 'react-icons/lu';
 
 export default async function ProgramaPage() {
-  const data = await fetcher<ResponsePrograma[]>('programa');
+  const token = await getToken();
+
+  const data = await fetcher<ResponsePrograma[]>('programa', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return (
     <div className="flex w-full flex-col gap-y-4 p-5">
       <Breadcrums
