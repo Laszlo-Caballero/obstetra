@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import cx from "@/libs/cx";
+import { ReactNode } from 'react';
+import cx from '@/libs/cx';
 
 interface SmallCardProps {
   title: string;
@@ -23,17 +23,15 @@ export default function SmallCard({
   return (
     <div
       className={cx(
-        "flex items-center justify-between py-2.5 px-3 text-sm text-ob-white border border-ob-gray rounded-xl",
-        className?.container
+        'text-ob-black-4 dark:text-ob-white border-ob-white-3 dark:border-ob-gray flex items-center justify-between rounded-xl border px-3 py-2.5 text-sm',
+        className?.container,
       )}
     >
       <div className="flex items-center gap-x-2.5">
         {icon}
         <div className="flex flex-col">
-          <p className={cx("font-medium", className?.title)}>{title}</p>
-          <span className={cx("text-ob-gray-2", className?.description)}>
-            {description}
-          </span>
+          <p className={cx('font-medium', className?.title)}>{title}</p>
+          <span className={cx('text-ob-gray-2', className?.description)}>{description}</span>
         </div>
       </div>
       {children}

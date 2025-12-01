@@ -16,7 +16,7 @@ export default function Aside() {
   return (
     <motion.aside
       className={cx(
-        'bg-ob-black border-ob-gray sticky top-0 flex h-screen w-[88px] cursor-pointer flex-col items-center border-r px-[9px] py-3',
+        'dark:bg-ob-black border-ob-white-3 dark:border-ob-gray sticky top-0 flex h-screen w-[88px] cursor-pointer flex-col items-center border-r bg-white px-[9px] py-3',
         isOpen && 'w-[300px] items-start',
       )}
       layout
@@ -25,20 +25,23 @@ export default function Aside() {
       <motion.div
         className={cx(
           'flex w-full justify-center overflow-hidden py-1.5',
-          isOpen && 'border-ob-blue items-center justify-start gap-x-2 rounded-lg border p-2',
+          isOpen &&
+            'border-ob-white-3 dark:border-ob-blue items-center justify-start gap-x-2 rounded-lg border p-2',
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span
-          className={cx('border-ob-blue flex size-[40px] justify-center rounded-xl border-2 p-2.5')}
+          className={cx(
+            'border-ob-white-3 dark:border-ob-blue flex size-[40px] justify-center rounded-xl border-2 p-2.5',
+          )}
         >
-          <LuHeartPulse className="text-ob-white size-5" />
+          <LuHeartPulse className="text-ob-black-4 dark:text-ob-white size-5" />
         </span>
 
         <AnimatePresence>
           {isOpen && (
             <div>
-              <span className="text-ob-white text-lg font-medium text-nowrap">
+              <span className="text-ob-black-4 dark:text-ob-white text-lg font-medium text-nowrap">
                 Portal Obstetrico
               </span>
               <p className="text-ob-gray-2 text-sm">Versión 1.0</p>
@@ -60,7 +63,7 @@ export default function Aside() {
         })}
       </div>
 
-      <div className="border-ob-gray-4 mt-auto w-full border-t">
+      <div className="border-ob-white-3 dark:border-ob-gray-4 mt-auto w-full border-t">
         <AsideIcon
           subItems={[]}
           icon={<AiOutlineQuestionCircle />}

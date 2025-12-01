@@ -10,7 +10,10 @@ interface InfoContainerProps extends HTMLAttributes<HTMLDivElement> {
 export default function InfoContainer({ children, className, ...props }: InfoContainerProps) {
   return (
     <div
-      className={cx('border-ob-gray flex flex-col gap-y-3 rounded-3xl border p-4', className)}
+      className={cx(
+        'border-ob-white-3 dark:border-ob-gray dark:bg-ob-black-6 flex flex-col gap-y-3 rounded-3xl border bg-white p-4',
+        className,
+      )}
       {...props}
       ref={props.ref}
     >

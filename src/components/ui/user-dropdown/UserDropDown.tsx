@@ -27,7 +27,7 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
   return (
     <div className="reltive flex flex-col font-medium" ref={ref}>
       <div
-        className="bg-ob-blue-2 flex cursor-pointer items-center gap-x-2.5 rounded-xl px-2.5 py-1.5"
+        className="bg-ob-white-4 dark:bg-ob-blue-2 flex cursor-pointer items-center gap-x-2.5 rounded-xl px-2.5 py-1.5"
         onClick={() => setOpen(!isOpen)}
       >
         <Image
@@ -37,13 +37,13 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
           width={24}
           height={24}
         />
-        <span className="text-ob-lightblue text-sm font-medium">{user}</span>
+        <span className="text-ob-black-4 dark:text-ob-lightblue text-sm font-medium">{user}</span>
         <RiArrowDropDownLine size={18} />
       </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="bg-ob-black-3 border-ob-gray absolute top-full right-5 z-10 flex w-[260px] flex-col overflow-hidden rounded-xl border"
+            className="dark:bg-ob-black-3 border-ob-white-3 dark:border-ob-gray absolute top-full right-5 z-10 flex w-[260px] flex-col overflow-hidden rounded-xl border bg-white"
             initial={{ opacity: 0, y: -10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}
@@ -57,28 +57,28 @@ export default function UserDropDown({ user, icon, email }: UserDropDownProps) {
                 height={36}
               />
               <span className="flex flex-col">
-                <span className="text-ob-white text-sm">{user}</span>
+                <span className="text-ob-black-4 dark:text-ob-white text-sm">{user}</span>
                 <span className="text-ob-gray-2 text-sm">{email}</span>
               </span>
             </div>
             <span className="text-ob-gray-2 p-2 text-xs">Cuenta</span>
             <ButtonLink
               href="/perfil"
-              className="text-ob-white hover:bg-ob-blue-2 border-ob-gray rounded-none border-b p-2.5"
+              className="text-ob-black-4 dark:text-ob-white hover:bg-ob-white-4 dark:hover:bg-ob-blue-2 border-ob-white-3 dark:border-ob-gray rounded-none border-b p-2.5"
             >
               <LuUser size={18} />
               Perfil
             </ButtonLink>
             <ButtonLink
               href="/"
-              className="text-ob-white border-ob-gray hover:bg-ob-blue-2 rounded-none border-b p-2.5"
+              className="text-ob-black-4 dark:text-ob-white border-ob-white-3 dark:border-ob-gray hover:bg-ob-white-4 dark:hover:bg-ob-blue-2 rounded-none border-b p-2.5"
             >
               <LuShield size={18} />
               Seguridad
             </ButtonLink>
             <span className="text-ob-gray-2 p-2 text-xs">Sesion</span>
             <button
-              className="text-ob-white flex cursor-pointer items-center gap-x-2.5 p-2.5"
+              className="text-ob-black-4 dark:text-ob-white hover:bg-ob-white-4 dark:hover:bg-ob-blue-2 flex cursor-pointer items-center gap-x-2.5 p-2.5"
               onClick={logout}
             >
               <PiSignOutBold size={18} />

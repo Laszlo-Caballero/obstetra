@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 interface TitleProps {
   title?: string;
@@ -8,14 +8,14 @@ interface TitleProps {
 
 export default function Title({ title, description, icon }: TitleProps) {
   return (
-    <div className="flex items-center text-ob-white font-medium">
+    <div className="text-ob-black-4 dark:text-ob-white flex items-center font-medium">
       <div className="flex items-start gap-x-2.5">
-        <span className=" p-1 border-3 border-ob-teal rounded-xl bg-ob-blue-2">
+        <span className="border-ob-red-4 dark:border-ob-teal bg-ob-white-4 dark:bg-ob-blue-2 rounded-xl border-3 p-1">
           {icon}
         </span>
         <div className="flex flex-col gap-y-0.5">
           <h2 className="text-xl">{title}</h2>
-          <span className="text-sm text-ob-gray-2">{description}</span>
+          <span className="text-ob-gray-2 text-sm">{description}</span>
         </div>
       </div>
     </div>

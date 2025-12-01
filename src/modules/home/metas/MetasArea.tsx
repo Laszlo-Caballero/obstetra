@@ -32,11 +32,11 @@ export default function MetasArea() {
         <ProgressBar porcentaje="80%" />
       </SmallCard>
       <div className="flex items-center justify-between">
-        <Button className="bg-ob-black-5 border-ob-gray text-ob-white border">
+        <Button className="bg-ob-white-4 dark:bg-ob-black-5 border-ob-white-3 dark:border-ob-gray text-ob-black-4 dark:text-ob-white border">
           <LuPencilLine size={18} />
           Editar Metas
         </Button>
-        <Button className="bg-ob-blue-2 text-ob-lightblue">
+        <Button className="bg-ob-blue dark:bg-ob-blue-2 dark:text-ob-lightblue text-white">
           <BiBarChartAlt size={18} />
           Ver Historial
         </Button>

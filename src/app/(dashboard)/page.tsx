@@ -19,7 +19,7 @@ export default function Home() {
         />
         <Button
           type="button"
-          className="border-ob-gray-4 border bg-transparent font-semibold text-white"
+          className="border-ob-white-3 dark:border-ob-gray-4 text-ob-black-4 border bg-transparent font-semibold dark:text-white"
         >
           <FiRefreshCcw size={18} />
           Actualizar
