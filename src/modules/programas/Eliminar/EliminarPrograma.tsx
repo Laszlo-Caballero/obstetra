@@ -13,8 +13,11 @@ import { useMutation } from '@/hooks/useMutation';
 import { ModalProps } from '@/interface/moda.interface';
 import { ResponsePrograma, Response } from '@/interface/response.interface';
 import { notify } from '@/libs/toast';
+import { MotivoSchema, MotivoSchemaType } from '@/schemas/motivo/motivo.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { LuTrash2, LuX } from 'react-icons/lu';
 import { PiWarningBold } from 'react-icons/pi';
 import { RiProhibitedLine } from 'react-icons/ri';
@@ -27,12 +30,25 @@ export default function EliminarPrograma({ onClose, id, programa }: EliminarProg
   const { token } = useAuth();
   const { refresh } = useTableContext<ResponsePrograma>();
   const { setMetadata } = useFilter();
-  const { mutate } = useMutation<{ id: number }, Response<ResponsePrograma[]>>({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(MotivoSchema),
+  });
+
+  const { mutate } = useMutation<
+    { id: number; data: MotivoSchemaType },
+    Response<ResponsePrograma[]>
+  >({
     mutationFn: async (data, urlApi) => {
       const res = await axios.delete(`${urlApi}/programa/${data.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        data: data.data,
       });
       return res.data;
     },
@@ -54,6 +70,14 @@ export default function EliminarPrograma({ onClose, id, programa }: EliminarProg
       });
     },
   });
+
+  const handleSubmitForm = (data: MotivoSchemaType) => {
+    mutate({
+      id,
+      data,
+    });
+  };
+
   return (
     <Modal onClose={onClose}>
       <ModalHeader>
@@ -65,56 +89,52 @@ export default function EliminarPrograma({ onClose, id, programa }: EliminarProg
         </CloseButton>
       </ModalHeader>
 
-      <div className="flex flex-col gap-y-4 p-4">
-        <span className="bg-ob-orange text-ob-black flex w-[536px] items-center gap-x-2.5 rounded-xl p-3 text-sm text-wrap">
-          <span>
-            <PiWarningBold size={18} />
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
+        <div className="flex flex-col gap-y-4 p-4">
+          <span className="bg-ob-orange text-ob-black flex w-[536px] items-center gap-x-2.5 rounded-xl p-3 text-sm text-wrap">
+            <span>
+              <PiWarningBold size={18} />
+            </span>
+            <span className="font-semibold">
+              Estás a punto de inhabilitar un Programa. El personal no podrá registrarla en citas.
+              Esta acción es irreversible.
+            </span>
           </span>
-          <span className="font-semibold">
-            Estás a punto de inhabilitar un Programa. El personal no podrá registrarla en citas.
-            Esta acción es irreversible.
-          </span>
-        </span>
-        <div>
-          <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
-            <span className="text-ob-gray-2">{programa.nombre}</span>
-            PPAP
+          <div>
+            <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
+              <span className="text-ob-gray-2">{programa.nombre}</span>
+              PPAP
+            </div>
+            <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
+              <span className="text-ob-gray-2">Descripcion</span>
+              {programa.descripcion}
+            </div>
+            <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
+              <span className="text-ob-gray-2">Responsable</span>
+              {programa.responsable
+                ? `${programa.responsable.nombre} ${programa.responsable.apellidoPaterno} ${programa.responsable.apellidoMaterno}`
+                : 'N/A'}
+            </div>
           </div>
-          <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
-            <span className="text-ob-gray-2">Descripcion</span>
-            {programa.descripcion}
-          </div>
-          <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
-            <span className="text-ob-gray-2">Responsable</span>
-            {programa.responsable
-              ? `${programa.responsable.nombre} ${programa.responsable.apellidoPaterno} ${programa.responsable.apellidoMaterno}`
-              : 'N/A'}
-          </div>
+          <TextArea
+            label="Motivo de Desactivación"
+            placeholder="Agregue una nota para el equipo..."
+            rows={4}
+            className={{ label: 'text-ob-white text-sm' }}
+            error={errors.razon?.message as string}
+            {...register('razon')}
+          />
         </div>
-        <TextArea
-          label="Motivo de Desactivación"
-          placeholder="Agregue una nota para el equipo..."
-          rows={4}
-          className={{ label: 'text-ob-white text-sm' }}
-        />
-      </div>
-      <ModalFooter nota="No se eliminará datos historicos">
-        <ContainerButton>
-          <CloseButton>Cancelar</CloseButton>
-          <Button
-            className="bg-ob-red-2 text-ob-white font-semibold"
-            type="submit"
-            onClick={() => {
-              mutate({
-                id,
-              });
-            }}
-          >
-            <RiProhibitedLine size={18} />
-            Deshabilitar
-          </Button>
-        </ContainerButton>
-      </ModalFooter>
+        <ModalFooter nota="No se eliminará datos historicos">
+          <ContainerButton>
+            <CloseButton>Cancelar</CloseButton>
+            <Button className="bg-ob-red-2 text-ob-white font-semibold" type="submit">
+              <RiProhibitedLine size={18} />
+              Deshabilitar
+            </Button>
+          </ContainerButton>
+        </ModalFooter>
+      </form>
     </Modal>
   );
 }
