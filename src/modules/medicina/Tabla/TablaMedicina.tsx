@@ -156,7 +156,7 @@ export default function TablaMedicina({ data, ...props }: TablaMedicinaProps) {
                   </ButtonLink>
                   <ButtonModal
                     className="border-ob-gray text-ob-white border bg-transparent"
-                    modal={<EliminarMedicina />}
+                    modal={<EliminarMedicina id={row.medicinaId} medicina={row} />}
                   >
                     <LuTrash2 size={18} />
                     Eliminar

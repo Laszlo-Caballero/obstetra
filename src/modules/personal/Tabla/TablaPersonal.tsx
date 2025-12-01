@@ -156,7 +156,7 @@ export default function TablaPersonal({ data, ...props }: TablaPersonalProps) {
                   </ButtonLink>
                   <ButtonModal
                     className="border-ob-gray text-ob-white border bg-transparent"
-                    modal={<EliminarPersonal />}
+                    modal={<EliminarPersonal id={row.personalId} personal={row} />}
                   >
                     <LuTrash2 size={18} />
                     Eliminar

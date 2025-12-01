@@ -12,6 +12,8 @@ import { FilterPosta } from '../types';
 import { useFilter } from '@/components/context/FilterContext';
 import { useQuery } from '@/hooks/useQuery';
 import axios from 'axios';
+import ButtonModal from '@/components/ui/button-modal/ButtonModal';
+import EliminarPosta from '../Eliminar/EliminarPosta';
 
 interface PostaTableProps {
   data: ResponsePosta[];
@@ -171,13 +173,13 @@ export default function PostaTable({ data, ...props }: PostaTableProps) {
                   <TbEdit className="size-[18px]" />
                   Editar
                 </ButtonLink>
-                <ButtonLink
-                  href={`/posta/${row?.postaId}/delete`}
+                <ButtonModal
                   className="border-ob-gray w-1/2 border dark:bg-transparent dark:text-red-400"
+                  modal={<EliminarPosta id={row.postaId} posta={row} />}
                 >
                   <TbTrash className="size-[18px]" />
                   Eliminar
-                </ButtonLink>
+                </ButtonModal>
               </div>
             );
           },

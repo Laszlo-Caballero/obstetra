@@ -11,7 +11,7 @@ import ModalTitle from '@/components/ui/modal/modal-title/ModalTitle';
 import TextArea from '@/components/ui/textarea/Textarea';
 import { useMutation } from '@/hooks/useMutation';
 import { ModalProps } from '@/interface/moda.interface';
-import { Response, ResponseMedicina } from '@/interface/response.interface';
+import { Response, ResponsePosta } from '@/interface/response.interface';
 import { notify } from '@/libs/toast';
 import { MotivoSchema, MotivoSchemaType } from '@/schemas/motivo/motivo.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,14 +22,14 @@ import { LuTrash2, LuX } from 'react-icons/lu';
 import { PiWarningBold } from 'react-icons/pi';
 import { RiProhibitedLine } from 'react-icons/ri';
 
-interface EliminarMedicinaProps extends ModalProps {
+interface EliminarPostaProps extends ModalProps {
   id: number;
-  medicina: ResponseMedicina;
+  posta: ResponsePosta;
 }
 
-export default function EliminarMedicina({ onClose, id, medicina }: EliminarMedicinaProps) {
+export default function EliminarPosta({ onClose, id, posta }: EliminarPostaProps) {
   const { token } = useAuth();
-  const { refresh } = useTableContext<ResponseMedicina>();
+  const { refresh } = useTableContext<ResponsePosta>();
   const { setMetadata } = useFilter();
 
   const {
@@ -40,37 +40,36 @@ export default function EliminarMedicina({ onClose, id, medicina }: EliminarMedi
     resolver: zodResolver(MotivoSchema),
   });
 
-  const { mutate } = useMutation<
-    { id: number; data: MotivoSchemaType },
-    Response<ResponseMedicina[]>
-  >({
-    mutationFn: async (data, urlApi) => {
-      const res = await axios.delete(`${urlApi}/farmacia/medicina/${data.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: data.data,
-      });
-      return res.data;
+  const { mutate } = useMutation<{ id: number; data: MotivoSchemaType }, Response<ResponsePosta[]>>(
+    {
+      mutationFn: async (data, urlApi) => {
+        const res = await axios.delete(`${urlApi}/posta/${data.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          data: data.data,
+        });
+        return res.data;
+      },
+      onSuccess: (data) => {
+        notify.success({
+          message: 'Posta eliminada correctamente',
+        });
+        refresh(data.data);
+        setMetadata({
+          total: data?.metadata?.totalItems || 0,
+          limit: 10,
+          totalPage: data?.metadata?.totalPages || 0,
+        });
+        onClose?.();
+      },
+      onError: () => {
+        notify.error({
+          message: 'Error al eliminar posta',
+        });
+      },
     },
-    onSuccess: (data) => {
-      notify.success({
-        message: 'Medicina eliminada correctamente',
-      });
-      refresh(data.data);
-      setMetadata({
-        total: data?.metadata?.totalItems || 0,
-        limit: 10,
-        totalPage: data?.metadata?.totalPages || 0,
-      });
-      onClose?.();
-    },
-    onError: () => {
-      notify.error({
-        message: 'Error al eliminar medicina',
-      });
-    },
-  });
+  );
 
   const handleSubmitForm = (data: MotivoSchemaType) => {
     mutate({
@@ -82,7 +81,7 @@ export default function EliminarMedicina({ onClose, id, medicina }: EliminarMedi
   return (
     <Modal onClose={onClose}>
       <ModalHeader>
-        <ModalTitle title="Deshabilitar Medicina" badge="Acción Critica">
+        <ModalTitle title="Deshabilitar Posta" badge="Acción Critica">
           <LuTrash2 size={20} />
         </ModalTitle>
         <CloseButton>
@@ -97,22 +96,21 @@ export default function EliminarMedicina({ onClose, id, medicina }: EliminarMedi
               <PiWarningBold size={18} />
             </span>
             <span className="font-semibold">
-              Estás a punto de inhabilitar una Medicina. El personal no podrá registrarla en
-              recetas. Esta acción es irreversible.
+              Estás a punto de inhabilitar una Posta. Esta acción es irreversible.
             </span>
           </span>
           <div>
             <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
-              <span className="text-ob-gray-2">Medicina</span>
-              {medicina.nombre}
+              <span className="text-ob-gray-2">Nombre</span>
+              {posta.nombre}
             </div>
             <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
-              <span className="text-ob-gray-2">Presentacion</span>
-              {medicina.presentacion?.nombre}
+              <span className="text-ob-gray-2">RUC</span>
+              {posta.ruc}
             </div>
             <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
-              <span className="text-ob-gray-2">Categoria</span>
-              {medicina.categoria?.nombre}
+              <span className="text-ob-gray-2">Ubicación</span>
+              {`${posta.distrito?.nombre}, ${posta.provincia?.nombre}`}
             </div>
           </div>
           <TextArea
