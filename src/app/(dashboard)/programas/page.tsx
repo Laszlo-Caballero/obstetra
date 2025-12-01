@@ -37,17 +37,17 @@ export default async function ProgramaPage() {
           icon={<LuLayers size={18} />}
         />
         <div className="flex items-center gap-x-2">
-          <Button className="bg-ob-teal text-ob-white">
+          <Button className="bg-ob-teal text-white">
             <LuUpload size={18} />
             Importar
           </Button>
-          <ButtonLink className="text-ob-white bg-ob-teal" href="/programas/crear">
+          <ButtonLink className="bg-ob-teal text-white" href="/programas/crear">
             <LuPlus size={18} />
             Registrar Programa
           </ButtonLink>
         </div>
       </section>
-      <InfoContainer className="bg-ob-black-6">
+      <InfoContainer className="dark:bg-ob-black-6 bg-white">
         <div className="flex items-center gap-x-2">
           <SearchPrograma />
           <FiltrosPrograma />

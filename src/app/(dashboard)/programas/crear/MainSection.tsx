@@ -100,14 +100,14 @@ export default function CreatePrograma({ responsables }: CreateProgramaProps) {
             router.back();
           }}
           type="button"
-          className="border-ob-gray-4 border bg-transparent font-semibold text-white"
+          className="border-ob-white-3 dark:border-ob-gray-4 text-ob-black-4 border bg-transparent font-semibold dark:text-white"
         >
           <LuArrowLeft size={18} />
           Volver
         </Button>
       </section>
 
-      <InfoContainer className="bg-ob-black-6 flex flex-col gap-y-3">
+      <InfoContainer className="dark:bg-ob-black-6 flex flex-col gap-y-3 bg-white">
         <span className="text-ob-gray-2 font-semibold">Informacion Basica</span>
         <div className="grid grid-cols-2 gap-3">
           <Input
@@ -158,7 +158,7 @@ export default function CreatePrograma({ responsables }: CreateProgramaProps) {
         </div>
       </InfoContainer>
       <span className="flex w-full justify-end">
-        <Button className="text-ob-black w-fit">
+        <Button className="bg-ob-teal w-fit text-white">
           <LuSave size={18} />
           Registrar
         </Button>

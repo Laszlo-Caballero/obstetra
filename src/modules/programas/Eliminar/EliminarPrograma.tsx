@@ -85,7 +85,7 @@ export default function EliminarPrograma({ onClose, id, programa }: EliminarProg
           <LuTrash2 size={20} />
         </ModalTitle>
         <CloseButton>
-          <LuX size={18} className="text-ob-white" />
+          <LuX size={18} className="text-ob-black-4 dark:text-ob-white" />
         </CloseButton>
       </ModalHeader>
 
@@ -101,15 +101,15 @@ export default function EliminarPrograma({ onClose, id, programa }: EliminarProg
             </span>
           </span>
           <div>
-            <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
+            <div className="border-ob-white-3 dark:border-ob-gray flex items-center justify-between border-b border-dashed py-2">
               <span className="text-ob-gray-2">{programa.nombre}</span>
               PPAP
             </div>
-            <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
+            <div className="border-ob-white-3 dark:border-ob-gray flex items-center justify-between border-b border-dashed py-2">
               <span className="text-ob-gray-2">Descripcion</span>
               {programa.descripcion}
             </div>
-            <div className="border-ob-gray flex items-center justify-between border-b border-dashed py-2">
+            <div className="border-ob-white-3 dark:border-ob-gray flex items-center justify-between border-b border-dashed py-2">
               <span className="text-ob-gray-2">Responsable</span>
               {programa.responsable
                 ? `${programa.responsable.nombre} ${programa.responsable.apellidoPaterno} ${programa.responsable.apellidoMaterno}`
@@ -120,7 +120,7 @@ export default function EliminarPrograma({ onClose, id, programa }: EliminarProg
             label="Motivo de Desactivación"
             placeholder="Agregue una nota para el equipo..."
             rows={4}
-            className={{ label: 'text-ob-white text-sm' }}
+            className={{ label: 'text-ob-black-4 dark:text-ob-white text-sm' }}
             error={errors.razon?.message as string}
             {...register('razon')}
           />

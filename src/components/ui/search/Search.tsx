@@ -1,7 +1,7 @@
-"use client";
-import cx from "@/libs/cx";
-import { useId } from "react";
-import { LuSearch } from "react-icons/lu";
+'use client';
+import cx from '@/libs/cx';
+import { useId } from 'react';
+import { LuSearch } from 'react-icons/lu';
 
 interface SearchProps {
   placeholder?: string;
@@ -12,23 +12,18 @@ interface SearchProps {
   };
 }
 
-export default function Search({
-  placeholder,
-  onSearch,
-  className,
-  value,
-}: SearchProps) {
+export default function Search({ placeholder, onSearch, className, value }: SearchProps) {
   const id = useId();
 
   return (
     <div
       className={cx(
-        "w-full flex gap-x-2 border-ob-gray border rounded-lg h-10 py-[11px] px-[13px]",
-        className?.container
+        'border-ob-white-3 dark:border-ob-gray flex h-10 w-full gap-x-2 rounded-lg border px-[13px] py-[11px]',
+        className?.container,
       )}
     >
       <label htmlFor={id}>
-        <LuSearch className="size-[18px] text-white" />
+        <LuSearch className="text-ob-black-4 size-[18px] dark:text-white" />
       </label>
 
       <input
@@ -36,7 +31,7 @@ export default function Search({
         type="text"
         placeholder={placeholder}
         onChange={(e) => onSearch?.(e.target.value)}
-        className="h-full w-full outline-0"
+        className="text-ob-black-4 h-full w-full bg-transparent outline-0 dark:text-white"
         value={value}
       />
     </div>

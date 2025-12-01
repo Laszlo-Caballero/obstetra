@@ -74,7 +74,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
           cell: ({ row }) => {
             return (
               <span className="flex items-center gap-x-2">
-                <LuHospital className="text-ob-white" size={22} />
+                <LuHospital className="text-ob-black-4 dark:text-ob-white" size={22} />
                 <p>{row?.nombre}</p>
               </span>
             );
@@ -91,7 +91,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
           cell: ({ row }) => {
             return (
               <span className="flex items-center gap-x-2">
-                <LuUser className="text-ob-white" size={22} />
+                <LuUser className="text-ob-black-4 dark:text-ob-white" size={22} />
                 <p>{`${row?.responsable?.nombre} ${row?.responsable?.apellidoPaterno} ${row?.responsable?.apellidoMaterno}`}</p>
               </span>
             );
@@ -120,7 +120,7 @@ export default function TablaPrograma({ data, ...props }: TablaProgramaProps) {
                   Editar
                 </ButtonLink>
                 <ButtonModal
-                  className="border-ob-gray text-ob-white border bg-transparent"
+                  className="border-ob-white-3 dark:border-ob-gray text-ob-black-4 dark:text-ob-white border bg-transparent"
                   modal={<EliminarPrograma id={row.programaId} programa={row} />}
                 >
                   <LuTrash2 size={18} />

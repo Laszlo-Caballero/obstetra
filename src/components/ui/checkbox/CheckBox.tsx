@@ -19,11 +19,15 @@ export default function CheckBox({ children, label, className, onChange, value }
   const [isSelected, setSelected] = useState(value || false);
   return (
     <div className={cx('flex flex-col gap-y-1', className?.container)}>
-      <span className={cx('text-ob-gray-2 font-medium', className?.label)}>{label}</span>
+      <span className={cx('text-ob-black-4 dark:text-ob-gray-2 font-medium', className?.label)}>
+        {label}
+      </span>
       <div
         className={cx(
           'w-full cursor-pointer rounded-full p-2 select-none',
-          isSelected ? 'bg-ob-teal text-ob-black' : 'bg-ob-blue-3 text-ob-lightblue',
+          isSelected
+            ? 'bg-ob-teal dark:text-ob-black text-white'
+            : 'bg-ob-white-4 dark:bg-ob-blue-3 text-ob-black-4 dark:text-ob-lightblue',
           className?.checkbox,
         )}
         onClick={() => {

@@ -15,18 +15,21 @@ interface TextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>
 export default function TextArea({ label, className, error, id, ...props }: TextAreaProps) {
   return (
     <div className={cx('flex flex-col gap-y-1', className?.main)}>
-      <label className={cx('text-ob-gray-2 font-medium', className?.label)} htmlFor={id}>
+      <label
+        className={cx('text-ob-black-4 dark:text-ob-gray-2 font-medium', className?.label)}
+        htmlFor={id}
+      >
         {label}
       </label>
       <div
         className={cx(
-          'bg-ob-black-4 border-ob-gray flex items-center rounded-xl border',
+          'dark:bg-ob-black-4 border-ob-white-3 dark:border-ob-gray flex items-center rounded-xl border bg-white',
           className?.container,
         )}
       >
         <textarea
           className={cx(
-            'placeholder-ob-white w-full resize-none px-3 py-2 text-sm font-medium focus:outline-none',
+            'placeholder-ob-gray-2 dark:placeholder-ob-white text-ob-black-4 w-full resize-none bg-transparent px-3 py-2 text-sm font-medium focus:outline-none dark:text-white',
             className?.textarea,
           )}
           id={id}

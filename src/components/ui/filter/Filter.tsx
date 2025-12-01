@@ -1,10 +1,10 @@
-"use client";
-import { useClose } from "@/hooks/useClose";
-import { IconProps, Options } from "@/interface/props";
-import cx from "@/libs/cx";
-import { cloneElement, ReactElement, ReactNode, useState } from "react";
-import { MdOutlineKeyboardArrowUp } from "react-icons/md";
-import { AnimatePresence, motion } from "motion/react";
+'use client';
+import { useClose } from '@/hooks/useClose';
+import { IconProps, Options } from '@/interface/props';
+import cx from '@/libs/cx';
+import { cloneElement, ReactElement, ReactNode, useState } from 'react';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
+import { AnimatePresence, motion } from 'motion/react';
 
 interface FilterProps {
   placeholder?: string;
@@ -33,41 +33,41 @@ export default function Filter({
   return (
     <div
       className={cx(
-        "py-[11px] relative cursor-pointer flex items-center px-[13px] border gap-x-2 border-ob-gray rounded-xl",
-        className?.container
+        'border-ob-white-3 dark:border-ob-gray relative flex cursor-pointer items-center gap-x-2 rounded-xl border px-[13px] py-[11px]',
+        className?.container,
       )}
       ref={ref}
       onClick={() => setOpen(!isOpen)}
     >
       {icon &&
         cloneElement(icon as ReactElement<IconProps>, {
-          className: "size-[18px] text-white",
+          className: 'size-[18px] text-ob-black-4 dark:text-white',
         })}
 
-      <span className="text-ob-white font-medium text-sm">
+      <span className="text-ob-black-4 dark:text-ob-white text-sm font-medium">
         {placeholder} {values?.find((item) => item.value === value)?.label}
       </span>
 
       <MdOutlineKeyboardArrowUp
         className={cx(
-          "size-[18px] text-white ml-auto",
-          !isOpen && "rotate-180"
+          'text-ob-black-4 ml-auto size-[18px] dark:text-white',
+          !isOpen && 'rotate-180',
         )}
       />
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute w-full z-10 max-h-[300px] overflow-y-auto bg-ob-black-7 left-0 top-full translate-y-2 rounded-lg border border-ob-gray"
-            initial={{ height: 0, overflow: "hidden" }}
-            animate={{ height: "auto", overflow: "auto" }}
-            exit={{ height: 0, overflow: "hidden" }}
+            className="dark:bg-ob-black-7 border-ob-white-3 dark:border-ob-gray absolute top-full left-0 z-10 max-h-[300px] w-full translate-y-2 overflow-y-auto rounded-lg border bg-white"
+            initial={{ height: 0, overflow: 'hidden' }}
+            animate={{ height: 'auto', overflow: 'auto' }}
+            exit={{ height: 0, overflow: 'hidden' }}
             transition={{ duration: 0.3 }}
           >
             {values?.map((item) => (
               <div
                 key={item.value}
-                className="py-2.5 px-3 hover:bg-ob-gray-2 border-b border-ob-gray cursor-pointer text-sm bg-ob-black-7 first:rounded-t-lg last:border-0 last:rounded-b-lg text-ob-white font-medium"
+                className="hover:bg-ob-white-4 dark:hover:bg-ob-gray-2 border-ob-white-3 dark:border-ob-gray dark:bg-ob-black-7 text-ob-black-4 dark:text-ob-white cursor-pointer border-b bg-white px-3 py-2.5 text-sm font-medium first:rounded-t-lg last:rounded-b-lg last:border-0"
                 onClick={() => {
                   onChange?.(item.value);
                   setOpen(false);

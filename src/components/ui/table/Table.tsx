@@ -47,15 +47,20 @@ export default function Table<T>({
   }, [metadata, initialMetadata]);
 
   return (
-    <div className={cx('border-ob-gray overflow-x-auto rounded-3xl border', className)}>
+    <div
+      className={cx(
+        'border-ob-white-3 dark:border-ob-gray overflow-x-auto rounded-3xl border',
+        className,
+      )}
+    >
       <table className={cx('w-full table-auto')}>
         <thead>
-          <tr className="bg-ob-black-2 transition-colors">
+          <tr className="bg-ob-white-4 dark:bg-ob-black-2 transition-colors">
             {table.getHeaders().map((header, i) => {
               return (
                 <th
                   key={i}
-                  className="text-ob-lightblue border-ob-gray w-auto max-w-max border-b p-3 text-left text-sm font-medium whitespace-nowrap"
+                  className="text-ob-black-4 dark:text-ob-lightblue border-ob-white-3 dark:border-ob-gray w-auto max-w-max border-b p-3 text-left text-sm font-medium whitespace-nowrap"
                 >
                   {header}
                 </th>
@@ -67,7 +72,10 @@ export default function Table<T>({
         <tbody>
           {table.getCells().map((row, index) => {
             return (
-              <tr key={index} className="border-ob-gray border-y transition-colors">
+              <tr
+                key={index}
+                className="border-ob-white-3 dark:border-ob-gray border-y transition-colors"
+              >
                 {row.map((cell, i) => {
                   return (
                     <td key={i} className="w-auto max-w-max p-4 whitespace-nowrap">
