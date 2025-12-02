@@ -52,7 +52,7 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
         ]}
       />
       <main className="flex flex-col gap-y-4">
-        <InfoContainer className="bg-ob-black-6">
+        <InfoContainer className="dark:bg-ob-black-6 bg-white">
           <section className="flex items-center justify-between">
             <Title
               title={data?.nombre + ' ' + data?.apellidoPaterno + ' ' + data?.apellidoMaterno}
@@ -60,20 +60,18 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
               icon={<LuUser size={18} />}
             />
             <span className="flex items-center gap-x-2">
-              <Badge className="border-ob-gray flex items-center gap-x-2 border px-3 text-sm">
+              <Badge className="border-ob-white-3 dark:border-ob-gray text-ob-black-4 flex items-center gap-x-2 border px-3 text-sm dark:text-white">
                 <LuCircleCheck size={16} />
                 {data.tipoPersonal?.nombre}
               </Badge>
-              <Badge
-                className={cx('text-ob-white px-3', data?.estado ? 'bg-ob-green' : 'bg-ob-red')}
-              >
+              <Badge className={cx('px-3 text-white', data?.estado ? 'bg-ob-green' : 'bg-ob-red')}>
                 {data.estado ? 'Activo' : 'Inactivo'}
               </Badge>
             </span>
           </section>
-          <section className="border-ob-gray flex gap-x-7 border-t pt-5">
+          <section className="border-ob-white-3 dark:border-ob-gray flex gap-x-7 border-t pt-5">
             <div className="flex w-[50%] flex-col gap-y-3">
-              <span> Informacion basica </span>
+              <span className="text-ob-black-4 text-lg dark:text-white"> Informacion basica </span>
               <div className="grid grid-cols-3 gap-3">
                 <CardInfo title="Nombre" description={data?.nombre} />
                 <CardInfo title="Apellido Paterno" description={data?.apellidoPaterno} />
@@ -87,12 +85,12 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
               </div>
             </div>
             <div className="flex w-[50%] flex-col gap-y-3">
-              <span> Turno </span>
+              <span className="text-ob-black-4 text-lg dark:text-white"> Turno </span>
               <div className="grid grid-cols-2 gap-3">
                 <CardInfo title="Inicio" description={data?.turno?.horaInicio || 'Desconocido'} />
                 <CardInfo title="Fin" description={data?.turno?.horaFin || 'Desconocido'} />
               </div>
-              <span> Tipo Personal </span>
+              <span className="text-ob-black-4 text-lg dark:text-white"> Tipo Personal </span>
               <div className="grid grid-cols-2 gap-3">
                 <CardInfo title="Tipo" description={data?.tipoPersonal?.nombre || 'Desconocido'} />
                 <CardInfo
@@ -104,8 +102,10 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
           </section>
         </InfoContainer>
         <div className="flex gap-x-6">
-          <InfoContainer className="bg-ob-black-6 w-[50%] px-0">
-            <span className="border-ob-gray-4 border-b p-4 pb-2">Posta Asignada</span>
+          <InfoContainer className="dark:bg-ob-black-6 w-[50%] bg-white px-0">
+            <span className="border-ob-white-3 dark:border-ob-gray-4 text-ob-black-4 border-b p-4 pb-2 dark:text-white">
+              Posta Asignada
+            </span>
 
             <Tabs>
               <TabsHeader>
@@ -132,7 +132,7 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
 
                     <CardInfo title="Dirección" description={posta.direccion} />
 
-                    <span className="border-ob-gray border-t" />
+                    <span className="border-ob-white-3 dark:border-ob-gray border-t" />
 
                     <div className="grid grid-cols-3 gap-3">
                       <CardInfo title="Latitud" description={posta.lat?.toString()} />
@@ -155,17 +155,20 @@ export default async function DetallePersonalPage({ params }: { params: Promise<
               </TabBody>
             </Tabs>
           </InfoContainer>
-          <InfoContainer className="bg-ob-black-6 w-[50%]">
-            <span>Historial y Acciones</span>
+          <InfoContainer className="dark:bg-ob-black-6 w-[50%] bg-white">
+            <span className="text-ob-black-4 dark:text-white">Historial y Acciones</span>
           </InfoContainer>
         </div>
       </main>
       <div className="flex items-center justify-end gap-x-2">
-        <ButtonLink href="/personal" className="border-ob-gray border">
+        <ButtonLink
+          href="/personal"
+          className="border-ob-white-3 dark:border-ob-gray text-ob-black-4 border dark:text-white"
+        >
           <LuArrowLeft size={18} />
           Volver
         </ButtonLink>
-        <Button className="bg-ob-red-2 text-ob-white font-semibold">
+        <Button className="bg-ob-red-2 font-semibold text-white">
           <LuTrash2 size={18} />
           Eliminar Personal
         </Button>

@@ -58,13 +58,16 @@ export default function CreateTurno({ onClose }: ModalProps) {
   });
 
   return (
-    <Modal onClose={onClose}>
+    <Modal
+      onClose={onClose}
+      className={{ container: 'dark:bg-ob-black-6 border-ob-white-3 dark:border-ob-gray bg-white' }}
+    >
       <ModalHeader>
         <ModalTitle title="Crear nuevo turno" badge="Crear">
-          <LuClock size={18} className="text-ob-white" />
+          <LuClock size={18} className="text-ob-black-4 dark:text-ob-white" />
         </ModalTitle>
         <CloseButton>
-          <LuX size={18} className="text-ob-white" />
+          <LuX size={18} className="text-ob-black-4 dark:text-ob-white" />
         </CloseButton>
       </ModalHeader>
       <form onSubmit={handleSubmit(mutate)}>
@@ -92,7 +95,7 @@ export default function CreateTurno({ onClose }: ModalProps) {
           <ContainerButton>
             <CloseButton>Cancelar</CloseButton>
 
-            <Button>Crear Turno</Button>
+            <Button className="bg-ob-teal text-white">Crear Turno</Button>
           </ContainerButton>
         </ModalFooter>
       </form>

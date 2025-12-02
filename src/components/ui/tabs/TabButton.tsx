@@ -13,7 +13,10 @@ export default function TabButton({ tabIndex, children }: TabButtonProps) {
 
   return (
     <button
-      className={cx('mb-2', selectedTab === tabIndex && 'border-ob-lightblue-2 border-b')}
+      className={cx(
+        'text-ob-black-4 mb-2 dark:text-white',
+        selectedTab === tabIndex && 'border-ob-lightblue-2 border-b',
+      )}
       onClick={() => {
         setSelectedTab(tabIndex ?? 0);
       }}

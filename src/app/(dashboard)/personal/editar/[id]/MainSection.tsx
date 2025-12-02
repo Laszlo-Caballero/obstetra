@@ -180,7 +180,7 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
         ]}
       />
       <form className="flex flex-col gap-y-4" onSubmit={handleSubmit((data) => create(data))}>
-        <InfoContainer className="bg-ob-black-6">
+        <InfoContainer className="dark:bg-ob-black-6 bg-white">
           <section className="flex items-center justify-between">
             <Title
               title="Editar Personal"
@@ -197,7 +197,9 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
           </section>
           <section className="border-ob-gray flex gap-x-7 border-t pt-5">
             <div className="flex w-[50%] flex-col gap-y-3">
-              <span className="text-ob-white text-lg">Informacion personal</span>
+              <span className="text-ob-black-4 dark:text-ob-white text-lg">
+                Informacion personal
+              </span>
               <div className="flex gap-x-2">
                 <Input
                   label="Documento de Identidad"
@@ -303,12 +305,15 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
               />
             </div>
             <div className="flex w-[50%] flex-col justify-start gap-y-3">
-              <span className="text-ob-white text-lg">Turno</span>
+              <span className="text-ob-black-4 dark:text-ob-white text-lg">Turno</span>
               <div className="flex gap-x-2">
                 <Select
                   placeholder="Turnos Disponibles:"
                   label="Turno"
-                  className={{ label: 'text-ob-white text-sm', placeholder: 'w-[665px]' }}
+                  className={{
+                    label: 'text-ob-black-4 dark:text-ob-white text-sm',
+                    placeholder: 'w-[665px]',
+                  }}
                   disableSearch={true}
                   options={turnos.map((turno) => ({
                     label: `${turno.horaInicio} - ${turno.horaFin}`,
@@ -318,16 +323,16 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
                   value={watchTurno}
                   error={errors.turno?.message}
                 />
-                <Button className="bg-ob-teal text-ob-white self-end" type="button">
+                <Button className="bg-ob-teal self-end text-white" type="button">
                   <LuPlus size={18} />
                   Nuevo Turno
                 </Button>
               </div>
-              <span className="text-ob-white text-lg">Tipo de Personal</span>
+              <span className="text-ob-black-4 dark:text-ob-white text-lg">Tipo de Personal</span>
               <Select
                 placeholder="Tipo Personal"
                 label="tipo"
-                className={{ label: 'text-ob-white text-sm' }}
+                className={{ label: 'text-ob-black-4 dark:text-ob-white text-sm' }}
                 disableSearch={true}
                 options={tipos.map((tipo) => ({
                   label: tipo.nombre,
@@ -337,7 +342,7 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
                 value={watchTipo}
                 error={errors.tipoPersonal?.message}
               />
-              <span className="text-ob-white text-lg">Asignación Postas</span>
+              <span className="text-ob-black-4 dark:text-ob-white text-lg">Asignación Postas</span>
               <MultiSelect
                 label="Postas:"
                 placeholder="Seleccionar Postas:"
@@ -349,7 +354,9 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
                 onChange={(selected) => setValue('postas', selected)}
                 error={errors.postas?.message}
               />
-              <span className="text-ob-white text-lg">Informacion Adicional</span>
+              <span className="text-ob-black-4 dark:text-ob-white text-lg">
+                Informacion Adicional
+              </span>
               <TextArea
                 label="Nota"
                 placeholder="Escribe una Nota"
@@ -368,12 +375,12 @@ export default function EditarPersonal({ tipos, turnos, postas, personal }: Edit
               router.back();
             }}
             type="button"
-            className="border-ob-gray-4 border bg-transparent font-semibold text-white"
+            className="border-ob-white-3 dark:border-ob-gray-4 text-ob-black-4 border bg-transparent font-semibold dark:text-white"
           >
             <LuArrowLeft size={18} />
             Volver
           </Button>
-          <Button className="font-semibold" type="submit">
+          <Button className="bg-ob-teal font-semibold text-white" type="submit">
             <LuCircleCheck size={18} />
             Actulizar Personal
           </Button>

@@ -1,5 +1,7 @@
 'use client';
 
+import cx from '@/libs/cx';
+
 import Badge from '@/components/ui/badge/Badge';
 import Button from '@/components/ui/button/Button';
 import Table from '@/components/ui/table/Table';
@@ -30,7 +32,11 @@ export default function TablaTipoPersonal({ data }: { data: ResponseTipoPersonal
           },
           {
             header: 'Estado',
-            cell: ({ row }) => <Badge>{row.estado ? 'Activo' : 'Inactivo'}</Badge>,
+            cell: ({ row }) => (
+              <Badge className={cx('text-white', row.estado ? 'bg-ob-green' : 'bg-ob-red')}>
+                {row.estado ? 'Activo' : 'Inactivo'}
+              </Badge>
+            ),
           },
           {
             header: 'Acciones',
@@ -38,7 +44,7 @@ export default function TablaTipoPersonal({ data }: { data: ResponseTipoPersonal
               return (
                 <div className="flex gap-2">
                   <Button
-                    className="text-ob-lightblue bg-ob-black-2"
+                    className="text-ob-lightblue bg-ob-blue-3"
                     onClick={() => {
                       updateModal.openModal(row.tipoPersonalId);
                     }}
@@ -47,7 +53,7 @@ export default function TablaTipoPersonal({ data }: { data: ResponseTipoPersonal
                     Editar
                   </Button>
                   <Button
-                    className="border-ob-gray border bg-transparent text-red-400"
+                    className="border-ob-white-3 dark:border-ob-gray border bg-transparent text-red-400"
                     onClick={() => {
                       deleteModal.openModal(row.tipoPersonalId);
                     }}

@@ -1,8 +1,7 @@
-import React, { ButtonHTMLAttributes, ReactNode } from "react";
-import cx from "@/libs/cx";
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
+import cx from '@/libs/cx';
 
-interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   className?: string;
   children?: ReactNode;
 }
@@ -11,8 +10,8 @@ export default function Button({ className, children, ...props }: ButtonProps) {
   return (
     <button
       className={cx(
-        "flex items-center cursor-pointer bg-ob-blue gap-x-2 px-3 py-2.5 rounded-md text-ob-black-6 text-sm font-medium",
-        className
+        'bg-ob-blue flex cursor-pointer items-center gap-x-2 rounded-md px-3 py-2.5 text-sm font-medium text-white',
+        className,
       )}
       {...props}
     >

@@ -86,7 +86,7 @@ export default function EliminarPersonal({ onClose, id, personal }: EliminarPers
           <LuTrash2 size={20} />
         </ModalTitle>
         <CloseButton>
-          <LuX size={18} className="text-ob-white" />
+          <LuX size={18} className="text-ob-black-4 dark:text-ob-white" />
         </CloseButton>
       </ModalHeader>
 
@@ -118,7 +118,7 @@ export default function EliminarPersonal({ onClose, id, personal }: EliminarPers
             label="Motivo de Desactivación"
             placeholder="Agregue una nota para el equipo..."
             rows={4}
-            className={{ label: 'text-ob-white text-sm' }}
+            className={{ label: 'text-ob-black-4 dark:text-ob-white text-sm' }}
             error={errors.razon?.message as string}
             {...register('razon')}
           />

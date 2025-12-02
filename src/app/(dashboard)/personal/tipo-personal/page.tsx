@@ -47,7 +47,7 @@ export default async function TipoPersonalPage() {
           description="Crea, importa y administra el inventario de medicamentos."
           icon={<LuPersonStanding size={18} />}
         />
-        <ButtonModal className="text-ob-black bg-ob-teal" modal={<CreateTipoPersonal />}>
+        <ButtonModal className="bg-ob-teal text-white" modal={<CreateTipoPersonal />}>
           <LuPlus size={18} />
           Registrar Tipo de Personal
         </ButtonModal>

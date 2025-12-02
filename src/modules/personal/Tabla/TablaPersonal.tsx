@@ -129,7 +129,7 @@ export default function TablaPersonal({ data, ...props }: TablaPersonalProps) {
             header: 'Estado',
             cell: ({ row }) => {
               return (
-                <Badge className={cx('text-ob-white', row.estado ? 'bg-ob-green' : 'bg-ob-red')}>
+                <Badge className={cx('text-white', row.estado ? 'bg-ob-green' : 'bg-ob-red')}>
                   {row.estado ? 'Activo' : 'Inactivo'}
                 </Badge>
               );
@@ -155,7 +155,7 @@ export default function TablaPersonal({ data, ...props }: TablaPersonalProps) {
                     Detalles
                   </ButtonLink>
                   <ButtonModal
-                    className="border-ob-gray text-ob-white border bg-transparent"
+                    className="border-ob-white-3 dark:border-ob-gray text-ob-black-4 dark:text-ob-white border bg-transparent"
                     modal={<EliminarPersonal id={row.personalId} personal={row} />}
                   >
                     <LuTrash2 size={18} />

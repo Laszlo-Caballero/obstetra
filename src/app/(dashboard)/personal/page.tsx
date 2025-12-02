@@ -45,13 +45,13 @@ export default async function PersonalPage() {
           description="Registra nuevo personal y consulta historiales"
           icon={<LuIdCard size={18} />}
         />
-        <ButtonLink className="text-ob-black bg-ob-teal" href="/personal/crear">
+        <ButtonLink className="bg-ob-teal text-white" href="/personal/crear">
           <LuPlus size={18} />
           Registrar Personal
         </ButtonLink>
       </section>
 
-      <InfoContainer className="bg-ob-black-6">
+      <InfoContainer className="dark:bg-ob-black-6 bg-white">
         <div className="flex items-center gap-x-2">
           <SearchPersonal />
           <FiltrosPersonal tipos={tipos?.data} postas={postas?.data} />

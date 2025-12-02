@@ -49,10 +49,13 @@ export default function DeleteTipoPersonal({ onClose, idTipoPersonal }: CreateTi
   });
 
   return (
-    <Modal onClose={onClose}>
+    <Modal
+      onClose={onClose}
+      className={{ container: 'dark:bg-ob-black-6 border-ob-white-3 dark:border-ob-gray bg-white' }}
+    >
       <ModalHeader>
         <ModalTitle title="Eliminar Tipo Personal" badge="Eliminar">
-          <LuPersonStanding size={20} className="text-ob-white" />
+          <LuPersonStanding size={20} className="text-ob-black-4 dark:text-ob-white" />
         </ModalTitle>
         <CloseButton>
           <LuX size={18} />

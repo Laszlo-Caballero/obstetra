@@ -48,13 +48,16 @@ export default function DeleteTurno({ onClose, turnoId }: DeleteTurnoProps) {
   });
 
   return (
-    <Modal onClose={onClose}>
+    <Modal
+      onClose={onClose}
+      className={{ container: 'dark:bg-ob-black-6 border-ob-white-3 dark:border-ob-gray bg-white' }}
+    >
       <ModalHeader>
         <ModalTitle title="Eliminar turno" badge="Eliminar">
-          <LuClock size={18} className="text-ob-white" />
+          <LuClock size={18} className="text-ob-black-4 dark:text-ob-white" />
         </ModalTitle>
         <CloseButton>
-          <LuX size={18} className="text-ob-white" />
+          <LuX size={18} className="text-ob-black-4 dark:text-ob-white" />
         </CloseButton>
       </ModalHeader>
       <ModalContent>

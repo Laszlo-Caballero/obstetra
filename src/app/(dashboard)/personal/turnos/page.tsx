@@ -47,7 +47,7 @@ export default async function TurnoPage() {
           description="Crea, importa y administra los turnos médicos."
           icon={<LuClock size={18} />}
         />
-        <ButtonModal className="text-ob-black bg-ob-teal" modal={<CreateTurno />}>
+        <ButtonModal className="bg-ob-teal text-white" modal={<CreateTurno />}>
           <LuPlus size={18} />
           Registrar Turno Personal
         </ButtonModal>

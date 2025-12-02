@@ -50,23 +50,23 @@ export default function MultiSelect({
 
   return (
     <div className="relative flex flex-col gap-y-1" ref={ref}>
-      <label className="text-ob-gray-2 font-medium">{label} </label>
+      <label className="text-ob-black-4 dark:text-ob-gray-2 font-medium">{label} </label>
       <div
-        className="text-ob-white bg-ob-black-4 border-ob-gray gap-y-| flex cursor-pointer flex-col rounded-xl border px-3 py-2 text-sm font-medium"
+        className="text-ob-black-4 dark:text-ob-white dark:bg-ob-black-4 border-ob-white-3 dark:border-ob-gray gap-y-| flex cursor-pointer flex-col rounded-xl border bg-white px-3 py-2 text-sm font-medium"
         onClick={() => {
           if (!disable) setOpen(!isOpen);
         }}
       >
         <div className="flex items-center justify-between">
           <span className="text-nowrap">{placeholder}</span>
-          <RiArrowDropDownLine className="text-ob-white" size={18} />
+          <RiArrowDropDownLine className="text-ob-black-4 dark:text-ob-white" size={18} />
         </div>
         {selectedOptions.length > 0 && (
           <div className="mt-1 flex flex-wrap gap-2">
             {selectedOptions.map((option) => (
               <span
                 key={option.value}
-                className="border-ob-gray flex items-center gap-x-2 rounded-md border px-2"
+                className="border-ob-white-3 dark:border-ob-gray flex items-center gap-x-2 rounded-md border px-2"
               >
                 {option.label}{' '}
                 <span
@@ -88,17 +88,17 @@ export default function MultiSelect({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="bg-ob-black-6 border-ob-gray absolute top-full z-10 mt-1 w-full translate-y-2 rounded-3xl border p-3"
+            className="dark:bg-ob-black-6 border-ob-white-3 dark:border-ob-gray absolute top-full z-10 mt-1 w-full translate-y-2 rounded-3xl border bg-white p-3"
             initial={{ height: 0, overflow: 'hidden' }}
             animate={{ height: 'auto', overflow: 'visible' }}
             exit={{ height: 0, overflow: 'hidden' }}
             transition={{ duration: 0.2 }}
           >
             {!disableSearch && (
-              <div className="bg-ob-black-8 flex w-full items-center gap-x-2 rounded-xl px-[11px] py-2">
-                <LuSearch className="text-ob-white size-[18px]" />
+              <div className="bg-ob-white-4 dark:bg-ob-black-8 flex w-full items-center gap-x-2 rounded-xl px-[11px] py-2">
+                <LuSearch className="text-ob-black-4 dark:text-ob-white size-[18px]" />
                 <input
-                  className="text-ob-white w-full bg-none text-sm outline-none placeholder:text-white"
+                  className="text-ob-black-4 dark:text-ob-white placeholder:text-ob-black-4 w-full bg-transparent bg-none text-sm outline-none dark:placeholder:text-white"
                   placeholder={'Buscar...'}
                 />
               </div>
@@ -110,12 +110,12 @@ export default function MultiSelect({
 
                 return (
                   <div
-                    className="hover:bg-ob-black-4 flex cursor-pointer items-center gap-x-2 rounded-xl px-4 py-2.5"
+                    className="hover:bg-ob-white-4 dark:hover:bg-ob-black-4 flex cursor-pointer items-center gap-x-2 rounded-xl px-4 py-2.5"
                     key={i}
                     onClick={() => setOption(option)}
                   >
                     <input type="checkbox" checked={checked} readOnly />
-                    <p className="text-ob-white text-sm">{option.label}</p>
+                    <p className="text-ob-black-4 dark:text-ob-white text-sm">{option.label}</p>
                   </div>
                 );
               })}
