@@ -63,9 +63,8 @@ export default function ProfileUpdateForm({ user }: ProfileUpdateFormProps) {
       });
       toast.success('Perfil actualizado correctamente');
       router.refresh();
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error.response?.data?.message || 'Error al actualizar el perfil');
+    } catch {
+      toast.error('Error al actualizar el perfil');
     } finally {
       setLoading(false);
     }

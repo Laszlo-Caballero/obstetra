@@ -52,9 +52,8 @@ export default function PasswordUpdateModal({ isOpen, onClose }: PasswordUpdateM
       toast.success('Contraseña actualizada correctamente');
       reset();
       onClose();
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error.response?.data?.message || 'Error al actualizar la contraseña');
+    } catch {
+      toast.error('Error al actualizar la contraseña');
     } finally {
       setLoading(false);
     }

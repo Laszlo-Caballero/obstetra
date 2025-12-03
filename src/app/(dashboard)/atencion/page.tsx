@@ -1,23 +1,20 @@
-import Breadcrums from "@/components/ui/breadcrums/Breadcrums";
-import React from "react";
-import { LuHouse } from "react-icons/lu";
+import React from 'react';
+import { getToken } from '@/utils/getToken';
+import { env } from '@/config/env';
+import { Response, ResponseCita } from '@/interface/response.interface';
+import AtencionView from '@/modules/atencion/components/AtencionView';
 
-export default function AdministrarPage() {
-  return (
-    <div className="w-full flex flex-col gap-y-4 p-5">
-      <Breadcrums
-        items={[
-          {
-            title: "Inicio",
-            icon: <LuHouse />,
-            href: "/",
-          },
-          {
-            title: "Atencion",
-            href: "/atencion/administrar",
-          },
-        ]}
-      />
-    </div>
-  );
+export default async function AtencionPage() {
+  const token = await getToken();
+
+  const res = await fetch(`${env.url_api}/cita/personal/hoy`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    cache: 'no-store', // Ensure fresh data on every request
+  });
+
+  const data: Response<ResponseCita[]> = await res.json();
+
+  return <AtencionView initialCitas={data.data || []} />;
 }

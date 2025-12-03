@@ -93,9 +93,9 @@ export const asideData: AsideProps[] = [
   },
   {
     icon: <MdOutlineQueuePlayNext />,
-    title: 'Atenciones',
+    title: 'Atención',
     href: '/atencion',
-    description: 'Historial de atenciones médicas',
+    description: 'Gestiona tus citas del día',
     subItems: [],
   },
   {

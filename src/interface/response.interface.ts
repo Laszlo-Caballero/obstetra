@@ -314,4 +314,8 @@ export interface ResponseCita {
   creadoPor: ResponsePersonal;
   programa: ResponsePrograma;
   turno: ResponseTurno;
+  diagnosticos: any[]; //TODO: definir interfaz
+  laboratorios: any[]; // TODO: definir interfaz
+  receta: ResponseReceta | null;
+  motivos: any[];
 }
