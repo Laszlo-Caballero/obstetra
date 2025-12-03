@@ -199,7 +199,12 @@ export interface ResponsePaciente {
   provincia: string;
   distrito: string;
   estado: boolean;
-  // citas: any[] //TODO:
+  citas: {
+    citaId: number;
+    fecha: string;
+    nota: string;
+    estado: string;
+  }[];
 }
 
 export interface ResponsePresentacion {
@@ -275,4 +280,38 @@ export interface ResponsePrograma {
   deribacion: boolean;
   responsable: ResponsePersonal;
   programaId: number;
+}
+
+export interface ResponseReceta {
+  recetaId: number;
+  detalle: string;
+  cita: {
+    citaId: number;
+    fecha: string;
+    nota: string;
+    estado: boolean;
+    personal: ResponsePersonal;
+  };
+  motivos: any[];
+  recetaMedicinas: RecetaMedicina[];
+}
+
+export interface RecetaMedicina {
+  recetamedicinaId: number;
+  dosis: string;
+  indicacion: string;
+  estado: boolean;
+  medicina: ResponseMedicina;
+}
+
+export interface ResponseCita {
+  citaId: number;
+  fecha: string;
+  nota: string;
+  estado: string;
+  paciente: ResponsePaciente;
+  personal: ResponsePersonal;
+  creadoPor: ResponsePersonal;
+  programa: ResponsePrograma;
+  turno: ResponseTurno;
 }

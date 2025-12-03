@@ -19,7 +19,15 @@ export interface Personal {
   dni: string;
   codigoColegio: string;
   estado: boolean;
+  nota?: string;
+  tipoPersonal?: TipoPersonal | null;
   posta: Posta[];
+}
+
+export interface TipoPersonal {
+  tipoPersonalId: number;
+  nombre: string;
+  estado: boolean;
 }
 
 export interface Posta {

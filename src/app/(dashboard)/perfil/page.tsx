@@ -1,11 +1,7 @@
 import React from 'react';
-import Button from '@/components/ui/button/Button';
-import Input from '@/components/ui/input/input';
-import Select from '@/components/ui/select/Select';
 import InfoContainer from '@/components/ui/info-container/InfoContainer';
-import { LuUserCog, LuSave, LuShieldCheck, LuX, LuCheck } from 'react-icons/lu';
+import { LuUserCog } from 'react-icons/lu';
 import { GoHome } from 'react-icons/go';
-import { LiaUndoAltSolid } from 'react-icons/lia';
 import Breadcrums from '@/components/ui/breadcrums/Breadcrums';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -14,6 +10,7 @@ import { fetcher } from '@/libs/fetch';
 import { ResponseUser } from '@/interface/user.interface';
 import Photo from '@/modules/perfil/components/photo/Photo';
 import Title from '@/components/ui/title/Title';
+import ProfileUpdateForm from '@/modules/perfil/components/form/ProfileUpdateForm';
 
 export default async function Perfilpage() {
   const cookieStore = await cookies();
@@ -28,6 +25,10 @@ export default async function Perfilpage() {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  if (!res?.data) {
+    return <div>Error al cargar el perfil</div>;
+  }
 
   return (
     <div className="h-full w-full">
@@ -54,49 +55,38 @@ export default async function Perfilpage() {
             description="Actualiza tu informacion personal, credenciales y preferencias."
             icon={<LuUserCog size={18} />}
           />
-          <div className="flex gap-x-1.5">
-            <Button className="border-ob-gray text-ob-white border bg-transparent">
-              <LiaUndoAltSolid className="text-ob-white" size={18} />
-              Deshacer
-            </Button>
-
-            <Button>
-              <LuSave size={18} className="text-ob-black-6" />
-              Guardar Cambios
-            </Button>
-          </div>
         </section>
 
         {/* Perfil */}
 
         <InfoContainer>
           <Photo
-            apellidoMaterno={res?.data?.personal.apellidoMaterno}
-            apellidoPaterno={res?.data?.personal.apellidoPaterno}
-            correo={res?.data?.personal.correo}
-            nombre={res?.data?.personal.nombre}
-            src={res?.data?.recurso?.url}
+            apellidoMaterno={res.data.personal.apellidoMaterno}
+            apellidoPaterno={res.data.personal.apellidoPaterno}
+            correo={res.data.personal.correo}
+            nombre={res.data.personal.nombre}
+            src={res.data.recurso?.url}
           />
           <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2">
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Rol</span>
-              <span className="text-ob-white text-sm font-medium">{res?.data?.role.roleName}</span>
+              <span className="text-ob-white text-sm font-medium">{res.data.role.roleName}</span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Dni</span>
-              <span className="text-ob-white text-sm font-medium">{res?.data?.personal.dni}</span>
+              <span className="text-ob-white text-sm font-medium">{res.data.personal.dni}</span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Estado</span>
               <span className="text-ob-white text-sm font-medium">
-                {res?.data?.personal.estado ? 'Activo' : 'Inactivo'}
+                {res.data.personal.estado ? 'Activo' : 'Inactivo'}
               </span>
             </div>
             <div className="flex flex-col gap-y-1">
               <span className="text-ob-gray-2 text-xs font-medium">Telefono</span>
               <span className="text-ob-white text-sm font-medium">
-                +51 {res?.data?.personal.telefono.slice(0, 3)}{' '}
-                {res?.data?.personal.telefono.slice(3, 6)} {res?.data?.personal.telefono.slice(6)}
+                +51 {res.data.personal.telefono.slice(0, 3)}{' '}
+                {res.data.personal.telefono.slice(3, 6)} {res.data.personal.telefono.slice(6)}
               </span>
             </div>
           </div>
@@ -104,103 +94,7 @@ export default async function Perfilpage() {
 
         {/* Formulario  */}
 
-        <form className="flex flex-col gap-y-4">
-          <InfoContainer>
-            <span className="text-ob-white text-sm font-medium">Información Personal</span>
-            <div className="grid grid-cols-2 gap-3">
-              <Input
-                label="Nombres"
-                placeholder={res?.data?.personal.nombre}
-                id="name"
-                className={{ label: 'text-sm' }}
-              />
-              <Input
-                label="Apellido Paterno"
-                placeholder={res?.data?.personal.apellidoPaterno}
-                id="lastname"
-                className={{ label: 'text-sm' }}
-              />
-
-              <Input
-                label="Apellido Materno"
-                placeholder={res?.data?.personal.apellidoMaterno}
-                id="lastname"
-                className={{ label: 'text-sm' }}
-              />
-              <Input
-                label="Correo Institucional"
-                placeholder={res?.data?.personal.correo}
-                id="email"
-                className={{ label: 'text-sm' }}
-              />
-              <Select
-                label="Establecimiento (Posta)"
-                placeholder="Seleccionar Posta"
-                search="Buscar Postas..."
-                className={{ label: 'text-sm' }}
-                options={
-                  res?.data?.personal.posta.map((posta) => ({
-                    label: posta.nombre,
-                    value: String(posta.postaId),
-                  })) || []
-                }
-              />
-              <Input
-                label="Telefono"
-                placeholder={res?.data?.personal.telefono}
-                id="phone"
-                className={{ label: 'text-sm' }}
-              />
-            </div>
-          </InfoContainer>
-          <InfoContainer>
-            <span className="text-ob-white text-sm font-medium">Seguridad</span>
-            <div className="grid grid-cols-2 gap-3">
-              <Input
-                label="Contraseña Actual"
-                placeholder="********"
-                id="actual-password"
-                className={{ label: 'text-sm' }}
-              />
-              <div className="flex flex-col gap-y-2">
-                <Input
-                  label="Nueva Contraseña"
-                  placeholder="********"
-                  id="new-password"
-                  className={{ label: 'text-sm' }}
-                />
-                <span className="text-ob-gray-2 text-xs font-medium">
-                  Minimo 8 caracteres. Usa números y letras
-                </span>
-              </div>
-              <Input
-                label="Confirmar Contraseña"
-                placeholder="********"
-                id="confirm-password"
-                className={{ label: 'text-sm' }}
-              />
-            </div>
-            <div className="flex justify-end">
-              <Button className="bg-ob-blue-2 text-ob-lightblue">
-                <LuShieldCheck size={18} className="text-ob-lightblue" />
-                Actualizar Contraseña
-              </Button>
-            </div>
-          </InfoContainer>
-        </form>
-
-        {/* Botones */}
-
-        <div className="flex justify-end gap-x-3">
-          <Button className="border-ob-gray text-ob-white border bg-transparent">
-            <LuX size={18} className="text-ob-white" />
-            Cancelar
-          </Button>
-          <Button>
-            <LuCheck size={18} className="text-ob-black-6" />
-            Guardar Perfil
-          </Button>
-        </div>
+        <ProfileUpdateForm user={res.data} />
       </main>
     </div>
   );

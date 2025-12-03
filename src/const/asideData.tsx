@@ -6,6 +6,8 @@ import {
   LuGoal,
   LuPersonStanding,
   LuStethoscope,
+  LuUsers,
+  LuFileText,
 } from 'react-icons/lu';
 import { LuBuilding2 } from 'react-icons/lu';
 import { MdOutlineQueuePlayNext } from 'react-icons/md';
@@ -97,6 +99,13 @@ export const asideData: AsideProps[] = [
     subItems: [],
   },
   {
+    icon: <LuFileText />,
+    title: 'Recetas',
+    href: '/receta',
+    description: 'Historial de recetas',
+    subItems: [],
+  },
+  {
     icon: <GiMedicines />,
     title: 'Medicina',
     href: '/medicina',
@@ -130,6 +139,13 @@ export const asideData: AsideProps[] = [
     title: 'CMS',
     href: '/cms',
     description: 'Gestión de contenido del sitio',
+    subItems: [],
+  },
+  {
+    icon: <LuUsers />,
+    title: 'Usuarios',
+    href: '/usuarios',
+    description: 'Gestión de usuarios',
     subItems: [],
   },
 ];
