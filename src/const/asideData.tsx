@@ -8,6 +8,7 @@ import {
   LuStethoscope,
   LuUsers,
   LuFileText,
+  LuFlaskConical,
 } from 'react-icons/lu';
 import { LuBuilding2 } from 'react-icons/lu';
 import { MdOutlineQueuePlayNext } from 'react-icons/md';
@@ -103,6 +104,13 @@ export const asideData: AsideProps[] = [
     title: 'Recetas',
     href: '/receta',
     description: 'Historial de recetas',
+    subItems: [],
+  },
+  {
+    icon: <LuFlaskConical />,
+    title: 'Laboratorio',
+    href: '/laboratorio',
+    description: 'Gestión de laboratorio',
     subItems: [],
   },
   {

@@ -319,3 +319,17 @@ export interface ResponseCita {
   receta: ResponseReceta | null;
   motivos: any[];
 }
+export interface ResponsePruebaLaboratorio {
+  pruebaId: number;
+  nombre: string;
+  estado: string;
+  fechaCreacion: string;
+  cita: {
+    citaId: number;
+    fecha: string;
+    nota: string;
+    estado: string;
+    personal: ResponsePersonal;
+    paciente: ResponsePaciente;
+  }[];
+}

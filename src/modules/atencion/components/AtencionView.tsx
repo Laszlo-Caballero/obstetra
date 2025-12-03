@@ -18,7 +18,6 @@ export default function AtencionView({ initialCitas }: AtencionViewProps) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const proximas = initialCitas.filter((c) => c.estado === 'Pendiente');
-  const completadas = initialCitas.filter((c) => c.estado === 'Completado');
 
   const currentDate = new Date();
   const dateString = currentDate.toLocaleDateString('es-ES', {
